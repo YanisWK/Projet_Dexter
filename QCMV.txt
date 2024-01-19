@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 
 QCM DE VICTORR
+=======
+QCM DE VICTOR
+>>>>>>> 7160e359e29ea850b09fcbbb9816f8f901e613dd
 
 1) a et b
 
