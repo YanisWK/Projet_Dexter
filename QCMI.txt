@@ -1,11 +1,10 @@
 Q1. A
 Q2. C
 Q3. B ("pointe" aussi sur le commmit le + récent)
-Q4.
-Q5.
-Q6.
-Q7.
-Q8.
-Q9.
-Q10.
-Q11.
+Q5. C
+Q6. B
+Q7. B
+Q8. A(master), C(main)
+Q9. B
+Q10. A
+Q11. B
