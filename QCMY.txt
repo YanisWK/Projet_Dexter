@@ -1,4 +1,4 @@
-QCM YANSI
+QCM YANIS
 
 Q1 : C
 Q2 : C
