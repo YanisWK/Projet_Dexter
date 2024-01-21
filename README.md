@@ -1,14 +1,8 @@
 # Projet-Dexter
 
-
-coucou
-
-Victor est passé par là
-
-lol  
-
-bouh
-
-Boo de mariokart ?
-
-Roi boo ?
+Bienvenue sur la page Github du groupe HeimerDexter, composé de 5 membres:
+-SAADI DIT SAADA Yanis
+-HARRAOUI Ines
+-ROQUE GOMES Victor
+-HUANG Loïc
+-MAO Lucke
