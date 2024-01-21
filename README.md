@@ -1,8 +1,3 @@
 # Projet-Dexter
 
-Bienvenue sur la page Github du groupe HeimerDexter, composé de 5 membres:\n
--SAADI DIT SAADA Yanis\n
--HARRAOUI Ines\n
--ROQUE GOMES Victor\n
--HUANG Loïc\n
--MAO Lucke
+Bienvenue sur la page Github du groupe HeimerDexter, composé de 5 membres: SAADI DIT SAADA Yanis, HARRAOUI Ines, ROQUE GOMES Victor, HUANG Loïc, MAO Lucke
