@@ -1,1 +1,0 @@
-print("c'est le test de Loïc")
