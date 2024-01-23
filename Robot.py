@@ -34,7 +34,7 @@ class Robot:
 
         print("La voiture a avancé de ", distance, "cm")
 
-        #Mettre à jour les coordonnées x et y (triginonmétrie)
+        #Mettre à jour les coordonnées x et y (trigonométrie)
 
     def reculer(self, distance):
         nb_tours = float(distance)/10
@@ -63,3 +63,9 @@ class Robot:
         if (self.direction > 360):
             self.direction -= 360
         print("Le robot a tourné de ", angle, "° à droite")
+
+    def carre(self, d):
+        #trace un carré
+        for i in range(4):
+            self.avancer(d) #avance sur une distance d
+            self.tourner_a_droite(90) #tourne 
