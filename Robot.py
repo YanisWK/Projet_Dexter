@@ -1,9 +1,11 @@
+from math import *
+
 class Robot:
     def __init__(self, id):
         self.id = id
         self.x = 0.0
         self.y = 0.0
-        self.direction = 0
+        self.direction = 90
         self.unite_de_temps = 10 #inutile pour le moment
 
     def __repr__(self):
@@ -34,7 +36,8 @@ class Robot:
 
         print("La voiture a avancé de ", distance, "cm")
 
-        #Mettre à jour les coordonnées x et y (trigonométrie)
+        self.x += round( distance * cos(radians(self.direction)) , 10)
+        self.y += round( distance * sin(radians(self.direction)) , 10)
 
     def reculer(self, distance):
         nb_tours = float(distance)/10
@@ -45,23 +48,24 @@ class Robot:
 
         print("La voiture a reculé de ", distance, "cm")
 
-        #Mettre à jour les coordonnées
+        self.x -= round( distance * cos(radians(self.direction)) , 10)
+        self.y -= round( distance * sin(radians(self.direction)) , 10)
 
 
     def tourner_a_gauche(self, angle):
         nb_tours = float(angle) / 10
         self.tourner_roue_droite_avant(nb_tours)
-        self.direction -= angle
-        if (self.direction < 0):
-            self.direction += 360
+        self.direction += angle
+        if (self.direction > 360):
+            self.direction -= 360
         print("Le robot a tourné de ", angle, "° à gauche")
 
     def tourner_a_droite(self, angle):
         nb_tours = float(angle) / 10
         self.tourner_roue_gauche_avant(nb_tours)
-        self.direction += angle
-        if (self.direction > 360):
-            self.direction -= 360
+        self.direction -= angle
+        if (self.direction < 0):
+            self.direction += 360
         print("Le robot a tourné de ", angle, "° à droite")
 
     def carre(self, d):
