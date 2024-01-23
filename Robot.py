@@ -7,7 +7,7 @@ class Robot:
         self.unite_de_temps = 10 #inutile pour le moment
 
     def __repr__(self):
-        return "C'est le robot d'identifiant " + str(self.id) + " se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
+        return "C'est le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
     
     def tourner_roue_gauche_avant(self, nb_tours):
         #à déterminer selon la taille des roues? Pour l'instant 1 tour = 10°, 1 tour = 10cm
@@ -68,4 +68,4 @@ class Robot:
         #trace un carré
         for i in range(4):
             self.avancer(d) #avance sur une distance d
-            self.tourner_a_droite(90) #tourne 
+            self.tourner_a_droite(90) #tourne de 90 degrés
