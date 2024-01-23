@@ -69,3 +69,25 @@ class Robot:
         for i in range(4):
             self.avancer(d) #avance sur une distance d
             self.tourner_a_droite(90) #tourne de 90 degrés
+    
+    def getX(self):
+        return self.x
+    
+    def getY(self):
+        return self.y
+    
+    def getDirection(self):
+        return self.direction
+    
+    def getUniteTemps(self):
+        return self.unite_de_temps
+    
+    def setDirection(self, dire):
+        self.direction = dire
+
+    def setX(self,x):
+        self.x = x
+
+    def setY(self,y):
+        self.y = y
+    
