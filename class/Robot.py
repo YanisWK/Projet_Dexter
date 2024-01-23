@@ -6,3 +6,9 @@ class Robot:
     
     def avancer(self,temps):
         self.position = self.position + self.vitesses*temps
+
+    def arreter(self):
+
+    def turnright(self, angle):
+
+    def turnleft(self, angle):
