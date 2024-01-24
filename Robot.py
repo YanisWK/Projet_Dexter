@@ -63,3 +63,8 @@ class Robot:
         if (self.direction > 360):
             self.direction -= 360
         print("Le robot a tourné de ", angle, "° à droite")
+
+    def trace_carre(self, distance):
+        for i in range(4):
+            self.avancer(distance)
+            self.tourner_a_droite(90)
