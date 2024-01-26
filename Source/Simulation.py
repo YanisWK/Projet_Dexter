@@ -21,6 +21,11 @@ class Simulation:
         #b=self.y - a*self.x
         #return a,b
 
+    def obtenirAngle():
+        """
+        -Fonction qui permet d'obtenir l'angle entre 2 points passés en paramètre
+            (par rapport à l'angle trigonométrique)
+        """
     
     def rafraichir():
         """
@@ -31,6 +36,7 @@ class Simulation:
     def coinsRobot():
         """
         -Fonction qui calcule, à l'aide de la taille et de la drection, la position des 4 coins du robot
+        -Nécessite obtenirAngle
         -Le centre du rectangle est la position x y du robot
         """
         return
