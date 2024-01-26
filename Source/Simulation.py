@@ -13,13 +13,13 @@ class Simulation:
     def setRobot(self, robot):
         self.robot = robot
 
-    def droiteDirection(self):
+    def droiteDirection(self, px, py):
         """
         -Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
         """
-        #a= calcul pente
-        #b=self.y - a*self.x
-        #return a,b
+        a= (px-self.x) / (py-self.y)
+        b= py - a*px
+        return a,b
 
     def obtenirAngle():
         """
