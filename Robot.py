@@ -28,7 +28,13 @@ class Robot:
     def tourner_roue_droite_arriere(self, nb_tours):
         #même problème que vers l'avant
         print("La roue droite tourne de ", nb_tours, " tours vers l'arrière")
-
+    #Les instructions pour faire tourner les roues sont a déterminer, 
+        #Les roues a priori tourneront tout le temps à la même vitesse, mais pas nécessairement dans le même sens
+        #Il faut donc déterminer le nb de tours à faire pour parcourir une distance donnée
+        #Ces fonctions vous permettront de faire tourner les roues dans un sens ou dans l'autre
+        #Il faudt les appeler dans les méthodes avancer, reculer, tourner_a_gauche et tourner_a_droite
+    #Fin des méthodes pour faire tourner les roues
+        
     def avancer(self, distance):
         #calcule le nb de tours nécessaires pour parcourir la distance donnée
         nb_tours = float(distance)/10
