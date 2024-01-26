@@ -9,7 +9,7 @@ class Robot:
         self.x = 0.0
         self.y = 0.0
 <<<<<<< HEAD
-        self.direction = 90
+        self.direction = 90 #direction en degrés
         self.unite_de_temps = 10 #inutile pour le moment
 
     def __repr__(self):
@@ -19,6 +19,7 @@ class Robot:
         self.unite_de_temps = 10 #inutile pour le moment
 
     def __repr__(self):
+        #représentation du robot
         return "C'est le robot d'identifiant " + str(self.id) + " se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
 >>>>>>> Environnement
     
@@ -39,15 +40,18 @@ class Robot:
         print("La roue droite tourne de ", nb_tours, " tours vers l'arrière")
 
     def avancer(self, distance):
+        #calcule le nb de tours nécessaires pour parcourir la distance donnée
         nb_tours = float(distance)/10
 
         #Il faut les faire tourner en même temps
+        #fait tourner les roues gauche et droite en avant pendant le nb de tours calculé
         self.tourner_roue_gauche_avant(nb_tours)
         self.tourner_roue_droite_avant(nb_tours)
 
         print("La voiture a avancé de ", distance, "cm")
 
 <<<<<<< HEAD
+        #màj des coordonnées (trigonométrie) en fonction de la direction actuelle
         self.x += round( distance * cos(radians(self.direction)) , 10)
         self.y += round( distance * sin(radians(self.direction)) , 10)
 =======
@@ -64,6 +68,7 @@ class Robot:
         print("La voiture a reculé de ", distance, "cm")
 
 <<<<<<< HEAD
+        #màj des coordonnées (trigonométrie)
         self.x -= round( distance * cos(radians(self.direction)) , 10)
         self.y -= round( distance * sin(radians(self.direction)) , 10)
 =======
