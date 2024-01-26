@@ -78,15 +78,23 @@ class Robot:
         #ajuste la direction pour rester dans [0, 360)
         if (self.direction > 360):
             self.direction -= 360
-            
+
         print("Le robot a tourné de ", angle, "° à gauche")
 
     def tourner_a_droite(self, angle):
-        nb_tours = float(angle) / 10
+        #calcule le nb de tours nécessaires pour tourner à droite de l'angle donné
+        nb_tours = float(angle)/10
+
+        #fait tourner la roue gauche en avant pendant le nb de tours
         self.tourner_roue_gauche_avant(nb_tours)
+
+        #met à jour la direction du robot en fonction de l'angle 
         self.direction -= angle
+
+        #ajuste la direction pour rester dans [0, 360)
         if (self.direction < 0):
             self.direction += 360
+            
         print("Le robot a tourné de ", angle, "° à droite")
     
     def getX(self):
