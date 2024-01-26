@@ -5,7 +5,7 @@ class Simulation:
         self.environnement = environnement  #L'environnement
         self.temps = temps                  #Le nombre de rafraichissement par seconde
         self.vitesse = 100                  #La vitesse à laquelle le robot se déplace
-        self.distance = 100                 #La distance que le robot va parcourir
+        self.distance = 100                 #La distance que le robot va parcourir (1 pixel = 1 cm)
         self.velociteX = []                 #Liste des déplacements sur l'axe x à chaque rafraichissement
         self.velociteY = []                 #Liste des déplacements sur l'axe y à chaque rafraichissement
         self.velociteR = []                 #Liste des changements de direction à chaque rafraichisement
