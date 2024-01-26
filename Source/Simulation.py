@@ -6,3 +6,6 @@ class Simulation:
         self.temps = temps                  #Le nombre de rafraichissement par seconde
         self.vitesse = 100                  #La vitesse à laquelle le robot se déplace
         self.distance = 100                 #La distance que le robot va parcourir
+
+    def setRobot(self, robot):
+        self.robot = robot
