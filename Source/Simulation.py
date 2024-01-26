@@ -13,11 +13,14 @@ class Simulation:
     def setRobot(self, robot):
         self.robot = robot
 
-    def droiteDirection():
+    def droiteDirection(self):
         """
         Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot regarde
         """
-        return
+        a= #calcul pente
+        b=self.y - a*self.x
+        return a,b
+
     
     def rafraichir():
         """
