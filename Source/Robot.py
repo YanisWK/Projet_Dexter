@@ -5,7 +5,6 @@ class Robot(Entite):
     def __init__(self, id):
         super().__init__(id)
         self.direction = 90
-        self.unite_de_temps = 10 #inutile pour le moment
 
     def __repr__(self):
         return "C'est le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
@@ -16,39 +15,25 @@ class Robot(Entite):
     def __repr__(self):
         return "C'est le robot d'identifiant " + str(self.id) + " se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
     
-    #Méthodes pour faire tourner les roues
-    def tourner_roue_gauche_avant(self, nb_tours):
-        #à déterminer selon la taille des roues? Pour l'instant 1 tour = 10cm 
-        #Et on pars du principe que la roue tourne à 6 tour / min (ce qui est très lent)
-        print("La roue gauche tourne de ", nb_tours, " tours vers l'avant")
+    #à déterminer selon la taille des roues? Pour l'instant 1 tour = 10cm 
+    #Et on part du principe que la roue tourne à 6 tour / min (ce qui est très lent)
 
-    def tourner_roue_droite_avant(self, nb_tours):
-        #même problème que pour la roue gauche
-        print("La roue droite tourne de ", nb_tours, " tours vers l'avant")
-
-    def tourner_roue_gauche_arriere(self, nb_tours):
-        #même problème que vers l'avant
-        print("La roue gauche tourne de ", nb_tours, " tours vers l'arrière")
-
-    def tourner_roue_droite_arriere(self, nb_tours):
-        #même problème que vers l'avant
-        print("La roue droite tourne de ", nb_tours, " tours vers l'arrière")
-    
     #Les instructions pour faire tourner les roues sont a déterminer, 
         #Les roues a priori tourneront tout le temps à la même vitesse, mais pas nécessairement dans le même sens
         #Il faut donc déterminer le nb de tours à faire pour parcourir une distance donnée
         #Ces fonctions vous permettront de faire tourner les roues dans un sens ou dans l'autre
         #Il faudt les appeler dans les méthodes avancer, reculer, tourner_a_gauche et tourner_a_droite
     #Fin des méthodes pour faire tourner les roues
-        
+
+
     def avancer(self, distance):
         #calcule le nb de tours nécessaires pour parcourir la distance donnée
         nb_tours = float(distance)/10
 
         #Il faut les faire tourner en même temps
         #fait tourner les roues gauche et droite en avant pendant le nb de tours calculé
-        self.tourner_roue_gauche_avant(nb_tours)
-        self.tourner_roue_droite_avant(nb_tours)
+        #self.tourner_roue_gauche_avant(nb_tours)
+        #self.tourner_roue_droite_avant(nb_tours)
 
         print("La voiture a avancé de ", distance, "cm")
 
@@ -60,8 +45,8 @@ class Robot(Entite):
         nb_tours = float(distance)/10
 
         #Il faut les faire tourner en même temps
-        self.tourner_roue_gauche_arriere(nb_tours)
-        self.tourner_roue_droite_arriere(nb_tours)
+        #self.tourner_roue_gauche_arriere(nb_tours)
+        #self.tourner_roue_droite_arriere(nb_tours)
 
         print("La voiture a reculé de ", distance, "cm")
 
@@ -75,7 +60,7 @@ class Robot(Entite):
         nb_tours = float(angle) / 10
 
         #tourne la roue droite en avant pendant le nb de tours 
-        self.tourner_roue_droite_avant(nb_tours)
+        #self.tourner_roue_droite_avant(nb_tours)
 
         self.direction += angle
 
@@ -91,7 +76,7 @@ class Robot(Entite):
 
     def tourner_a_droite(self, angle):
         nb_tours = float(angle) / 10
-        self.tourner_roue_gauche_avant(nb_tours)
+        #self.tourner_roue_gauche_avant(nb_tours)
 
         #met à jour la direction du robot en fonction de l'angle 
         self.direction -= angle
