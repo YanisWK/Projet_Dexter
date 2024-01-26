@@ -28,6 +28,7 @@ class Robot:
     def tourner_roue_droite_arriere(self, nb_tours):
         #même problème que vers l'avant
         print("La roue droite tourne de ", nb_tours, " tours vers l'arrière")
+    
     #Les instructions pour faire tourner les roues sont a déterminer, 
         #Les roues a priori tourneront tout le temps à la même vitesse, mais pas nécessairement dans le même sens
         #Il faut donc déterminer le nb de tours à faire pour parcourir une distance donnée
