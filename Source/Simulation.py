@@ -1,3 +1,6 @@
+from Source.Robot import *
+from Source.Environnement import *
+
 class Simulation:
     def __init__(self, id, robot, environnement, temps):
         self.id = id
