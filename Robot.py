@@ -11,8 +11,10 @@ class Robot:
     def __repr__(self):
         return "C'est le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
     
+    #Méthodes pour faire tourner les roues
     def tourner_roue_gauche_avant(self, nb_tours):
-        #à déterminer selon la taille des roues? Pour l'instant 1 tour = 10°, 1 tour = 10cm
+        #à déterminer selon la taille des roues? Pour l'instant 1 tour = 10cm 
+        #Et on pars du principe que la roue tourne à 6 tour / min (ce qui est très lent)
         print("La roue gauche tourne de ", nb_tours, " tours vers l'avant")
 
     def tourner_roue_droite_avant(self, nb_tours):
