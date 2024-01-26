@@ -15,7 +15,7 @@ class Simulation:
 
     def droiteDirection(self):
         """
-        Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot regarde
+        -Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
         """
         #a= calcul pente
         #b=self.y - a*self.x
@@ -24,24 +24,31 @@ class Simulation:
     
     def rafraichir():
         """
-        Fonction qui effectue les actions nécessaires à chaque rafraichissement
+        -Fonction qui effectue les actions nécessaires à chaque rafraichissement
         """
         return
     
     def coinsRobot():
         """
-        Fonction qui calcule, à l'aide de la taille et de la drection, la position des 4 coins du robot
+        -Fonction qui calcule, à l'aide de la taille et de la drection, la position des 4 coins du robot
+        -Le centre du rectangle est la position x y du robot
         """
         return
     
     def deplacementRobot():
         """
-        Fonction qui effectue les calcules nécessaire afin de déplacer le robot
+        -Fonction qui effectue les calcules nécessaire afin de déplacer le robot
+        -Nécessite droiteDirection() 
+        -Ajout dans velociteX et velociteY les déplacements à faire à chaque rafraichissement selon la distance à parcourir et la vitesse,
+            dans la direction du robot
+        -Ne retourne rien
         """
         return
     
     def rotationRobot():
         """
-        Fonction qui effectue les calcules nécessaire afin de faire une rotation au robot
+        -Fonction qui effectue les calcules nécessaire afin de faire une rotation au robot
+        -Ajout dans velociteR les modifications d'angles à faire à chaque rafraichissement selon la vitesse
+        -Ne retourne rien
         """
         return
