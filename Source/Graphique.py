@@ -13,9 +13,9 @@ window.resizable(height=False, width=False)
 frame = Frame(window,borderwidth=5, relief="raise")
 frame.pack(fill = BOTH,side = RIGHT)
 
-
 rec_base = Canvas(window, bg='blue', width=longueur, height=largeur)
 rec_base.place(x='0',y='0')
+
 
 #Pour le scale de la vitesse
 texte_var_vit = StringVar()
@@ -27,9 +27,17 @@ scale = Scale(frame, from_=0, to=1000, length=240,variable=Vitesse, orient=HORIZ
 scale.pack(pady=1)
 
 #Pour le scale de la distance
+espace = Label(frame, text="", font=("Helvetica", 16))
+espace.pack()
+espace = Label(frame, text="", font=("Helvetica", 16))
+espace.pack()
+
+dist = Label(frame, text="Distance", font=("Helvetica", 16))
+dist.pack()
 Distance = IntVar()
-scale = Scale(frame, from_=0, to=1000, length=240,variable=Distance, orient=HORIZONTAL)
-scale.pack(pady=1)
+scale2 = Scale(frame, from_=0, to=1000, length=240,variable=Distance, orient=HORIZONTAL)
+scale2.pack(pady=1)
+
 
 
 window.mainloop()
