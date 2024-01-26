@@ -18,8 +18,8 @@ class Simulation:
         Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot regarde
         """
         #a= calcul pente
-        b=self.y - a*self.x
-        return a,b
+        #b=self.y - a*self.x
+        #return a,b
 
     
     def rafraichir():
