@@ -1,6 +1,5 @@
 class Environnement : 
 
-
     def __init__(self,id,hauteur,largeur):
         self.id=id
         self.hauteur=hauteur
