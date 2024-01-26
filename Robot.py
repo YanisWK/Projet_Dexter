@@ -93,12 +93,6 @@ class Robot:
         if (self.direction < 0):
             self.direction += 360
         print("Le robot a tourné de ", angle, "° à droite")
-
-    def carre(self, d):
-        #trace un carré
-        for i in range(4):
-            self.avancer(d) #avance sur une distance d
-            self.tourner_a_droite(90) #tourne de 90 degrés
     
     def getX(self):
         return self.x
@@ -128,7 +122,8 @@ class Robot:
         print("Le robot a tourné de ", angle, "° à droite")
 
     def trace_carre(self, distance):
+        #trace un carré
         for i in range(4):
-            self.avancer(distance)
-            self.tourner_a_droite(90)
+            self.avancer(distance) #avance sur une distance donnée
+            self.tourner_a_droite(90) #tourne de 90 degrés
 >>>>>>> Environnement
