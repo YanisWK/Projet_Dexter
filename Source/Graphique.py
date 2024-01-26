@@ -1,18 +1,30 @@
 from time import *
 from tkinter import *
 
+#Fonction dans lequel on pourra faire bouger le robot grâce au touches du clavier. (A ajouter les fonction du robot plus tard)
+'''
+def onKeyPress(event):
+    if event.keysym == "Right":
+    elif event.keysym == "Left":
+    elif event.keysym == "Up":
+    elif event.keysym == "Down":
+
+
+'''
+
 #Spécificité de notre interface graphique
 window = Tk()
-longueur = 1080
-largeur = 720
+longueur = 1000
+largeur = 700
 window.title("Simulation")
 window.geometry(f"{longueur+250}x{largeur+5}")
 window.resizable(height=False, width=False)
 
-
+#Première frame/boîte
 frame = Frame(window,borderwidth=5, relief="raise")
 frame.pack(fill = BOTH,side = RIGHT)
 
+#Canvas ou sera simuler l'environnement du robot et ces déplacement
 rec_base = Canvas(window, bg='blue', width=longueur, height=largeur)
 rec_base.place(x='0',y='0')
 
@@ -26,20 +38,20 @@ Vitesse = IntVar()
 scale = Scale(frame, from_=0, to=1000, length=240,variable=Vitesse, orient=HORIZONTAL)
 scale.pack(pady=1)
 
-#Pour le scale de la distance
+#Essayer de trouver une autre façon de mettre des espaces si possible
 espace = Label(frame, text="", font=("Helvetica", 16))
 espace.pack()
 espace = Label(frame, text="", font=("Helvetica", 16))
 espace.pack()
 
+#Pour le scale de la distance
 dist = Label(frame, text="Distance", font=("Helvetica", 16))
 dist.pack()
 Distance = IntVar()
 scale2 = Scale(frame, from_=0, to=1000, length=240,variable=Distance, orient=HORIZONTAL)
 scale2.pack(pady=1)
 
-
-
+#window.bind('<KeyPress>', onKeyPress) #
 window.mainloop()
 
 
