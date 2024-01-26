@@ -1,4 +1,5 @@
 from math import *
+from Entite import *
 
 class Robot(Entite):
     def __init__(self, id):
