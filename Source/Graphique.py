@@ -19,4 +19,5 @@ scale = Scale(frame, from_=0, to=100, variable=Vitesse, orient=HORIZONTAL)
 scale.pack(pady=20,side = RIGHT)
 text2 = Label(frame, text="Vitesse", font=("Courrier",40), fg="black")
 text2.pack(side = BOTTOM)
+
 window.mainloop()
