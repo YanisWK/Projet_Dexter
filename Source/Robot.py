@@ -1,10 +1,8 @@
 from math import *
 
-class Robot:
+class Robot(Entite):
     def __init__(self, id):
-        self.id = id
-        self.x = 0.0
-        self.y = 0.0
+        super().__init__(id)
         self.direction = 90
         self.unite_de_temps = 10 #inutile pour le moment
 
@@ -91,10 +89,7 @@ class Robot:
         print("Le robot a tourné de ", angle, "° à gauche")
 
     def tourner_a_droite(self, angle):
-        #calcule le nb de tours nécessaires pour tourner à droite de l'angle donné
-        nb_tours = float(angle)/10
-
-        #fait tourner la roue gauche en avant pendant le nb de tours
+        nb_tours = float(angle) / 10
         self.tourner_roue_gauche_avant(nb_tours)
 
         #met à jour la direction du robot en fonction de l'angle 
@@ -121,8 +116,7 @@ class Robot:
     def setDirection(self, dire):
         self.direction = dire
 
-    def setX(self,x):
-        self.x = x
-
-    def setY(self,y):
-        self.y = y
+    def trace_carre(self, distance):
+        for i in range(4):
+            self.avancer(distance)
+            self.tourner_a_droite(90)

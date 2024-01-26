@@ -8,3 +8,6 @@ class Entite :
         self.x=x
         self.y=y
         
+    def __repr__(self):
+        
+        
