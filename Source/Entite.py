@@ -7,7 +7,5 @@ class Entite :
     def set_pos(self,x,y):
         self.x=x
         self.y=y
-        
-    def __repr__(self):
-        
+
         
