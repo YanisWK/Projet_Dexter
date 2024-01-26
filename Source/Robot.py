@@ -126,8 +126,3 @@ class Robot:
 
     def setY(self,y):
         self.y = y
-
-    def trace_carre(self, distance):
-        for i in range(4):
-            self.avancer(distance)
-            self.tourner_a_droite(90)
