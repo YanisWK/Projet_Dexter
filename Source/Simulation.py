@@ -23,7 +23,7 @@ class Simulation:
 
     def obtenirAngle():
         """
-        -Fonction qui permet d'obtenir l'angle entre 2 points passés en paramètre
+        -Fonction qui permet d'obtenir l'angle du segment entre 2 points passés en paramètre
             (par rapport à l'angle trigonométrique)
         """
     
