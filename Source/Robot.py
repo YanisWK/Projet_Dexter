@@ -2,9 +2,11 @@ from math import *
 from Entite import *
 
 class Robot(Entite):
-    def __init__(self, id):
+    def __init__(self, id, longueur, largeur):
         super().__init__(id)
         self.direction = 90
+        self.longueur = longueur
+        self.largeur = largeur
 
     def __repr__(self):
         return "C'est le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
