@@ -9,6 +9,14 @@ class Simulation:
         self.velociteD = []                 #Liste des déplacements vers l'avant à chaque rafraichissement
         self.velociteR = []                 #Liste des changements de direction à chaque rafraichisement
 
+        #Les 4 coins du robot delon la position du centre et la taille du robot
+        L = robot.longueur/2
+        l = robot.largeur/2
+        x = robot.x
+        y = robot.y
+        coordRobot = ([(x-l, y-L), (x+l, y-L), (x+l, y+L), (x-l, y+L)], 90)
+        self.coordRobot = coordRobot
+
     def setRobot(self, robot):
         self.robot = robot
 
@@ -30,7 +38,7 @@ class Simulation:
     def rafraichir():
         """
         -Fonction qui effectue les actions nécessaires à chaque rafraichissement
-        -Avancer d'une distance (celle de velociteD[0]) et tourner d'un certain angle (celle de velocitéR[0]) si les tableaux ne sont pas vides
+        -Avancer d'une distance (celle de velociteD[0]) et/ou tourner d'un certain angle (celle de velocitéR[0]) si les tableaux ne sont pas vides
         -Mettre à jour les coordonnées des coins du robot (avec coinsRobot)
         """
         return
@@ -46,7 +54,7 @@ class Simulation:
     def deplacementRobot():
         """
         -Fonction qui effectue les calcules nécessaire afin de déplacer le robot
-        -Ajout dans velociteX et velociteY les déplacements à faire à chaque rafraichissement selon la distance à parcourir et la vitesse,
+        -Ajout dans velociteD les distances à faire à chaque rafraichissement selon la distance à parcourir et la vitesse,
             dans la direction du robot
         -Ne retourne rien
         """
