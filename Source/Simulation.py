@@ -70,7 +70,7 @@ class Simulation:
         nombre_rafraichissements = self.distance / distance_par_rafraichissement
 
         for i in range(nombre_rafraichissements):
-            velociteD.append(distance_par_rafraichissement)
+            self.velociteD.append(distance_par_rafraichissement)
 
 
         return
