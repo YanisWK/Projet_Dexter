@@ -22,14 +22,15 @@ class Simulation:
     def setRobot(self, robot):
         self.robot = robot
 
-    def droiteDirection(self, px, py):
-        #px et py sont les coordonnées d'un point donné
+    def droiteDirection(self):
         """
         -Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
         """
-        a= (px-self.robot.x) / (py-self.robot.y) #pente
-        b= py - a*px #ax+b=y => b=y-ax
-        return a,b
+
+        a = sin(radians(self.angle))
+        b = -cos(radians(self.angle))
+
+        return (a,b)
     
     def rafraichir():
         """
