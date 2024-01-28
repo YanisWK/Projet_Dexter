@@ -69,11 +69,14 @@ class Simulation:
         #Calcule de la distance que parcoure le robot à chaque rafraîchissement
         distance_par_rafraichissement = self.vitesse / self.temps
 
-        #Calcule du nombre de rafraîchissements nécessaires pour que le robot puisse parcourir la distance totale
-        nombre_rafraichissements = self.distance / distance_par_rafraichissement
+        #(à voir) Calcule du nombre de rafraîchissements nécessaires pour que le robot puisse parcourir la distance totale
+        #nombre_rafraichissements = self.distance / distance_par_rafraichissement
+
+        #La distance que le robot doit parcourir
+        distance_a_parcourir = self.distance
 
         #Ajout de la distance que le robot parcoure à chaque rafraîchissement dans la liste velociteD 
-        for _ in range(nombre_rafraichissements):
+        for _ in range(distance_a_parcourir - distance_par_rafraichissement):
             self.velociteD.append(distance_par_rafraichissement)
 
 
