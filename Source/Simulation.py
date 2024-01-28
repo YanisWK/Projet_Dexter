@@ -1,3 +1,5 @@
+from math import *
+
 class Simulation:
     def __init__(self, id, robot, environnement, temps):
         self.id = id
@@ -14,8 +16,7 @@ class Simulation:
         l = robot.largeur/2
         x = robot.x
         y = robot.y
-        coordRobot = ([(x-l, y-L), (x+l, y-L), (x+l, y+L), (x-l, y+L)], 90)
-        self.coordRobot = coordRobot
+        self.coordRobot = [(x-l, y-L), (x+l, y-L), (x+l, y+L), (x-l, y+L)]
 
     def setRobot(self, robot):
         self.robot = robot
@@ -43,13 +44,25 @@ class Simulation:
         """
         return
     
-    def coinsRobot():
+    def coinsRobot(self):
         """
         -Fonction qui calcule, à l'aide de la taille et de la drection, la position des 4 coins du robot
         -Nécessite obtenirAngle
         -Le centre du rectangle est la position x y du robot
+        -Modifier self.coordRobot par la liste des coordonnees des 4 coins
         """
-        return
+        L = self.robot.longueur / 2
+        l = self.robot.largeur / 2
+        dir = self.robot.direction
+        x = self.robot.x
+        y = self.robot.y
+
+
+        c1 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
+        c2 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
+        c3 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
+        c4 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
+        self.coordRobot = [c1, c2, c3, c4]
     
     def deplacementRobot():
         """
