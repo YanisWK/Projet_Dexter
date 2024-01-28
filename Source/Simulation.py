@@ -10,7 +10,7 @@ class Simulation:
         self.distance = 100                 #La distance que le robot va parcourir (1 pixel = 1 cm)
         self.velociteD = []                 #Liste des déplacements vers l'avant à chaque rafraichissement
         self.velociteR = []                 #Liste des changements de direction à chaque rafraichisement
-        self.angle = 90
+        self.angle = 90.0
 
         #Les 4 coins du robot delon la position du centre et la taille du robot
         L = robot.longueur/2
@@ -86,13 +86,13 @@ class Simulation:
         -Ne retourne rien
         """
         #Calcule de la rotation que  le robot doit tourner à chaque rafraîchissement
-        Rotation_par_rafraichissement = self.angle / self.temps
+        Rotation_par_rafraichissement_angle = self.angle / self.temps
+        Angle_a_parcourir = self.angle
+        #Ajoute dans velociteR l'angle que le doit tourner a chaque rafraichissement
+        while Angle_a_parcourir > Rotation_par_rafraichissement_angle:
+            self.velociteR.append(Rotation_par_rafraichissement_angle)
+            Angle_a_parcourir -= Rotation_par_rafraichissement_angle
 
-        #Calcule du nombre de rafraîchissements nécessaires pour que le robot puisse atteindre l'angle qu'on veut
-        nombre_rafraichissements_rota = self.angle / Rotation_par_rafraichissement
-
-        #Ajout de la distance que le robot parcoure à chaque rafraîchissement dans la liste velociteR
-        for _ in range(nombre_rafraichissements_rota):
-            self.velociteR.append(Rotation_par_rafraichissement)
-
+        #Ajoute dans velociteR la rotation final qu'il doit faire pour atteindre l'angle final au cas ou python arrondie les valeurs
+        self.velociteR.append(Angle_a_parcourir)
         return
