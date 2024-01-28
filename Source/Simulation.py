@@ -26,10 +26,20 @@ class Simulation:
         """
         -Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
         """
+        #coordonnées d'un point situé dans la direction du robot
+        x = self.robot.x + cos(radians(self.robot.direction))
+        y = self.robot.y + sin(radians(self.robot.direction))
 
-        a = sin(radians(self.angle))
-        b = -cos(radians(self.angle))
-
+        #soit la droite y = ax + b
+        if x - self.robot.x != 0:
+            a = (y-self.robot.y)/(x-self.robot.x) #calcul de la pente
+            b = self.robot.y - a*self.robot.x # y=ax + b <=> b=y - ax
+        else:
+            #si x-self.robot.x=0 (division par zéro), la droite est verticale 
+            #donc  x est constant et b=0. Donc la droite est y=ax avec x=self.robot.x
+            a = float('inf') #droite verticale donc la pente est infinie
+            b = None  #droite verticale donc b=1 et seul y varie
+    
         return (a,b)
     
     def rafraichir(self):
