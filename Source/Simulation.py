@@ -10,6 +10,7 @@ class Simulation:
         self.distance = 100                 #La distance que le robot va parcourir (1 pixel = 1 cm)
         self.velociteD = []                 #Liste des déplacements vers l'avant à chaque rafraichissement
         self.velociteR = []                 #Liste des changements de direction à chaque rafraichisement
+        self.angle = 90
 
         #Les 4 coins du robot delon la position du centre et la taille du robot
         L = robot.longueur/2
@@ -78,10 +79,20 @@ class Simulation:
 
         return
     
-    def rotationRobot():
+    def rotationRobot(self):
         """
         -Fonction qui effectue les calcules nécessaire afin de faire une rotation au robot
         -Ajout dans velociteR les modifications d'angles à faire à chaque rafraichissement selon la vitesse
         -Ne retourne rien
         """
+        #Calcule de la rotation que  le robot doit tourner à chaque rafraîchissement
+        Rotation_par_rafraichissement = self.angle / self.temps
+
+        #Calcule du nombre de rafraîchissements nécessaires pour que le robot puisse atteindre l'angle qu'on veut
+        nombre_rafraichissements_rota = self.angle / Rotation_par_rafraichissement
+
+        #Ajout de la distance que le robot parcoure à chaque rafraîchissement dans la liste velociteR
+        for _ in range(nombre_rafraichissements_rota):
+            self.velociteR.append(Rotation_par_rafraichissement)
+
         return
