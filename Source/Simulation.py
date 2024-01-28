@@ -31,12 +31,26 @@ class Simulation:
         b= py - a*px #ax+b=y => b=y-ax
         return a,b
     
-    def rafraichir():
+    def rafraichir(self):
+
+
         """
-        -Fonction qui effectue les actions nécessaires à chaque rafraichissement
+        -Fonction qui effectue les actions nécessaires à chaque rafraichissement 
         -Avancer d'une distance (celle de velociteD[0]) et/ou tourner d'un certain angle (celle de velocitéR[0]) si les tableaux ne sont pas vides
         -Mettre à jour les coordonnées des coins du robot (avec coinsRobot)
         """
+        if not self.velociteD and not self.velociteR :
+            print("les tableau sont vides")
+        else :
+            if self.velociteD : 
+                self.robot.Avancer(self.velociteD.pop(0))
+            if self.velociteR : 
+                self.robot.tourner(self.velociteR.pop(0))
+            self.coinsRobot()
+                
+
+
+
         return
     
     def coinsRobot(self):
