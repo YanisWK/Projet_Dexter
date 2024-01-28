@@ -36,9 +36,9 @@ class Simulation:
             b = self.robot.y - a*self.robot.x # y=ax + b <=> b=y - ax
         else:
             #si x-self.robot.x=0 (division par zéro), la droite est verticale 
-            #donc  x est constant et b=0. Donc la droite est y=ax avec x=self.robot.x
+            #donc  x est constant et le couple renvoyé est (infini,0) -> y=a*x avec x une constante
             a = float('inf') #droite verticale donc la pente est infinie
-            b = None  #droite verticale donc b=1 et seul y varie
+            b = None  #pas de terme constant(y varie constamment)
     
         return (a,b)
     
