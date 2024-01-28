@@ -58,7 +58,7 @@ class Simulation:
         c4 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
         self.coordRobot = [c1, c2, c3, c4]
     
-    def deplacementRobot():
+    def deplacementRobot(self):
         """
         -Fonction qui effectue les calcules nécessaire afin de déplacer le robot
         -Ajout dans velociteD les distances à faire à chaque rafraichissement selon la distance à parcourir et la vitesse,
@@ -68,6 +68,10 @@ class Simulation:
         distance_par_rafraichissement = self.vitesse / self.temps
 
         nombre_rafraichissements = self.distance / distance_par_rafraichissement
+
+        for i in range(nombre_rafraichissements):
+            velociteD.append(distance_par_rafraichissement)
+
 
         return
     
