@@ -44,23 +44,24 @@ class Simulation:
     
     def rafraichir(self):
 
-
         """
         -Fonction qui effectue les actions nécessaires à chaque rafraichissement 
         -Avancer d'une distance (celle de velociteD[0]) et/ou tourner d'un certain angle (celle de velocitéR[0]) si les tableaux ne sont pas vides
         -Mettre à jour les coordonnées des coins du robot (avec coinsRobot)
         """
+        #si les deux tableaux sont vide
         if not self.velociteD and not self.velociteR :
             print("les tableau sont vides")
+            return 
         else :
+            #si le tableau velociteD n'est pas vide alors on avance
             if self.velociteD : 
                 self.robot.Avancer(self.velociteD.pop(0))
+            
+            #si le tableau velociteR n'est pas vide alors on tourne
             if self.velociteR : 
                 self.robot.tourner(self.velociteR.pop(0))
             self.coinsRobot()
-                
-
-
 
         return
     
