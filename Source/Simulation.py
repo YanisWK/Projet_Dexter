@@ -29,12 +29,6 @@ class Simulation:
         a= (px-self.x) / (py-self.y) #pente
         b= py - a*px #ax+b=y => b=y-ax
         return a,b
-
-    def obtenirAngle():
-        """
-        -Fonction qui permet d'obtenir l'angle du segment entre 2 points passés en paramètre
-            (par rapport à l'angle trigonométrique)
-        """
     
     def rafraichir():
         """
