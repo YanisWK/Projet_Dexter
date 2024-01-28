@@ -51,6 +51,20 @@ Distance = IntVar()
 scale2 = Scale(frame, from_=0, to=1000, length=240,variable=Distance, orient=HORIZONTAL)
 scale2.pack(pady=1)
 
+
+#Essayer de trouver une autre façon de mettre des espaces si possible
+espace = Label(frame, text="", font=("Helvetica", 16))
+espace.pack()
+espace = Label(frame, text="", font=("Helvetica", 16))
+espace.pack()
+
+#Pour le scale de l'angle à tourner
+dist = Label(frame, text="Angle", font=("Helvetica", 16))
+dist.pack()
+Angle = IntVar()
+scale2 = Scale(frame, from_=-180, to=180, length=240,variable=Angle, orient=HORIZONTAL)
+scale2.pack(pady=1)
+
 #window.bind('<KeyPress>', onKeyPress) #
 window.mainloop()
 
