@@ -27,7 +27,7 @@ class Simulation:
         """
         -Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
         """
-        a= (px-self.x) / (py-self.y) #pente
+        a= (px-self.robot.x) / (py-self.robot.y) #pente
         b= py - a*px #ax+b=y => b=y-ax
         return a,b
     
