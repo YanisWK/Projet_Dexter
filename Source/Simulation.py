@@ -65,6 +65,10 @@ class Simulation:
             dans la direction du robot
         -Ne retourne rien
         """
+        distance_par_rafraichissement = self.vitesse / self.temps
+
+        nombre_rafraichissements = self.distance / distance_par_rafraichissement
+
         return
     
     def rotationRobot():
