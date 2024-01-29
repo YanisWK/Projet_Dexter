@@ -1,5 +1,8 @@
 from time import *
 from tkinter import *
+from Simulation import *
+from Robot import *
+from Environnement import *
 
 #Fonction dans lequel on pourra faire bouger le robot grâce au touches du clavier. (A ajouter les fonction du robot plus tard)
 '''
