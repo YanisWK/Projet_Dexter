@@ -19,6 +19,13 @@ def onKeyPress(event):
 
 '''
 
+def espace (f):
+    ''' Hypothèse : f est une frame '''
+    espace = Label(f, text="", font=("Helvetica", 16))
+    espace.pack()
+    espace = Label(f, text="", font=("Helvetica", 16))
+    espace.pack()
+
 #Spécificité de notre interface graphique
 window = Tk()
 longueur = 1000
@@ -35,7 +42,6 @@ frame.pack(fill = BOTH,side = RIGHT)
 rec_base = Canvas(window, bg='blue', width=longueur, height=largeur)
 rec_base.place(x='0',y='0')
 
-
 #Pour le scale de la vitesse
 texte_var_vit = StringVar()
 texte_var_vit.set("Vitesse")
@@ -45,11 +51,7 @@ Vitesse = IntVar()
 scale = Scale(frame, from_=0, to=1000, length=240,variable=Vitesse, orient=HORIZONTAL)
 scale.pack(pady=1)
 
-#Essayer de trouver une autre façon de mettre des espaces si possible
-espace = Label(frame, text="", font=("Helvetica", 16))
-espace.pack()
-espace = Label(frame, text="", font=("Helvetica", 16))
-espace.pack()
+espace(frame)
 
 #Pour le scale de la distance
 dist = Label(frame, text="Distance", font=("Helvetica", 16))
@@ -59,11 +61,7 @@ scale2 = Scale(frame, from_=0, to=1000, length=240,variable=Distance, orient=HOR
 scale2.pack(pady=1)
 
 
-#Essayer de trouver une autre façon de mettre des espaces si possible
-espace = Label(frame, text="", font=("Helvetica", 16))
-espace.pack()
-espace = Label(frame, text="", font=("Helvetica", 16))
-espace.pack()
+espace(frame)
 
 #Pour le scale de l'angle à tourner
 dist = Label(frame, text="Angle", font=("Helvetica", 16))
