@@ -1,5 +1,6 @@
 from math import *
 
+"""Documentation : """
 class Simulation:
     def __init__(self, id, robot, environnement, temps):
         self.id = id

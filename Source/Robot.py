@@ -1,6 +1,9 @@
 from math import *
 from Entite import *
 
+"""Documentation : """
+
+
 class Robot(Entite):
     def __init__(self, id, longueur, largeur):
         super().__init__(id)

@@ -1,3 +1,5 @@
+"""Documentation : """
+
 class Entite : 
     def __init__(self,id):
         self.id=id
