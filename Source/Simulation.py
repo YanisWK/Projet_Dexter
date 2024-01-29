@@ -40,7 +40,6 @@ class Simulation:
         #si les deux tableaux sont vide
         if not self.velociteD and not self.velociteR :
             print("les tableau sont vides")
-            return 
         else :
             #si le tableau velociteD n'est pas vide alors on avance
             if self.velociteD : 
@@ -50,7 +49,7 @@ class Simulation:
             if self.velociteR : 
                 self.robot.tourner(self.velociteR.pop(0))
             self.coinsRobot()
-
+        
         return
     
     def coinsRobot(self):
