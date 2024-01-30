@@ -27,8 +27,8 @@ class Simulation:
         """
         -Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
         """
-        a = sin(radians(self.angle))
-        b = -cos(radians(self.angle))
+        a = cos(radians(self.angle))
+        b = sin(radians(self.angle))
         return (a,b)
     
     def rafraichir(self):
@@ -38,10 +38,8 @@ class Simulation:
         -Avancer d'une distance (celle de velociteD[0]) et/ou tourner d'un certain angle (celle de velocitéR[0]) si les tableaux ne sont pas vides
         -Mettre à jour les coordonnées des coins du robot (avec coinsRobot)
         """
-        #si les deux tableaux sont vide
-        if not self.velociteD and not self.velociteR :
-            print("les tableau sont vides")
-        else :
+        #Si l'un des tableaux n'est pas vide
+        if self.velociteD or self.velociteR :
             #si le tableau velociteD n'est pas vide alors on avance
             if self.velociteD : 
                 self.robot.Avancer(self.velociteD.pop(0))
@@ -51,7 +49,6 @@ class Simulation:
                 self.robot.tourner(self.velociteR.pop(0))
             self.coinsRobot()
         
-        return
     
     def coinsRobot(self):
         """
