@@ -3,13 +3,14 @@ from tkinter import *
 from Simulation import *
 from Robot import *
 from Environnement import *
+from math import *
 
 """Documentation : """
 
 
 Environnement_test = Environnement(1,1000,700)
 Robot1 = Robot(1,100,50,Environnement_test.getLo()/2,Environnement_test.getLa()/2)
-Simu = Simulation(1,Robot1,Environnement_test,10)
+Simu = Simulation(1,Robot1,Environnement_test,60)
 
 #Fonction dans lequel on pourra faire bouger le robot grâce au touches du clavier. (A ajouter les fonction du robot plus tard)
 
@@ -92,6 +93,15 @@ while True:
     rec_base.delete("all")
     Simu.rafraichir()
     rec_base.create_polygon(Simu.coordRobot)
+
+    x = Robot1.x
+    y = Robot1.y
+    L = Robot1.longueur / 2
+    l = Robot1.largeur / 2
+    x1 = x + L*cos(radians(Robot1.direction))
+    y1 = y - L*sin(radians(Robot1.direction))
+    rec_base.create_line(x, y, x1, y1, fill="red")
+
     rec_base.pack()
     rec_base.update()
 

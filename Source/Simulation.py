@@ -132,9 +132,9 @@ class Simulation:
                 self.velociteR.append(Rotation_par_rafraichissement)
                 Angle_a_parcourir -= Rotation_par_rafraichissement
         else:
-            while Angle_a_parcourir < Rotation_par_rafraichissement:
-                self.velociteR.append(Rotation_par_rafraichissement)
-                Angle_a_parcourir -= Rotation_par_rafraichissement
+            while Angle_a_parcourir < -Rotation_par_rafraichissement:
+                self.velociteR.append(-Rotation_par_rafraichissement)
+                Angle_a_parcourir += Rotation_par_rafraichissement
 
         self.velociteR.append(Angle_a_parcourir)
         return
