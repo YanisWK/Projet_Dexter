@@ -68,7 +68,7 @@ Coord = Simu.coordRobot
 rec_base.create_polygon(Coord[0][0],Coord[0][1],Coord[1][0],Coord[1][1],Coord[2][0],Coord[2][1],Coord[3][0],Coord[3][1])
 rec_base.pack()
 
-
+#Fonction qui choisi les fonctions a executer en fonction des touches directionnel
 def onKeyPress(event):
     if event.keysym == "Right":
         Simu.angle = -Angle
@@ -80,8 +80,16 @@ def onKeyPress(event):
         Simu.vitesse = Vitesse
         Simu.deplacementRobot()
     elif event.keysym == "Down":
-        Simu.vitesse = Vitesse
+        Simu.vitesse = -Vitesse
         Simu.deplacementRobot()
+
+while True:
+    sleep(1/Simu.temps)
+    rec_base.clear("all")
+    Simu.rafraichir()
+    Coord = Simu.coordRobot
+    rec_base.create_polygon(Coord[0][0],Coord[0][1],Coord[1][0],Coord[1][1],Coord[2][0],Coord[2][1],Coord[3][0],Coord[3][1])
+    rec_base.pack()
 
 
 window.mainloop()
