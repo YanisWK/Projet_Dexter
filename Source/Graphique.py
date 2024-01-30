@@ -60,7 +60,7 @@ espace(frame)
 dist = Label(frame, text="Angle", font=("Helvetica", 16))
 dist.pack()
 Angle = IntVar()
-scale3 = Scale(frame, from_=10, to=180, length=240,variable=Angle, orient=HORIZONTAL)
+scale3 = Scale(frame, from_=0, to=180, length=240,variable=Angle, orient=HORIZONTAL)
 scale3.pack(pady=1)
 
 #Implementaiton du robot dans l'environnement
