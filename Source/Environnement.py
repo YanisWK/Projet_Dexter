@@ -2,21 +2,21 @@
 
 class Environnement : 
 
-    def __init__(self,id,hauteur,largeur):
+    def __init__(self,id,longueur,largeur):
         self.id=id
-        self.hauteur=hauteur
+        self.longueur=longueur
         self.largeur=largeur
     
 
 
-    def setHandL(self,h,l):
-        self.hauteur=h
-        self.largeur=l
+    def setHandL(self,lo,la):
+        self.longueur=lo
+        self.largeur=la
 
     
-    def getH(self):
-        return self.hauteur
-    def getL(self):
+    def getLo(self):
+        return self.longueur
+    def getLa(self):
         return self.largeur
         
 
