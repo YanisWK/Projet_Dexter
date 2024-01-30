@@ -110,12 +110,10 @@ class Simulation:
                     self.velociteD.append(distance_par_rafraichissement)
                     distance_a_parcourir -= distance_par_rafraichissement
         else:
-            while distance_a_parcourir < distance_par_rafraichissement:
-                    self.velociteD.append(distance_par_rafraichissement)
-                    distance_a_parcourir -= distance_par_rafraichissement
+            while distance_a_parcourir < -distance_par_rafraichissement:
+                    self.velociteD.append(-distance_par_rafraichissement)
+                    distance_a_parcourir += distance_par_rafraichissement
         self.velociteD.append(distance_a_parcourir)
-
-        return
     
     def rotationRobot(self):
         """

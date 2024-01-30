@@ -40,7 +40,7 @@ class Robot(Entite):
         print("La voiture a avancé de ", distance, "cm")
 
         self.x += round( distance * cos(radians(self.direction)) , 10)
-        self.y += round( distance * sin(radians(self.direction)) , 10)
+        self.y -= round( distance * sin(radians(self.direction)) , 10)
         #Mettre à jour les coordonnées x et y en fonction de la direction et de la distance
         #arrondit les résultats à 10 chiffres après la virgule
 
