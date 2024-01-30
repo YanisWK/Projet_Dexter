@@ -7,21 +7,12 @@ from Environnement import *
 """Documentation : """
 
 
-
-#Fonction dans lequel on pourra faire bouger le robot grâce au touches du clavier. (A ajouter les fonction du robot plus tard)
-'''
-def onKeyPress(event):
-    if event.keysym == "Right":
-    elif event.keysym == "Left":
-    elif event.keysym == "Up":
-    elif event.keysym == "Down":
-
-
-'''
-
 Environnement_test = Environnement(1,1000,700)
 Robot1 = Robot(1,100,50,Environnement_test.getLo()/2,Environnement_test.getLa()/2)
 Simu = Simulation(1,Robot1,Environnement_test,10)
+
+#Fonction dans lequel on pourra faire bouger le robot grâce au touches du clavier. (A ajouter les fonction du robot plus tard)
+
 
 def espace (f):
     ''' Hypothèse : f est une frame '''
@@ -76,6 +67,23 @@ Coord = Simu.coordRobot
 
 rec_base.create_polygon(Coord[0][0],Coord[0][1],Coord[1][0],Coord[1][1],Coord[2][0],Coord[2][1],Coord[3][0],Coord[3][1])
 rec_base.pack()
+
+
+def onKeyPress(event):
+    if event.keysym == "Right":
+        Simu.angle = -Angle
+        Simu.rotationRobot()
+    elif event.keysym == "Left":
+        Simu.angle = Angle
+        Simu.rotationRobot()
+    elif event.keysym == "Up":
+        Simu.vitesse = Vitesse
+        Simu.deplacementRobot()
+    elif event.keysym == "Down":
+        Simu.vitesse = Vitesse
+        Simu.deplacementRobot()
+
+
 window.mainloop()
 
 
