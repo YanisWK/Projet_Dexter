@@ -41,7 +41,7 @@ texte_var_vit.set("Vitesse")
 label = Label(frame, textvariable=texte_var_vit, font=("Helvetica", 16))
 label.pack()
 Vitesse = IntVar()
-scale = Scale(frame, from_=0, to=200, length=240,variable=Vitesse, orient=HORIZONTAL)
+scale = Scale(frame, from_=10, to=200, length=240,variable=Vitesse, orient=HORIZONTAL)
 scale.pack(pady=1)
 
 espace(frame)
@@ -50,7 +50,7 @@ espace(frame)
 dist = Label(frame, text="Distance", font=("Helvetica", 16))
 dist.pack()
 Distance = IntVar()
-scale2 = Scale(frame, from_=0, to=200, length=240,variable=Distance, orient=HORIZONTAL)
+scale2 = Scale(frame, from_=10, to=200, length=240,variable=Distance, orient=HORIZONTAL)
 scale2.pack(pady=1)
 
 
@@ -60,11 +60,11 @@ espace(frame)
 dist = Label(frame, text="Angle", font=("Helvetica", 16))
 dist.pack()
 Angle = IntVar()
-scale3 = Scale(frame, from_=0, to=180, length=240,variable=Angle, orient=HORIZONTAL)
+scale3 = Scale(frame, from_=10, to=180, length=240,variable=Angle, orient=HORIZONTAL)
 scale3.pack(pady=1)
 
+#Implementaiton du robot dans l'environnement
 Coord = Simu.coordRobot
-
 rec_base.create_polygon(Coord[0][0],Coord[0][1],Coord[1][0],Coord[1][1],Coord[2][0],Coord[2][1],Coord[3][0],Coord[3][1])
 rec_base.pack()
 
@@ -83,8 +83,10 @@ def onKeyPress(event):
     elif event.keysym == "Down":
         Simu.distance = -Distance.get()
         Simu.deplacementRobot()
-
+#Sert a utiliser la fonction onKeyPress lorsque on clique sur une touche du clavier
 window.bind('<KeyPress>', onKeyPress)
+
+#Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES / Trouver une solution de préférence
 while True:
     sleep(1/Simu.temps)
     rec_base.delete("all")
