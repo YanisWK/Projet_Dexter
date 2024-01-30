@@ -18,6 +18,9 @@ def onKeyPress(event):
 
 
 '''
+Robot1 = Robot(1,100,50)
+Environnement_test = Environnement(1,1000,700)
+Simu = Simulation(1,Robot1,Environnement_test,10)
 
 def espace (f):
     ''' Hypothèse : f est une frame '''
@@ -28,10 +31,8 @@ def espace (f):
 
 #Spécificité de notre interface graphique
 window = Tk()
-longueur = 1000
-largeur = 700
 window.title("Simulation")
-window.geometry(f"{longueur+250}x{largeur+5}")
+window.geometry(f"{Environnement_test.getLo()+250}x{Environnement_test.getLa()+5}")
 window.resizable(height=False, width=False)
 
 #Première frame/boîte
@@ -39,7 +40,7 @@ frame = Frame(window,borderwidth=5, relief="raise")
 frame.pack(fill = BOTH,side = RIGHT)
 
 #Canvas ou sera simuler l'environnement du robot et ces déplacement
-rec_base = Canvas(window, bg='blue', width=longueur, height=largeur)
+rec_base = Canvas(window, bg='blue', width=Environnement_test.getLo(), height=Environnement_test.getLa())
 rec_base.place(x='0',y='0')
 
 #Pour le scale de la vitesse
@@ -67,10 +68,13 @@ espace(frame)
 dist = Label(frame, text="Angle", font=("Helvetica", 16))
 dist.pack()
 Angle = IntVar()
-scale2 = Scale(frame, from_=-180, to=180, length=240,variable=Angle, orient=HORIZONTAL)
+scale2 = Scale(frame, from_=0, to=180, length=240,variable=Angle, orient=HORIZONTAL)
 scale2.pack(pady=1)
 
-#window.bind('<KeyPress>', onKeyPress) #
+Coord = Simu.coordRobot
+
+rec_base.create_polygon(Coord[0][0],Coord[0][1],Coord[1][0],Coord[1][1],Coord[2][0],Coord[2][1],Coord[3][0],Coord[3][1])
+rec_base.pack()
 window.mainloop()
 
 
