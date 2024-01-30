@@ -44,23 +44,8 @@ class Robot(Entite):
         #Mettre à jour les coordonnées x et y en fonction de la direction et de la distance
         #arrondit les résultats à 10 chiffres après la virgule
 
-    def reculer(self, distance):
-        #calcule le nb de tours nécessaires pour parcourir la distance donnée
-        nb_tours = float(distance)/10
 
-        #Il faut les faire tourner en même temps
-        #self.tourner_roue_gauche_arriere(nb_tours)
-        #self.tourner_roue_droite_arriere(nb_tours)
-
-        print("La voiture a reculé de ", distance, "cm")
-
-        self.x -= round( distance * cos(radians(self.direction)) , 10)
-        self.y -= round( distance * sin(radians(self.direction)) , 10)
-        #Mettre à jour les coordonnées x et y en fonction de la direction et de la distance
-        #arrondit les résultats à 10 chiffres après la virgule
-
-
-    def tourner_a_gauche(self, angle):
+    def tourner(self, angle):
         #calcule le nb de tours pour tourner à gauche de l'angle donné
         nb_tours = float(angle) / 10
 
@@ -77,20 +62,7 @@ class Robot(Entite):
         if (self.direction < 0):
             self.direction += 360
 
-        print("Le robot a tourné de ", angle, "° à gauche")
-
-    def tourner_a_droite(self, angle):
-        nb_tours = float(angle) / 10
-        #self.tourner_roue_gauche_avant(nb_tours)
-
-        #met à jour la direction du robot en fonction de l'angle 
-        self.direction -= angle
-
-        #ajuste la direction pour rester dans [0, 360)
-        if (self.direction < 0):
-            self.direction += 360
-            
-        print("Le robot a tourné de ", angle, "° à droite")
+        print("Le robot a tourné de ", angle, "°")
     
     def getX(self):
         return self.x
@@ -100,9 +72,6 @@ class Robot(Entite):
     
     def getDirection(self):
         return self.direction
-    
-    def getUniteTemps(self):
-        return self.unite_de_temps
     
     def setDirection(self, dire):
         self.direction = dire
