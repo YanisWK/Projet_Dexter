@@ -124,18 +124,17 @@ class Simulation:
         #Calcule de la rotation que le robot doit tourner à chaque rafraîchissement
         Rotation_par_rafraichissement = self.vitesse / self.temps
         
-        Rotation_par_frame = self.angle / Rotation_par_rafraichissement
         Angle_a_parcourir = self.angle
         
         #Ajout de la rotation que le robot parcoure à chaque rafraîchissement dans la liste velociteR
         if (Angle_a_parcourir > 0):
-            while Angle_a_parcourir > Rotation_par_frame:
-                self.velociteR.append(Rotation_par_frame)
-                Angle_a_parcourir -= Rotation_par_frame
+            while Angle_a_parcourir > Rotation_par_rafraichissement:
+                self.velociteR.append(Rotation_par_rafraichissement)
+                Angle_a_parcourir -= Rotation_par_rafraichissement
         else:
-            while Angle_a_parcourir < Rotation_par_frame:
-                self.velociteR.append(Rotation_par_frame)
-                Angle_a_parcourir -= Rotation_par_frame
+            while Angle_a_parcourir < Rotation_par_rafraichissement:
+                self.velociteR.append(Rotation_par_rafraichissement)
+                Angle_a_parcourir -= Rotation_par_rafraichissement
 
         self.velociteR.append(Angle_a_parcourir)
         return

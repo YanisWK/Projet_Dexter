@@ -10,7 +10,7 @@ Simu = Simulation(1,Robot1,Environnement_test,10)
 print(Simu.coordRobot)
 Simu.vitesse = 100
 Simu.distance = 200
-Simu.angle = 50
+Simu.angle = 90
 
 Simu.deplacementRobot()
 
