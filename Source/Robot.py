@@ -37,7 +37,7 @@ class Robot(Entite):
         #self.tourner_roue_gauche_avant(nb_tours)
         #self.tourner_roue_droite_avant(nb_tours)
 
-        print("La voiture a avancé de ", distance, "cm")
+        print("Le Robot a avancé de ", distance, "cm")
 
         self.x += round( distance * cos(radians(self.direction)) , 10)
         self.y -= round( distance * sin(radians(self.direction)) , 10)
