@@ -40,8 +40,8 @@ texte_var_vit = StringVar()
 texte_var_vit.set("Vitesse")
 label = Label(frame, textvariable=texte_var_vit, font=("Helvetica", 16))
 label.pack()
-Vitesse = IntVar()
-scale = Scale(frame, from_=0, to=1000, length=240,variable=Vitesse, orient=HORIZONTAL)
+Vitesse = 0
+scale = Scale(frame, from_=0, to=200, length=240,variable=Vitesse, orient=HORIZONTAL)
 scale.pack(pady=1)
 
 espace(frame)
@@ -49,8 +49,8 @@ espace(frame)
 #Pour le scale de la distance
 dist = Label(frame, text="Distance", font=("Helvetica", 16))
 dist.pack()
-Distance = IntVar()
-scale2 = Scale(frame, from_=0, to=1000, length=240,variable=Distance, orient=HORIZONTAL)
+Distance = 0
+scale2 = Scale(frame, from_=0, to=200, length=240,variable=Distance, orient=HORIZONTAL)
 scale2.pack(pady=1)
 
 
@@ -59,7 +59,7 @@ espace(frame)
 #Pour le scale de l'angle à tourner
 dist = Label(frame, text="Angle", font=("Helvetica", 16))
 dist.pack()
-Angle = IntVar()
+Angle = 0
 scale2 = Scale(frame, from_=0, to=180, length=240,variable=Angle, orient=HORIZONTAL)
 scale2.pack(pady=1)
 
@@ -70,29 +70,32 @@ rec_base.pack()
 
 #Fonction qui choisi les fonctions a executer en fonction des touches directionnel
 def onKeyPress(event):
+    Simu.vitesse = int(Vitesse)
     if event.keysym == "Right":
-        Simu.angle = -Angle
+        Simu.angle = -int(Angle)
         Simu.rotationRobot()
     elif event.keysym == "Left":
-        Simu.angle = Angle
+        Simu.angle = int(Angle)
         Simu.rotationRobot()
     elif event.keysym == "Up":
-        Simu.vitesse = Vitesse
+        Simu.distance = int(Distance)
         Simu.deplacementRobot()
     elif event.keysym == "Down":
-        Simu.vitesse = -Vitesse
+        Simu.distance = -int(Distance)
         Simu.deplacementRobot()
 
+window.bind('<KeyPress>', onKeyPress)
 while True:
     sleep(1/Simu.temps)
     rec_base.delete("all")
     Simu.rafraichir()
-    Coord = Simu.coordRobot
-    rec_base.create_polygon(Coord[0][0],Coord[0][1],Coord[1][0],Coord[1][1],Coord[2][0],Coord[2][1],Coord[3][0],Coord[3][1])
+    rec_base.create_polygon(Simu.coordRobot)
     rec_base.pack()
-
+    rec_base.update()
 
 window.mainloop()
+
+
 
 
 

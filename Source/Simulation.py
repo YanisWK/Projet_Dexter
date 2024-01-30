@@ -42,7 +42,7 @@ class Simulation:
         if self.velociteD or self.velociteR :
             #si le tableau velociteD n'est pas vide alors on avance
             if self.velociteD : 
-                self.robot.Avancer(self.velociteD.pop(0))
+                self.robot.avancer(self.velociteD.pop(0))
             
             #si le tableau velociteR n'est pas vide alors on tourne
             if self.velociteR : 
