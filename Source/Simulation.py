@@ -47,6 +47,24 @@ class Simulation:
             #si le tableau velociteR n'est pas vide alors on tourne
             if self.velociteR : 
                 self.robot.tourner(self.velociteR.pop(0))
+
+            #Verification des bords de la simulation
+            for coin in self.coinsRobot:
+                decal_x = 0
+                decal_y = 0
+                if coin[0] < 0:
+                    decal_x = max(decal_x, -coin[0])
+                if coin[0] > self.environnement.longueur:
+                    decal_x = min(decal_x, -(coin[0] - self.environnement.longueur))
+
+                if coin[1] < 0:
+                    decal_y = max(decal_y, -coin[1])
+                if coin[1] > self.environnement.largeur:
+                    decal_x = min(decal_y, -(coin[1] - self.environnement.largeur))
+
+            self.robot.x += decal_x
+            self.robot.y += decal_y
+
             self.coinsRobot()
         
     
