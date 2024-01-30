@@ -5,8 +5,8 @@ from Entite import *
 
 
 class Robot(Entite):
-    def __init__(self, id, longueur, largeur):
-        super().__init__(id)
+    def __init__(self, id, longueur, largeur, x, y):
+        super().__init__(id, x ,y)
         self.direction = 90
         self.longueur = longueur
         self.largeur = largeur

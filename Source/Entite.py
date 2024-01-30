@@ -1,10 +1,10 @@
 """Documentation : """
 
 class Entite : 
-    def __init__(self,id):
+    def __init__(self,id, x, y):
         self.id=id
-        self.x=0.0
-        self.y=0.0
+        self.x=x
+        self.y=y
 
     def set_pos(self,x,y):
         self.x=x
