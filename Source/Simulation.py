@@ -105,11 +105,15 @@ class Simulation:
         distance_a_parcourir = self.distance
 
         #Ajout de la distance que le robot parcoure à chaque rafraîchissement dans la liste velociteD 
-        while distance_a_parcourir > distance_par_rafraichissement:
-                self.velociteD.append(distance_par_rafraichissement)
-                distance_a_parcourir -= distance_par_rafraichissement
+        if (distance_a_parcourir > 0):
+            while distance_a_parcourir > distance_par_rafraichissement:
+                    self.velociteD.append(distance_par_rafraichissement)
+                    distance_a_parcourir -= distance_par_rafraichissement
+        else:
+            while distance_a_parcourir < distance_par_rafraichissement:
+                    self.velociteD.append(distance_par_rafraichissement)
+                    distance_a_parcourir -= distance_par_rafraichissement
         self.velociteD.append(distance_a_parcourir)
-        distance_a_parcourir = 0
 
         return
     
@@ -133,7 +137,7 @@ class Simulation:
         else:
             while Angle_a_parcourir < Rotation_par_frame:
                 self.velociteR.append(Rotation_par_frame)
-                Angle_a_parcourir += Rotation_par_frame
+                Angle_a_parcourir -= Rotation_par_frame
 
         self.velociteR.append(Angle_a_parcourir)
         return
