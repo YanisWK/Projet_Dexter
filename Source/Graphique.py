@@ -18,8 +18,9 @@ def onKeyPress(event):
 
 
 '''
-Robot1 = Robot(1,100,50)
+
 Environnement_test = Environnement(1,1000,700)
+Robot1 = Robot(1,100,50,Environnement_test.getLo()/2,Environnement_test.getLa()/2)
 Simu = Simulation(1,Robot1,Environnement_test,10)
 
 def espace (f):
