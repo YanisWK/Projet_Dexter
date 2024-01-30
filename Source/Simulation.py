@@ -49,7 +49,7 @@ class Simulation:
                 self.robot.tourner(self.velociteR.pop(0))
 
             #Verification des bords de la simulation
-            for coin in self.coinsRobot:
+            for coin in self.coordRobot:
                 decal_x = 0
                 decal_y = 0
                 if coin[0] < 0:

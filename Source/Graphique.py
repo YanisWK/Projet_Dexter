@@ -40,7 +40,7 @@ texte_var_vit = StringVar()
 texte_var_vit.set("Vitesse")
 label = Label(frame, textvariable=texte_var_vit, font=("Helvetica", 16))
 label.pack()
-Vitesse = 0
+Vitesse = IntVar()
 scale = Scale(frame, from_=0, to=200, length=240,variable=Vitesse, orient=HORIZONTAL)
 scale.pack(pady=1)
 
@@ -49,7 +49,7 @@ espace(frame)
 #Pour le scale de la distance
 dist = Label(frame, text="Distance", font=("Helvetica", 16))
 dist.pack()
-Distance = 0
+Distance = IntVar()
 scale2 = Scale(frame, from_=0, to=200, length=240,variable=Distance, orient=HORIZONTAL)
 scale2.pack(pady=1)
 
@@ -59,9 +59,9 @@ espace(frame)
 #Pour le scale de l'angle à tourner
 dist = Label(frame, text="Angle", font=("Helvetica", 16))
 dist.pack()
-Angle = 0
-scale2 = Scale(frame, from_=0, to=180, length=240,variable=Angle, orient=HORIZONTAL)
-scale2.pack(pady=1)
+Angle = IntVar()
+scale3 = Scale(frame, from_=0, to=180, length=240,variable=Angle, orient=HORIZONTAL)
+scale3.pack(pady=1)
 
 Coord = Simu.coordRobot
 
@@ -70,18 +70,18 @@ rec_base.pack()
 
 #Fonction qui choisi les fonctions a executer en fonction des touches directionnel
 def onKeyPress(event):
-    Simu.vitesse = int(Vitesse)
+    Simu.vitesse = Vitesse.get()
     if event.keysym == "Right":
-        Simu.angle = -int(Angle)
+        Simu.angle = -Angle.get()
         Simu.rotationRobot()
     elif event.keysym == "Left":
-        Simu.angle = int(Angle)
+        Simu.angle = Angle.get()
         Simu.rotationRobot()
     elif event.keysym == "Up":
-        Simu.distance = int(Distance)
+        Simu.distance = Distance.get()
         Simu.deplacementRobot()
     elif event.keysym == "Down":
-        Simu.distance = -int(Distance)
+        Simu.distance = -Distance.get()
         Simu.deplacementRobot()
 
 window.bind('<KeyPress>', onKeyPress)
