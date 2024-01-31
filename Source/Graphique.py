@@ -9,7 +9,7 @@ from math import *
 
 
 Environnement_test = Environnement(1,1000,700)
-Robot1 = Robot(1,100,50,Environnement_test.getLo()/2,Environnement_test.getLa()/2)
+Robot1 = Robot(1,50,25,Environnement_test.getLo()/2,Environnement_test.getLa()/2)
 Simu = Simulation(1,Robot1,Environnement_test,60)
 
 #Fonction dans lequel on pourra faire bouger le robot grâce au touches du clavier. (A ajouter les fonction du robot plus tard)
