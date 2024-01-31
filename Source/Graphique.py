@@ -33,7 +33,7 @@ frame = Frame(window,borderwidth=5, relief="raise")
 frame.pack(fill = BOTH,side = RIGHT)
 
 #Canvas ou sera simuler l'environnement du robot et ces déplacement
-rec_base = Canvas(window, bg='blue', width=Environnement_test.getLo(), height=Environnement_test.getLa())
+rec_base = Canvas(window, bg='#cccccc', width=Environnement_test.getLo(), height=Environnement_test.getLa())
 rec_base.place(x='0',y='0')
 
 #Pour le scale de la vitesse
