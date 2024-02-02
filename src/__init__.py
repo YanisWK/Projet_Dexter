@@ -1,2 +1,2 @@
-from .Robot import Robot
-from .Simulation import Simulation
+from .robot import Robot
+from .simulation import Simulation
