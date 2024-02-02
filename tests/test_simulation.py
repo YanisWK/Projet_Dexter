@@ -1,25 +1,10 @@
-from Simulation import Simulation
-from Environnement import Environnement
-from Robot import Robot
+from src.simulation import Simulation
+from src.robot import Robot
 
-Environnement_test = Environnement(1,1000,700)
-Robot1 = Robot(1,100,50,Environnement_test.getLo()/2,Environnement_test.getLa()/2)
-Simu = Simulation(1,Robot1,Environnement_test,10)
+import unittest
 
-
-print(Simu.coordRobot)
-Simu.vitesse = 100
-Simu.distance = 200
-Simu.angle = 90
-
-Simu.deplacementRobot()
-
-print(Simu.velociteD)
-
-Simu.rafraichir()
-
-print(Simu.velociteD)
-
-Simu.rotationRobot()
-
-print(Simu.velociteR)
+class TestSimulation(unittest.TestCase):
+    def test_simulation_est_instancce_de_simulation(self):
+        robot = Robot("Dexter",50,25,0,0)
+        simulation = Simulation(1,robot,1000,700,60)
+        self.assertIsInstance(simulation, Simulation)
