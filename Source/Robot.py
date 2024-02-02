@@ -1,6 +1,14 @@
 from math import *
 
-"""Documentation : Fichier python """
+"""Documentation : 
+
+    Description generale : Fichier contenant la classe Robot avec ces attributs de position,direction ainsi que sa longueur et largeur
+    Listes des methodes : 
+    -avancer
+    -tourner
+    -
+    
+"""
 
 
 class Robot:
@@ -63,19 +71,3 @@ class Robot:
 
         print("Le robot a tourné de ", angle, "°")
     
-    def getX(self):
-        return self.x
-    
-    def getY(self):
-        return self.y
-    
-    def getDirection(self):
-        return self.direction
-    
-    def setDirection(self, dire):
-        self.direction = dire
-
-    def trace_carre(self, distance):
-        for i in range(4):
-            self.avancer(distance)
-            self.tourner_a_droite(90)
