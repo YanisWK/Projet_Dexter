@@ -1,7 +1,7 @@
 from time import sleep
 from tkinter import Canvas, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH
-from src.simulation import Simulation
 from src.robot import Robot
+from src.simulation import Simulation
 from math import cos,radians,sin
 
 """Documentation : """
@@ -62,7 +62,7 @@ scale3 = Scale(frame, from_=0, to=180, length=240,variable=Angle, orient=HORIZON
 scale3.pack(pady=1)
 
 #Implementaiton du robot dans l'environnement
-coord = simu.coordRobot
+coord = simu.robot.coordRobot
 rec_base.create_polygon(coord[0][0],coord[0][1],coord[1][0],coord[1][1],coord[2][0],coord[2][1],coord[3][0],coord[3][1])
 rec_base.pack()
 
@@ -71,16 +71,16 @@ def onKeyPress(event):
     simu.vitesse = Vitesse.get()
     if event.keysym == "Right":
         simu.angle = -Angle.get()
-        simu.rotationRobot()
+        simu.robot.rotationRobot()
     elif event.keysym == "Left":
         simu.angle = Angle.get()
-        simu.rotationRobot()
+        simu.robot.rotationRobot()
     elif event.keysym == "Up":
         simu.distance = Distance.get()
-        simu.deplacementRobot()
+        simu.robot.deplacementRobot()
     elif event.keysym == "Down":
         simu.distance = -Distance.get()
-        simu.deplacementRobot()
+        simu.robot.deplacementRobot()
 #Sert a utiliser la fonction onKeyPress lorsque on clique sur une touche du clavier
 window.bind('<KeyPress>', onKeyPress)
 
@@ -89,7 +89,7 @@ while True:
     sleep(1/simu.temps)
     rec_base.delete("all")
     simu.rafraichir()
-    rec_base.create_polygon(simu.coordRobot)
+    rec_base.create_polygon(simu.robot.coordRobot)
 
     x = robot1.x
     y = robot1.y
