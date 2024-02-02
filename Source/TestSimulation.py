@@ -1,6 +1,6 @@
-from Simulation import *
-from Environnement import *
-from Robot import *
+from Simulation import Simulation
+from Environnement import Environnement
+from Robot import Robot
 
 Environnement_test = Environnement(1,1000,700)
 Robot1 = Robot(1,100,50,Environnement_test.getLo()/2,Environnement_test.getLa()/2)
