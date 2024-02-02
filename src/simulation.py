@@ -32,6 +32,16 @@ et d'effectuer les calculs nécessaires pour simuler un déplacement fluide et r
 
 class Simulation:
     def __init__(self, id, robot, largeur, longueur,temps):
+        """
+        Initialise une simulation avec un identifiant, un robot, un environnement et un temps de rafraîchissement
+
+        Paramètres :
+        - id : identifiant 
+        - robot : instance de la classe Robot         
+        - environnement : instance de la classe Environnement dans lequel le robot se déplace
+        - temps : nombre de rafraîchissements par seconde dans la simulation
+
+        """
         self.id = id
         self.robot = robot                  #Le robot
         self.longueur = longueur            #La longueur de l'environnement
@@ -52,7 +62,9 @@ class Simulation:
 
     def droiteDirection(self):
         """
-        -Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
+        Retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
+        Cette droite permet au robot de se déplacer dans la direction voulue en variant x et y
+
         """
         a = cos(radians(self.angle))
         b = sin(radians(self.angle))
@@ -61,9 +73,11 @@ class Simulation:
     def rafraichir(self):
 
         """
-        -Fonction qui effectue les actions nécessaires à chaque rafraichissement 
-        -Avancer d'une distance (celle de velociteD[0]) et/ou tourner d'un certain angle (celle de velocitéR[0]) si les tableaux ne sont pas vides
-        -Mettre à jour les coordonnées des coins du robot (avec coinsRobot)
+        Effectue les actions nécessaires à chaque rafraichissement :
+        - Avance d'une distance (celle de velociteD[0]) si velociteD est non-vide
+        - Tourne d'un certain angle (celle de velociteR[0]) si velociteR est non-vide
+        - Met à jour les coordonnées des coins du robot (avec coinsRobot)
+
         """
         #Si l'un des tableaux n'est pas vide
         if self.velociteD or self.velociteR :
@@ -97,10 +111,8 @@ class Simulation:
     
     def coinsRobot(self):
         """
-        -Fonction qui calcule, à l'aide de la taille et de la drection, la position des 4 coins du robot
-        -Nécessite obtenirAngle
-        -Le centre du rectangle est la position x y du robot
-        -Modifier self.coordRobot par la liste des coordonnees des 4 coins
+        Calcule, à l'aide des dimensions du robot et de la direction, la position des 4 coins du robot
+
         """
         L = self.robot.longueur / 2
         l = self.robot.largeur / 2
@@ -117,10 +129,10 @@ class Simulation:
     
     def deplacementRobot(self):
         """
-        -Fonction qui effectue les calcules nécessaire afin de déplacer le robot
-        -Ajout dans velociteD les distances à faire à chaque rafraichissement selon la distance à parcourir et la vitesse,
-            dans la direction du robot
-        -Ne retourne rien
+        Effectue les calculs nécessaires afin de déplacer le robot :
+        - Ajoute dans velociteD les distances à faire à chaque rafraichissement en fonction de la distance 
+        à parcourir et la vitesse, dans la direction du robot
+
         """
         #Calcule de la distance que parcoure le robot à chaque rafraîchissement
         distance_par_rafraichissement = self.vitesse / self.temps
@@ -144,9 +156,10 @@ class Simulation:
     
     def rotationRobot(self):
         """
-        -Fonction qui effectue les calcules nécessaire afin de faire une rotation au robot
-        -Ajout dans velociteR les modifications d'angles à faire à chaque rafraichissement selon la vitesse
-        -Ne retourne rien
+        Effectue les calculs nécessaires pour faire faire une rotation au robot :
+        - Ajoute dans velociteR les modifications d'angles à faire à chaque rafraichissement en fonction 
+        de la vitesse
+
         """
         #Calcule de la rotation que le robot doit tourner à chaque rafraîchissement
         Rotation_par_rafraichissement = self.vitesse / self.temps
