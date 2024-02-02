@@ -2,10 +2,11 @@ from math import *
 
 """Documentation : """
 class Simulation:
-    def __init__(self, id, robot, environnement, temps):
+    def __init__(self, id, robot, largeur, longueur,temps):
         self.id = id
         self.robot = robot                  #Le robot
-        self.environnement = environnement  #L'environnement
+        self.longueur = longueur            #La longueur de l'environnement
+        self.largueur = largeur             #La largueur de l'environnement
         self.temps = temps                  #Le nombre de rafraichissement par seconde
         self.vitesse = 100                  #La vitesse à laquelle le robot se déplace
         self.distance = 100                 #La distance que le robot va parcourir (1 pixel = 1 cm)
@@ -19,9 +20,6 @@ class Simulation:
         x = robot.x
         y = robot.y
         self.coordRobot = [(x-l, y-L), (x+l, y-L), (x+l, y+L), (x-l, y+L)]
-
-    def setRobot(self, robot):
-        self.robot = robot
 
     def droiteDirection(self):
         """
@@ -54,13 +52,13 @@ class Simulation:
             for coin in self.coordRobot:
                 if coin[0] < 0:
                     decal_x = max(decal_x, -coin[0])
-                if coin[0] > self.environnement.longueur:
-                    decal_x = min(decal_x, -(coin[0] - self.environnement.longueur))
+                if coin[0] > self.longueur:
+                    decal_x = min(decal_x, -(coin[0] - self.longueur))
 
                 if coin[1] < 0:
                     decal_y = max(decal_y, -coin[1])
-                if coin[1] > self.environnement.largeur:
-                    decal_y = min(decal_y, -(coin[1] - self.environnement.largeur))
+                if coin[1] > self.largeur:
+                    decal_y = min(decal_y, -(coin[1] - self.largeur))
 
             self.robot.x += decal_x
             self.robot.y += decal_y
