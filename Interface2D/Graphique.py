@@ -1,17 +1,14 @@
-from time import *
-from tkinter import *
+from time import sleep
+from tkinter import Canvas, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH
 from Source.Simulation import Simulation
 from Source.Robot import Robot
-from Source.Environnement import Environnement
-from math import *
+from math import cos,radians,sin
 
 """Documentation : """
-
-
-Environnement_test = Environnement(1,1000,700)
-Robot1 = Robot(1,50,25,Environnement_test.getLo()/2,Environnement_test.getLa()/2)
-Simu = Simulation(1,Robot1,Environnement_test,60)
-
+larg = 700
+long = 1000
+Robot1 = Robot(1,50,25,long/2,larg/2)
+Simu = Simulation(1,Robot1,larg,long,60)
 #Fonction dans lequel on pourra faire bouger le robot grâce au touches du clavier. (A ajouter les fonction du robot plus tard)
 
 
@@ -25,7 +22,7 @@ def espace (f):
 #Spécificité de notre interface graphique
 window = Tk()
 window.title("Simulation")
-window.geometry(f"{Environnement_test.getLo()+250}x{Environnement_test.getLa()+5}")
+window.geometry(f"{Simu.longueur+250}x{Simu.largueur+5}")
 window.resizable(height=False, width=False)
 
 #Première frame/boîte
@@ -33,7 +30,7 @@ frame = Frame(window,borderwidth=5, relief="raise")
 frame.pack(fill = BOTH,side = RIGHT)
 
 #Canvas ou sera simuler l'environnement du robot et ces déplacement
-rec_base = Canvas(window, bg='#cccccc', width=Environnement_test.getLo(), height=Environnement_test.getLa())
+rec_base = Canvas(window, bg='#cccccc', width=Simu.longueur, height=Simu.largueur)
 rec_base.place(x='0',y='0')
 
 #Pour le scale de la vitesse
