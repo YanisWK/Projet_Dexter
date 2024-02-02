@@ -1,5 +1,4 @@
 from math import *
-from Entite import *
 
 """Documentation : """
 
