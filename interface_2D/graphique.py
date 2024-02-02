@@ -1,19 +1,35 @@
 from time import sleep
 from tkinter import Canvas, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH
-from src.robot import Robot
 from src.simulation import Simulation
+from src.robot import Robot
 from math import cos,radians,sin
 
-"""Documentation : """
+"""Documentation : 
+    - initialise les paramètres de la simulation
+    - configure de l'interface graphique
+    - affiche l'environnement à l'aide d'un canvas (fond gris)
+    - affiche les échelles de la distance, la vitesse et l'angle pour l'utilisateur
+    - affiche le robot sous forme de rectangle
+    - configure les touches du clavier permettant de faire avancer/reculer/tourner le robot
+    - affiche une ligne rouge pointant vers le point centre du robot
+
+"""
+
+
 larg = 700
 long = 1000
-robot1 = Robot(1,50,25,long/2,larg/2)
-simu = Simulation(1,robot1,larg,long,60)
-#Fonction dans lequel on pourra faire bouger le robot grâce au touches du clavier. (A ajouter les fonction du robot plus tard)
+Robot1 = Robot(1,50,25,long/2,larg/2)
+Simu = Simulation(1,Robot1,larg,long,60)
 
 
 def espace (f):
-    ''' Hypothèse : f est une frame '''
+    ''' 
+    Ajoute un espace entre les éléments d'une frame
+
+    Paramètres : 
+    - f : frame
+
+    '''
     espace = Label(f, text="", font=("Helvetica", 16))
     espace.pack()
     espace = Label(f, text="", font=("Helvetica", 16))
@@ -22,15 +38,15 @@ def espace (f):
 #Spécificité de notre interface graphique
 window = Tk()
 window.title("Simulation")
-window.geometry(f"{simu.longueur+250}x{simu.largueur+5}")
+window.geometry(f"{Simu.longueur+250}x{Simu.largueur+5}")
 window.resizable(height=False, width=False)
 
 #Première frame/boîte
 frame = Frame(window,borderwidth=5, relief="raise")
 frame.pack(fill = BOTH,side = RIGHT)
 
-#Canvas ou sera simuler l'environnement du robot et ces déplacement
-rec_base = Canvas(window, bg='#cccccc', width=simu.longueur, height=simu.largueur)
+#Canvas où sera simulé l'environnement du robot et ses déplacements
+rec_base = Canvas(window, bg='#cccccc', width=Simu.longueur, height=Simu.largueur)
 rec_base.place(x='0',y='0')
 
 #Pour le scale de la vitesse
@@ -61,42 +77,48 @@ Angle = IntVar()
 scale3 = Scale(frame, from_=0, to=180, length=240,variable=Angle, orient=HORIZONTAL)
 scale3.pack(pady=1)
 
-#Implementaiton du robot dans l'environnement
-coord = simu.robot.coordRobot
-rec_base.create_polygon(coord[0][0],coord[0][1],coord[1][0],coord[1][1],coord[2][0],coord[2][1],coord[3][0],coord[3][1])
+#Implementation du robot dans l'environnement
+Coord = Simu.coordRobot
+rec_base.create_polygon(Coord[0][0],Coord[0][1],Coord[1][0],Coord[1][1],Coord[2][0],Coord[2][1],Coord[3][0],Coord[3][1])
 rec_base.pack()
 
-#Fonction qui choisi les fonctions a executer en fonction des touches directionnel
 def onKeyPress(event):
-    simu.vitesse = Vitesse.get()
+    """
+    Choisit les fonctions à executer en fonction des touches directionnelles
+
+    Paramètres :
+    - event : événement de clavier dans l'interface utilisateur, crée quand une touche est pressée
+    """
+    Simu.vitesse = Vitesse.get()
     if event.keysym == "Right":
-        simu.angle = -Angle.get()
-        simu.robot.rotationRobot()
+        Simu.angle = -Angle.get()
+        Simu.rotationRobot()
     elif event.keysym == "Left":
-        simu.angle = Angle.get()
-        simu.robot.rotationRobot()
+        Simu.angle = Angle.get()
+        Simu.rotationRobot()
     elif event.keysym == "Up":
-        simu.distance = Distance.get()
-        simu.robot.deplacementRobot()
+        Simu.distance = Distance.get()
+        Simu.deplacementRobot()
     elif event.keysym == "Down":
-        simu.distance = -Distance.get()
-        simu.robot.deplacementRobot()
+        Simu.distance = -Distance.get()
+        Simu.deplacementRobot()
+
 #Sert a utiliser la fonction onKeyPress lorsque on clique sur une touche du clavier
 window.bind('<KeyPress>', onKeyPress)
 
-#Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES / Trouver une solution de préférence
+#Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES
 while True:
-    sleep(1/simu.temps)
+    sleep(1/Simu.temps)
     rec_base.delete("all")
-    simu.rafraichir()
-    rec_base.create_polygon(simu.robot.coordRobot)
+    Simu.rafraichir()
+    rec_base.create_polygon(Simu.coordRobot)
 
-    x = robot1.x
-    y = robot1.y
-    L = robot1.longueur / 2
-    l = robot1.largeur / 2
-    x1 = x + L*cos(radians(robot1.direction))
-    y1 = y - L*sin(radians(robot1.direction))
+    x = Robot1.x
+    y = Robot1.y
+    L = Robot1.longueur / 2
+    l = Robot1.largeur / 2
+    x1 = x + L*cos(radians(Robot1.direction))
+    y1 = y - L*sin(radians(Robot1.direction))
     rec_base.create_line(x, y, x1, y1, fill="red")
 
     rec_base.pack()
