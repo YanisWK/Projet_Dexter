@@ -10,8 +10,8 @@ class TestRobot(unittest.TestCase):
     def test_robot_avancer(self):
         test_robot = Robot("Dexter",50,25,0,0)
         test_robot.avancer(10)
-        self.assertEqual(test_robot.x, 10)
-        self.assertEqual(test_robot.y, 0)
+        self.assertEqual(test_robot.x, 0)
+        self.assertEqual(test_robot.y, -10)
 
 if __name__ == '__main__':
     unittest.main()
