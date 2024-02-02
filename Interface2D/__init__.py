@@ -1,1 +1,1 @@
-from .Graphique import Graphique
+from .graphique import Graphique
