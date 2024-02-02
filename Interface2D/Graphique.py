@@ -2,7 +2,6 @@ from time import *
 from tkinter import *
 from Source.Simulation import Simulation
 from Source.Robot import Robot
-from Source.Environnement import Environnement
 from math import *
 
 """Documentation : """
