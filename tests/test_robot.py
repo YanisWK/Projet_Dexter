@@ -4,12 +4,12 @@ import unittest
 
 class TestRobot(unittest.TestCase):
     def test_robot_est_instancce_de_robot(self):
-        robot = Robot("Dexter",50,25,0,0)
-        self.assertIsInstance(robot, Robot)
+        test_robot = Robot("Dexter",50,25,0,0)
+        self.assertIsInstance(test_robot, Robot)
 
     def test_robot_avancer(self):
-        robot = Robot("Dexter",50,25,0,0)
-        robot.avancer(10)
+        test_robot = Robot("Dexter",50,25,0,0)
+        test_robot.avancer(10)
         self.assertEqual(robot.getX(), 10)
         self.assertEqual(robot.getY(), 0)
 
