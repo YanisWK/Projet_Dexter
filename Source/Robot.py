@@ -4,9 +4,11 @@ from Entite import *
 """Documentation : """
 
 
-class Robot(Entite):
+class Robot:
     def __init__(self, id, longueur, largeur, x, y):
-        super().__init__(id, x ,y)
+        self.id=id 
+        self.x = x 
+        self.y = y
         self.direction = 90
         self.longueur = longueur
         self.largeur = largeur
