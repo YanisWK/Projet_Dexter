@@ -1,8 +1,8 @@
 from time import *
 from tkinter import *
-from Simulation import *
-from Robot import *
-from Environnement import *
+from Simulation import Simulation
+from Robot import Robot
+from Environnement import Environnement
 from math import *
 
 """Documentation : """
