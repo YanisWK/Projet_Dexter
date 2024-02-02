@@ -1,7 +1,7 @@
 from time import sleep
 from tkinter import Canvas, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH
-from Source.Simulation import Simulation
-from Source.Robot import Robot
+from src.simulation import Simulation
+from src.robot import Robot
 from math import cos,radians,sin
 
 """Documentation : """
