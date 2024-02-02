@@ -1,4 +1,3 @@
-from math import *
 
 """Documentation : 
 
@@ -37,7 +36,7 @@ class Robot:
     #Fin des méthodes pour faire tourner les roues
 
 
-    def avancer(self, distance):
+    def Avancer(self, distance):
         #calcule le nb de tours nécessaires pour parcourir la distance donnée
         nb_tours = float(distance)/10
 
@@ -54,7 +53,7 @@ class Robot:
         #arrondit les résultats à 10 chiffres après la virgule
 
 
-    def tourner(self, angle):
+    def Tourner(self, angle):
         #calcule le nb de tours pour tourner à gauche de l'angle donné
         #nb_tours = float(angle) / 10
 
