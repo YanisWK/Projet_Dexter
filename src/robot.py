@@ -6,6 +6,7 @@ from math import cos, sin, radians
     Listes des methodes : 
     -avancer
     -tourner
+    -coeff_directeur
     -
     
 """
@@ -82,7 +83,7 @@ class Robot:
 
         print("Le robot a tourné de ", angle, "°")
     
-    def droiteDirection(self, angle):
+    def coeff_directeur(self, angle):
         """
         -Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
         """
@@ -91,7 +92,7 @@ class Robot:
         return (a,b)
     
    
-    def coinsRobot(self):
+    def pos_coins_Robot(self):
         """
         -Fonction qui calcule, à l'aide de la taille et de la drection, la position des 4 coins du robot
         -Nécessite obtenirAngle
