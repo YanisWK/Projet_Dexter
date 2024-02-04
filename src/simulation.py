@@ -72,26 +72,9 @@ class Simulation:
     
     def rafraichir(self):
 
-        """
-        Effectue les actions nécessaires à chaque rafraichissement :
-        - Avance d'une distance (celle de velociteD[0]) si velociteD est non-vide
-        - Tourne d'un certain angle (celle de velociteR[0]) si velociteR est non-vide
-        - Met à jour les coordonnées des coins du robot (avec coinsRobot)
+            self.robot.rafraichir()
 
-        """
-        #Si l'un des tableaux n'est pas vide
-        if self.velociteD or self.velociteR :
-            #si le tableau velociteD n'est pas vide alors on avance
-            if self.velociteD : 
-                self.robot.avancer(self.velociteD.pop(0))
-            
-            #si le tableau velociteR n'est pas vide alors on tourne
-            if self.velociteR : 
-                self.robot.tourner(self.velociteR.pop(0))
-
-            #Verification des bords de la simulation
-            decal_x = 0
-            decal_y = 0
+    """
             for coin in self.coordRobot:
                 if coin[0] < 0:
                     decal_x = max(decal_x, -coin[0])
@@ -107,6 +90,7 @@ class Simulation:
             self.robot.y += decal_y
 
             self.coinsRobot()
+    """
         
     
     def coinsRobot(self):

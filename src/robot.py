@@ -162,3 +162,13 @@ class Robot:
 
         self.velociteR.append(Angle_a_parcourir)
         return
+
+    def rafraichir(self):
+        if self.velociteD or self.velociteR :
+            #si le tableau velociteD n'est pas vide alors on avance
+            if self.velociteD : 
+                self.avancer(self.velociteD.pop(0))
+            
+            #si le tableau velociteR n'est pas vide alors on tourne
+            if self.velociteR : 
+                self.tourner(self.velociteR.pop(0))
