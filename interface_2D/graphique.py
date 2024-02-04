@@ -89,30 +89,29 @@ def onKeyPress(event):
     Paramètres :
     - event : événement de clavier dans l'interface utilisateur, crée quand une touche est pressée
     """
-    Simu.vitesse = Vitesse.get()
     if event.keysym == "Right":
-        Simu.angle = -Angle.get()
-        Simu.rotationRobot()
+        Simu.robot.rotationRobot(-Angle.get(), Vitesse.get(), Simu.temps)
     elif event.keysym == "Left":
-        Simu.angle = Angle.get()
-        Simu.rotationRobot()
+        Simu.robot.rotationRobot(Angle.get(), Vitesse.get(), Simu.temps)
     elif event.keysym == "Up":
-        Simu.distance = Distance.get()
-        Simu.deplacementRobot()
+        Simu.robot.deplacementRobot(Distance.get(), Vitesse.get(), Simu.temps)
     elif event.keysym == "Down":
-        Simu.distance = -Distance.get()
-        Simu.deplacementRobot()
+        Simu.robot.deplacementRobot(-Distance.get(), Vitesse.get(), Simu.temps)
 
 #Sert a utiliser la fonction onKeyPress lorsque on clique sur une touche du clavier
 window.bind('<KeyPress>', onKeyPress)
 
 #Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES
 while True:
+    #Mise a jour tous les 1/temps
     sleep(1/Simu.temps)
+
+    #On efface tout et on redessine le robot
     rec_base.delete("all")
     Simu.rafraichir()
-    rec_base.create_polygon(Simu.coordRobot)
+    rec_base.create_polygon(Simu.robot.coordRobot)
 
+    #Affichage de la ligne rouge pour la direction du robot
     x = Robot1.x
     y = Robot1.y
     L = Robot1.longueur / 2
