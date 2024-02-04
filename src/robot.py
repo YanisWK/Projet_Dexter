@@ -119,6 +119,8 @@ class Robot:
             dans la direction du robot
         -Ne retourne rien
         """
+        self.velociteD = []
+
         #Calcule de la distance que parcoure le robot à chaque rafraîchissement
         distance_par_rafraichissement = vitesse / temps
 
@@ -145,6 +147,7 @@ class Robot:
         -Ajout dans velociteR les modifications d'angles à faire à chaque rafraichissement selon la vitesse
         -Ne retourne rien
         """
+        self.velociteR = []
         #Calcule de la rotation que le robot doit tourner à chaque rafraîchissement
         Rotation_par_rafraichissement = vitesse / temps
         
