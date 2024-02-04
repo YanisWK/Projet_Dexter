@@ -78,7 +78,7 @@ scale3 = Scale(frame, from_=0, to=180, length=240,variable=Angle, orient=HORIZON
 scale3.pack(pady=1)
 
 #Implementation du robot dans l'environnement
-Coord = Simu.coordRobot
+Coord = Simu.robot.coordRobot
 rec_base.create_polygon(Coord[0][0],Coord[0][1],Coord[1][0],Coord[1][1],Coord[2][0],Coord[2][1],Coord[3][0],Coord[3][1])
 rec_base.pack()
 
