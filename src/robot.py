@@ -175,3 +175,5 @@ class Robot:
             #si le tableau velociteR n'est pas vide alors on tourne
             if self.velociteR : 
                 self.tourner(self.velociteR.pop(0))
+
+        self.pos_coins_Robot()
