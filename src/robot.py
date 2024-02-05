@@ -3,10 +3,12 @@ from math import cos, sin, radians
 """Documentation : 
 
     Description generale : Fichier contenant la classe Robot avec ces attributs de position,direction ainsi que sa longueur et largeur
-    Listes des methodes : 
-    -avancer
-    -tourner
-    -coeff_directeur
+    Listes des methodes :
+    - __init__ => crée une instance Robot
+                  la classe utilise des listes velociteD et velociteR, pour stocker les déplacements et les 
+                  rotations à chaque rafraîchissement
+    -avancer =>
+    -tourner =>
     - coeff_directeur => retourne le couple (a,b) de la droite directionelle ax+by
                     Ces coefficients sont les composantes du vecteur unitaire dirigeant le robot  
                     - a est la composante horizontale (abscisse)
@@ -29,6 +31,13 @@ from math import cos, sin, radians
 
 class Robot:
     def __init__(self, id, longueur, largeur, x, y):
+        """
+        Paramètres :
+        - id : identifiant du robot
+        - longueur, largeur : dimensions du robot
+        - x,y : coordonnées du robot dans l'environnement
+
+        """
         self.id=id 
         self.x = x 
         self.y = y
@@ -102,7 +111,9 @@ class Robot:
     
     def coeff_directeur(self, angle):
         """
-        -Fonction qui retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
+        Retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
+        Cette droite permet au robot de se déplacer dans la direction voulue en variant x et y
+
         """
         a = cos(radians(angle))
         b = sin(radians(angle))
@@ -111,10 +122,11 @@ class Robot:
    
     def pos_coins_Robot(self):
         """
-        -Fonction qui calcule, à l'aide de la taille et de la drection, la position des 4 coins du robot
-        -Nécessite obtenirAngle
-        -Le centre du rectangle est la position x y du robot
-        -Modifier self.coordRobot par la liste des coordonnees des 4 coins
+        - Calcule, à l'aide des dimensions du robot et de la direction, la position des 4 coins du robot
+        - Nécessite obtenirAngle
+        - Le centre du rectangle est la position x y du robot
+        - Modifie self.coordRobot par la liste des coordonnees des 4 coins
+
         """
         L = self.longueur / 2
         l = self.largeur / 2
@@ -131,11 +143,12 @@ class Robot:
     
     def deplacementRobot(self, distance, vitesse, temps):
         """
-        -Fonction qui effectue les calcules nécessaire afin de déplacer le robot
-        -Ajout dans velociteD les distances à faire à chaque rafraichissement selon la distance à parcourir et la vitesse,
-            dans la direction du robot
-        -Ne retourne rien
+        Effectue les calculs nécessaires afin de déplacer le robot :
+        - Ajoute dans velociteD les distances à faire à chaque rafraichissement en fonction de la distance 
+        à parcourir et la vitesse, dans la direction du robot
+
         """
+
         self.velociteD = []
 
         #Calcule de la distance que parcoure le robot à chaque rafraîchissement
@@ -160,9 +173,10 @@ class Robot:
     
     def rotationRobot(self, angle, vitesse, temps):
         """
-        -Fonction qui effectue les calcules nécessaire afin de faire une rotation au robot
-        -Ajout dans velociteR les modifications d'angles à faire à chaque rafraichissement selon la vitesse
-        -Ne retourne rien
+        Effectue les calculs nécessaires pour faire faire une rotation au robot :
+        - Ajoute dans velociteR les modifications d'angles à faire à chaque rafraichissement en fonction 
+        de la vitesse
+
         """
         self.velociteR = []
         #Calcule de la rotation que le robot doit tourner à chaque rafraîchissement
@@ -184,6 +198,11 @@ class Robot:
         return
 
     def rafraichir(self):
+        """
+        - Avance d'une distance (celle de velociteD[0]) et/ou tourne d'un certain angle (celle de velociteR[0]) 
+        si les tableaux ne sont pas vides
+        """
+
         if self.velociteD or self.velociteR :
             #si le tableau velociteD n'est pas vide alors on avance
             if self.velociteD : 
