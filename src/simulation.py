@@ -8,26 +8,9 @@ La simulation inclut des fonctions permettant de mettre à jour les coordonnées
 et d'effectuer les calculs nécessaires pour simuler un déplacement fluide et réaliste :
 
 - __init__ => crée une simulation liant le robot et l'environnement avec un temps de rafraichissement
-              Le script utilise des listes velociteD et velociteR, pour stocker les déplacements et les 
-              rotations à chaque rafraîchissement.
-
-- droiteDirection => retourne le couple (a,b) de la droite directionelle ax+by
-                    Ces coefficients sont les composantes du vecteur unitaire dirigeant le robot  
-                    - a est la composante horizontale (abscisse)
-                    - b est la composante verticale (ordonnée)
-                    Ils décrivent la direction associée à l'angle dans le cercle trigonométrique.
 
 - rafraichir => effectue les déplacements avancer/tourner à l'aide des listes velociteD et velociteR et 
                 gère les collisions avec les bords de l'environnement
-
-- coinsRobot => calcule la position des 4 coins à l'aide de la direction et de la taille du robot
-
-- deplacementRobot => fait avancer ou reculer le robot dans sa direction actuelle, 
-                      en fonction des déplacements contenus dans velociteD et en fonction de la vitesse
-
-- rotationRobot => fait tourner le robot en fonction des modifs d'angles contenues dans velociteR et 
-                   en fonction de la vitesse
-
 """
 
 class Simulation:
@@ -38,7 +21,8 @@ class Simulation:
         Paramètres :
         - id : identifiant 
         - robot : instance de la classe Robot         
-        - environnement : instance de la classe Environnement dans lequel le robot se déplace
+        - longueur : longueur de l'environnement dans lequel le robot se déplace
+        - largeur : largueur de l'environnement 
         - temps : nombre de rafraîchissements par seconde dans la simulation
 
         """
@@ -49,8 +33,10 @@ class Simulation:
         self.temps = temps
     
     def rafraichir(self):
-
-            self.robot.rafraichir()
+        """
+        - Met à jour les coordonnées des coins du robot (avec coinsRobot)
+        """
+        self.robot.rafraichir()
 
     """
             for coin in self.coordRobot:
