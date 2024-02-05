@@ -7,8 +7,23 @@ from math import cos, sin, radians
     -avancer
     -tourner
     -coeff_directeur
-    -
-    
+    - coeff_directeur => retourne le couple (a,b) de la droite directionelle ax+by
+                    Ces coefficients sont les composantes du vecteur unitaire dirigeant le robot  
+                    - a est la composante horizontale (abscisse)
+                    - b est la composante verticale (ordonnée)
+                    Ils décrivent la direction associée à l'angle dans le cercle trigonométrique.
+
+    - rafraichir => effectue les déplacements avancer/tourner à l'aide des listes velociteD et velociteR et 
+                    gère les collisions avec les bords de l'environnement
+
+    - pos_coins_Robot => calcule la position des 4 coins à l'aide de la direction et de la taille du robot
+
+    - deplacementRobot => fait avancer ou reculer le robot dans sa direction actuelle, 
+                        en fonction des déplacements contenus dans velociteD et en fonction de la vitesse
+
+    - rotationRobot => fait tourner le robot en fonction des modifs d'angles contenues dans velociteR et 
+                    en fonction de la vitesse
+
 """
 
 
