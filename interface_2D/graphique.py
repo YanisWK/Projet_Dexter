@@ -51,21 +51,16 @@ rec_base.place(x='0',y='0')
 
 #Pour le scale de la vitesse
 texte_var_vit = StringVar()
-texte_var_vit.set("Vitesse")
+texte_var_vit.set("Vitesse Roue Gauche")
 label = Label(frame, textvariable=texte_var_vit, font=("Helvetica", 16))
 label.pack()
 vitesse = IntVar()
-scale = Scale(frame, from_=10, to=200, length=240,variable=vitesse, orient=HORIZONTAL)
+scale = Scale(frame, from_=0, to=100, length=120,variable=vitesse, orient=HORIZONTAL)
 scale.pack(pady=1)
 
 espace(frame)
 
 #Pour le scale de la distance
-dist = Label(frame, text="Distance", font=("Helvetica", 16))
-dist.pack()
-distance = IntVar()
-scale2 = Scale(frame, from_=10, to=200, length=240,variable=distance, orient=HORIZONTAL)
-scale2.pack(pady=1)
 
 
 espace(frame)
@@ -82,24 +77,24 @@ coord = simu.robot.coordRobot
 rec_base.create_polygon(coord[0][0],coord[0][1],coord[1][0],coord[1][1],coord[2][0],coord[2][1],coord[3][0],coord[3][1])
 rec_base.pack()
 
-def onKeyPress(event):
-    """
-    Choisit les fonctions à executer en fonction des touches directionnelles
+# def onKeyPress(event):
+#     """
+#     Choisit les fonctions à executer en fonction des touches directionnelles
 
-    Paramètres :
-    - event : événement de clavier dans l'interface utilisateur, crée quand une touche est pressée
-    """
-    if event.keysym == "Right":
-        simu.robot.rotationRobot(-angle.get(), vitesse.get(), simu.temps)
-    elif event.keysym == "Left":
-        simu.robot.rotationRobot(angle.get(), vitesse.get(), simu.temps)
-    elif event.keysym == "Up":
-        simu.robot.deplacementRobot(distance.get(), vitesse.get(), simu.temps)
-    elif event.keysym == "Down":
-        simu.robot.deplacementRobot(-distance.get(), vitesse.get(), simu.temps)
+#     Paramètres :
+#     - event : événement de clavier dans l'interface utilisateur, crée quand une touche est pressée
+#     """
+#     if event.keysym == "Right":
+#         simu.robot.rotationRobot(-angle.get(), vitesse.get(), simu.temps)
+#     elif event.keysym == "Left":
+#         simu.robot.rotationRobot(angle.get(), vitesse.get(), simu.temps)
+#     elif event.keysym == "Up":
+#         simu.robot.deplacementRobot(distance.get(), vitesse.get(), simu.temps)
+#     elif event.keysym == "Down":
+#         simu.robot.deplacementRobot(-distance.get(), vitesse.get(), simu.temps)
 
 #Sert a utiliser la fonction onKeyPress lorsque on clique sur une touche du clavier
-window.bind('<KeyPress>', onKeyPress)
+# window.bind('<KeyPress>', onKeyPress)
 
 #Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES
 while True:
