@@ -22,13 +22,15 @@ class Robot:
         self.largeur = largeur
         self.velociteD = []                 #Liste des déplacements vers l'avant à chaque rafraichissement
         self.velociteR = []                 #Liste des changements de direction à chaque rafraichisement
-
+        self.vitesseRoueG=0
+        self.vitesseRoueD=0
         #Les 4 coins du robot delon la position du centre et la taille du robot
         L = self.longueur / 2
         l = self.largeur / 2
         dir = self.direction
         x = self.x
         y = self.y
+
 
         self.coordRobot = [(x-l, y-L), (x+l, y-L), (x+l, y+L), (x-l, y+L)]
 
