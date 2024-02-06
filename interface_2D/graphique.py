@@ -1,5 +1,5 @@
 from time import sleep
-from tkinter import Canvas, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH
+from tkinter import Canvas, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH, BOTTOM
 from src.simulation import Simulation
 from src.robot import Robot
 from math import cos,radians,sin
@@ -49,34 +49,35 @@ frame.pack(fill = BOTH,side = RIGHT)
 rec_base = Canvas(window, bg='#cccccc', width=simu.longueur, height=simu.largueur)
 rec_base.place(x='0',y='0')
 
-#Pour le scale de la vitesse
-texte_var_vit = StringVar()
-texte_var_vit.set("Vitesse Roue Gauche")
-label = Label(frame, textvariable=texte_var_vit, font=("Helvetica", 16))
+#Pour le scale de la roue droite
+texte_vit_gauche = StringVar()
+texte_vit_gauche.set("Vitesse Roue Droite")
+label = Label(frame, textvariable=texte_vit_gauche, font=("Helvetica", 16))
 label.pack()
-vitesse = IntVar()
-scale = Scale(frame, from_=0, to=100, length=120,variable=vitesse, orient=HORIZONTAL)
-scale.pack(pady=1)
+vit_gauche = IntVar()
+scale = Scale(frame, from_=-100, to=100, length=240,variable=vit_gauche, orient=HORIZONTAL)
+scale.pack()
 
 espace(frame)
 
-#Pour le scale de la distance
-
+#Pour le scale de la roue gauche
+texte_vit_droite = StringVar()
+texte_vit_droite.set("Vitesse Roue Gauche")
+label = Label(frame, textvariable=texte_vit_droite, font=("Helvetica", 16))
+label.pack()
+vit_droite = IntVar()
+scale2 = Scale(frame, from_=-100, to=100, length=240,variable=vit_droite, orient=HORIZONTAL)
+scale2.pack()
 
 espace(frame)
-
-#Pour le scale de l'angle à tourner
-dist = Label(frame, text="Angle", font=("Helvetica", 16))
-dist.pack()
-angle = IntVar()
-scale3 = Scale(frame, from_=0, to=180, length=240,variable=angle, orient=HORIZONTAL)
-scale3.pack(pady=1)
 
 #Implementation du robot dans l'environnement
 coord = simu.robot.coordRobot
 rec_base.create_polygon(coord[0][0],coord[0][1],coord[1][0],coord[1][1],coord[2][0],coord[2][1],coord[3][0],coord[3][1])
 rec_base.pack()
 
+couleur = Canvas(frame, bg='red', width=100, height=50)
+couleur.pack(side=BOTTOM)
 # def onKeyPress(event):
 #     """
 #     Choisit les fonctions à executer en fonction des touches directionnelles
