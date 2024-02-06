@@ -40,6 +40,7 @@ class Simulation:
         if (self.awake):
             if (self.robot.pret):
                 self.robot.rafraichir(self.temps)
+                self.check_collision()
 
         
 

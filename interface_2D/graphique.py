@@ -20,7 +20,7 @@ larg = 700
 long = 1000
 robot1 = Robot(1,50,25,long/2,larg/2)
 simu = Simulation(1,robot1,larg,long,60)
-robot1.pret = True
+
 
 
 def espace (f):
@@ -115,25 +115,28 @@ window.bind('<KeyPress>', onKeyPress)
 
 #Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES
 while True:
-    #Mise a jour tous les 1/temps
-    sleep(1/simu.temps)
+    if (simu.awake):
+        #Mise a jour tous les 1/temps
+        sleep(1/simu.temps)
 
-    #On efface tout et on redessine le robot
-    rec_base.delete("all")
-    simu.rafraichir()
-    rec_base.create_polygon(simu.robot.coordRobot)
+        #On efface tout et on redessine le robot
+        rec_base.delete("all")
+        simu.rafraichir()
+        rec_base.create_polygon(simu.robot.coordRobot)
 
-    #Affichage de la ligne rouge pour la direction du robot
-    x = robot1.x
-    y = robot1.y
-    L = robot1.longueur / 2
-    l = robot1.largeur / 2
-    x1 = x + L*cos(radians(robot1.direction))
-    y1 = y - L*sin(radians(robot1.direction))
-    rec_base.create_line(x, y, x1, y1, fill="red")
+        #Affichage de la ligne rouge pour la direction du robot
+        x = robot1.x
+        y = robot1.y
+        L = robot1.longueur / 2
+        l = robot1.largeur / 2
+        x1 = x + L*cos(radians(robot1.direction))
+        y1 = y - L*sin(radians(robot1.direction))
+        rec_base.create_line(x, y, x1, y1, fill="red")
 
-    rec_base.pack()
-    rec_base.update()
+        rec_base.pack()
+        rec_base.update()
+    else:
+        break
 
 window.mainloop()
 
