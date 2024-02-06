@@ -78,6 +78,13 @@ rec_base.pack()
 
 couleur = Canvas(frame, bg='red', width=100, height=50)
 couleur.pack(side=BOTTOM)
+
+def change_color(boolean):
+    if boolean:
+        couleur.configure(bg='green')
+    else:
+        couleur.configure(bg='red')
+
 # def onKeyPress(event):
 #     """
 #     Choisit les fonctions à executer en fonction des touches directionnelles
