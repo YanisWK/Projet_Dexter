@@ -46,7 +46,7 @@ class Robot:
         self.largeur = largeur
         self.vitesseRoueG = 0
         self.vitesseRoueD = 0
-        self.pret=False
+        self.pret  #Si la simulation est en pause et le robot est prêt, le robot se rafraichit 
         #Les 4 coins du robot delon la position du centre et la taille du robot
         L = self.longueur / 2
         l = self.largeur / 2
@@ -166,8 +166,7 @@ class Robot:
 
     def rafraichir(self,temps):
         """
-        - Avance d'une distance (celle de velociteD[0]) et/ou tourne d'un certain angle (celle de velociteR[0]) 
-        si les tableaux ne sont pas vides
+        Met à jour les positions des coins du robot et les déplacements du robot
         """
         self.deplacementRobot(temps)
         self.pos_coins_Robot()
