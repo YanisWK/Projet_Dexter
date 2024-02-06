@@ -35,10 +35,12 @@ class Simulation:
         self.awake=True
         
     
-    def rafraichir(self):
+    def rafraichir(self, vitesse_roue_g, vitesse_roue_d):
         #Si  on est pret le robot se rafraichie 
         if (self.awake):
             if (self.robot.pret):
+                self.robot.vitesseRoueG = vitesse_roue_g
+                self.robot.vitesseRoueD = vitesse_roue_d
                 self.robot.rafraichir(self.temps)
                 self.check_collision()
 
