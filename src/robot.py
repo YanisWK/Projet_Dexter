@@ -73,9 +73,10 @@ class Robot:
     #Fin des méthodes pour faire tourner les roues
 
 
+    #Fonction non réaliste permettant de simuler les mouvements du robot
     def avancer(self, distance):
         #calcule le nb de tours nécessaires pour parcourir la distance donnée
-        nb_tours = float(distance)/10
+        #nb_tours = float(distance)/10
 
         #Il faut les faire tourner en même temps
         #fait tourner les roues gauche et droite en avant pendant le nb de tours calculé
@@ -88,7 +89,6 @@ class Robot:
         self.y -= round( distance * sin(radians(self.direction)) , 10)
         #Mettre à jour les coordonnées x et y en fonction de la direction et de la distance
         #arrondit les résultats à 10 chiffres après la virgule
-
 
     def tourner(self, angle):
         #calcule le nb de tours pour tourner à gauche de l'angle donné
@@ -107,6 +107,7 @@ class Robot:
 
         print("Le robot a tourné de ", angle, "°")
     
+
     def coeff_directeur(self, angle):
         """
         Retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
@@ -138,6 +139,7 @@ class Robot:
         c3 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
         c4 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
         self.coordRobot = [c1, c2, c3, c4]
+        
     
     def deplacementRobot(self, vitesse, temps):
         """
