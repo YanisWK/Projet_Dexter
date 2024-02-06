@@ -20,5 +20,10 @@ class TestRobot(unittest.TestCase):
         test_robot.tourner(-180)
         self.assertEqual(test_robot.direction, 0)
 
+    def test_robot_pos_coins_Robot(self):
+        test_robot = Robot("Dexter",50,25,0,0)
+        test_robot.pos_coins_Robot()
+        self.assertEqual(test_robot.coordRobot, [(25.0, 0.0), (25.0, 50.0), (-25.0, 50.0), (-25.0, 0.0)])
+
 if __name__ == '__main__':
     unittest.main()
