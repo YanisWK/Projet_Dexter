@@ -157,15 +157,6 @@ class Robot:
         deplacement_par_rafraichissement = vitesse_deplacement / temps
         self.avancer(deplacement_par_rafraichissement)
 
-    
-    def rotationRobot(self, temps):
-        """
-        Effectue les calculs nécessaires pour faire faire une rotation au robot :
-        - Ajoute dans velociteR les modifications d'angles à faire à chaque rafraichissement en fonction 
-        de la vitesse
-
-        """
-
         #Calcule de la rotation que le robot doit tourner à chaque rafraîchissement
 
         vitesse_rotation = self.vitesseRoueD - self.vitesseRoueG
@@ -178,6 +169,5 @@ class Robot:
         - Avance d'une distance (celle de velociteD[0]) et/ou tourne d'un certain angle (celle de velociteR[0]) 
         si les tableaux ne sont pas vides
         """
-        self.rotationRobot(temps)
         self.deplacementRobot(temps)
         self.pos_coins_Robot()
