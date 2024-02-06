@@ -46,6 +46,7 @@ class Robot:
         self.largeur = largeur
         self.vitesseRoueG = 0
         self.vitesseRoueD = 0
+        self.pret=False
         #Les 4 coins du robot delon la position du centre et la taille du robot
         L = self.longueur / 2
         l = self.largeur / 2
@@ -165,19 +166,10 @@ class Robot:
         Rotation_par_rafraichissement = vitesse / temps
         
 
-    def rafraichir(self):
+    def rafraichir(self,vitesse,temps):
         """
         - Avance d'une distance (celle de velociteD[0]) et/ou tourne d'un certain angle (celle de velociteR[0]) 
         si les tableaux ne sont pas vides
         """
-
-        if self.velociteD or self.velociteR :
-            #si le tableau velociteD n'est pas vide alors on avance
-            if self.velociteD : 
-                self.avancer(self.velociteD.pop(0))
-            
-            #si le tableau velociteR n'est pas vide alors on tourne
-            if self.velociteR : 
-                self.tourner(self.velociteR.pop(0))
 
         self.pos_coins_Robot()

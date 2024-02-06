@@ -1,4 +1,5 @@
 from math import *
+from src.robot import Robot
 
 """Documentation : 
 
@@ -31,13 +32,14 @@ class Simulation:
         self.longueur = longueur            #La longueur de l'environnement
         self.largueur = largeur             #La largueur de l'environnement
         self.temps = temps
+        self.awake=True
+        
     
-    def rafraichir(self,pret):
-        #Si le moteur est allumé le robot se rafraichie sinon on retourne rien
-        if (pret):
-            self.robot.rafraichir()
-        else:
-            return 
+    def rafraichir(self):
+        #Si  on est pret le robot se rafraichie 
+        if (self.awake):
+            if (Robot.pret):
+                Robot.rafraichir()
 
         
 
