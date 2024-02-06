@@ -39,7 +39,7 @@ class Simulation:
         #Si  on est pret le robot se rafraichie 
         if (self.awake):
             if (Robot.pret):
-                Robot.rafraichir()
+                Robot.rafraichir(self.temps)
 
         
 

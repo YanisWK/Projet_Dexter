@@ -166,11 +166,11 @@ class Robot:
         Rotation_par_rafraichissement = vitesse / temps
         
 
-    def rafraichir(self,vitesse,temps):
+    def rafraichir(self,temps):
         """
         - Avance d'une distance (celle de velociteD[0]) et/ou tourne d'un certain angle (celle de velociteR[0]) 
         si les tableaux ne sont pas vides
         """
-        self.rotationRobot(vitesse,temps)
-        self.deplacementRobot(vitesse,temps)
+        self.rotationRobot(temps)
+        self.deplacementRobot(temps)
         self.pos_coins_Robot()
