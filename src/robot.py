@@ -46,7 +46,7 @@ class Robot:
         self.largeur = largeur
         self.vitesseRoueG = 0
         self.vitesseRoueD = 0
-        self.pret  #Si la simulation est en pause et le robot est prêt, le robot se rafraichit 
+        self.pret = False  #Si la simulation est en pause et le robot est prêt, le robot se rafraichit 
         #Les 4 coins du robot delon la position du centre et la taille du robot
         L = self.longueur / 2
         l = self.largeur / 2
