@@ -39,35 +39,30 @@ class Robot:
 
         """
         self.id = id 
+
         self.x = x 
         self.y = y
         self.direction = 90
+
         self.longueur = longueur
         self.largeur = largeur
+
         self.vitesseRoueG = 0
         self.vitesseRoueD = 0
+
         self.pret = False  #Si la simulation est en pause et le robot est prêt, le robot se rafraichit 
+
         #Les 4 coins du robot delon la position du centre et la taille du robot
         L = self.longueur / 2
         l = self.largeur / 2
         x = self.x
         y = self.y
 
-
         self.coordRobot = [(x-l, y-L), (x+l, y-L), (x+l, y+L), (x-l, y+L)]
+
 
     def __repr__(self):
         return "C'est le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
-
-    #à déterminer selon la taille des roues? Pour l'instant 1 tour = 10cm 
-    #Et on part du principe que la roue tourne à 6 tour / min (ce qui est très lent)
-
-    #Les instructions pour faire tourner les roues sont a déterminer, 
-    #Les roues a priori tourneront tout le temps à la même vitesse, mais pas nécessairement dans le même sens
-    #Il faut donc déterminer le nb de tours à faire pour parcourir une distance donnée
-    #Ces fonctions vous permettront de faire tourner les roues dans un sens ou dans l'autre
-    #Il faudt les appeler dans les méthodes avancer, reculer, tourner_a_gauche et tourner_a_droite
-    #Fin des méthodes pour faire tourner les roues
 
 
     #Fonction non réaliste permettant de simuler les mouvements du robot
@@ -76,6 +71,7 @@ class Robot:
 
         self.x += round( distance * cos(radians(self.direction)) , 10)
         self.y -= round( distance * sin(radians(self.direction)) , 10)
+
 
     def tourner(self, angle):
         self.direction += angle
@@ -113,7 +109,6 @@ class Robot:
         dir = self.direction
         x = self.x
         y = self.y
-
 
         c1 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
         c2 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
