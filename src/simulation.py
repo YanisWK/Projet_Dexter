@@ -36,7 +36,14 @@ class Simulation:
         
     
     def rafraichir(self, vitesse_roue_g, vitesse_roue_d):
-        #Si  on est pret le robot se rafraichie 
+        """
+        Met à jour la fonction rafraichir du robot si la simu est active et si le robot est prêt
+        
+        Paramètres: 
+        - vitesse_roue_g : vitesse des roues gauche
+        - vitesse_roue_d ; vitesse des roues droite
+        
+        """
         if (self.awake):
             if (self.robot.pret):
                 self.robot.vitesseRoueG = vitesse_roue_g
