@@ -121,7 +121,7 @@ while True:
 
         #On efface tout et on redessine le robot
         rec_base.delete("all")
-        simu.rafraichir()
+        simu.rafraichir(vit_gauche.get(), vit_droite.get())
         rec_base.create_polygon(simu.robot.coordRobot)
 
         #Affichage de la ligne rouge pour la direction du robot
