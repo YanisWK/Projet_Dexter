@@ -171,5 +171,6 @@ class Robot:
         - Avance d'une distance (celle de velociteD[0]) et/ou tourne d'un certain angle (celle de velociteR[0]) 
         si les tableaux ne sont pas vides
         """
-
+        self.rotationRobot(vitesse,temps)
+        self.deplacementRobot(vitesse,temps)
         self.pos_coins_Robot()
