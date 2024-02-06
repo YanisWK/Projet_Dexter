@@ -153,6 +153,10 @@ class Robot:
         #Calcule de la distance que parcoure le robot à chaque rafraîchissement
         #distance_par_rafraichissement = vitesse / temps
 
+        vitesse_deplacement = self.vitesseRoueG + self.vitesseRoueD
+        deplacement_par_rafraichissement = vitesse_deplacement / temps
+        self.avancer(deplacement_par_rafraichissement)
+
     
     def rotationRobot(self, temps):
         """
