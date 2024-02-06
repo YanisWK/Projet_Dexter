@@ -20,6 +20,7 @@ larg = 700
 long = 1000
 robot1 = Robot(1,50,25,long/2,larg/2)
 simu = Simulation(1,robot1,larg,long,60)
+robot1.pret = True
 
 
 def espace (f):
@@ -38,7 +39,7 @@ def espace (f):
 #Spécificité de notre interface graphique
 window = Tk()
 window.title("Simulation")
-window.geometry(f"{simu.longueur+250}x{simu.largueur+5}")
+window.geometry(f"{simu.longueur+250}x{simu.largeur+5}")
 window.resizable(height=False, width=False)
 
 #Première frame/boîte
@@ -46,7 +47,7 @@ frame = Frame(window,borderwidth=5, relief="raise")
 frame.pack(fill = BOTH,side = RIGHT)
 
 #Canvas où sera simulé l'environnement du robot et ses déplacements
-rec_base = Canvas(window, bg='#cccccc', width=simu.longueur, height=simu.largueur)
+rec_base = Canvas(window, bg='#cccccc', width=simu.longueur, height=simu.largeur)
 rec_base.place(x='0',y='0')
 
 #Pour le scale de la roue droite
@@ -79,8 +80,8 @@ rec_base.pack()
 couleur = Canvas(frame, bg='red', width=100, height=50)
 couleur.pack(side=BOTTOM)
 
-def change_color(boolean):
-    if boolean:
+def change_color(activation):
+    if activation:
         couleur.configure(bg='green')
     else:
         couleur.configure(bg='red')
@@ -100,9 +101,17 @@ def change_color(boolean):
 #         simu.robot.deplacementRobot(distance.get(), vitesse.get(), simu.temps)
 #     elif event.keysym == "Down":
 #         simu.robot.deplacementRobot(-distance.get(), vitesse.get(), simu.temps)
-
+def onKeyPress(event):
+    if event.keysym == "space":
+        if (robot1.pret) :
+            robot1.pret = False
+            change_color(robot1.pret)
+        else:
+            robot1.pret = True
+            change_color(robot1.pret)
+        
 #Sert a utiliser la fonction onKeyPress lorsque on clique sur une touche du clavier
-# window.bind('<KeyPress>', onKeyPress)
+window.bind('<KeyPress>', onKeyPress)
 
 #Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES
 while True:
