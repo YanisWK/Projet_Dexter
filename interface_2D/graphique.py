@@ -52,7 +52,7 @@ rec_base.place(x='0',y='0')
 
 #Pour le scale de la roue droite
 texte_vit_gauche = StringVar()
-texte_vit_gauche.set("Vitesse Roue Droite")
+texte_vit_gauche.set("Vitesse Roue Gauche")
 label = Label(frame, textvariable=texte_vit_gauche, font=("Helvetica", 16))
 label.pack()
 vit_gauche = IntVar()
@@ -63,7 +63,7 @@ espace(frame)
 
 #Pour le scale de la roue gauche
 texte_vit_droite = StringVar()
-texte_vit_droite.set("Vitesse Roue Gauche")
+texte_vit_droite.set("Vitesse Roue Droite")
 label = Label(frame, textvariable=texte_vit_droite, font=("Helvetica", 16))
 label.pack()
 vit_droite = IntVar()

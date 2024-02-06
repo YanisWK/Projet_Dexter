@@ -139,7 +139,7 @@ class Robot:
 
         #Calcule de la rotation que le robot doit tourner à chaque rafraîchissement
 
-        vitesse_rotation = self.vitesseRoueG - self.vitesseRoueD
+        vitesse_rotation = self.vitesseRoueD - self.vitesseRoueG
         rotation_par_rafraichissement = vitesse_rotation / temps
         self.tourner(rotation_par_rafraichissement)
         
