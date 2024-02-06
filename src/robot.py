@@ -50,7 +50,6 @@ class Robot:
         #Les 4 coins du robot delon la position du centre et la taille du robot
         L = self.longueur / 2
         l = self.largeur / 2
-        dir = self.direction
         x = self.x
         y = self.y
 
@@ -59,9 +58,6 @@ class Robot:
 
     def __repr__(self):
         return "C'est le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
-
-        self.direction = 0
-        self.unite_de_temps = 10 #inutile pour le moment
 
     #à déterminer selon la taille des roues? Pour l'instant 1 tour = 10cm 
     #Et on part du principe que la roue tourne à 6 tour / min (ce qui est très lent)
@@ -76,28 +72,12 @@ class Robot:
 
     #Fonction non réaliste permettant de simuler les mouvements du robot
     def avancer(self, distance):
-        #calcule le nb de tours nécessaires pour parcourir la distance donnée
-        #nb_tours = float(distance)/10
-
-        #Il faut les faire tourner en même temps
-        #fait tourner les roues gauche et droite en avant pendant le nb de tours calculé
-        #self.tourner_roue_gauche_avant(nb_tours)
-        #self.tourner_roue_droite_avant(nb_tours)
-
         print("Le Robot a avancé de ", distance, "cm")
 
         self.x += round( distance * cos(radians(self.direction)) , 10)
         self.y -= round( distance * sin(radians(self.direction)) , 10)
-        #Mettre à jour les coordonnées x et y en fonction de la direction et de la distance
-        #arrondit les résultats à 10 chiffres après la virgule
 
     def tourner(self, angle):
-        #calcule le nb de tours pour tourner à gauche de l'angle donné
-        #nb_tours = float(angle) / 10
-
-        #tourne la roue droite en avant pendant le nb de tours 
-        #self.tourner_roue_droite_avant(nb_tours)
-
         self.direction += angle
 
         #ajuste la direction pour rester dans [0, 360)
