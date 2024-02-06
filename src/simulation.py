@@ -32,11 +32,14 @@ class Simulation:
         self.largeur = largeur             #La largueur de l'environnement
         self.temps = temps
     
-    def rafraichir(self):
-        """
-        - Met à jour les coordonnées des coins du robot (avec coinsRobot)
-        """
-        self.robot.rafraichir()
+    def rafraichir(self,pret):
+        #Si le moteur est allumé le robot se rafraichie sinon on retourne rien
+        if (pret):
+            self.robot.rafraichir()
+        else:
+            return 
+
+        
 
     """
             for coin in self.coordRobot:
