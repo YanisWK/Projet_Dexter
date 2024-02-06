@@ -1,5 +1,5 @@
 from time import sleep
-from tkinter import Canvas, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH, BOTTOM
+from tkinter import Canvas, Toplevel, Button, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH, BOTTOM
 from src.simulation import Simulation
 from src.robot import Robot
 from math import cos,radians,sin
@@ -109,7 +109,25 @@ def onKeyPress(event):
         else:
             robot1.pret = True
             change_color(robot1.pret)
-        
+
+def popup_collision():
+    win = Toplevel()
+    win.wm_title("CRASH")
+
+    l = Label(win, text="Le robot est entré en collision avec un obstacle")
+    l.grid(row=0, column=0)
+
+    b = Button(win, text="Fermer la simulation", command=window.destroy)
+    b.grid(row=1, column=0)
+
+    #Calculer x et y pour positionner la popup au milieu de l'interface
+    x = window.winfo_rootx() + window.winfo_width() // 2 - win.winfo_reqwidth() // 2
+    y = window.winfo_rooty() + window.winfo_height() // 2 - win.winfo_reqheight() // 2
+
+    # Définition de la position du Toplevel
+    win.geometry("+{}+{}".format(x, y))
+
+
 #Sert a utiliser la fonction onKeyPress lorsque on clique sur une touche du clavier
 window.bind('<KeyPress>', onKeyPress)
 
@@ -137,6 +155,7 @@ while True:
         rec_base.update()
     else:
         break
+popup_collision()
 
 window.mainloop()
 
