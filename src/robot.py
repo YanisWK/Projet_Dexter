@@ -142,7 +142,7 @@ class Robot:
         self.coordRobot = [c1, c2, c3, c4]
         
     
-    def deplacementRobot(self, vitesse, temps):
+    def deplacementRobot(self, temps):
         """
         Effectue les calculs nécessaires afin de déplacer le robot :
         - Ajoute dans velociteD les distances à faire à chaque rafraichissement en fonction de la distance 
@@ -151,10 +151,10 @@ class Robot:
         """
 
         #Calcule de la distance que parcoure le robot à chaque rafraîchissement
-        distance_par_rafraichissement = vitesse / temps
+        #distance_par_rafraichissement = vitesse / temps
 
     
-    def rotationRobot(self, vitesse, temps):
+    def rotationRobot(self, temps):
         """
         Effectue les calculs nécessaires pour faire faire une rotation au robot :
         - Ajoute dans velociteR les modifications d'angles à faire à chaque rafraichissement en fonction 
@@ -163,7 +163,10 @@ class Robot:
         """
 
         #Calcule de la rotation que le robot doit tourner à chaque rafraîchissement
-        Rotation_par_rafraichissement = vitesse / temps
+
+        vitesse_rotation = self.vitesseRoueD - self.vitesseRoueG
+        rotation_par_rafraichissement = vitesse_rotation / temps
+        self.tourner(rotation_par_rafraichissement)
         
 
     def rafraichir(self,temps):
