@@ -38,16 +38,14 @@ class Robot:
         - x,y : coordonnées du robot dans l'environnement
 
         """
-        self.id=id 
+        self.id = id 
         self.x = x 
         self.y = y
         self.direction = 90
         self.longueur = longueur
         self.largeur = largeur
-        self.velociteD = []                 #Liste des déplacements vers l'avant à chaque rafraichissement
-        self.velociteR = []                 #Liste des changements de direction à chaque rafraichisement
-        self.vitesseRoueG=0
-        self.vitesseRoueD=0
+        self.vitesseRoueG = 0
+        self.vitesseRoueD = 0
         #Les 4 coins du robot delon la position du centre et la taille du robot
         L = self.longueur / 2
         l = self.largeur / 2
@@ -141,7 +139,7 @@ class Robot:
         c4 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
         self.coordRobot = [c1, c2, c3, c4]
     
-    def deplacementRobot(self, distance, vitesse, temps):
+    def deplacementRobot(self, vitesse, temps):
         """
         Effectue les calculs nécessaires afin de déplacer le robot :
         - Ajoute dans velociteD les distances à faire à chaque rafraichissement en fonction de la distance 
@@ -149,53 +147,21 @@ class Robot:
 
         """
 
-        self.velociteD = []
-
         #Calcule de la distance que parcoure le robot à chaque rafraîchissement
         distance_par_rafraichissement = vitesse / temps
 
-        #(à voir) Calcule du nombre de rafraîchissements nécessaires pour que le robot puisse parcourir la distance totale
-        #nombre_rafraichissements = self.distance / distance_par_rafraichissement
-
-        #La distance que le robot doit parcourir
-        distance_a_parcourir = distance
-
-        #Ajout de la distance que le robot parcoure à chaque rafraîchissement dans la liste velociteD 
-        if (distance_a_parcourir > 0):
-            while distance_a_parcourir > distance_par_rafraichissement:
-                    self.velociteD.append(distance_par_rafraichissement)
-                    distance_a_parcourir -= distance_par_rafraichissement
-        else:
-            while distance_a_parcourir < -distance_par_rafraichissement:
-                    self.velociteD.append(-distance_par_rafraichissement)
-                    distance_a_parcourir += distance_par_rafraichissement
-        self.velociteD.append(distance_a_parcourir)
     
-    def rotationRobot(self, angle, vitesse, temps):
+    def rotationRobot(self, vitesse, temps):
         """
         Effectue les calculs nécessaires pour faire faire une rotation au robot :
         - Ajoute dans velociteR les modifications d'angles à faire à chaque rafraichissement en fonction 
         de la vitesse
 
         """
-        self.velociteR = []
+
         #Calcule de la rotation que le robot doit tourner à chaque rafraîchissement
         Rotation_par_rafraichissement = vitesse / temps
         
-        Angle_a_parcourir = angle
-        
-        #Ajout de la rotation que le robot parcoure à chaque rafraîchissement dans la liste velociteR
-        if (Angle_a_parcourir > 0):
-            while Angle_a_parcourir > Rotation_par_rafraichissement:
-                self.velociteR.append(Rotation_par_rafraichissement)
-                Angle_a_parcourir -= Rotation_par_rafraichissement
-        else:
-            while Angle_a_parcourir < -Rotation_par_rafraichissement:
-                self.velociteR.append(-Rotation_par_rafraichissement)
-                Angle_a_parcourir += Rotation_par_rafraichissement
-
-        self.velociteR.append(Angle_a_parcourir)
-        return
 
     def rafraichir(self):
         """
