@@ -16,7 +16,9 @@ class TestRobot(unittest.TestCase):
     def test_robot_tourner(self):
         test_robot = Robot("Dexter",50,25,0,0)
         test_robot.tourner(90)
-        self.assertEqual(test_robot.direction, 90)
+        self.assertEqual(test_robot.direction, 180)
+        test_robot.tourner(-180)
+        self.assertEqual(test_robot.direction, 0)
 
 if __name__ == '__main__':
     unittest.main()
