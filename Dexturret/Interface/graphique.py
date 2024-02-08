@@ -5,7 +5,6 @@ from Turret.robot import Robot
 from math import cos,radians,sin
 
 """Documentation : 
-    - initialise les paramètres de la simulation
     - configure de l'interface graphique
     - affiche l'environnement à l'aide d'un canvas (fond gris)
     - affiche les échelles de la distance, la vitesse et l'angle pour l'utilisateur
@@ -25,7 +24,7 @@ simu = Simulation(1,robot1,larg,long,60)
 
 def espace (f):
     ''' 
-    Aute un espace entre les éléments d'une frame
+    Ajoute un espace entre les éléments d'une frame
 
     Paramètres : 
     - f : frame
@@ -81,6 +80,13 @@ couleur = Canvas(frame, bg='red', width=100, height=50)
 couleur.pack(side=BOTTOM)
 
 def change_color(activation):
+    """
+    Change la couleur du bouton d'activation de la simulation
+
+    Paramètre :
+    - activation : booléen (true si la simulation est active, false sinon)
+
+    """
     if activation:
         couleur.configure(bg='green')
     else:
@@ -102,15 +108,26 @@ def change_color(activation):
 #     elif event.keysym == "Down":
 #         simu.robot.deplacementRobot(-distance.get(), vitesse.get(), simu.temps)
 def onKeyPress(event):
+    """
+    Paramètre :
+    - event : évènement crée lorsqu'une touche du clavier est pressée
+
+    """
     if event.keysym == "space":
         if (robot1.pret) :
+            #fait bouger le robot si le robot est prêt et qu'on appuie sur espace
             robot1.pret = False
             change_color(robot1.pret)
         else:
+            #stoppe le robot si le robot n'est pas prêt et qu'on appuie sur espace
             robot1.pret = True
             change_color(robot1.pret)
 
 def popup_collision():
+    """
+    Crée un pop-up permettant de feemer la simulation lorsque le robot rencontre un obstacle
+    
+    """
     win = Toplevel()
     win.wm_title("CRASH")
 
@@ -156,13 +173,6 @@ while True:
     else:
         break
 popup_collision()
-
-window.mainloop()
-
-
-
-
-
 
 
 #boutton_moins_distance = Button(frame, text="-10",font =("verdana", 13), fg='black', bg='white')
