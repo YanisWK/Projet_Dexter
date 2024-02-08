@@ -10,6 +10,6 @@ long = 1000
 robot1 = Robot(1,50,25,long/2,larg/2)
 simu = Simulation(1,robot1,larg,long,60)
 
-#permet les main de l'interface et de la simulation
+#permet de relier les main de l'interface et de la simulation
 if __name__ == "__main__":
     main()

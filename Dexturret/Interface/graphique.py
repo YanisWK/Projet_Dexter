@@ -9,7 +9,7 @@ from math import cos,radians,sin
     - affiche l'environnement à l'aide d'un canvas (fond gris)
     - affiche les échelles de la distance, la vitesse et l'angle pour l'utilisateur
     - affiche le robot sous forme de rectangle
-    - configure les touches du clavier permettant de faire avancer/reculer/tourner le robot
+    - configure la touche activant/désactivant la simulation
     - affiche une ligne rouge pointant vers le point centre du robot
 
 """
@@ -152,7 +152,7 @@ window.bind('<KeyPress>', onKeyPress)
 while True:
     if (simu.awake):
         #Mise a jour tous les 1/temps
-        sleep(1/simu.temps)
+        sleep(1/simu.fps)
 
         #On efface tout et on redessine le robot
         rec_base.delete("all")

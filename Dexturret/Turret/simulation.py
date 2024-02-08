@@ -10,12 +10,12 @@ et d'effectuer les calculs nécessaires pour simuler un déplacement fluide et r
 
 - __init__ => crée une simulation liant le robot et l'environnement avec un temps de rafraichissement
 
-- rafraichir => effectue les déplacements avancer/tourner à l'aide des listes velociteD et velociteR et 
-                gère les collisions avec les bords de l'environnement
+- rafraichir => effectue les déplacements et rotations à l'aide des vitesses des roues gauches et 
+                droite
 """
 
 class Simulation:
-    def __init__(self, id, robot, largeur, longueur, temps):
+    def __init__(self, id, robot, largeur, longueur, fps):
         """
         Initialise une simulation avec un identifiant, un robot, un environnement et un temps de rafraîchissement
 
@@ -30,8 +30,8 @@ class Simulation:
         self.id = id
         self.robot = robot                  #Le robot
         self.longueur = longueur            #La longueur de l'environnement
-        self.largeur = largeur             #La largueur de l'environnement
-        self.temps = temps
+        self.largeur = largeur              #La largueur de l'environnement
+        self.fps = fps                      #Temps de rafraichissement
         self.awake=True
         
     
@@ -48,7 +48,7 @@ class Simulation:
             if (self.robot.pret):
                 self.robot.vitesseRoueG = vitesse_roue_g
                 self.robot.vitesseRoueD = vitesse_roue_d
-                self.robot.rafraichir(self.temps)
+                self.robot.rafraichir(self.fps)
                 self.check_collision()
 
         
@@ -70,8 +70,11 @@ class Simulation:
 
             self.coinsRobot()
     """
-    #Fonction qui regarde si le robot est sortie de l'environnement 
-    def check_collision(self):
+    def check_collision(self):    
+        """
+        Checke si le robot se cogne contre une bordure et stoppe la simulation
+         
+        """
         Coord = self.robot.coordRobot
         for i in range(4):
             if (Coord[i][0] > self.longueur) or (Coord[i][0] < 0):

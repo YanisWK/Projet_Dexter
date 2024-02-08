@@ -23,9 +23,6 @@ from math import cos, sin, radians
     - deplacementRobot => fait avancer ou reculer le robot dans sa direction actuelle, 
                         en fonction des déplacements contenus dans velociteD et en fonction de la vitesse
 
-    - rotationRobot => fait tourner le robot en fonction des modifs d'angles contenues dans velociteR et 
-                    en fonction de la vitesse
-
 """
 
 
