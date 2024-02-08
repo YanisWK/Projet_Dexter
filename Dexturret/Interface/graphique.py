@@ -1,7 +1,7 @@
 from time import sleep
 from tkinter import Canvas, Toplevel, Button, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH, BOTTOM
-from src.simulation import Simulation
-from src.robot import Robot
+from Turret.simulation import Simulation
+from Turret.robot import Robot
 from math import cos,radians,sin
 
 """Documentation : 
@@ -25,7 +25,7 @@ simu = Simulation(1,robot1,larg,long,60)
 
 def espace (f):
     ''' 
-    Ajoute un espace entre les éléments d'une frame
+    Aute un espace entre les éléments d'une frame
 
     Paramètres : 
     - f : frame

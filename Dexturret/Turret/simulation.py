@@ -1,5 +1,5 @@
 from math import *
-from src.robot import Robot
+from Turret.robot import Robot
 
 """Documentation : 
 
