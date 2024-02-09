@@ -6,7 +6,7 @@ from time import sleep
 
 larg = 700
 long = 1000
-robot = Robot(1,50,25,long/2,larg/2)
+robot = Robot(1,50,25,5,long/2,larg/2)
 simu = Simulation(1,robot,larg,long,60)
 
 window = creer_fenetre(long, larg)

@@ -141,14 +141,18 @@ class Robot:
         """       
 
         #Calcul de la distance que parcourt le robot à chaque rafraîchissement distance_par_rafraichissement = vitesse/temps
+        
+        self.vitesse_de_rotation_roue_gauche = self.vitesse_lineaire_roue_gauche / self.rayon_des_roues
+        self.vitesse_de_rotation_roue_droite = self.vitesse_lineaire_roue_droite / self.rayon_des_roues
 
-        vitesse_deplacement = (self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2
+
+        vitesse_deplacement = (self.vitesse_lineaire_roue_gauche+ ( - self.vitesse_de_rotation_roue_droite)) / 2
         deplacement_par_rafraichissement = vitesse_deplacement / temps
         self.avancer(deplacement_par_rafraichissement)
 
         #Calcul de la rotation que le robot doit faire à chaque rafraîchissement
 
-        vitesse_rotation = self.vitesse_lineaire_roue_droite - self.vitesse_lineaire_roue_gauche
+        vitesse_rotation = - ( self.rayon_des_roues*(self.vitesse_de_rotation_roue_gauche + self.vitesse_de_rotation_roue_droite)) / (2 * (self.largeur/2))
         rotation_par_rafraichissement = vitesse_rotation / temps
         self.tourner(rotation_par_rafraichissement)
         
