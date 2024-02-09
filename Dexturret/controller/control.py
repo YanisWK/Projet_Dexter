@@ -5,13 +5,13 @@ class Avancer():
 
 class Tourner():
     def __init__(self,angle) -> None:
-        pass
+        self.angle=angle
 
 class DeplacerVers():
     def __init__(self,x,y):
-        pass
-    
+        self.x=x
+        self.y=y
 class TracerCarre():
     def __init__(self,distance) -> None:
-        pass
+        self.distance=distance
 
