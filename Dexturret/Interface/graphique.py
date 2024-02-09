@@ -59,6 +59,7 @@ def creer_scale(frame, texte):
     vit_gauche = IntVar()
     scale = Scale(frame, from_=-100, to=100, length=240,variable=vit_gauche, orient=HORIZONTAL)
     scale.pack()
+    return scale
 
 espace(frame)
 
@@ -78,8 +79,10 @@ def affiche_robot(simu, canvas):
     canvas.create_polygon(simu.robot.coordRobot)
     canvas.pack()
 
-couleur = Canvas(frame, bg='red', width=100, height=50)
-couleur.pack(side=BOTTOM)
+def creer_couleur(frame):
+    couleur = Canvas(frame, bg='red', width=100, height=50)
+    couleur.pack(side=BOTTOM)
+    return couleur
 
 def change_color(activation):
     """
