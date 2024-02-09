@@ -1,4 +1,9 @@
-from math import cos, sin, radians
+from math import cos, sin, radians, sqrt 
+import logging
+
+
+
+
 
 """Documentation : 
 
@@ -82,7 +87,7 @@ class Robot:
         - distance : distance à parcourir
         
         """
-        print("Le Robot a avancé de ", distance, "cm")
+        logging.info(f'Le Robot a avancé de {distance} cm')
 
         #mise à jour des coordonnées grâce aux fonctions cosinus/sinus
         self.x += round( distance * cos(radians(self.direction)) , 10)
@@ -106,7 +111,7 @@ class Robot:
         if (self.direction < 0):
             self.direction += 360
 
-        print("Le robot a tourné de ", angle, "°")
+        logging.info(f'Le robot a tourné de {angle}°')
     
 
     def coeff_directeur(self, angle):
@@ -152,8 +157,36 @@ class Robot:
         """
         self.deplacementRobot(fps)
 
-    def detect_distance(self,simu):
-        return
+
+    def detect_limites(self,simu, distx,disty):
+        """
+        Vérifie si la distance de détection du robot touche une bordure
+
+        Paramètre :
+        - simulation : simulation contenant l'environnement dans lequel se déplace le robot
+        
+        """
+        if distx > simu.longueur or disty > simu.largeur:
+            return True
+        else:
+            return False
     
-    def detect_limites(self,simu):
-        return
+
+    def detect_distance(self,simu):
+        """
+        Retourne une distance dans la direction dans laquelle le robot est orienté
+
+        Paramètre :
+        - simulation : simulation contenant l'environnement dans lequel se déplace le robot
+
+        """
+        #formule de la distance = sqrt((self.x - px)**2 + (self.y - py)**2)
+        #Distance de détection maximale du robot
+        dist_max = 1000 #1000 car la dimension max de l'environnement
+
+        if self.detect_limites(simu):
+            #Calcule la distance entre la position du robot et le point d'intersection entre la distance de détection du robot et la bordure la + proche
+            return 
+        else:
+            #Retourne la distance de détection max si la distance de détection ne touche pas de bordure
+            return dist_max     
