@@ -150,4 +150,3 @@ class Robot:
         - fps : 
         """
         self.deplacementRobot(fps)
-        self.pos_coins_Robot()
