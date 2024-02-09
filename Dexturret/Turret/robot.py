@@ -20,7 +20,8 @@ from math import cos, sin, radians
 
     - pos_coins_Robot => calcule la position des 4 coins à l'aide de la direction et de la taille du robot
 
-
+    - detect_distance =>
+    - detect_limites =>
 """
 
 
@@ -150,3 +151,9 @@ class Robot:
         - fps : 
         """
         self.deplacementRobot(fps)
+
+    def detect_distance(self,simu):
+        return
+    
+    def detect_limites(self,simu):
+        return
