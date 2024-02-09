@@ -39,21 +39,26 @@ def creer_fenetre(simu_longueur, simu_largeur):
     return window
 
 #Première frame/boîte
-frame = Frame(window,borderwidth=5, relief="raise")
-frame.pack(fill = BOTH,side = RIGHT)
+def creer_frame(window):
+    frame = Frame(window,borderwidth=5, relief="raise")
+    frame.pack(fill = BOTH,side = RIGHT)
+    return frame
 
 #Canvas où sera simulé l'environnement du robot et ses déplacements
-rec_base = Canvas(window, bg='#cccccc', width=simu.longueur, height=simu.largeur)
-rec_base.place(x='0',y='0')
+def creer_canvas(window, simu_longueur, simu_largeur):
+    rec_base = Canvas(window, bg='#cccccc', width=simu_longueur, height=simu_largeur)
+    rec_base.place(x='0',y='0')
+    return rec_base
 
 #Pour le scale de la roue droite
-texte_vit_gauche = StringVar()
-texte_vit_gauche.set("Vitesse Roue Gauche")
-label = Label(frame, textvariable=texte_vit_gauche, font=("Helvetica", 16))
-label.pack()
-vit_gauche = IntVar()
-scale = Scale(frame, from_=-100, to=100, length=240,variable=vit_gauche, orient=HORIZONTAL)
-scale.pack()
+def creer_scale(frame, texte):
+    texte_vit_gauche = StringVar()
+    texte_vit_gauche.set("Vitesse Roue Gauche")
+    label = Label(frame, textvariable=texte_vit_gauche, font=("Helvetica", 16))
+    label.pack()
+    vit_gauche = IntVar()
+    scale = Scale(frame, from_=-100, to=100, length=240,variable=vit_gauche, orient=HORIZONTAL)
+    scale.pack()
 
 espace(frame)
 
@@ -120,7 +125,7 @@ def onKeyPress(event):
             robot1.pret = True
             change_color(robot1.pret)
 
-def popup_collision():
+def popup_collision(window):
     """
     Crée un pop-up permettant de feemer la simulation lorsque le robot rencontre un obstacle
     
