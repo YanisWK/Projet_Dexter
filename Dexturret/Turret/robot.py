@@ -145,9 +145,9 @@ class Robot:
 
         #Calcul de la rotation que le robot doit faire à chaque rafraîchissement
 
-        vitesse_rotation = - ( self.rayon_des_roues*(self.vitesse_de_rotation_roue_gauche + self.vitesse_de_rotation_roue_droite)) / (2 * (self.largeur/2))
+        vitesse_rotation = - ( self.rayon_des_roues*(self.vitesse_de_rotation_roue_gauche + self.vitesse_de_rotation_roue_droite)) / (self.largeur/2)
         rotation_par_rafraichissement = vitesse_rotation / temps
-        self.tourner(rotation_par_rafraichissement)
+        self.tourner(degrees(rotation_par_rafraichissement))
         
 
     def rafraichir(self,fps):
