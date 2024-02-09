@@ -164,6 +164,8 @@ class Robot:
 
         Paramètre :
         - simulation : simulation contenant l'environnement dans lequel se déplace le robot
+        - distx : point x de l'extremité de la distance de détection
+        - disty : point y de l'extremité de la distance de détection
         
         """
         if distx > simu.longueur or disty > simu.largeur:
@@ -180,13 +182,17 @@ class Robot:
         - simulation : simulation contenant l'environnement dans lequel se déplace le robot
 
         """
-        #formule de la distance = sqrt((self.x - px)**2 + (self.y - py)**2)
         #Distance de détection maximale du robot
         dist_max = 1000 #1000 car la dimension max de l'environnement
 
+        px= self.x + dist_max *cos(radians(self.direction ))
+        py= self.y + dist_max *sin(radians(self.direction))
+
         if self.detect_limites(simu):
-            #Calcule la distance entre la position du robot et le point d'intersection entre la distance de détection du robot et la bordure la + proche
-            return 
+            #Calcule la distance entre la position du robot et le point d'intersection 
+            #entre les coord. des extremités de la distance de détection du robot et la bordure la + proche
+            dist = sqrt((self.x - px)**2 + (self.y - py)**2)
+            return dist
         else:
             #Retourne la distance de détection max si la distance de détection ne touche pas de bordure
             return dist_max     
