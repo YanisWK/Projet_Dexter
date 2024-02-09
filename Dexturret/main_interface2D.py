@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 
 larg = 700
 long = 1000
-robot = Robot(1,50,25,5,long/2,larg/2)
+robot = Robot(1,50,25,0.05,long/2,larg/2)
 simu = Simulation(1,robot,larg,long,60)
 
 window = creer_fenetre(long, larg)
