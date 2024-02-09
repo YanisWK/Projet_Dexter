@@ -60,6 +60,12 @@ def creer_scale(frame, texte, var, min, max):
 #Implementation du robot dans l'environnement
 def affiche_robot(simu, canvas):
     canvas.create_polygon(simu.robot.coordRobot)
+
+    #Creer la ligne qui montre la direction du robot
+    demi_longueur_robot = simu.robot.longueur / 2
+    demi_largeur_robot = simu.robot.largeur / 2
+    canvas.create_line(simu.robot.x, simu.robot.y, simu.robot.x + demi_longueur_robot * cos(radians(simu.robot.direction)), simu.robot.y - demi_largeur_robot * (sin(radians(simu.robot.direction))), fill = "red")
+    
     canvas.pack()
 
 def creer_couleur(frame):
@@ -102,14 +108,9 @@ def popup_collision(window):
     win.geometry("+{}+{}".format(x, y))
 
 
-def rafraichir(simu, canvas):
+def rafraichir_graphique(simu, canvas):
     canvas.delete("all")
     affiche_robot(simu, canvas)
-
-    #Creer la ligne qui montre la direction du robot
-    demi_longueur_robot = simu.robot.longueur / 2
-    demi_largeur_robot = simu.robot.largeur / 2
-    canvas.create_line(simu.robot.x, simu.robot.y, simu.robot.x + demi_longueur_robot * cos(radians(simu.robot.direction)), simu.robot.y - demi_largeur_robot * (sin(radians(simu.robot.direction))), fill = "red")
     
     canvas.pack()
     canvas.update()
