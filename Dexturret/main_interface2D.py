@@ -54,8 +54,6 @@ while True:
         canvas.update()
     else:
         break
-popup_collision()
+popup_collision(window)
 
 window.mainloop()
-
-#window.mainloop()
