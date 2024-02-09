@@ -1,8 +1,5 @@
-from math import cos, sin, radians, sqrt 
+from math import cos, sin, radians, degrees
 import logging
-
-
-
 
 
 """Documentation : 
