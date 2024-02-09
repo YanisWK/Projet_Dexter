@@ -62,10 +62,10 @@ class Robot:
             x = self.x
             y = self.y
 
-            c1 = ( (x + Lcos(radians(dir))) + lcos(radians(dir + 90)), (y - Lsin(radians(dir))) - lsin(radians(dir + 90)) )
-            c2 = ( (x + Lcos(radians(dir))) + lcos(radians(dir - 90)), (y - Lsin(radians(dir))) - lsin(radians(dir - 90)) )
-            c3 = ( (x - Lcos(radians(dir))) + lcos(radians(dir - 90)), (y + Lsin(radians(dir))) - lsin(radians(dir - 90)) )
-            c4 = ( (x - Lcos(radians(dir))) + lcos(radians(dir + 90)), (y + Lsin(radians(dir))) - lsin(radians(dir + 90)) )
+            c1 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
+            c2 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
+            c3 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
+            c4 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
             return [c1, c2, c3, c4]
         
     
