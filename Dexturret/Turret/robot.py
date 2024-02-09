@@ -117,26 +117,7 @@ class Robot:
         a = cos(radians(angle))
         b = sin(radians(angle))
         return (a,b)
-    
-   
-    def pos_coins_Robot(self):
-        """
-        - Calcule la position des 4 coins du robot à l'aide des dimensions du robot et de la direction
-        - Modifie self.coordRobot par la liste des coordonnees des 4 coins
-
-        """
-        L = self.longueur / 2
-        l = self.largeur / 2
-        dir = self.direction
-        x = self.x
-        y = self.y
-
-        c1 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
-        c2 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
-        c3 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
-        c4 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
-        self.coordRobot = [c1, c2, c3, c4]
-        
+            
     
     def deplacementRobot(self, temps):
         """
