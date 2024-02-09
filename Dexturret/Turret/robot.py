@@ -42,8 +42,11 @@ class Robot:
         self.longueur = longueur
         self.largeur = largeur
 
-        self.vitesseRoueG = 0
-        self.vitesseRoueD = 0
+        self.vitesseLineaireRoueG = 0
+        self.vitesseLineaireRoueD = 0
+
+        self.vitesseRotationRoueG = 0
+        self.vitesseRotationRoueD = 0
 
         self.pret = False  #La simulation est activée et le robot est en mouvement
 
