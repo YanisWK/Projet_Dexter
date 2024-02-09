@@ -84,7 +84,7 @@ def creer_couleur(frame):
     couleur.pack(side=BOTTOM)
     return couleur
 
-def change_color(activation):
+def change_color(activation, couleur):
     """
     Change la couleur du bouton d'activation de la simulation
 
@@ -112,21 +112,7 @@ def change_color(activation):
 #         simu.robot.deplacementRobot(distance.get(), vitesse.get(), simu.temps)
 #     elif event.keysym == "Down":
 #         simu.robot.deplacementRobot(-distance.get(), vitesse.get(), simu.temps)
-def onKeyPress(event):
-    """
-    Paramètre :
-    - event : évènement crée lorsqu'une touche du clavier est pressée
 
-    """
-    if event.keysym == "space":
-        if (robot1.pret) :
-            #fait bouger le robot si le robot est prêt et qu'on appuie sur espace
-            robot1.pret = False
-            change_color(robot1.pret)
-        else:
-            #stoppe le robot si le robot n'est pas prêt et qu'on appuie sur espace
-            robot1.pret = True
-            change_color(robot1.pret)
 
 def popup_collision(window):
     """
@@ -150,8 +136,6 @@ def popup_collision(window):
     win.geometry("+{}+{}".format(x, y))
 
 
-#Sert a utiliser la fonction onKeyPress lorsque on clique sur une touche du clavier
-window.bind('<KeyPress>', onKeyPress)
 
 #Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES
 while True:
