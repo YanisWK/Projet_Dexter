@@ -1,5 +1,5 @@
 from tkinter import Tk
-#from Interface.graphique import window
+from Interface import espace, creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir
 from Turret import Robot
 from Turret import Simulation
 
@@ -7,6 +7,8 @@ larg = 700
 long = 1000
 robot1 = Robot(1,50,25,long/2,larg/2)
 simu = Simulation(1,robot1,larg,long,60)
+
+window = creer_fenetre(long, larg)
 
 def onKeyPress(event):
     """
