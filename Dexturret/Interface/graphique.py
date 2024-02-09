@@ -46,9 +46,9 @@ def creer_frame(window):
 
 #Canvas où sera simulé l'environnement du robot et ses déplacements
 def creer_canvas(window, simu_longueur, simu_largeur):
-    rec_base = Canvas(window, bg='#cccccc', width=simu_longueur, height=simu_largeur)
-    rec_base.place(x='0',y='0')
-    return rec_base
+    canvas = Canvas(window, bg='#cccccc', width=simu_longueur, height=simu_largeur)
+    canvas.place(x='0',y='0')
+    return canvas
 
 #Pour le scale de la roue droite
 def creer_scale(frame, texte):
@@ -74,9 +74,9 @@ scale2.pack()
 espace(frame)
 
 #Implementation du robot dans l'environnement
-coord = simu.robot.coordRobot
-rec_base.create_polygon(coord[0][0],coord[0][1],coord[1][0],coord[1][1],coord[2][0],coord[2][1],coord[3][0],coord[3][1])
-rec_base.pack()
+def affiche_robot(simu, canvas):
+    canvas.create_polygon(simu.robot.coordRobot)
+    canvas.pack()
 
 couleur = Canvas(frame, bg='red', width=100, height=50)
 couleur.pack(side=BOTTOM)
