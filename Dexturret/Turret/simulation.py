@@ -1,4 +1,3 @@
-from math import *
 from Turret.robot import Robot
 
 """Documentation : 
