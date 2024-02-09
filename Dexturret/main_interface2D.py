@@ -25,7 +25,7 @@ scal_roue_droite = creer_scale(frame, "Vitesse roue droite", vitesse_roue_droite
 
 espace(frame)
 
-creer_couleur(frame)
+couleur = creer_couleur(frame)
 
 def onKeyPress(event):
     """
@@ -35,7 +35,7 @@ def onKeyPress(event):
     """
     if event.keysym == "space":
         robot.pret = not robot.pret
-        change_color(robot.pret)
+        change_color(robot.pret, couleur)
 
 window.bind('<KeyPress>', onKeyPress)
 
