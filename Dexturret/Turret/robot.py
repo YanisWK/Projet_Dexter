@@ -1,4 +1,9 @@
 from math import cos, sin, radians, sqrt 
+import logging
+
+
+
+
 
 """Documentation : 
 
@@ -82,7 +87,7 @@ class Robot:
         - distance : distance à parcourir
         
         """
-        print("Le Robot a avancé de ", distance, "cm")
+        logging.info(f'Le Robot a avancé de {distance} cm')
 
         #mise à jour des coordonnées grâce aux fonctions cosinus/sinus
         self.x += round( distance * cos(radians(self.direction)) , 10)
@@ -106,7 +111,7 @@ class Robot:
         if (self.direction < 0):
             self.direction += 360
 
-        print("Le robot a tourné de ", angle, "°")
+        logging.info(f'Le robot a tourné de {angle}°')
     
 
     def coeff_directeur(self, angle):
