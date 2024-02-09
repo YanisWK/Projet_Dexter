@@ -20,7 +20,8 @@ from math import cos, sin, radians
 
     - pos_coins_Robot => calcule la position des 4 coins à l'aide de la direction et de la taille du robot
 
-
+    - detect_distance =>
+    - detect_limites =>
 """
 
 
@@ -54,15 +55,21 @@ class Robot:
 
         self.pret = False  #La simulation est activée et le robot est en mouvement
 
-        #Les 4 coins du robot selon la position du centre et la taille du robot
-        L = self.longueur / 2
-        l = self.largeur / 2
-        x = self.x
-        y = self.y
+    def __getattr__(self,name):
+        if name == "coordRobot":
+            L = self.longueur / 2
+            l = self.largeur / 2
+            dir = self.direction
+            x = self.x
+            y = self.y
 
-        self.coordRobot = [(x-l, y-L), (x+l, y-L), (x+l, y+L), (x-l, y+L)]
-
-
+            c1 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
+            c2 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
+            c3 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
+            c4 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
+            return [c1, c2, c3, c4]
+        
+    
     def __repr__(self):
         return "C'est le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
 
@@ -111,26 +118,7 @@ class Robot:
         a = cos(radians(angle))
         b = sin(radians(angle))
         return (a,b)
-    
-   
-    def pos_coins_Robot(self):
-        """
-        - Calcule la position des 4 coins du robot à l'aide des dimensions du robot et de la direction
-        - Modifie self.coordRobot par la liste des coordonnees des 4 coins
-
-        """
-        L = self.longueur / 2
-        l = self.largeur / 2
-        dir = self.direction
-        x = self.x
-        y = self.y
-
-        c1 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
-        c2 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
-        c3 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
-        c4 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
-        self.coordRobot = [c1, c2, c3, c4]
-        
+            
     
     def deplacementRobot(self, temps):
         """
@@ -163,4 +151,9 @@ class Robot:
         - fps : 
         """
         self.deplacementRobot(fps)
-        self.pos_coins_Robot()
+
+    def detect_distance(self,simu):
+        return
+    
+    def detect_limites(self,simu):
+        return
