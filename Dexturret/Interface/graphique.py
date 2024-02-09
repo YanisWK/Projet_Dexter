@@ -50,14 +50,13 @@ def creer_canvas(window, simu_longueur, simu_largeur):
     canvas.place(x='0',y='0')
     return canvas
 
-#Pour le scale de la roue droite
-def creer_scale(frame, texte):
+#Pour le scale de la roue gauche
+def creer_scale(frame, texte, var, min, max):
     texte_vit_gauche = StringVar()
-    texte_vit_gauche.set("Vitesse Roue Gauche")
+    texte_vit_gauche.set(texte)
     label = Label(frame, textvariable=texte_vit_gauche, font=("Helvetica", 16))
     label.pack()
-    vit_gauche = IntVar()
-    scale = Scale(frame, from_=-100, to=100, length=240,variable=vit_gauche, orient=HORIZONTAL)
+    scale = Scale(frame, from_=min, to=max, length=240,variable=var, orient=HORIZONTAL)
     scale.pack()
     return scale
 
@@ -135,6 +134,15 @@ def popup_collision(window):
     # Définition de la position du Toplevel
     win.geometry("+{}+{}".format(x, y))
 
+
+def rafraichir(simu, canvas):
+    canvas.delete("all")
+    affiche_robot(simu, canvas)
+
+    #Creer la ligne qui montre la direction du robot
+    demi_longueur_robot = simu.robot.longueur / 2
+    demi_largeur_robot = simu.robot.largeur / 2
+    canvas.create_line(simu.robot.x, simu.robot.y, simu.robot.x + demi_longueur_robot * cos(radians(simu.robot.direction)), simu.robot.y - demi_largeur_robot * (sin(radians(simu.robot.direction))))
 
 
 #Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES
