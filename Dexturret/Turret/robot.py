@@ -25,7 +25,7 @@ from math import cos, sin, radians
 
 
 class Robot:
-    def __init__(self, id, longueur, largeur, x, y):
+    def __init__(self, id, longueur, largeur, rayon_des_roues, x, y):
         """
         Paramètres :
         - id : identifiant du robot
@@ -42,6 +42,7 @@ class Robot:
         self.longueur = longueur
         self.largeur = largeur
 
+        self.rayon_des_roues = rayon_des_roues
 
         self.vitesse_lineaire_roue_gauche = 0
         self.vitesse_lineaire_roue_droite = 0
