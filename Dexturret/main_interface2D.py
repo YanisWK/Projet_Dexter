@@ -3,6 +3,10 @@ from Interface import espace, creer_canvas, creer_couleur, creer_fenetre, creer_
 from Turret import Robot
 from Turret import Simulation
 from time import sleep
+import logging
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
+
 
 larg = 700
 long = 1000
