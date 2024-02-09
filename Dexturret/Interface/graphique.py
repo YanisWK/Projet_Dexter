@@ -52,26 +52,13 @@ def creer_canvas(window, simu_longueur, simu_largeur):
 
 #Pour le scale de la roue gauche
 def creer_scale(frame, texte, var, min, max):
-    texte_vit_gauche = StringVar()
-    texte_vit_gauche.set(texte)
-    label = Label(frame, textvariable=texte_vit_gauche, font=("Helvetica", 16))
+    texte_vit = StringVar()
+    texte_vit.set(texte)
+    label = Label(frame, textvariable=texte_vit, font=("Helvetica", 16))
     label.pack()
-    scale = Scale(frame, from_=min, to=max, length=240,variable=var, orient=HORIZONTAL)
+    scale = Scale(frame, from_=min, to=max, length=240, variable=var, orient=HORIZONTAL)
     scale.pack()
     return scale
-
-espace(frame)
-
-#Pour le scale de la roue gauche
-texte_vit_droite = StringVar()
-texte_vit_droite.set("Vitesse Roue Droite")
-label = Label(frame, textvariable=texte_vit_droite, font=("Helvetica", 16))
-label.pack()
-vit_droite = IntVar()
-scale2 = Scale(frame, from_=-100, to=100, length=240,variable=vit_droite, orient=HORIZONTAL)
-scale2.pack()
-
-espace(frame)
 
 #Implementation du robot dans l'environnement
 def affiche_robot(simu, canvas):
@@ -95,23 +82,6 @@ def change_color(activation, couleur):
         couleur.configure(bg='green')
     else:
         couleur.configure(bg='red')
-
-# def onKeyPress(event):
-#     """
-#     Choisit les fonctions à executer en fonction des touches directionnelles
-
-#     Paramètres :
-#     - event : événement de clavier dans l'interface utilisateur, crée quand une touche est pressée
-#     """
-#     if event.keysym == "Right":
-#         simu.robot.rotationRobot(-angle.get(), vitesse.get(), simu.temps)
-#     elif event.keysym == "Left":
-#         simu.robot.rotationRobot(angle.get(), vitesse.get(), simu.temps)
-#     elif event.keysym == "Up":
-#         simu.robot.deplacementRobot(distance.get(), vitesse.get(), simu.temps)
-#     elif event.keysym == "Down":
-#         simu.robot.deplacementRobot(-distance.get(), vitesse.get(), simu.temps)
-
 
 def popup_collision(window):
     """
