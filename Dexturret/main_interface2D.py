@@ -1,7 +1,8 @@
 from tkinter import IntVar
-from Interface import espace, creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir, change_color
+from Interface import espace, creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color
 from Turret import Robot
 from Turret import Simulation
+from time import sleep
 
 larg = 700
 long = 1000
@@ -33,15 +34,28 @@ def onKeyPress(event):
 
     """
     if event.keysym == "space":
-        if (robot.pret) :
-            #fait bouger le robot si le robot est prêt et qu'on appuie sur espace
-            robot.pret = False
-            change_color(robot.pret)
-        else:
-            #stoppe le robot si le robot n'est pas prêt et qu'on appuie sur espace
-            robot.pret = True
-            change_color(robot.pret)
-            
+        robot.pret = not robot.pret
+        change_color(robot.pret)
+
 window.bind('<KeyPress>', onKeyPress)
+
+while True:
+    if (simu.awake):
+        #Mise a jour tous les 1/temps
+        sleep(1/simu.fps)
+
+        #On efface tout et on redessine le robot
+        simu.rafraichir(vitesse_roue_gauche.get(), vitesse_roue_droite.get())
+        rafraichir_graphique(simu, canvas)
+
+        #Affichage de la ligne rouge pour la direction du robot
+
+        canvas.pack()
+        canvas.update()
+    else:
+        break
+popup_collision()
+
+window.mainloop()
 
 #window.mainloop()
