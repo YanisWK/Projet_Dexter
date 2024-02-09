@@ -42,6 +42,10 @@ class Robot:
         self.longueur = longueur
         self.largeur = largeur
 
+
+        self.vitesseRoueG = 0
+        self.vitesseRoueD = 0
+
         self.vitesseLineaireRoueG = 0
         self.vitesseLineaireRoueD = 0
 
