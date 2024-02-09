@@ -64,7 +64,7 @@ def affiche_robot(simu, canvas):
     #Creer la ligne qui montre la direction du robot
     demi_longueur_robot = simu.robot.longueur / 2
     demi_largeur_robot = simu.robot.largeur / 2
-    canvas.create_line(simu.robot.x, simu.robot.y, simu.robot.x + demi_longueur_robot * cos(radians(simu.robot.direction)), simu.robot.y - demi_largeur_robot * (sin(radians(simu.robot.direction))), fill = "red")
+    canvas.create_line(simu.robot.x, simu.robot.y, simu.robot.x + demi_longueur_robot * cos(radians(simu.robot.direction)), simu.robot.y - demi_longueur_robot * (sin(radians(simu.robot.direction))), fill = "red")
     
     canvas.pack()
 
