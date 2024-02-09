@@ -54,15 +54,21 @@ class Robot:
 
         self.pret = False  #La simulation est activée et le robot est en mouvement
 
-        #Les 4 coins du robot selon la position du centre et la taille du robot
-        L = self.longueur / 2
-        l = self.largeur / 2
-        x = self.x
-        y = self.y
+    def __getattr__(self,name):
+        if name == "coordRobot":
+            L = self.longueur / 2
+            l = self.largeur / 2
+            dir = self.direction
+            x = self.x
+            y = self.y
 
-        self.coordRobot = [(x-l, y-L), (x+l, y-L), (x+l, y+L), (x-l, y+L)]
-
-
+            c1 = ( (x + Lcos(radians(dir))) + lcos(radians(dir + 90)), (y - Lsin(radians(dir))) - lsin(radians(dir + 90)) )
+            c2 = ( (x + Lcos(radians(dir))) + lcos(radians(dir - 90)), (y - Lsin(radians(dir))) - lsin(radians(dir - 90)) )
+            c3 = ( (x - Lcos(radians(dir))) + lcos(radians(dir - 90)), (y + Lsin(radians(dir))) - lsin(radians(dir - 90)) )
+            c4 = ( (x - Lcos(radians(dir))) + lcos(radians(dir + 90)), (y + Lsin(radians(dir))) - lsin(radians(dir + 90)) )
+            return [c1, c2, c3, c4]
+        
+    
     def __repr__(self):
         return "C'est le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "°"
 
