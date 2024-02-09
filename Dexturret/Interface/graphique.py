@@ -14,9 +14,6 @@ from math import cos,radians,sin
 
 """
 
-
-
-
 def espace (f):
     ''' 
     Ajoute un espace entre les éléments d'une frame
@@ -116,26 +113,3 @@ def rafraichir(simu, canvas):
     
     canvas.pack()
     canvas.update()
-
-#Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES
-while True:
-    if (simu.awake):
-        #Mise a jour tous les 1/temps
-        sleep(1/simu.fps)
-
-        #On efface tout et on redessine le robot
-        rec_base.delete("all")
-        simu.rafraichir(vit_gauche.get(), vit_droite.get())
-        rec_base.create_polygon(simu.robot.coordRobot)
-
-        #Affichage de la ligne rouge pour la direction du robot
-
-        rec_base.pack()
-        rec_base.update()
-    else:
-        break
-popup_collision()
-
-
-#boutton_moins_distance = Button(frame, text="-10",font =("verdana", 13), fg='black', bg='white')
-#boutton_moins_distance.pack(side = LEFT)
