@@ -59,5 +59,6 @@ while True:
     else:
         break
 popup_collision(window)
+logging.info(f'Le Robot est entré en collision avec un obstacle')
 
 window.mainloop()
