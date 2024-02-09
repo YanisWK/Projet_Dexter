@@ -43,14 +43,11 @@ class Robot:
         self.largeur = largeur
 
 
-        self.vitesseRoueG = 0
-        self.vitesseRoueD = 0
+        self.vitesse_lineaire_roue_gauche = 0
+        self.vitesse_lineaire_roue_droite = 0
 
-        self.vitesseLineaireRoueG = 0
-        self.vitesseLineaireRoueD = 0
-
-        self.vitesseRotationRoueG = 0
-        self.vitesseRotationRoueD = 0
+        self.vitesse_de_rotation_roue_gauche = 0
+        self.vitesse_de_rotation_roue_droite = 0
 
         self.pret = False  #La simulation est activée et le robot est en mouvement
 
@@ -144,13 +141,13 @@ class Robot:
 
         #Calcul de la distance que parcourt le robot à chaque rafraîchissement distance_par_rafraichissement = vitesse/temps
 
-        vitesse_deplacement = (self.vitesseRoueG + self.vitesseRoueD) / 2
+        vitesse_deplacement = (self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2
         deplacement_par_rafraichissement = vitesse_deplacement / temps
         self.avancer(deplacement_par_rafraichissement)
 
         #Calcul de la rotation que le robot doit faire à chaque rafraîchissement
 
-        vitesse_rotation = self.vitesseRoueD - self.vitesseRoueG
+        vitesse_rotation = self.vitesse_lineaire_roue_droite - self.vitesse_lineaire_roue_gauche
         rotation_par_rafraichissement = vitesse_rotation / temps
         self.tourner(rotation_par_rafraichissement)
         
