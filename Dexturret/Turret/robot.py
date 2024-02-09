@@ -153,7 +153,7 @@ class Robot:
         self.deplacementRobot(fps)
 
 
-    def detect_limites(self,simu):
+    def detect_limites(self,simu, distx,disty):
         """
         Vérifie si la distance de détection du robot touche une bordure
 
