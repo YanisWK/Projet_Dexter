@@ -142,8 +142,10 @@ def rafraichir(simu, canvas):
     #Creer la ligne qui montre la direction du robot
     demi_longueur_robot = simu.robot.longueur / 2
     demi_largeur_robot = simu.robot.largeur / 2
-    canvas.create_line(simu.robot.x, simu.robot.y, simu.robot.x + demi_longueur_robot * cos(radians(simu.robot.direction)), simu.robot.y - demi_largeur_robot * (sin(radians(simu.robot.direction))))
-
+    canvas.create_line(simu.robot.x, simu.robot.y, simu.robot.x + demi_longueur_robot * cos(radians(simu.robot.direction)), simu.robot.y - demi_largeur_robot * (sin(radians(simu.robot.direction))), fill = "red")
+    
+    canvas.pack()
+    canvas.update()
 
 #Boucle qui permet de rafraichir l'interface mais ça bouffe TROP DE RESSOURCES
 while True:
@@ -157,13 +159,6 @@ while True:
         rec_base.create_polygon(simu.robot.coordRobot)
 
         #Affichage de la ligne rouge pour la direction du robot
-        x = robot1.x
-        y = robot1.y
-        L = robot1.longueur / 2
-        l = robot1.largeur / 2
-        x1 = x + L*cos(radians(robot1.direction))
-        y1 = y - L*sin(radians(robot1.direction))
-        rec_base.create_line(x, y, x1, y1, fill="red")
 
         rec_base.pack()
         rec_base.update()
