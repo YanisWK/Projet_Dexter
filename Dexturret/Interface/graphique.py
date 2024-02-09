@@ -15,11 +15,6 @@ from math import cos,radians,sin
 """
 
 
-larg = 700
-long = 1000
-robot1 = Robot(1,50,25,long/2,larg/2)
-simu = Simulation(1,robot1,larg,long,60)
-
 
 
 def espace (f):
@@ -36,10 +31,12 @@ def espace (f):
     espace.pack()
 
 #Spécificité de notre interface graphique
-window = Tk()
-window.title("Simulation")
-window.geometry(f"{simu.longueur+250}x{simu.largeur+5}")
-window.resizable(height=False, width=False)
+def creer_fenetre(simu_longueur, simu_largeur):
+    window = Tk()
+    window.title("Simulation")
+    window.geometry(f"{simu_longueur+250}x{simu_largeur+5}")
+    window.resizable(height=False, width=False)
+    return window
 
 #Première frame/boîte
 frame = Frame(window,borderwidth=5, relief="raise")
