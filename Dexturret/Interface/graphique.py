@@ -27,28 +27,70 @@ def espace (f):
     espace = Label(f, text="", font=("Helvetica", 16))
     espace.pack()
 
-#Spécificité de notre interface graphique
 def creer_fenetre(simu_longueur, simu_largeur):
+    """
+    Crée et configure la fenêtre principale de l'interface graphique
+
+    Paramètres :
+    - simu_longueur : longueur de la simulation
+    - simu_largeur : largeur de la simulation
+
+    Retourne :
+    - window : fenêtre principale
+    
+    """
     window = Tk()
     window.title("Simulation")
     window.geometry(f"{simu_longueur+250}x{simu_largeur+5}")
     window.resizable(height=False, width=False)
     return window
 
-#Première frame/boîte
 def creer_frame(window):
+    """
+    Crée et configure une frame 
+
+    Paramètre :
+    - window : fenêtre principale
+
+    Retourne :
+    - frame : fenêtre pour les échelles de vitesse des roues
+    """
     frame = Frame(window,borderwidth=5, relief="raise")
     frame.pack(fill = BOTH,side = RIGHT)
     return frame
 
-#Canvas où sera simulé l'environnement du robot et ses déplacements
 def creer_canvas(window, simu_longueur, simu_largeur):
+    """
+    Crée et configure un canvas pour la simulation
+
+    Paramètres :
+    - window : fenêtre principale
+    - simu_longueur : longueur de la simulation
+    - simu_largeur : largeur de la simulation
+
+    Retourne :
+    - canvas : canvas représentant l'environnement dans lequel se déplace le robot
+
+    """
     canvas = Canvas(window, bg='#cccccc', width=simu_longueur, height=simu_largeur)
     canvas.place(x='0',y='0')
     return canvas
 
-#Pour le scale de la roue gauche
 def creer_scale(frame, texte, var, min, max):
+    """
+    Crée et configure un scale (curseur) dans une frame.
+
+    Paramètres :
+    - frame : fenêtre pour les outils nécessaires au fonctionnement de la simulation
+    - texte : texte à afficher à côté du scale
+    - var : variable associée au scale
+    - min : valeur minimale du scale
+    - max : valeur maximale du scale
+
+    Retourne :
+    - scale : échelle qui servira à varier la vitesse d'une roue
+    
+    """
     texte_vit = StringVar()
     texte_vit.set(texte)
     label = Label(frame, textvariable=texte_vit, font=("Helvetica", 16))
