@@ -22,8 +22,11 @@ import logging
 
     - pos_coins_Robot => calcule la position des 4 coins à l'aide de la direction et de la taille du robot
 
-    - detect_distance =>
-    - detect_limites =>
+    - detect_distance => retourne la distance séparant une bordure et le robot si la distance de détection 
+                         atteint une bordure ou la distance maximale de détection sinon
+
+    - detect_limites => retourne true si la distance de détection du robot atteint une bordure, false sinon
+
 """
 
 
@@ -92,7 +95,7 @@ class Robot:
     def tourner(self, angle):
         """
         Effectue une rotation en ajustant la direction pour rester dans [0, 360]
-        si l'angle n'est pas compris dans [0,360], c'est le modulo 360 sur cet angle qui est ajouté 
+        si l'angle n'est pas compris dans [0,360], c'est l'angle modulo 360 qui est ajouté 
         à la direction actuelle
 
         Paramètre :
@@ -152,7 +155,7 @@ class Robot:
         Met à jour les positions des coins du robot et les déplacements du robot
 
         Paramètre :
-        - fps : 
+        - fps : frame par seconde
         """
         self.deplacementRobot(fps)
 
@@ -162,9 +165,8 @@ class Robot:
         Vérifie si la distance de détection du robot touche une bordure
 
         Paramètre :
-        - simulation : simulation contenant l'environnement dans lequel se déplace le robot
-        - distx : point x de l'extremité de la distance de détection
-        - disty : point y de l'extremité de la distance de détection
+        - simu : simulation contenant l'environnement dans lequel se déplace le robot
+        - distx, disty : coordonnées du point maximal de la distance de détection
         
         """
         if distx > simu.longueur or disty > simu.largeur:
@@ -178,16 +180,16 @@ class Robot:
         Retourne une distance dans la direction dans laquelle le robot est orienté
 
         Paramètre :
-        - simulation : simulation contenant l'environnement dans lequel se déplace le robot
+        - simu : simulation contenant l'environnement dans lequel se déplace le robot
 
         """
         #Distance de détection maximale du robot
         dist_max = 1000 #1000 car la dimension max de l'environnement
 
-        px= self.x + dist_max *cos(radians(self.direction ))
-        py= self.y + dist_max *sin(radians(self.direction))
+        px= self.x + dist_max*cos(radians(self.direction))
+        py= self.y + dist_max*sin(radians(self.direction))
 
-        if self.detect_limites(simu):
+        if self.detect_limites(simu,px,py):
             #Calcule la distance entre la position du robot et le point d'intersection 
             #entre les coord. des extremités de la distance de détection du robot et la bordure la + proche
             dist = sqrt((self.x - px)**2 + (self.y - py)**2)
