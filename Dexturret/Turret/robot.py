@@ -60,16 +60,16 @@ class Robot:
 
     def __getattr__(self,name):
         if name == "coordRobot":
-            L = self.longueur / 2
-            l = self.largeur / 2
+            demi_longueur = self.longueur / 2
+            demi_largeur = self.largeur / 2
             dir = self.direction
             x = self.x
             y = self.y
 
-            c1 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
-            c2 = ( (x + L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y - L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
-            c3 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir - 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir - 90)) )
-            c4 = ( (x - L*cos(radians(dir))) + l*cos(radians(dir + 90)), (y + L*sin(radians(dir))) - l*sin(radians(dir + 90)) )
+            c1 = ( (x + demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir + 90)), (y - demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir + 90)) )
+            c2 = ( (x + demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir - 90)), (y - demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir - 90)) )
+            c3 = ( (x - demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir - 90)), (y + demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir - 90)) )
+            c4 = ( (x - demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir + 90)), (y + demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir + 90)) )
             return [c1, c2, c3, c4]
         
     
@@ -145,7 +145,7 @@ class Robot:
 
         #Calcul de la rotation que le robot doit faire à chaque rafraîchissement
 
-        vitesse_rotation = - ( self.rayon_des_roues*(self.vitesse_de_rotation_roue_gauche + self.vitesse_de_rotation_roue_droite)) / (self.largeur/2)
+        vitesse_rotation = - ( self.rayon_des_roues * (self.vitesse_de_rotation_roue_gauche + self.vitesse_de_rotation_roue_droite)) / self.largeur
         rotation_par_rafraichissement = vitesse_rotation / temps
         self.tourner(degrees(rotation_par_rafraichissement))
         
