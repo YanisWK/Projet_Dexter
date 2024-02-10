@@ -99,8 +99,15 @@ def creer_scale(frame, texte, var, min, max):
     scale.pack()
     return scale
 
-#Implementation du robot dans l'environnement
 def affiche_robot(simu, canvas):
+    """
+    Affiche le robot et la ligne pointant vers sa direction dans le canvas.
+
+    Paramètres :
+    - simu : simulation
+    - canvas : canvas/environnement de la simulation
+
+    """
     canvas.create_polygon(simu.robot.coordRobot)
 
     #Creer la ligne qui montre la direction du robot
@@ -111,16 +118,27 @@ def affiche_robot(simu, canvas):
     canvas.pack()
 
 def creer_couleur(frame):
+    """
+    Crée et configure une couleur.
+
+    Paramètre :
+    - frame : fenêtre concernée par la couleur
+
+    Retourne :
+    - couleur : élément graphique contenant la couleur 
+
+    """
     couleur = Canvas(frame, bg='red', width=100, height=50)
     couleur.pack(side=BOTTOM)
     return couleur
 
 def change_color(activation, couleur):
     """
-    Change la couleur du bouton d'activation de la simulation
+    Configure la couleur du bouton d'activation de la simulation
 
     Paramètre :
     - activation : booléen (true si la simulation est active, false sinon)
+    - couleur : couleur créée à partir de creer_couleur pour le bouton de simulation
 
     """
     if activation:
@@ -130,7 +148,10 @@ def change_color(activation, couleur):
 
 def popup_collision(window):
     """
-    Crée un pop-up permettant de feemer la simulation lorsque le robot rencontre un obstacle
+    Crée un pop-up permettant de fermer la simulation lorsque le robot rencontre un obstacle
+
+    Paramètre :
+    - window : fenêtre principale
     
     """
     win = Toplevel()
@@ -151,6 +172,15 @@ def popup_collision(window):
 
 
 def rafraichir_graphique(simu, canvas):
+    """
+    Rafraîchit le graphique en effaçant le canvas et en réaffichant le robot avec les nouvelles positions, 
+    et met à jour le canvas avec les changements effectués
+
+    Paramètres :
+    - simu : simulation
+    - canvas : canvas/environnement de la simulation
+
+    """
     canvas.delete("all")
     affiche_robot(simu, canvas)
     
