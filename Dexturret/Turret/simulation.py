@@ -48,10 +48,10 @@ class Simulation:
                 self.robot.vitesse_lineaire_roue_gauche = vitesse_roue_g
                 self.robot.vitesse_lineaire_roue_droite = - vitesse_roue_d
                 self.robot.rafraichir(self.fps)
+                self.robot.detect_distance(self)
                 self.check_collision()
 
         
-
     """
             for coin in self.coordRobot:
                 if coin[0] < 0:

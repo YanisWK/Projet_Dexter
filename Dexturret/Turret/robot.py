@@ -166,10 +166,10 @@ class Robot:
 
         Paramètre :
         - simu : simulation contenant l'environnement dans lequel se déplace le robot
-        - distx, disty : coordonnées du point maximal de la distance de détection
+        - distx, disty : coordonnées du point maximal du rayon de détection
         
         """
-        if distx > simu.longueur or disty > simu.largeur:
+        if distx < 0 or disty < 0 or distx > simu.longueur or disty > simu.largeur:
             return True
         else:
             return False
@@ -186,6 +186,7 @@ class Robot:
         #Distance de détection maximale du robot
         dist_max = 1000 #1000 car la dimension max de l'environnement
 
+        #Calcul des coordonnées du point maximal du rayon de détection
         px= self.x + dist_max*cos(radians(self.direction))
         py= self.y + dist_max*sin(radians(self.direction))
 
