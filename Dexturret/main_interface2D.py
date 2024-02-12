@@ -1,5 +1,5 @@
 from tkinter import IntVar
-from Interface import espace, creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color
+from Interface import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color
 from Turret import Robot
 from Turret import Simulation
 from time import sleep
@@ -26,12 +26,12 @@ vitesse_roue_gauche = IntVar()
 scale_roue_gauche = creer_scale(frame, "Vitesse roue gauche", vitesse_roue_gauche, -100, 100)
 
 #Ajout d'un espace entre les éléments de la frame
-espace(frame)
+scale_roue_gauche.pack(ipady=20)
 
 vitesse_roue_droite = IntVar()
-scal_roue_droite = creer_scale(frame, "Vitesse roue droite", vitesse_roue_droite, -100, 100)
+scale_roue_droite = creer_scale(frame, "Vitesse roue droite", vitesse_roue_droite, -100, 100)
 
-espace(frame)
+scale_roue_droite.pack(ipady=20)
 
 #Création d'une couleur 
 couleur = creer_couleur(frame)

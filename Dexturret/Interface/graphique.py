@@ -14,19 +14,6 @@ from math import cos,radians,sin
 
 """
 
-def espace (f):
-    ''' 
-    Ajoute un espace entre les éléments d'une frame
-
-    Paramètres : 
-    - f : frame
-
-    '''
-    espace = Label(f, text="", font=("Helvetica", 16))
-    espace.pack()
-    espace = Label(f, text="", font=("Helvetica", 16))
-    espace.pack()
-
 def creer_fenetre(simu_longueur, simu_largeur):
     """
     Crée et configure la fenêtre principale de l'interface graphique
