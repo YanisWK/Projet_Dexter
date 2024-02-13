@@ -28,8 +28,9 @@ class Tourner():
 class TracerCarre():
     def __init__(self,tailleCote):
         stratAvancer=Avancer(tailleCote)
-        stratTourner=Tourner(tailleCote)
-        self.strats=[stratAvancer,stratTourner]
+        stratTourner=Tourner(90) #Besoin de savoir a chaque fois qu'on tourne de combien de degrès il faut tourner.
+
+        self.strats=[stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner]
         self.tailleCote=tailleCote
         self.current=-1
     def start(self):
@@ -37,9 +38,8 @@ class TracerCarre():
     def etape(self):
         if self.stop():return
         if self.current<0 or self.strats[self.current].stop():
-        self.current+=1
-        self.strats[current].start()
-        self.strat
-
+            self.current+=1
+            self.strats[self.current].start()
+        self.strats[self.current].step
     def stop(self):
         return self.current==len(self.starts)-1 and self.strats[self.current].stop()
