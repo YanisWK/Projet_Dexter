@@ -1,9 +1,12 @@
 class Avancer():
     def __init__(self,distance):
         self.distance=distance
-        self.parcouru
+        
     def start(self):
         self.parcouru=0
+    def etape(self):
+        self.parcouru+=self.distance #il me faudrait la distance parcouru toute les x etapes ou j'ai juste mal compris
+     
 
 class Tourner():
     def __init__(self,angle):
