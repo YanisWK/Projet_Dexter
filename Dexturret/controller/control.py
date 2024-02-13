@@ -32,5 +32,14 @@ class TracerCarre():
         self.strats=[stratAvancer,stratTourner]
         self.tailleCote=tailleCote
         self.current=-1
+    def start(self):
+        self.current=-1
+    def etape(self):
+        if self.stop():return
+        if self.current<0 or self.strats[self.current].stop():
+        self.current+=1
+        self.strats[current].start()
+        self.strat
 
-
+    def stop(self):
+        return self.current==len(self.starts)-1 and self.strats[self.current].stop()
