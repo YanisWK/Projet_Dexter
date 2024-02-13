@@ -171,12 +171,20 @@ class Robot:
         Retourne :
         - xi,yi : point d'intersection avec une bordure s'il y en a une, None sinon
         """
+
         #Coordonnées du point d'intersection
         xi,yi = None,None
         if x < 0 or x > simu.longueur or y < 0 or y > simu.largeur:
-            return
+            #Si le rayon dépasse une bordure de l'environnement
+            if x > simu.longueur:
+                xi = simu.longueur
+                yi = y + (simu.longueur-x) * (y-self.y)/(x-self.x)
+            elif y > simu.largeur:
+                xi = x + (simu.largeur-y) * (x-self.x)/(y-self.y)
+                yi = simu.largeur
+             
         return xi,yi
-    
+        
 
     def detect_distance(self,simu):
         """
@@ -195,11 +203,11 @@ class Robot:
 
         distx,disty = self.intersect_limites(simu,px,py)
 
-        if self.detect_limites(simu,px,py):
+        if distx and disty:
             #Calcule la distance entre la position du robot et le point d'intersection 
             #entre les coord. des extremités de la distance de détection du robot et la bordure la + proche
             dist = sqrt((self.x - distx)**2 + (self.y - disty)**2)
-            return dist
+            return round(dist,1)
         else:
             #Retourne la distance de détection max si la distance de détection ne touche pas de bordure
             return dist_max     
