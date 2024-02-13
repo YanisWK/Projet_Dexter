@@ -48,7 +48,7 @@ class Simulation:
                 self.robot.vitesse_lineaire_roue_gauche = vitesse_roue_g
                 self.robot.vitesse_lineaire_roue_droite = - vitesse_roue_d
                 self.robot.rafraichir(self.fps)
-                self.robot.detect_distance(self)
+                self.robot.detect_distance(self.longueur,self.largeur)
                 self.check_collision()
 
         
@@ -80,4 +80,4 @@ class Simulation:
                 self.awake = False
             elif (Coord[i][1] > self.largeur) or (Coord[i][1] < 0):
                 self.awake = False
-    
+

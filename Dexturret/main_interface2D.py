@@ -1,4 +1,4 @@
-from tkinter import IntVar
+from tkinter import IntVar,Button,Label
 from Interface import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color
 from Turret import Robot
 from Turret import Simulation
@@ -33,6 +33,13 @@ scale_roue_droite = creer_scale(frame, "Vitesse roue droite", vitesse_roue_droit
 
 scale_roue_droite.pack(ipady=20)
 
+def affichage_distance(long,larg):
+    text_distance.config(text = f"Distance : {robot.detect_distance(long,larg)}")
+
+text_distance = Label(frame, text="Distance : 0.0")
+text_distance.pack()
+button_affichage = Button(frame,text="Affichage", command= affichage_distance(simu.longueur,simu.largeur))
+button_affichage.pack()
 #Création d'une couleur 
 couleur = creer_couleur(frame)
 
@@ -51,20 +58,17 @@ def onKeyPress(event):
 window.bind('<KeyPress>', onKeyPress)
 
 #Boucle principale de la simu
-while True:
-    if (simu.awake):
-        #Mise a jour tous les 1/temps
-        sleep(1/simu.fps)
+while simu.awake:
+    #Mise a jour tous les 1/temps
+    sleep(1/simu.fps)
 
-        #On efface tout et on redessine le robot
-        simu.rafraichir(vitesse_roue_gauche.get(), vitesse_roue_droite.get())
-        rafraichir_graphique(simu, canvas)
+    #On efface tout et on redessine le robot
+    simu.rafraichir(vitesse_roue_gauche.get(), vitesse_roue_droite.get())
+    rafraichir_graphique(simu, canvas)
 
-        #Affichage de la ligne rouge pour la direction du robot
-        canvas.pack()
-        canvas.update()
-    else:
-        break
+    #Affichage de la ligne rouge pour la direction du robot
+    canvas.pack()
+    canvas.update()
 
 #Affichage d'une fenêtre pop-up en cas de collision
 popup_collision(window)
