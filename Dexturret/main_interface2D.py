@@ -35,11 +35,10 @@ scale_roue_droite.pack(ipady=20)
 
 def affichage_distance(long,larg):
     text_distance.config(text = f"Distance : {robot.detect_distance(long,larg)}")
+    print("SA MARCHE OU PAS SALO")
 
 text_distance = Label(frame, text="Distance : 0.0")
 text_distance.pack()
-button_affichage = Button(frame,text="Affichage", command= affichage_distance(simu.longueur,simu.largeur))
-button_affichage.pack()
 #Création d'une couleur 
 couleur = creer_couleur(frame)
 
@@ -54,7 +53,6 @@ def onKeyPress(event):
     if event.keysym == "space":
         robot.pret = not robot.pret
         change_color(robot.pret, couleur)
-
 window.bind('<KeyPress>', onKeyPress)
 
 #Boucle principale de la simu
@@ -69,6 +67,7 @@ while simu.awake:
     #Affichage de la ligne rouge pour la direction du robot
     canvas.pack()
     canvas.update()
+    affichage_distance(simu.longueur,simu.largeur)
 
 #Affichage d'une fenêtre pop-up en cas de collision
 popup_collision(window)
