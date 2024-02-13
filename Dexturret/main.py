@@ -5,8 +5,9 @@ from Turret.simulation import Simulation
 #Rayon des roues à 10 pour tester
 robot_t = Robot("Dexter", 50, 25, 10, 0, 0) 
 
-def affichage():
-    print(robot_t)
+def affichage(robot):
+    print("\n")
+    print(robot)
     print("Pour pouvoir faire bouger le robot, veuillez taper le numéro de l'action :\n")
     print("0 : Sortir du programme")
     print("1 : Avancer d'une certaine durée")
@@ -31,17 +32,20 @@ larg = 700
 long = 1000
 robot1 = Robot(1,50,25,10,long/2,larg/2)
 simu = Simulation(1,robot1,larg,long,60)
+
 """
 #permet de relier les main de l'interface et de la simulation
 if __name__ == "__main__":
     main()
 """
+vrd = 0
+vrg = 0
 while True:
-    choix_ut = affichage()
-    vrd = 0
-    vrg = 0
+    choix_ut = affichage(robot1)
     if choix_ut == 0:
+        print("Le programme s'arrête\n")
         break
+
     elif choix_ut == 1:
         while True:
             try:
@@ -51,7 +55,8 @@ while True:
                 print("Veuillez entrer un chiffre \n")
         for loop in range(choix_d):
             #Sleep ?
-            robot_t.rafraichir(vrg,vrd)
+            simu.rafraichir(vrg,vrd)
+
     elif choix_ut == 2:
         print(f"Vitesse de la roue gauche actuelle : {vrg}\n")
         while True:
@@ -66,6 +71,7 @@ while True:
                 print("Veuillez entrer un chiffre \n")
         print(f"Vitesse de la roue gauche initialisé à : {vrg} !!!\n")
         print("\n")
+
     elif choix_ut == 3:
         print(f"Vitesse de la roue droite actuelle : {vrd}\n")
         while True:
@@ -80,6 +86,9 @@ while True:
                 print("Veuillez entrer un chiffre \n")
         print(f"Vitesse de la roue droite initialisé à : {vrd} !!!\n")
         print("\n")
-        
 
+    elif choix_ut == 4:
+        distance_r_m = robot1.detect_distance(simu.longueur,simu.largeur)
+        print(f"Le distance entre le robot et le mur est de : {distance_r_m} \n")
     
+        
