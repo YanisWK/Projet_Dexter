@@ -34,7 +34,7 @@ scale_roue_droite = creer_scale(frame, "Vitesse roue droite", vitesse_roue_droit
 scale_roue_droite.pack(ipady=20)
 
 def affichage_distance(long,larg):
-    text_distance.config(text = f"Distance : {robot.detect_distance(simu)}")
+    text_distance.config(text = f"Distance : {robot.detect_distance(long,larg)}")
 
 
 text_distance = Label(frame, text="Distance : 0.0")
