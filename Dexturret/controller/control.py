@@ -10,7 +10,7 @@ class Avancer():
         self.parcouru+=self.distance #il me faudrait la distance parcouru poure chaque etapes ou j'ai juste mal compris peut être la distance parcouru par le robot d'ailleurs
         if self.stop() : return
     def stop(self):
-        return self.parcouru>self.distance
+        return self.parcouru>=self.distance
     
 
 class Tourner():
@@ -22,7 +22,7 @@ class Tourner():
         self.angle_parcouru+=self.angle 
         if self.stop(): return
     def stop(self):
-        return self.angle_parcouru>self.angle
+        return self.angle_parcouru>=self.angle
     
 
 class TracerCarre():
