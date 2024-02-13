@@ -210,4 +210,4 @@ class Robot:
             return round(dist,1)
         else:
             #Retourne la distance de détection max si la distance de détection ne touche pas de bordure
-            return dist_max     
+            return dist_max  
