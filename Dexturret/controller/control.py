@@ -1,12 +1,16 @@
+update_time=60
+
+
 class Avancer():
     def __init__(self,distance):
         self.distance=distance
-        
     def start(self):
         self.parcouru=0
     def etape(self):
-        self.parcouru+=self.distance #il me faudrait la distance parcouru toute les x etapes ou j'ai juste mal compris
-     
+        self.parcouru+=self.distance #il me faudrait la distance parcouru poure chaque etapes ou j'ai juste mal compris peut être la distance parcouru par le robot d'ailleurs
+    def stop(self):
+        return self.parcouru>self.distance
+    
 
 class Tourner():
     def __init__(self,angle):
