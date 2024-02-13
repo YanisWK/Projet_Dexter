@@ -19,7 +19,7 @@ def affichage():
             if (choix >= 0 and choix <= 4):
                 break
             else:
-                print("Veuillez choisir un chiffre entre 0 à 4\n")
+                print("Veuillez choisir un chiffre entre 0 et 4\n")
                 continue
         except ValueError:
             print("Veuillez entrer un chiffre \n")
@@ -52,5 +52,34 @@ while True:
         for loop in range(choix_d):
             #Sleep ?
             robot_t.rafraichir(vrg,vrd)
+    elif choix_ut == 2:
+        print(f"Vitesse de la roue gauche actuelle : {vrg}\n")
+        while True:
+            try:
+                vrg = int(input("Veuillez écrire la vitesse de la roue gauche que vous voulez avoir (-100 à 100 inclus) : "))
+                if (vrg >= -100 and vrg <= 100):
+                    break
+                else:
+                    print("Veuillez choisir un chiffre entre -100 et 100\n")
+                    continue
+            except ValueError:
+                print("Veuillez entrer un chiffre \n")
+        print(f"Vitesse de la roue gauche initialisé à : {vrg} !!!\n")
+        print("\n")
+    elif choix_ut == 3:
+        print(f"Vitesse de la roue droite actuelle : {vrd}\n")
+        while True:
+            try:
+                vrd = int(input("Veuillez écrire la vitesse de la roue gauche que vous voulez avoir (-100 à 100 inclus) : "))
+                if (vrd >= -100 and vrd <= 100):
+                    break
+                else:
+                    print("Veuillez choisir un chiffre entre -100 et 100\n")
+                    continue
+            except ValueError:
+                print("Veuillez entrer un chiffre \n")
+        print(f"Vitesse de la roue droite initialisé à : {vrd} !!!\n")
+        print("\n")
+        
 
     
