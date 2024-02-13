@@ -35,7 +35,7 @@ scale_roue_droite.pack(ipady=20)
 
 def affichage_distance(long,larg):
     text_distance.config(text = f"Distance : {robot.detect_distance(simu)}")
-    print("SA MARCHE OU PAS SALO")
+
 
 text_distance = Label(frame, text="Distance : 0.0")
 text_distance.pack()
