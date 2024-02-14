@@ -32,6 +32,7 @@ larg = 700
 long = 1000
 robot1 = Robot(1,50,25,10,long/2,larg/2)
 simu = Simulation(1,robot1,larg,long,60)
+simu.robot.pret = True
 
 """
 #permet de relier les main de l'interface et de la simulation
@@ -54,7 +55,7 @@ while True:
             except ValueError:
                 print("Veuillez entrer un chiffre \n")
         for loop in range(choix_d):
-            #Sleep ?
+            print(loop)
             simu.rafraichir(vrg,vrd)
 
     elif choix_ut == 2:
@@ -69,6 +70,7 @@ while True:
                     continue
             except ValueError:
                 print("Veuillez entrer un chiffre \n")
+        robot1.vitesse_lineaire_roue_gauche = vrg
         print(f"Vitesse de la roue gauche initialisé à : {vrg} !!!\n")
         print("\n")
 
@@ -84,6 +86,7 @@ while True:
                     continue
             except ValueError:
                 print("Veuillez entrer un chiffre \n")
+        robot1.vitesse_lineaire_roue_droite = vrd
         print(f"Vitesse de la roue droite initialisé à : {vrd} !!!\n")
         print("\n")
 
