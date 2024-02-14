@@ -166,8 +166,8 @@ class Robot:
         Vérifie si le rayon du robot intersecte une bordure
 
         Paramètres :
-        - simu : simulation
-        - x, y : coordonnées de l'extrémité du rayon.
+        - simu_longueur, simu_largeur : ldimensions de l'environnement d'une simulation
+        - x, y : coordonnées de l'extrémité du rayon de détection
 
         Retourne :
         - xi,yi : point d'intersection avec une bordure s'il y en a une, None sinon
@@ -202,7 +202,10 @@ class Robot:
         Retourne une distance dans la direction dans laquelle le robot est orienté
 
         Paramètre :
-        - simu : simulation contenant l'environnement dans lequel se déplace le robot
+        - simu_longueur, simu_largeur : ldimensions de l'environnement d'une simulation
+
+        Retourne :
+        - la distance séparant une bordure et le point d'intersection
 
         """
         #Distance de détection maximale du robot
