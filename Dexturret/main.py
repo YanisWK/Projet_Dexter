@@ -6,6 +6,9 @@ from Turret.simulation import Simulation
 robot_t = Robot("Dexter", 50, 25, 10, 0, 0) 
 
 def affichage(robot):
+    """
+    Permet à l'utilisateur de choisir une action afin de contrôler le robot. Le temps n'est pas continu et c'est à l'utilisateur de choisir de combien de tick le robot avance
+    """
     print("\n")
     print(robot)
     print("Pour pouvoir faire bouger le robot, veuillez taper le numéro de l'action :\n")
@@ -55,7 +58,6 @@ while True:
             except ValueError:
                 print("Veuillez entrer un chiffre \n")
         for loop in range(choix_d):
-            print(loop)
             simu.rafraichir(vrg,vrd)
 
     elif choix_ut == 2:
