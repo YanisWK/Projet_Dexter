@@ -13,33 +13,7 @@ long = 1000
 robot = Turret.Robot(1,50,25,0.05,long/2,larg/2)
 simu = Turret.Simulation(1,robot,larg,long,60)
 
-#Création de la fenêtre principale, de la frame et du canvas pour la simulation
-window = Interface.creer_fenetre(long, larg)
-
-frame = Interface.creer_frame(window)
-
-canvas = Interface.creer_canvas(window, simu.longueur, simu.largeur)
-
-#Création des variables de vitesse des roues gauche et droite et configuration de leur scale de vitesse
-vitesse_roue_gauche = IntVar()
-scale_roue_gauche = Interface.creer_scale(frame, "Vitesse roue gauche", vitesse_roue_gauche, -100, 100)
-
-#Ajout d'un espace entre les éléments de la frame
-scale_roue_gauche.pack(ipady=20)
-
-vitesse_roue_droite = IntVar()
-scale_roue_droite = Interface.creer_scale(frame, "Vitesse roue droite", vitesse_roue_droite, -100, 100)
-
-scale_roue_droite.pack(ipady=20)
-
-def affichage_distance(long,larg):
-    text_distance.config(text = f"Distance : {robot.detect_distance(long,larg)}")
-
-
-text_distance = Label(frame, text="Distance : 0.0")
-text_distance.pack()
-#Création d'une couleur 
-couleur = Interface.creer_couleur(frame)
+window, couleur, canvas, frame, text_distance = Interface.creer_graphique(robot,simu)
 
 def onKeyPress(event):
     """
@@ -60,13 +34,13 @@ while simu.awake:
     sleep(1/simu.fps)
 
     #On efface tout et on redessine le robot
-    simu.rafraichir(vitesse_roue_gauche.get(), vitesse_roue_droite.get())
+    #simu.rafraichir(window.vitesse_roue_gauche.get(), window.vitesse_roue_droite.get())
     Interface.rafraichir_graphique(simu, canvas)
 
     #Affichage de la ligne rouge pour la direction du robot
     canvas.pack()
     canvas.update()
-    affichage_distance(simu.longueur,simu.largeur)
+    Interface.affichage_distance(text_distance,robot,simu.longueur,simu.largeur)
 
 #Affichage d'une fenêtre pop-up en cas de collision
 Interface.popup_collision(window)

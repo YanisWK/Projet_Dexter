@@ -172,3 +172,32 @@ def rafraichir_graphique(simu, canvas):
     
     canvas.pack()
     canvas.update()
+
+
+def creer_graphique(robot,simu):
+    #Création de la fenêtre principale, de la frame et du canvas pour la simulation
+    window = creer_fenetre(simu.longueur, simu.largeur)
+
+    frame = creer_frame(window)
+
+    canvas = creer_canvas(window, simu.longueur, simu.largeur)
+
+    #Création des variables de vitesse des roues gauche et droite et configuration de leur scale de vitesse
+    vitesse_roue_gauche = IntVar()
+    scale_roue_gauche = creer_scale(frame, "Vitesse roue gauche", vitesse_roue_gauche, -100, 100)
+
+    #Ajout d'un espace entre les éléments de la frame
+    scale_roue_gauche.pack(ipady=20)
+
+    vitesse_roue_droite = IntVar()
+    scale_roue_droite = creer_scale(frame, "Vitesse roue droite", vitesse_roue_droite, -100, 100)
+
+    scale_roue_droite.pack(ipady=20)
+
+    text_distance = Label(frame, text="Distance : 0.0")
+    text_distance.pack()
+    #Création d'une couleur 
+    couleur = creer_couleur(frame)
+    return window, couleur, canvas, frame, text_distance
+def affichage_distance(text_distance,robot,long,larg):
+    text_distance.config(text = f"Distance : {robot.detect_distance(long,larg)}")
