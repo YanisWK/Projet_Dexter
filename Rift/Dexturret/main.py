@@ -1,9 +1,7 @@
-from Turret.robot import Robot
-from Turret.simulation import Simulation
-#from main_interface2D import main
+import Turret
 
 #Rayon des roues à 10 pour tester
-robot_t = Robot("Dexter", 50, 25, 10, 0, 0) 
+robot_t = Turret.Robot("Dexter", 50, 25, 10, 0, 0) 
 
 def affichage(robot):
     """
@@ -33,8 +31,8 @@ def affichage(robot):
 
 larg = 700
 long = 1000
-robot1 = Robot(1,50,25,10,long/2,larg/2)
-simu = Simulation(1,robot1,larg,long,60)
+robot1 = Turret.Robot(1,50,25,10,long/2,larg/2)
+simu = Turret.Simulation(1,robot1,larg,long,60)
 simu.robot.pret = True
 
 """
