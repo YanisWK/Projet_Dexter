@@ -43,9 +43,10 @@ window.bind('<KeyPress>', onKeyPress)
 while simu.awake:
     #Mise a jour tous les 1/temps
     sleep(1/simu.fps)
-
+    robot.vitesse_lineaire_roue_droite = vitesse_roue_droite.get()
+    robot.vitesse_lineaire_roue_gauche = vitesse_roue_gauche.get()
     #On efface tout et on redessine le robot
-    simu.rafraichir(vitesse_roue_gauche.get(), vitesse_roue_droite.get())
+    simu.rafraichir()
     Interface.rafraichir_graphique(simu, canvas)
 
     #Affichage de la ligne rouge pour la direction du robot
