@@ -1,4 +1,4 @@
-from Turret.robot import Robot
+import Turret
 
 """Documentation : 
 

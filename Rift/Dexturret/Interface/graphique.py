@@ -1,7 +1,6 @@
 from time import sleep
 from tkinter import Canvas, Toplevel, Button, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH, BOTTOM
-from Turret.simulation import Simulation
-from Turret.robot import Robot
+import Turret
 from math import cos,radians,sin
 
 """Documentation : 
