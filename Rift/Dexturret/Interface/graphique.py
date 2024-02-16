@@ -1,5 +1,5 @@
 from time import sleep
-from tkinter import Canvas, Toplevel, Button, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH, BOTTOM
+from tkinter import Canvas, Toplevel, Button, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH, BOTTOM, CENTER
 import Turret
 from math import cos,radians,sin
 
@@ -182,22 +182,12 @@ def creer_graphique(robot,simu):
 
     canvas = creer_canvas(window, simu.longueur, simu.largeur)
 
-    #Création des variables de vitesse des roues gauche et droite et configuration de leur scale de vitesse
-    vitesse_roue_gauche = IntVar()
-    scale_roue_gauche = creer_scale(frame, "Vitesse roue gauche", vitesse_roue_gauche, -100, 100)
-
-    #Ajout d'un espace entre les éléments de la frame
-    scale_roue_gauche.pack(ipady=20)
-
-    vitesse_roue_droite = IntVar()
-    scale_roue_droite = creer_scale(frame, "Vitesse roue droite", vitesse_roue_droite, -100, 100)
-
-    scale_roue_droite.pack(ipady=20)
-
-    text_distance = Label(frame, text="Distance : 0.0")
-    text_distance.pack()
+    text_distance = Label(frame, text="Distance : 0.0", font=("Helvetica", 16))
+    text_distance.pack(ipady=10)
     #Création d'une couleur 
     couleur = creer_couleur(frame)
     return window, couleur, canvas, frame, text_distance
+
+
 def affichage_distance(text_distance,robot,long,larg):
     text_distance.config(text = f"Distance : {robot.detect_distance(long,larg)}")

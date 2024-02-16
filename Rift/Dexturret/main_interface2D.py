@@ -14,6 +14,17 @@ robot = Turret.Robot(1,50,25,0.05,long/2,larg/2)
 simu = Turret.Simulation(1,robot,larg,long,60)
 
 window, couleur, canvas, frame, text_distance = Interface.creer_graphique(robot,simu)
+#Création des variables de vitesse des roues gauche et droite et configuration de leur scale de vitesse
+vitesse_roue_gauche = IntVar()
+scale_roue_gauche = Interface.creer_scale(frame, "Vitesse roue gauche", vitesse_roue_gauche, -100, 100)
+
+#Ajout d'un espace entre les éléments de la frame
+scale_roue_gauche.pack(ipady=20)
+
+vitesse_roue_droite = IntVar()
+scale_roue_droite = Interface.creer_scale(frame, "Vitesse roue droite", vitesse_roue_droite, -100, 100)
+
+scale_roue_droite.pack(ipady=20)
 
 def onKeyPress(event):
     """
@@ -34,7 +45,7 @@ while simu.awake:
     sleep(1/simu.fps)
 
     #On efface tout et on redessine le robot
-    #simu.rafraichir(window.vitesse_roue_gauche.get(), window.vitesse_roue_droite.get())
+    simu.rafraichir(vitesse_roue_gauche.get(), vitesse_roue_droite.get())
     Interface.rafraichir_graphique(simu, canvas)
 
     #Affichage de la ligne rouge pour la direction du robot
