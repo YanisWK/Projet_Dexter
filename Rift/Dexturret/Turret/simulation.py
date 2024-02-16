@@ -46,7 +46,7 @@ class Simulation:
         if (self.awake):
             if (self.robot.pret):
                 self.robot.vitesse_lineaire_roue_gauche = vitesse_roue_g
-                self.robot.vitesse_lineaire_roue_droite = - vitesse_roue_d
+                self.robot.vitesse_lineaire_roue_droite = vitesse_roue_d
                 self.robot.rafraichir(self.fps)
                 self.robot.detect_distance(self.longueur,self.largeur)
                 self.check_collision()
