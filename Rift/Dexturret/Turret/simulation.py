@@ -34,7 +34,7 @@ class Simulation:
         self.awake=True
         
     
-    def rafraichir(self, vitesse_roue_g, vitesse_roue_d):
+    def rafraichir(self):
         """
         Met à jour la fonction rafraichir du robot si la simu est active et si le robot est prêt
         
@@ -45,8 +45,6 @@ class Simulation:
         """
         if (self.awake):
             if (self.robot.pret):
-                self.robot.vitesse_lineaire_roue_gauche = vitesse_roue_g
-                self.robot.vitesse_lineaire_roue_droite = vitesse_roue_d
                 self.robot.rafraichir(self.fps)
                 self.robot.detect_distance(self.longueur,self.largeur)
                 self.check_collision()
