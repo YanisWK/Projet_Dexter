@@ -26,18 +26,8 @@ scale_roue_droite = Interface.creer_scale(frame, "Vitesse roue droite", vitesse_
 
 scale_roue_droite.pack(ipady=20)
 
-def onKeyPress(event):
-    """
-    Gère l'événement lorsqu'une touche du clavier est pressée.
 
-    Paramètre :
-    - event : évènement crée lorsqu'une touche du clavier est pressée
-
-    """
-    if event.keysym == "space":
-        robot.pret = not robot.pret
-        Interface.change_color(robot.pret, couleur)
-window.bind('<KeyPress>', onKeyPress)
+window.bind('<KeyPress>',lambda event: Interface.onKeyPress(robot, couleur,event))
 
 #Boucle principale de la simu
 while simu.awake:

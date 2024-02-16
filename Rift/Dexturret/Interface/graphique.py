@@ -191,3 +191,15 @@ def creer_graphique(robot,simu):
 
 def affichage_distance(text_distance,robot,long,larg):
     text_distance.config(text = f"Distance : {robot.detect_distance(long,larg)}")
+
+def onKeyPress(robot,couleur,event):
+    """
+    Gère l'événement lorsqu'une touche du clavier est pressée.
+
+    Paramètre :
+    - event : évènement crée lorsqu'une touche du clavier est pressée
+
+    """
+    if event.keysym == "space":
+        robot.pret = not robot.pret
+        change_color(robot.pret, couleur)
