@@ -202,25 +202,13 @@ class Robot:
         Retourne une distance dans la direction dans laquelle le robot est orienté
 
         Paramètre :
-        - simu_longueur, simu_largeur : ldimensions de l'environnement d'une simulation
+        - simu_longueur, simu_largeur : dimensions de l'environnement d'une simulation
 
         Retourne :
-        - la distance séparant une bordure et le point d'intersection
+        - la distance séparant la bordure la + proche du robot et le point d'intersection
 
         """
-        #Distance de détection maximale du robot
-        dist_max = 1000 #1000 car la dimension max de l'environnement
 
-        #Calcul des coordonnées du point maximal du rayon de détection
-        px= self.x + dist_max*cos(radians(self.direction))
-        py= self.y - dist_max*sin(radians(self.direction))
+        dist = min(self.x, simu_longueur-self.x,self.y,simu_largeur - self.y)-(self.longueur/2)
 
-        distx,disty = self.intersect_limites(simu_longueur, simu_largeur, px, py)
-
-        if distx != None and disty != None:
-            #Calcule la distance entre la position du robot et le point d'intersection 
-            dist = sqrt((self.x - distx)**2 + (self.y - disty)**2) -(self.longueur/2)
-            return round(dist,1)
-        else:
-            #Retourne la distance de détection max si la distance de détection ne touche pas de bordure
-            return dist_max  
+        return round(dist, 1)
