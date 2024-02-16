@@ -22,11 +22,7 @@ import logging
 
     - pos_coins_Robot => calcule la position des 4 coins à l'aide de la direction et de la taille du robot
 
-    - detect_distance => retourne la distance séparant une bordure et le robot si la distance de détection 
-                         atteint une bordure ou la distance maximale de détection sinon
-
-    - detect_limites => retourne true si la distance de détection du robot atteint une bordure, false sinon
-
+    - detect_distance => retourne la distance séparant la bordure la plus proche du robot
 """
 
 
@@ -159,42 +155,6 @@ class Robot:
         - fps : frame par seconde
         """
         self.deplacementRobot(fps)
-
-
-    def intersect_limites(self,simu_longueur, simu_largeur, x, y):
-        """
-        Vérifie si le rayon du robot intersecte une bordure
-
-        Paramètres :
-        - simu_longueur, simu_largeur : ldimensions de l'environnement d'une simulation
-        - x, y : coordonnées de l'extrémité du rayon de détection
-
-        Retourne :
-        - xi,yi : point d'intersection avec une bordure s'il y en a une, None sinon
-        """
-        #Coordonnées du point d'intersection
-        xi,yi = None,None            
-        
-        #Si le rayon dépasse une bordure de l'environnement
-        if x < 0 or x > simu_longueur or y < 0 or y > simu_largeur:
-            #si le rayon touche la bordure de droite
-            if x > simu_longueur:
-                xi = simu_longueur
-                yi = y + (simu_longueur-x) * (y - self.y) / (x - self.x)
-            #si le rayon touche la bordure de gauche
-            elif x < 0:
-                xi = 0
-                yi = y - x * (y - self.y) / (x - self.x)
-            #si le rayon touche la bordure du bas
-            elif y > simu_largeur:
-                xi = x + (simu_largeur-y) * (x-self.x) / (y-self.y)
-                yi = simu_largeur
-            #si le rayon touche la bordure du haut
-            elif y < 0:
-                xi = x - y * (x - self.x) / (y - self.y)
-                yi = 0
-            
-        return xi,yi
         
 
     def detect_distance(self, simu_longueur, simu_largeur):
