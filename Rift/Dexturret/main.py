@@ -1,8 +1,5 @@
 import Turret
 
-#Rayon des roues à 10 pour tester
-robot_t = Turret.Robot("Dexter", 50, 25, 10, 0, 0) 
-
 def affichage(robot):
     """
     Permet à l'utilisateur de choisir une action afin de contrôler le robot. Le temps n'est pas continu et c'est à l'utilisateur de choisir de combien de tick le robot avance
@@ -35,11 +32,6 @@ robot1 = Turret.Robot(1,50,25,10,long/2,larg/2)
 simu = Turret.Simulation(1,robot1,larg,long,60)
 simu.robot.pret = True
 
-"""
-#permet de relier les main de l'interface et de la simulation
-if __name__ == "__main__":
-    main()
-"""
 vrd = 0
 vrg = 0
 while True:
