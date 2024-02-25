@@ -1,4 +1,5 @@
 import Turret
+from time import time
 
 def affichage(robot):
     """
@@ -28,7 +29,7 @@ def affichage(robot):
 
 larg = 700
 long = 1000
-robot1 = Turret.Robot(1,50,25,10,long/2,larg/2)
+robot1 = Turret.Robot(1, 50, 25, 10, long/2, larg/2, time.time())
 simu = Turret.Simulation(1,robot1,larg,long,60)
 simu.robot.pret = True
 

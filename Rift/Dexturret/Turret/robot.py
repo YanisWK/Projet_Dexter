@@ -27,7 +27,7 @@ import logging
 
 
 class Robot:
-    def __init__(self, id, longueur, largeur, rayon_des_roues, x, y):
+    def __init__(self, id, longueur, largeur, rayon_des_roues, x, y, dernier_rafraichissement):
         """
         Paramètres :
         - id : identifiant du robot
@@ -53,6 +53,8 @@ class Robot:
         self.vitesse_de_rotation_roue_droite = 0
 
         self.pret = False  #La simulation est activée et le robot est en mouvement
+
+        self.dernier_rafraichissement = dernier_rafraichissement
 
     def __getattr__(self,name):
         if name == "coordRobot":

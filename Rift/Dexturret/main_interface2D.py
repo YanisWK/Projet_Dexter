@@ -1,7 +1,7 @@
 from tkinter import IntVar,Button,Label
 import Interface
 import Turret
-from time import sleep
+from time import sleep, time
 import logging
 
 #Configuration des logs 
@@ -10,8 +10,8 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 #Initialisation des paramètres du robot et de la simulation
 larg = 700
 long = 1000
-robot = Turret.Robot(1,50,25,0.05,long/2,larg/2)
-simu = Turret.Simulation(1,robot,larg,long,60)
+robot = Turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
+simu = Turret.Simulation(1, robot, larg, long, 60)
 
 window, couleur, canvas, frame, text_distance = Interface.creer_graphique(robot,simu)
 #Création des variables de vitesse des roues gauche et droite et configuration de leur scale de vitesse
