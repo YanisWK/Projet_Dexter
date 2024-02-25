@@ -1,5 +1,6 @@
 from math import cos, sin, radians, degrees, sqrt
 import logging
+from time import time
 
 
 """Documentation : 
@@ -55,6 +56,7 @@ class Robot:
         self.pret = False  #La simulation est activée et le robot est en mouvement
 
         self.dernier_rafraichissement = dernier_rafraichissement
+        self.temps_ajustement = 0
 
     def __getattr__(self,name):
         if name == "coordRobot":
@@ -122,13 +124,13 @@ class Robot:
         return (a,b)
             
     
-    def deplacementRobot(self, temps):
+    def deplacementRobot(self, fps):
         """
         Calcule la distance de déplacement en ligne droite et la rotation du robot à chaque rafraîchissement, 
         puis met à jour la position et la direction du robot en appelant avancer et tourner
         
         Paramètre :
-        - temps : temps par rafraichissement
+        - fps : nombre de rafraichissement par seconde
         
         """       
 
@@ -139,13 +141,13 @@ class Robot:
 
 
         vitesse_deplacement = (self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2
-        deplacement_par_rafraichissement = vitesse_deplacement / temps
+        deplacement_par_rafraichissement = vitesse_deplacement * ((1/fps) + self.temps_ajustement)
         self.avancer(deplacement_par_rafraichissement)
 
         #Calcul de la rotation que le robot doit faire à chaque rafraîchissement
 
         vitesse_rotation = ( self.rayon_des_roues * (self.vitesse_de_rotation_roue_droite - self.vitesse_de_rotation_roue_gauche)) / self.largeur
-        rotation_par_rafraichissement = vitesse_rotation / temps
+        rotation_par_rafraichissement = vitesse_rotation * ((1/fps) + self.temps_ajustement)
         self.tourner(degrees(rotation_par_rafraichissement))
         
 
@@ -156,6 +158,8 @@ class Robot:
         Paramètre :
         - fps : frame par seconde
         """
+        self.temps_ajustement = max(round((time() - self.dernier_rafraichissement) - 1/fps, 3), 0)
+        self.dernier_rafraichissement = time()
         if self.pret:
             self.deplacementRobot(fps)
         
