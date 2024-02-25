@@ -154,7 +154,8 @@ class Robot:
         Paramètre :
         - fps : frame par seconde
         """
-        self.deplacementRobot(fps)
+        if self.pret:
+            self.deplacementRobot(fps)
         
 
     def detect_distance(self, simu_longueur, simu_largeur):
