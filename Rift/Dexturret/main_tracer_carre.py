@@ -12,11 +12,12 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 larg = 700
 long = 1000
 robot = Turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
+robot.pret = True
 simu = Turret.Simulation(1, robot, larg, long, 60)
 
 window, couleur, canvas, frame, text_distance = Interface.creer_graphique(robot,simu)
 
-controller_carre = controller.TracerCarre(100)
+controller_carre = controller.TracerCarre(robot, 100, 50)
 controller_carre.start()
 
 #Boucle principale de la simu
