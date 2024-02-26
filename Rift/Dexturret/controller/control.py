@@ -1,6 +1,5 @@
 import Turret
-update_time=60
-
+from math import sqrt
 
 class Avancer():
     def __init__(self, robot, distance, vitesse):
@@ -9,12 +8,18 @@ class Avancer():
         self.vitesse = vitesse
 
     def start(self):
-        self.parcouru=0
+        self.parcouru = 0
+        self.robot_x = self.robot.x
+        self.robot_y = self.robot.y
 
     def etape(self):
         self.robot.vitesse_lineaire_roue_gauche = self.vitesse
         self.robot.vitesse_lineaire_roue_droite = self.vitesse
-        self.parcouru+=self.distance #Comment obtenir la relle distance parcourue?
+
+        self.parcouru += sqrt((self.robot.x - self.robot_x)**2 + (self.robot.y - self.robot_y)**2)
+        self.robot_x = self.robot.x
+        self.robot_y = self.robot.y
+
         if self.stop() :
             self.robot.vitesse_lineaire_roue_gauche = 0
             self.robot.vitesse_lineaire_roue_droite = 0
@@ -32,11 +37,14 @@ class Tourner():
 
     def start(self):
         self.angle_parcouru = 0
+        self.robot_direction = self.robot.direction
 
     def etape(self):
         self.robot.vitesse_lineaire_roue_gauche = self.vitesse
         self.robot.vitesse_lineaire_roue_droite = -self.vitesse
-        self.angle_parcouru += self.angle #Comment obtenir l'angle que le robot a reellement parcouru?
+
+        self.angle_parcouru += abs(self.robot_direction - self.robot.direction)
+        self.robot_direction = self.robot.direction
 
         if self.stop():
             self.robot.vitesse_lineaire_roue_gauche = 0
