@@ -56,9 +56,9 @@ class Tourner():
     
 
 class TracerCarre():
-    def __init__(self,tailleCote):
-        stratAvancer = Avancer(tailleCote)
-        stratTourner = Tourner(90) #Besoin de savoir a chaque fois qu'on tourne de combien de degrès il faut tourner.
+    def __init__(self, robot, tailleCote, vitesse):
+        stratAvancer = Avancer(robot, tailleCote, vitesse)
+        stratTourner = Tourner(robot, 90, vitesse) #Besoin de savoir a chaque fois qu'on tourne de combien de degrès il faut tourner.
 
         self.strats = [stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner]
         self.tailleCote=tailleCote
