@@ -17,7 +17,7 @@ simu = Turret.Simulation(1, robot, larg, long, 60)
 
 window, couleur, canvas, frame, text_distance = Interface.creer_graphique(robot,simu)
 
-controller_carre = controller.TracerCarre(robot, 100, 50)
+controller_carre = controller.TracerCarre(robot, 100, 100)
 controller_carre.start()
 
 #Boucle principale de la simu

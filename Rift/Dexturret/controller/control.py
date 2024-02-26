@@ -40,8 +40,8 @@ class Tourner():
         self.robot_direction = self.robot.direction
 
     def etape(self):
-        self.robot.vitesse_lineaire_roue_gauche = self.vitesse
-        self.robot.vitesse_lineaire_roue_droite = -self.vitesse
+        self.robot.vitesse_lineaire_roue_gauche = 10
+        self.robot.vitesse_lineaire_roue_droite = -10
 
         self.angle_parcouru += abs(self.robot_direction - self.robot.direction)
         self.robot_direction = self.robot.direction
@@ -52,7 +52,9 @@ class Tourner():
             return
 
     def stop(self):
-        return self.angle_parcouru >= self.angle
+        print(self.angle_parcouru)
+        print(self.robot.direction)
+        return self.angle <= self.angle_parcouru #or self.angle - self.angle_parcouru <= 1
     
 
 class TracerCarre():
