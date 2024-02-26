@@ -32,7 +32,7 @@ class Avancer():
 class Tourner():
     def __init__(self, robot, angle, vitesse):
         self.robot = robot
-        self.angle=angle
+        self.angle = angle
         self.vitesse = vitesse
 
     def start(self):
@@ -57,6 +57,25 @@ class Tourner():
         return self.angle <= self.angle_parcouru #or self.angle - self.angle_parcouru <= 1
     
 
+class AvancerVite():
+    def __init__(self, robot, simu, vitesse):
+        self.robot = robot
+        self.simu = simu
+        self.vitesse = vitesse
+
+    def start(self):
+        self.robot.vitesse_lineaire_roue_gauche = self.vitesse
+        self.robot.vitesse_lineaire_roue_droite = self.vitesse
+
+    def etape(self):
+        if self.stop():
+            self.robot.vitesse_lineaire_roue_gauche = 0
+            self.robot.vitesse_lineaire_roue_droite = 0
+            return
+
+    def stop(self):
+        return self.robot.detect_distance(self.simu.longueur, self.simu.largeur) <= self.robot.largeur * 2
+
 class TracerCarre():
     def __init__(self, robot, tailleCote, vitesse):
         stratAvancer = Avancer(robot, tailleCote, vitesse)
@@ -79,3 +98,6 @@ class TracerCarre():
 
     def stop(self):
         return self.current == len(self.strats)-1 and self.strats[self.current].stop()
+
+class AvancerViteMur():
+    
