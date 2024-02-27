@@ -1,1 +1,1 @@
-from .control import Avancer, Tourner, TracerCarre
+from .control import Avancer, Tourner, TracerCarre, AvancerViteMur

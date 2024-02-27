@@ -17,15 +17,41 @@ simu = Turret.Simulation(1, robot, larg, long, 60)
 
 window, couleur, canvas, frame, text_distance = Interface.creer_graphique(robot,simu)
 
-controller_carre = controller.TracerCarre(robot, 100, 100)
-controller_carre.start()
+
+boucle = True
+
+while (boucle):
+    print("Choix du controller:\n(1) Tracer un carré\n(2) Foncer vers un mur")
+    choix = input()
+
+    if (choix != 1 and choix != 2):
+        print("Choix invalide, veuillez recommencer")
+    else:
+        print("Entrez la vitesse du robot:")
+        vitesse = input()
+        if not (isinstance(vitesse, int)):
+            print("Entrée invalide, veuillez recommencer depuis le début (l'entrée doit être un entier)")
+        else:
+            if (choix == 1):
+                print("Entrez la distance d'un coté du carré:")
+                distance = input()
+                if not (isinstance(distance, int)):
+                    print("Entrée invalide, veuillez recommencer depuis le début (l'entrée doit être un entier)")
+                else:
+                    controller_choisi = controller.TracerCarre(robot, distance, vitesse)
+            else:
+                controller_choisi = controller.AvancerViteMur(robot, simu, vitesse)
+            boucle = False
+
+
+controller_choisi.start()
 
 #Boucle principale de la simu
-while simu.awake and not controller_carre.stop():
+while simu.awake and not controller_choisi.stop():
     #Mise a jour tous les 1/temps
     sleep(1/simu.fps)
 
-    controller_carre.etape()
+    controller_choisi.etape()
     
     #On efface tout et on redessine le robot
     simu.rafraichir()
@@ -42,4 +68,5 @@ if not simu.awake:
     logging.info(f'Le Robot est entré en collision avec un obstacle')
 
 #Lancement de la boucle principale
-window.mainloop()
+if not boucle:
+    window.mainloop()
