@@ -100,4 +100,21 @@ class TracerCarre():
         return self.current == len(self.strats)-1 and self.strats[self.current].stop()
 
 class AvancerViteMur():
-    
+    def __init__(self, robot, simu, vitesse):
+        StratAvancerVite = AvancerVite(robot, simu, vitesse)
+        self.strats = [StratAvancerVite]
+        self.current = -1
+
+    def start(self):
+        self.current = -1
+
+    def etape(self):
+        if self.stop():
+            return
+        if self.current < 0 or self.strat[self.current].stop():
+            self.current += 1
+            self.strats[self.current].start()
+        self.strats[self.current].etape()
+
+    def stop(self):
+        return self.current == len(self.strats)-1 and self.strats[self.current].stop()
