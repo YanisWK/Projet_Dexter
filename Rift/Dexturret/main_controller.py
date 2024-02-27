@@ -15,7 +15,6 @@ robot = Turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
 robot.pret = True
 simu = Turret.Simulation(1, robot, larg, long, 60)
 
-
 boucle = True
 
 while (boucle):
@@ -45,6 +44,7 @@ window, couleur, canvas, frame, text_distance = Interface.creer_graphique(robot,
 
 controller_choisi.start()
 
+robot.dernier_rafraichissement = time()
 #Boucle principale de la simu
 while simu.awake and not controller_choisi.stop():
     #Mise a jour tous les 1/temps
