@@ -74,7 +74,7 @@ class AvancerVite():
             return
 
     def stop(self):
-        return self.robot.detect_distance(self.simu.longueur, self.simu.largeur) <= self.robot.largeur * 2
+        return self.robot.detect_distance(self.simu.longueur, self.simu.largeur) <= self.robot.largeur
 
 class TracerCarre():
     def __init__(self, robot, tailleCote, vitesse):
@@ -111,7 +111,7 @@ class AvancerViteMur():
     def etape(self):
         if self.stop():
             return
-        if self.current < 0 or self.strat[self.current].stop():
+        if self.current < 0 or self.strats[self.current].stop():
             self.current += 1
             self.strats[self.current].start()
         self.strats[self.current].etape()

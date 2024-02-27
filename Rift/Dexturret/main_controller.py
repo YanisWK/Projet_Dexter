@@ -15,8 +15,6 @@ robot = Turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
 robot.pret = True
 simu = Turret.Simulation(1, robot, larg, long, 60)
 
-window, couleur, canvas, frame, text_distance = Interface.creer_graphique(robot,simu)
-
 
 boucle = True
 
@@ -43,6 +41,7 @@ while (boucle):
                 controller_choisi = controller.AvancerViteMur(robot, simu, vitesse)
             boucle = False
 
+window, couleur, canvas, frame, text_distance = Interface.creer_graphique(robot,simu)
 
 controller_choisi.start()
 
