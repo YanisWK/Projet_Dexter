@@ -22,19 +22,19 @@ boucle = True
 
 while (boucle):
     print("Choix du controller:\n(1) Tracer un carré\n(2) Foncer vers un mur")
-    choix = input()
+    choix = int(input())
 
     if (choix != 1 and choix != 2):
         print("Choix invalide, veuillez recommencer")
     else:
         print("Entrez la vitesse du robot:")
-        vitesse = input()
+        vitesse = int(input())
         if not (isinstance(vitesse, int)):
             print("Entrée invalide, veuillez recommencer depuis le début (l'entrée doit être un entier)")
         else:
             if (choix == 1):
                 print("Entrez la distance d'un coté du carré:")
-                distance = input()
+                distance = int(input())
                 if not (isinstance(distance, int)):
                     print("Entrée invalide, veuillez recommencer depuis le début (l'entrée doit être un entier)")
                 else:
@@ -68,5 +68,6 @@ if not simu.awake:
     logging.info(f'Le Robot est entré en collision avec un obstacle')
 
 #Lancement de la boucle principale
+print("ok")
 if not boucle:
     window.mainloop()
