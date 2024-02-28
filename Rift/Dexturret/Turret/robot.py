@@ -169,41 +169,6 @@ class Robot:
         if self.pret:
             self.deplacementRobot(fps)
         
-
-    def intersect_limites(self,simu_longueur, simu_largeur, x, y):
-        """
-        Vérifie si le rayon du robot intersecte une bordure
-        Paramètres :
-        - simu_longueur, simu_largeur : ldimensions de l'environnement d'une simulation
-        - x, y : coordonnées de l'extrémité du rayon de détection
-        Retourne :
-        - xi,yi : point d'intersection avec une bordure s'il y en a une, None sinon
-        """
-        #Coordonnées du point d'intersection
-        xi,yi = None,None            
-
-        #Si le rayon dépasse une bordure de l'environnement
-        if x < 0 or x > simu_longueur or y < 0 or y > simu_largeur:
-            #si le rayon touche la bordure de droite
-            if x > simu_longueur:
-                xi = simu_longueur
-                yi = y + (simu_longueur-x) * (y - self.y) / (x - self.x)
-            #si le rayon touche la bordure de gauche
-            elif x < 0:
-                xi = 0
-                yi = y - x * (y - self.y) / (x - self.x)
-            #si le rayon touche la bordure du bas
-            elif y > simu_largeur:
-                xi = x + (simu_largeur-y) * (x-self.x) / (y-self.y)
-                yi = simu_largeur
-            #si le rayon touche la bordure du haut
-            elif y < 0:
-                xi = x - y * (x - self.x) / (y - self.y)
-                yi = 0
-
-        return xi,yi
-
-
     def detect_distance(self, simu_longueur, simu_largeur):
         """
         Retourne une distance dans la direction dans laquelle le robot est orienté
@@ -216,19 +181,6 @@ class Robot:
 
         """
 
-        #Distance de détection maximale du robot
-        dist_max = 1000 #1000 car la dimension max de l'environnement
+        dist = min(self.x, simu_longueur-self.x,self.y,simu_largeur - self.y)-(self.longueur/2)
 
-        #Calcul des coordonnées du point maximal du rayon de détection
-        px= self.x + dist_max*cos(radians(self.direction))
-        py= self.y - dist_max*sin(radians(self.direction))
-
-        distx,disty = self.intersect_limites(simu_longueur, simu_largeur, px, py)
-
-        if distx != None and disty != None:
-            #Calcule la distance entre la position du robot et le point d'intersection 
-            dist = sqrt((self.x - distx)**2 + (self.y - disty)**2) -(self.longueur/2)
-            return round(dist,1)
-        else:
-            #Retourne la distance de détection max si la distance de détection ne touche pas de bordure
-            return dist_max 
+        return round(dist, 1)
