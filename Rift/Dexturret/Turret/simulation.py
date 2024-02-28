@@ -23,7 +23,7 @@ class Simulation:
         - robot : instance de la classe Robot         
         - longueur : longueur de l'environnement dans lequel le robot se déplace
         - largeur : largueur de l'environnement 
-        - temps : nombre de rafraîchissements par seconde dans la simulation
+        - fps : nombre de rafraîchissements par seconde dans la simulation
 
         """
         self.id = id
