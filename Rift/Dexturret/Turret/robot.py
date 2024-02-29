@@ -95,8 +95,8 @@ class Robot:
         logging.info(f'Le Robot a avancé de {distance} cm')
 
         #mise à jour des coordonnées grâce aux fonctions cosinus/sinus
-        self.x += round( distance * cos(radians(self.direction)) , 10)
-        self.y -= round( distance * sin(radians(self.direction)) , 10)
+        self.x += distance * cos(radians(self.direction))
+        self.y -= distance * sin(radians(self.direction))
 
 
     def tourner(self, angle):
