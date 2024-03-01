@@ -1,1 +1,3 @@
-from .control import Avancer, Tourner, TracerCarre, AvancerViteMur
+from .control import TracerCarre, AvancerViteMur
+from .implementation import RobotIRL, RobotSimu
+from .strat import AvancerRobotSimu,AvancerViteRobotSimu,TournerRobotSimu
