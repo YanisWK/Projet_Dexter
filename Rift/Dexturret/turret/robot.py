@@ -180,6 +180,13 @@ class Robot:
 
         """
 
-        dist = min(self.x, simu_longueur-self.x,self.y,simu_largeur - self.y)-(self.longueur/2)
+        dx =min(self.x, simu_longueur-self.x)
+        dy =min(self.y, simu_largeur-self.y)
 
-        return round(dist, 1)
+        for c in self.coordRobot:
+            dx = min(dx, c[0], simu_longueur-c[0])
+            dy = min(dy, c[1], simu_largeur-c[1])
+
+        d =min(dx,dy)-(self.longueur/2)
+
+        return round(d, 1)
