@@ -43,7 +43,14 @@ class Tourner():
         self.robot.vitesse_lineaire_roue_gauche = 10
         self.robot.vitesse_lineaire_roue_droite = -10
 
-        self.angle_parcouru += abs(self.robot_direction - self.robot.direction) #ICI PROBLEME LOIC RESOUT LE
+
+        if abs(self.robot_direction - self.robot.direction) > 360:
+            if self.robot_direction > self.robot.direction :
+                self.angle_parcouru +=  360 - self.robot_direction + self.robot.direction
+            else:
+                self.angle_parcouru +=  360 - self.robot.direction + self.robot_direction 
+        else :
+            self.angle_parcouru += abs(self.robot_direction - self.robot.direction) 
         self.robot_direction = self.robot.direction
 
         if self.stop():
