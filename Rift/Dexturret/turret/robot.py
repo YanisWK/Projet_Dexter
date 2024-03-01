@@ -180,9 +180,8 @@ class Robot:
 
         """
 
-        for i in range(len(self.coordRobot)):
-           dx = min(self.x, simu_longueur - self.x)
-           dy = min(self.y, simu_largeur - self.y)
+        dx = min(self.x, simu_longueur - self.x)
+        dy = min(self.y, simu_largeur - self.y)
         
         d =min(dx,dy)-(self.longueur/2)
 
