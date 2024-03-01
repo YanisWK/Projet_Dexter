@@ -4,11 +4,13 @@ class TracerCarre():
     def __init__(self, robot, tailleCote, vitesse):
         result=isinstance(robot,turret.Robot)
         if(result):
-            stratAvancer = implementation.RobotSimu.creerAvancer(robot, tailleCote, vitesse)
-            stratTourner = implementation.RobotSimu.creerTourner(robot, 90, vitesse)
+            instanceSimu=implementation.RobotSimu(robot)
+            stratAvancer = instanceSimu.creerAvancer(robot, tailleCote, vitesse)
+            stratTourner = instanceSimu.RobotSimu.creerTourner(robot, 90, vitesse)
         else:
-            stratAvancer = implementation.RobotIRL.creerAvancer(robot, tailleCote, vitesse)
-            stratTourner = implementation.RobotIRL.creerTourner(robot, 90, vitesse)
+            instanceIRL=implementation.RobotIRL(robot)
+            stratAvancer = instanceIRL.creerAvancer(robot, tailleCote, vitesse)
+            stratTourner = instanceIRL.creerTourner(robot, 90, vitesse)
          #Besoin de savoir a chaque fois qu'on tourne de combien de degrès il faut tourner.
 
         self.strats = [stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner]
@@ -33,8 +35,10 @@ class AvancerViteMur():
     def __init__(self, robot, simu, vitesse):
         result=isinstance(robot,turret.Robot)
         if(result):
+            instanceSimu=implementation.RobotSimu(robot)
             StratAvancerVite = implementation.RobotSimu.creerAvancerVite(robot, simu, vitesse,simu)
         else:
+            instanceIRL=implementation.RobotIRL(robot)
             StratAvancerVite = implementation.RobotIRL.creerAvancerVite()
         self.strats = [StratAvancerVite]
         self.current = -1
