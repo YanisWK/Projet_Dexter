@@ -1,16 +1,16 @@
 import turret.robot
-import implementation
+import controller.implementation 
 class TracerCarre():
     def __init__(self, robot, tailleCote, vitesse):
         result=isinstance(robot,turret.Robot)
         if(result):
-            instanceSimu=implementation.RobotSimu(robot)
-            stratAvancer = instanceSimu.creerAvancer(robot, tailleCote, vitesse)
-            stratTourner = instanceSimu.RobotSimu.creerTourner(robot, 90, vitesse)
+            instanceSimu=controller.implementation.RobotSimu(robot)
+            stratAvancer = instanceSimu.creerAvancer(tailleCote,vitesse)
+            stratTourner = instanceSimu.creerTourner(90, vitesse)
         else:
-            instanceIRL=implementation.RobotIRL(robot)
-            stratAvancer = instanceIRL.creerAvancer(robot, tailleCote, vitesse)
-            stratTourner = instanceIRL.creerTourner(robot, 90, vitesse)
+            instanceIRL=controller.implementation.RobotIRL(robot)
+            stratAvancer = instanceIRL.creerAvancer(tailleCote, vitesse)
+            stratTourner = instanceIRL.creerTourner(90, vitesse)
          #Besoin de savoir a chaque fois qu'on tourne de combien de degrès il faut tourner.
 
         self.strats = [stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner]
@@ -35,11 +35,11 @@ class AvancerViteMur():
     def __init__(self, robot, simu, vitesse):
         result=isinstance(robot,turret.Robot)
         if(result):
-            instanceSimu=implementation.RobotSimu(robot)
-            StratAvancerVite = implementation.RobotSimu.creerAvancerVite(robot, simu, vitesse,simu)
+            instanceSimu=controller.implementation.RobotSimu(robot)
+            StratAvancerVite = instanceSimu.creerAvancerVite(simu, vitesse,simu)
         else:
-            instanceIRL=implementation.RobotIRL(robot)
-            StratAvancerVite = implementation.RobotIRL.creerAvancerVite()
+            instanceIRL=controller.implementation.RobotIRL(robot)
+            StratAvancerVite = instanceIRL.creerAvancerVite()
         self.strats = [StratAvancerVite]
         self.current = -1
 
