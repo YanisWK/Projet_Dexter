@@ -12,6 +12,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 larg = 700
 long = 1000
 robot = Turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
+robot.direction = 135
 robot.pret = True
 simu = Turret.Simulation(1, robot, larg, long, 60)
 

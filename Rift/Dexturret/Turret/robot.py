@@ -58,21 +58,26 @@ class Robot:
         self.dernier_rafraichissement = dernier_rafraichissement
         self.temps_ajustement = 0
 
-    def __getattr__(self,name):
-        if name == "coordRobot":
-            demi_longueur = self.longueur / 2
-            demi_largeur = self.largeur / 2
-            dir = self.direction
-            x = self.x
-            y = self.y
+    @property
+    def coord_robot(self):
+        """
+        Met à jour les coordonnées des coins du robot
 
-            c1 = ( (x + demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir + 90)), (y - demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir + 90)) )
-            c2 = ( (x + demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir - 90)), (y - demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir - 90)) )
-            c3 = ( (x - demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir - 90)), (y + demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir - 90)) )
-            c4 = ( (x - demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir + 90)), (y + demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir + 90)) )
-            return [c1, c2, c3, c4]
-        
-    
+        Paramètre :
+        - name : coordonnées des coins du robot
+        """
+        demi_longueur = self.longueur / 2
+        demi_largeur = self.largeur / 2
+        dir = self.direction
+        x = self.x
+        y = self.y
+
+        c1 = ( (x + demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir + 90)), (y - demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir + 90)) )
+        c2 = ( (x + demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir - 90)), (y - demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir - 90)) )
+        c3 = ( (x - demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir - 90)), (y + demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir - 90)) )
+        c4 = ( (x - demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir + 90)), (y + demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir + 90)) )
+        return [c1, c2, c3, c4]
+
     def __repr__(self):
         return "Le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "° \n" \
                 + "La vitesse de sa roue gauche est de " + str(self.vitesse_lineaire_roue_gauche) + " et celle de sa roue droite est de " + str(self.vitesse_lineaire_roue_droite)
@@ -89,8 +94,8 @@ class Robot:
         logging.info(f'Le Robot a avancé de {distance} cm')
 
         #mise à jour des coordonnées grâce aux fonctions cosinus/sinus
-        self.x += round( distance * cos(radians(self.direction)) , 10)
-        self.y -= round( distance * sin(radians(self.direction)) , 10)
+        self.x += distance * cos(radians(self.direction))
+        self.y -= distance * sin(radians(self.direction))
 
 
     def tourner(self, angle):
@@ -163,7 +168,6 @@ class Robot:
         if self.pret:
             self.deplacementRobot(fps)
         
-
     def detect_distance(self, simu_longueur, simu_largeur):
         """
         Retourne une distance dans la direction dans laquelle le robot est orienté
