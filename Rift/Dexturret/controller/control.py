@@ -1,4 +1,4 @@
-import Turret
+import turret
 from math import sqrt
 
 class Avancer():
