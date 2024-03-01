@@ -59,7 +59,7 @@ class Robot:
         self.temps_ajustement = 0
 
     @property
-    def coord_robot(self):
+    def coordRobot(self):
         """
         Met à jour les coordonnées des coins du robot
 
