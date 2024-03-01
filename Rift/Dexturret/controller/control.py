@@ -1,7 +1,7 @@
 class TracerCarre():
     def __init__(self, robot, tailleCote, vitesse):
-        stratAvancer = Avancer(robot, tailleCote, vitesse)
-        stratTourner = Tourner(robot, 90, vitesse) #Besoin de savoir a chaque fois qu'on tourne de combien de degrès il faut tourner.
+        stratAvancer = AvancerRobotSimu(robot, tailleCote, vitesse)
+        stratTourner = TournerRobotSimu(robot, 90, vitesse) #Besoin de savoir a chaque fois qu'on tourne de combien de degrès il faut tourner.
 
         self.strats = [stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner]
         self.tailleCote=tailleCote
@@ -23,7 +23,7 @@ class TracerCarre():
 
 class AvancerViteMur():
     def __init__(self, robot, simu, vitesse):
-        StratAvancerVite = AvancerVite(robot, simu, vitesse)
+        StratAvancerVite = AvancerViteRobotSimu(robot, simu, vitesse)
         self.strats = [StratAvancerVite]
         self.current = -1
 
