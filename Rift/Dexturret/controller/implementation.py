@@ -11,7 +11,7 @@ class RobotSimu():
         return controller.strat.TournerRobotSimu(self.robot,angle,vitesse)
     
     def creerAvancerVite(self,vitesse,simu):
-        return controller.strat.AvancerViteRobotSimu(self.robot,simu)
+        return controller.strat.AvancerViteRobotSimu(self.robot,simu,vitesse)
     
 
 

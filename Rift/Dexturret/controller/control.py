@@ -36,7 +36,7 @@ class AvancerViteMur():
         result=isinstance(robot,turret.Robot)
         if(result):
             instanceSimu=controller.implementation.RobotSimu(robot)
-            StratAvancerVite = instanceSimu.creerAvancerVite(simu, vitesse,simu)
+            StratAvancerVite = instanceSimu.creerAvancerVite(vitesse,simu)
         else:
             instanceIRL=controller.implementation.RobotIRL(robot)
             StratAvancerVite = instanceIRL.creerAvancerVite()
