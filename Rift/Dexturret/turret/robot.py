@@ -176,17 +176,13 @@ class Robot:
         - simu_longueur, simu_largeur : dimensions de l'environnement d'une simulation
 
         Retourne :
-        - la distance séparant la bordure la + proche du robot et le point d'intersection
+        - la distance séparant le mur le + proche dans la direction robot et le point d'intersection avec le mur
 
         """
 
-        dx =min(self.x, simu_longueur-self.x)
-        dy =min(self.y, simu_largeur-self.y)
-
-        for c in self.coordRobot:
-            dx = min(dx, c[0], simu_longueur-c[0])
-            dy = min(dy, c[1], simu_largeur-c[1])
-
+        dx = min(self.x, simu_longueur - self.x)
+        dy = min(self.y, simu_largeur - self.y)
+        
         d =min(dx,dy)-(self.longueur/2)
 
         return round(d, 1)
