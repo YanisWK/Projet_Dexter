@@ -8,7 +8,11 @@ class RobotSimu():
     def creerAvancer(self,distance, vitesse):
         return strat.AvancerRobotSimu(self.robot,distance,vitesse)
 
-
+    def creerTourner(self,angle,vitesse):
+        return strat.TournerRobotSimu(self.robot,angle,vitesse)
+    
+    def creerAvancerVite(self,vitesse):
+        return strat.AvancerViteRobotSimu(self.robot,)
 
 
 
