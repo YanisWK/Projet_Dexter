@@ -1,6 +1,6 @@
 from tkinter import IntVar,Button,Label
-import Interface
-import Turret
+import interface
+import turret
 from time import sleep, time
 import logging
 import controller
@@ -11,10 +11,10 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 #Initialisation des paramètres du robot et de la simulation
 larg = 700
 long = 1000
-robot = Turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
+robot = turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
 robot.direction = 135
 robot.pret = True
-simu = Turret.Simulation(1, robot, larg, long, 60)
+simu = turret.Simulation(1, robot, larg, long, 60)
 
 boucle = True
 
@@ -41,7 +41,7 @@ while (boucle):
                 controller_choisi = controller.AvancerViteMur(robot, simu, vitesse)
             boucle = False
 
-window, couleur, canvas, frame, text_distance = Interface.creer_graphique(robot,simu)
+window, couleur, canvas, frame, text_distance = interface.creer_graphique(robot,simu)
 
 controller_choisi.start()
 
@@ -55,16 +55,16 @@ while simu.awake and not controller_choisi.stop():
     
     #On efface tout et on redessine le robot
     simu.rafraichir()
-    Interface.rafraichir_graphique(simu, canvas)
+    interface.rafraichir_graphique(simu, canvas)
 
     #Affichage de la ligne rouge pour la direction du robot
     canvas.pack()
     canvas.update()
-    Interface.affichage_distance(text_distance,robot,simu.longueur,simu.largeur)
+    interface.affichage_distance(text_distance,robot,simu.longueur,simu.largeur)
 
 #Affichage d'une fenêtre pop-up en cas de collision
 if not simu.awake:
-    Interface.popup_collision(window)
+    interface.popup_collision(window)
     logging.info(f'Le Robot est entré en collision avec un obstacle')
 
 #Lancement de la boucle principale

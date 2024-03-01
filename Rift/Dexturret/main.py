@@ -1,4 +1,4 @@
-import Turret
+import turret
 from time import time
 
 def affichage(robot):
@@ -29,8 +29,8 @@ def affichage(robot):
 
 larg = 700
 long = 1000
-robot1 = Turret.Robot(1, 50, 25, 10, long/2, larg/2, time.time())
-simu = Turret.Simulation(1,robot1,larg,long,120)
+robot1 = turret.Robot(1, 50, 25, 10, long/2, larg/2, time.time())
+simu = turret.Simulation(1,robot1,larg,long,120)
 simu.robot.pret = True
 
 vrd = 0

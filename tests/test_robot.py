@@ -1,4 +1,4 @@
-from Dexturret.Turret.robot import Robot 
+from Dexturret.turret.robot import Robot 
 from math import cos, sin, radians
 
 import unittest
