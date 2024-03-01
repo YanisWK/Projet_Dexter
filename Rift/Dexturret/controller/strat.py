@@ -43,14 +43,14 @@ class TournerRobotSimu():
         self.robot.vitesse_lineaire_roue_gauche = 10
         self.robot.vitesse_lineaire_roue_droite = -10
 
+        if (abs(self.robot_direction - self.robot.direction) > 180):
+            self.angle_parcouru += 360 - abs(self.robot_direction - self.robot.direction)
+        else:
+            self.angle_parcouru += abs(self.robot_direction - self.robot.direction)
 
-        if abs(self.robot_direction - self.robot.direction) > 360:
-            if self.robot_direction > self.robot.direction :
-                self.angle_parcouru +=  360 - self.robot_direction + self.robot.direction
-            else:
-                self.angle_parcouru +=  360 - self.robot.direction + self.robot_direction 
-        else :
-            self.angle_parcouru += abs(self.robot_direction - self.robot.direction) 
+        self.robot_direction = self.robot.direction
+
+
         self.robot_direction = self.robot.direction
 
         if self.stop():
