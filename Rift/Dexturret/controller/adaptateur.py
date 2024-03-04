@@ -1,6 +1,6 @@
-import controller.strat
+import controller.control
 
-class RobotSimu():
+class AdaptateurSimu():
     def __init__(self,robot):
         self.robot=robot
 
@@ -14,9 +14,7 @@ class RobotSimu():
         return controller.strat.AvancerViteRobotSimu(self.robot,simu,vitesse)
     
 
-
-
-class RobotIRL():
+class AdaptateurIRL():
     def __init__(self,robot):
         self.robot=robot
 
