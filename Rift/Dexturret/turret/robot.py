@@ -184,6 +184,13 @@ class Robot:
         dy = min(self.y, simu_largeur - self.y)
         
         d =min(dx,dy)-(self.longueur/2)
+
+        for c in self.coordRobot:
+            if c[0]<0 or c[0]> simu_longueur:
+                return 0.0
+            if c[1]<0 or c[1]> simu_largeur:
+                return 0.0
+        
         if d<0:
             return 0.0
 
