@@ -176,21 +176,25 @@ class Robot:
         - simu_longueur, simu_largeur : dimensions de l'environnement d'une simulation
 
         Retourne :
-        - la distance séparant le mur le + proche dans la direction robot et le point d'intersection avec le mur
+        - la distance séparant le mur dans la direction robot et le robot
 
         """
 
+        #minimum entre les coordonnées et les dimensions de la simu
         dx = min(self.x, simu_longueur - self.x)
         dy = min(self.y, simu_largeur - self.y)
         
+        #minimum entre la distance robot-longueur et la distance robot-largeur
         d =min(dx,dy)-(self.longueur/2)
 
         for c in self.coordRobot:
+            #si un coin touche le mur
             if c[0]<0 or c[0]> simu_longueur:
                 return 0.0
             if c[1]<0 or c[1]> simu_largeur:
                 return 0.0
         
+        #si la distance est négative
         if d<0:
             return 0.0
 
