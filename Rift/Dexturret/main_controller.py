@@ -46,6 +46,8 @@ window, couleur, canvas, frame, text_distance = interface.creer_graphique(robot,
 controller_choisi.start()
 
 robot.dernier_rafraichissement = time()
+tab = [(robot.x,robot.y)]
+tailleMax = 500
 #Boucle principale de la simu
 while simu.awake and not controller_choisi.stop():
     #Mise a jour tous les 1/temps
@@ -59,6 +61,15 @@ while simu.awake and not controller_choisi.stop():
 
     #Affichage de la ligne rouge pour la direction du robot
     canvas.pack()
+    if (robot.x,robot.y) != tab[-1]:
+        if len(tab) > tailleMax:
+            tab.pop(0)
+        tab.append((robot.x,robot.y))
+    for elem in range(1,len(tab)):
+        x,y = tab[elem-1]
+        x1,y1 = tab[elem]
+        canvas.create_line(x, y, x1, y1, fill="black")
+        canvas.pack()
     canvas.update()
     interface.affichage_distance(text_distance,robot,simu.longueur,simu.largeur)
 
