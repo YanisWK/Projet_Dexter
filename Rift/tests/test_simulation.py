@@ -1,5 +1,5 @@
-from Dexturret.Turret.simulation import Simulation
-from Dexturret.Turret.robot import Robot
+from Dexturret.turret.simulation import Simulation
+from Dexturret.turret.robot import Robot
 
 import unittest
 
