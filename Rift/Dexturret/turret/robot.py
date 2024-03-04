@@ -23,7 +23,7 @@ from time import time
 
     - pos_coins_Robot => calcule la position des 4 coins à l'aide de la direction et de la taille du robot
 
-    - detect_distance => retourne la distance séparant la bordure la plus proche du robot
+    - detect_distance => retourne la distance séparant la bordure dans la direction du robot
 """
 
 
@@ -184,5 +184,7 @@ class Robot:
         dy = min(self.y, simu_largeur - self.y)
         
         d =min(dx,dy)-(self.longueur/2)
+        if d<0:
+            return 0.0
 
         return round(d, 1)
