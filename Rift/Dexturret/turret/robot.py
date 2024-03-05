@@ -214,6 +214,6 @@ class Robot:
         elif (port == 2):
             self.vitesse_lineaire_roue_droite = vitesse
         elif (port == 3):
-            self.vitesse_de_rotation_roue_droite = vitesse
-            self.vitesse_de_rotation_roue_gauche = vitesse
+            self.vitesse_lineaire_roue_droite = vitesse
+            self.vitesse_lineaire_roue_gauche = vitesse
     
