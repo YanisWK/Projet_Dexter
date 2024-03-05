@@ -43,7 +43,7 @@ simu.robot.pret = True
 vrd = 0
 vrg = 0
 
-controller_choisi = None  # Déclaration en dehors de la boucle
+controller_choisi = None 
 tab = [(robot1.x,robot1.y)]
 tailleMax = 500
 

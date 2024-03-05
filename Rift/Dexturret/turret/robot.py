@@ -177,27 +177,6 @@ class Robot:
 
         """
 
-        """
-        #minimum entre les coordonnées et les dimensions de la simu
-        dx = self.x + self.longueur/2 * cos(radians(self.direction))
-        dy = self.y - self.longueur/2 * sin(radians(self.direction))
-        
-        #minimum entre la distance robot-longueur et la distance robot-largeur
-        d = min(dx,dy)
-
-        for c in self.coordRobot:
-            #si un coin touche le mur
-            if c[0]<0 or c[0]> simu_longueur:
-                return 0.0
-            if c[1]<0 or c[1]> simu_largeur:
-                return 0.0
-        
-        #si la distance est négative
-        if d<0:
-            return 0.0
-
-        return round(d, 1)
-        """
         pas = 0.1
         dist = 0
         rayon = [self.x + (self.longueur/2)*cos(radians(self.direction)), self.y - (self.longueur/2)*sin(radians(self.direction))]
@@ -208,9 +187,18 @@ class Robot:
             dist += 1
         return pas * dist
         
-
     
     def set_vitesse_roue(self,port,vitesse):
+        """
+        Ajuste la vitesse linéaire d'une ou des deux roues du robot en fonction du port.
+
+        Paramètres :
+        - port : numéro du port de la roue 
+                -> 1 pour roue gauche
+                -> 2 pour roue droite
+                -> 3 pour les deux roues
+        - vitesse : nouvelle vitesse linéaire de la roue (en cm/s)
+        """
         if (port == 1):
             self.vitesse_lineaire_roue_gauche = vitesse
         elif (port == 2):
