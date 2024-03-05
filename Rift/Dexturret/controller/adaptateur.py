@@ -1,29 +1,16 @@
-import controller.control
+from turret import robot
+from turret import robot2I013Fake
+class adaptateur(robot):
 
-class AdaptateurSimu():
-    def __init__(self,robot):
-        self.robot=robot
-
-    def creerAvancer(self,distance, vitesse):
-        return controller.strat.AvancerRobotSimu(self.robot,distance,vitesse)
-
-    def creerTourner(self,angle,vitesse):
-        return controller.strat.TournerRobotSimu(self.robot,angle,vitesse)
-    
-    def creerAvancerVite(self,vitesse,simu):
-        return controller.strat.AvancerViteRobotSimu(self.robot,simu,vitesse)
-    
-
-class AdaptateurIRL():
-    def __init__(self,robot):
-        self.robot=robot
-
-    def creerAvancer():
+    def __init__():
         pass
-    def creerTourner():
+
+    def stop(robot,vitesse):
         pass
-    def creerAvancerVite():
-        pass
-     
+
+
+
+
+
     
         

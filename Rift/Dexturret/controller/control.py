@@ -1,5 +1,6 @@
 import turret.robot
 import controller.adaptateur 
+from math import sqrt
 
 class AvancerRobotSimu():
     def __init__(self, robot, distance, vitesse):
