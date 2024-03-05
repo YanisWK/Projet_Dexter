@@ -1,25 +1,27 @@
 import turret.robot
 import controller.adaptateur 
-from math import sqrt
+from math import sqrt, degrees
 
 
 class AvancerRobot():
-    def __init__(self, robot, distance, vitesse):
+    def __init__(self, robot, distance, vitesse, fps):
         self.robot = robot
         self.distance = distance
         self.vitesse = vitesse
+        self.fps = fps
 
     def start(self):
         self.parcouru = 0
-        self.robot_x = self.robot.x
-        self.robot_y = self.robot.y
 
     def etape(self):
         self.robot.set_vitesse_roue(3,self.vitesse)
 
-        self.parcouru += sqrt((self.robot.x - self.robot_x)**2 + (self.robot.y - self.robot_y)**2)
-        self.robot_x = self.robot.x
-        self.robot_y = self.robot.y
+        vitesse_deplacement = (self.vitesse + self.vitesse) / 2
+        deplacement_par_rafraichissement = vitesse_deplacement / self.fps
+
+        self.parcouru += deplacement_par_rafraichissement
+
+        print("Parcour: ", deplacement_par_rafraichissement)
 
         if self.stop() :
             self.robot.set_vitesse_roue(3,0)
@@ -30,24 +32,28 @@ class AvancerRobot():
     
 
 class TournerRobot():
-    def __init__(self, robot, angle):
+    def __init__(self, robot, angle, fps):
         self.robot = robot
         self.angle = angle
+        self.fps = fps
 
     def start(self):
         self.angle_parcouru = 0
         self.robot_direction = self.robot.direction
 
     def etape(self):
-        self.robot.set_vitesse_roue(1,10)
-        self.robot.set_vitesse_roue(2,-10)
+        vit = 10
+        self.robot.set_vitesse_roue(1,vit)
+        self.robot.set_vitesse_roue(2,-vit)
 
-        if (abs(self.robot_direction - self.robot.direction) > 180):
-            self.angle_parcouru += 360 - abs(self.robot_direction - self.robot.direction)
-        else:
-            self.angle_parcouru += abs(self.robot_direction - self.robot.direction)
+        vit_rot_RG = vit / self.robot.rayon_des_roues
+        vit_rot_RD = -vit / self.robot.rayon_des_roues
 
-        self.robot_direction = self.robot.direction
+        vitesse_rotation = ( self.robot.rayon_des_roues * (vit_rot_RD - vit_rot_RG)) / self.robot.largeur
+        rotation_par_rafraichissement = vitesse_rotation / self.fps
+
+        self.angle_parcouru += abs(degrees(rotation_par_rafraichissement))
+        print("rot/raf ", degrees(rotation_par_rafraichissement))
 
         if self.stop():
             self.robot.set_vitesse_roue(3,0)
@@ -80,12 +86,12 @@ class AvancerViteRobot():
 
 
 class TracerCarre():
-    def __init__(self, robot, tailleCote, vitesse):
+    def __init__(self, robot, tailleCote, vitesse, fps):
         self.robot = robot
         self.tailleCote = tailleCote
         self.vitesse = vitesse
-        stratAvancer = AvancerRobot(self.robot,self.tailleCote,self.vitesse)
-        stratTourner = TournerRobot(self.robot,90)
+        stratAvancer = AvancerRobot(self.robot, self.tailleCote, self.vitesse, fps)
+        stratTourner = TournerRobot(self.robot, 90, fps)
          #Besoin de savoir a chaque fois qu'on tourne de combien de degrès il faut tourner.
 
         self.strats = [stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner]
@@ -106,11 +112,11 @@ class TracerCarre():
         return self.current == len(self.strats)-1 and self.strats[self.current].stop()
 
 class AvancerViteMur():
-    def __init__(self, robot, simu, vitesse):
+    def __init__(self, robot, simu, vitesse, fps):
         self.robot = robot
         self.simu = simu
         self.vitesse = vitesse
-        StratAvancerVite = AvancerViteRobot(self.robot,self.simu,self.vitesse)
+        StratAvancerVite = AvancerViteRobot(self.robot, self.simu, self.vitesse, fps)
         self.strats = [StratAvancerVite]
         self.current = -1
 

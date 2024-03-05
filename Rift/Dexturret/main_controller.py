@@ -14,7 +14,8 @@ long = 1000
 robot = turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
 robot.direction = 135
 robot.pret = True
-simu = turret.Simulation(1, robot, larg, long, 60)
+fps = 60
+simu = turret.Simulation(1, robot, larg, long, fps)
 
 boucle = True
 
@@ -36,9 +37,9 @@ while (boucle):
                 if not (isinstance(distance, int)):
                     print("Entrée invalide, veuillez recommencer depuis le début (l'entrée doit être un entier)")
                 else:
-                    controller_choisi = controller.TracerCarre(robot, distance, vitesse)
+                    controller_choisi = controller.TracerCarre(robot, distance, vitesse, fps)
             else:
-                controller_choisi = controller.AvancerViteMur(robot, simu, vitesse)
+                controller_choisi = controller.AvancerViteMur(robot, simu, vitesse, fps)
             boucle = False
 
 window, couleur, canvas, frame, text_distance = interface.creer_graphique(robot,simu)

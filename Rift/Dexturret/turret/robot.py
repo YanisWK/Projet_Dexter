@@ -142,12 +142,14 @@ class Robot:
 
         vitesse_deplacement = (self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2
         deplacement_par_rafraichissement = vitesse_deplacement * ((1/fps) + self.temps_ajustement)
+        print("robot deplacer avancer: ", deplacement_par_rafraichissement)
         self.avancer(deplacement_par_rafraichissement)
 
         #Calcul de la rotation que le robot doit faire à chaque rafraîchissement
 
         vitesse_rotation = ( self.rayon_des_roues * (self.vitesse_de_rotation_roue_droite - self.vitesse_de_rotation_roue_gauche)) / self.largeur
         rotation_par_rafraichissement = vitesse_rotation * ((1/fps) + self.temps_ajustement)
+        print("robot rot/raf", degrees(rotation_par_rafraichissement))
         self.tourner(degrees(rotation_par_rafraichissement))
         
 
