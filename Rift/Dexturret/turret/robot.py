@@ -45,13 +45,13 @@ class Robot:
         self.vitesse_lineaire_roue_gauche = 0
         self.vitesse_lineaire_roue_droite = 0
 
-        self.vitesse_de_rotation_roue_gauche = 0
-        self.vitesse_de_rotation_roue_droite = 0
-
         self.pret = False  #La simulation est activée et le robot est en mouvement
 
         self.dernier_rafraichissement = dernier_rafraichissement
         self.temps_ajustement = 0
+
+        self.position_moteurs = [0,0]
+
 
     @property
     def coordRobot(self):
@@ -72,6 +72,7 @@ class Robot:
         c3 = ( (x - demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir - 90)), (y + demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir - 90)) )
         c4 = ( (x - demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir + 90)), (y + demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir + 90)) )
         return [c1, c2, c3, c4]
+
 
     def __repr__(self):
         return "Le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "° \n" \
@@ -136,8 +137,8 @@ class Robot:
 
         #Calcul de la distance que parcourt le robot à chaque rafraîchissement distance_par_rafraichissement = vitesse/temps
         
-        self.vitesse_de_rotation_roue_gauche = self.vitesse_lineaire_roue_gauche / self.rayon_des_roues
-        self.vitesse_de_rotation_roue_droite = self.vitesse_lineaire_roue_droite / self.rayon_des_roues
+        vitesse_rotation_roue_gauche = self.vitesse_lineaire_roue_gauche / self.rayon_des_roues
+        vitesse_rotation_roue_droite = self.vitesse_lineaire_roue_droite / self.rayon_des_roues
 
 
         vitesse_deplacement = (self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2
@@ -147,9 +148,12 @@ class Robot:
 
         #Calcul de la rotation que le robot doit faire à chaque rafraîchissement
 
-        vitesse_rotation = ( self.rayon_des_roues * (self.vitesse_de_rotation_roue_droite - self.vitesse_de_rotation_roue_gauche)) / self.largeur
+        vitesse_rotation = ( self.rayon_des_roues * (vitesse_rotation_roue_droite - vitesse_rotation_roue_gauche)) / self.largeur
         rotation_par_rafraichissement = vitesse_rotation * ((1/fps) + self.temps_ajustement)
-        print("robot rot/raf", degrees(rotation_par_rafraichissement))
+
+        self.position_moteurs[0] += vitesse_rotation_roue_gauche * ((1/fps) + self.temps_ajustement)
+        self.position_moteurs[1] += vitesse_rotation_roue_droite * ((1/fps) + self.temps_ajustement)
+
         self.tourner(degrees(rotation_par_rafraichissement))
         
 
@@ -165,6 +169,7 @@ class Robot:
         if self.pret:
             self.deplacementRobot(fps)
         
+
     def detect_distance(self, simu_longueur, simu_largeur):
         """
         Retourne une distance dans la direction dans laquelle le robot est orienté
@@ -207,3 +212,6 @@ class Robot:
             self.vitesse_lineaire_roue_droite = vitesse
             self.vitesse_lineaire_roue_gauche = vitesse
     
+
+    def get_position_moteurs(self):
+        return (self.position_moteurs[0], self.position_moteurs[1])
