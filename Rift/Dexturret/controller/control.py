@@ -86,7 +86,7 @@ class TracerCarre():
         self.tailleCote = tailleCote
         self.vitesse = vitesse
         stratAvancer = AvancerRobot(self.robot,self.tailleCote,self.vitesse)
-        stratTourner = TournerRobot(self.robot,self.tailleCote)
+        stratTourner = TournerRobot(self.robot,90)
          #Besoin de savoir a chaque fois qu'on tourne de combien de degrès il faut tourner.
 
         self.strats = [stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner]
