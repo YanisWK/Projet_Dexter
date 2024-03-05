@@ -1,9 +1,9 @@
 from turret import robot
-from turret import robot2I013Fake
-class adaptateur(robot2I013Fake):
+from turret.robot2I013Fake import Robot2IN013Fake
+class adaptateur(Robot2IN013Fake):
 
     def __init__(self):
-        robot2I013Fake.__init__()
+        Robot2IN013Fake.__init__()
 
     def stop(robot,vitesse):
         pass
