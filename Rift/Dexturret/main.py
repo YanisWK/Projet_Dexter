@@ -1,5 +1,9 @@
 import turret
 from time import time
+import interface
+import logging
+import controller.adaptateur
+from .control import TracerCarre, AvancerViteMur
 
 def affichage(robot):
     """
@@ -35,6 +39,9 @@ simu.robot.pret = True
 
 vrd = 0
 vrg = 0
+
+controller_choisi = None  # Déclaration en dehors de la boucle
+
 while True:
     choix_ut = affichage(robot1)
     if choix_ut == 0:
@@ -87,4 +94,22 @@ while True:
         distance_r_m = robot1.detect_distance(simu.longueur,simu.largeur)
         print(f"Le distance entre le robot et le mur est de : {distance_r_m} \n")
     
+    elif choix_ut == 5:
+        print("Entrez la taille d'un coté du carré:")
+        taille = int(input())        
+        vitesse = int(input("Entrez la vitesse du robot : "))
+        if not (isinstance(taille, int)):
+            print("Entrée invalide, veuillez recommencer depuis le début (l'entrée doit être un entier)")
+        else:
+            controller_choisi = controller.TracerCarre(robot1, taille, vitesse)
+            controller_choisi.start()
+
+            
+    elif choix_ut == 6:
+        vitesse= int(input("Entrez la vitesse du robot : "))
+        controller_choisi = controller.AvancerViteMur(robot1, simu, vitesse)
+        controller_choisi.start()
+
+        
+ 
         
