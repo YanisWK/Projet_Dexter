@@ -20,7 +20,6 @@ class AvancerRobot():
         self.parcouru += sqrt((self.robot.x - self.robot_x)**2 + (self.robot.y - self.robot_y)**2)
         self.robot_x = self.robot.x
         self.robot_y = self.robot.y
-        print("Il bouge")
 
         if self.stop() :
             self.robot.set_vitesse_roue(3,0)
