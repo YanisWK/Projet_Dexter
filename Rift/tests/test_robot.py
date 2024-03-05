@@ -1,4 +1,4 @@
-from Dexturret.turret.robot import Robot 
+from .Dexturret.turret.robot import Robot 
 from math import cos, sin, radians
 
 import unittest
@@ -45,6 +45,21 @@ class TestRobot(unittest.TestCase):
         res = test_robot.detect_distance(simu_longueur, simu_largeur)
         res_assert = round(simu_longueur/2,simu_largeur/2)
         self.assertEqual(res, res_assert)
+
+    def test_robot_set_vitesse_roue(self):
+        test_robot = Robot("Dexter", 50, 25, 0, 0)
+        #test roue gauche
+        test_robot.set_vitesse_roue(1, 10)
+        self.assertEqual(test_robot.vitesse_lineaire_roue_gauche, 10)
+
+        #test roue droite
+        test_robot.set_vitesse_roue(2, 8)
+        self.assertEqual(test_robot.vitesse_lineaire_roue_droite, 8)
+
+        #test pour les deux roues
+        test_robot.set_vitesse_roue(3, 5)
+        self.assertEqual(test_robot.vitesse_lineaire_roue_gauche, 5)
+        self.assertEqual(test_robot.vitesse_lineaire_roue_droite, 5)
 
     if __name__ == '__main__':
         unittest.main()
