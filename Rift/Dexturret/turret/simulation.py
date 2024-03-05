@@ -11,6 +11,9 @@ et d'effectuer les calculs nécessaires pour simuler un déplacement fluide et r
 
 - rafraichir => effectue les déplacements et rotations à l'aide des vitesses des roues gauches et 
                 droite
+
+- check_collision => vérifie si le robot se cogne contre une bordure et stoppe la simulation
+
 """
 
 class Simulation:
@@ -38,10 +41,6 @@ class Simulation:
         """
         Met à jour la fonction rafraichir du robot si la simu est active et si le robot est prêt
         
-        Paramètres: 
-        - vitesse_roue_g : vitesse des roues gauche
-        - vitesse_roue_d ; vitesse des roues droite
-        
         """
         if (self.awake):
             self.robot.rafraichir(self.fps)
@@ -66,10 +65,10 @@ class Simulation:
 
             self.coinsRobot()
     """
+    
     def check_collision(self):    
         """
         Checke si le robot se cogne contre une bordure et stoppe la simulation
-         
         """
         Coord = self.robot.coordRobot
         for i in range(4):
