@@ -199,3 +199,13 @@ class Robot:
             return 0.0
 
         return round(d, 1)
+    
+    def set_vitesse_roue(self,port,vitesse):
+        if (port == 1):
+            self.vitesse_lineaire_roue_gauche = vitesse
+        elif (port == 2):
+            self.vitesse_lineaire_roue_droite = vitesse
+        elif (port == 3):
+            self.vitesse_de_rotation_roue_droite = vitesse
+            self.vitesse_de_rotation_roue_gauche = vitesse
+    
