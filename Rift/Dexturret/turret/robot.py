@@ -5,25 +5,20 @@ from time import time
 
 """Documentation : 
 
-    Description generale : Fichier contenant la classe Robot, les fonctions de mises à jour de coordonnées et de déplacement
-    Listes des methodes :
-    - __init__ => crée une instance Robot
-                  la classe utilise des listes velociteD et velociteR, pour stocker les déplacements et les 
-                  rotations à chaque rafraîchissement
-    - avancer => fait avancer le robot sur une distance donnée
-    - tourner => fait tourner le robot dans un angle donné
-    - coeff_directeur => retourne le couple (a,b) de la droite directionelle ax+by
-                    Ces coefficients sont les composantes du vecteur unitaire dirigeant le robot  
-                    - a est la composante horizontale (abscisse)
-                    - b est la composante verticale (ordonnée)
-                    Ils décrivent la direction associée à l'angle dans le cercle trigonométrique.
-    - deplacementRobot => effectue les déplacements du robot avec les fonctions avancer et tourner
+    Classe du robot pour la simulation.
 
-    - rafraichir => met à jour les déplacements et positions des coins du robot sur un temps de rafraichissement donné
-
-    - pos_coins_Robot => calcule la position des 4 coins à l'aide de la direction et de la taille du robot
-
-    - detect_distance => retourne la distance séparant la bordure dans la direction du robot
+    Attributs :
+    - id : identifiant du robot
+    - longueur, largeur : dimensions du robot
+    - x, y : coordonnées du robot dans l'environnement
+    - direction : angle d'orientation du robot en degrés
+    - rayon_des_roues : rayon des roues du robot
+    - vitesse_lineaire_roue_gauche, vitesse_lineaire_roue_droite : vitesses linéaires des roues gauche et droite
+    - vitesse_de_rotation_roue_gauche, vitesse_de_rotation_roue_droite : vitesses de rotation des roues gauche et droite
+    - pret : indique l'activation de la simulation et du mouvement du robot
+    - dernier_rafraichissement : temps du dernier rafraîchissement
+    - temps_ajustement : temps d'ajustement pour le rafraîchissement
+    
 """
 
 
@@ -101,7 +96,7 @@ class Robot:
     def tourner(self, angle):
         """
         Effectue une rotation en ajustant la direction pour rester dans [0, 360]
-        si l'angle n'est pas compris dans [0,360], c'est l'angle modulo 360 qui est ajouté 
+        Si l'angle n'est pas compris dans [0,360], c'est l'angle modulo 360 qui est ajouté 
         à la direction actuelle
 
         Paramètre :
@@ -176,7 +171,7 @@ class Robot:
         - simu_longueur, simu_largeur : dimensions de l'environnement d'une simulation
 
         Retourne :
-        - la distance séparant le mur dans la direction robot et le robot
+        - la distance entre le robot et le mur dans la direction du robot
 
         """
 
