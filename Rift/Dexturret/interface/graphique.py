@@ -190,7 +190,7 @@ def creer_graphique(robot,simu):
 
 
 def affichage_distance(text_distance,robot,long,larg):
-    text_distance.config(text = f"Distance : {robot.detect_distance(long,larg)}")
+    text_distance.config(text = f"Distance : {round(robot.detect_distance(long,larg),1)}")
 
 def onKeyPress(robot,couleur,event):
     """

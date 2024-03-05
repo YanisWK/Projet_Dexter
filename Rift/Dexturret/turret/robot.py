@@ -175,12 +175,13 @@ class Robot:
 
         """
 
+        """
         #minimum entre les coordonnées et les dimensions de la simu
-        dx = min(self.x, simu_longueur - self.x)
-        dy = min(self.y, simu_largeur - self.y)
+        dx = self.x + self.longueur/2 * cos(radians(self.direction))
+        dy = self.y - self.longueur/2 * sin(radians(self.direction))
         
         #minimum entre la distance robot-longueur et la distance robot-largeur
-        d =min(dx,dy)-(self.longueur/2)
+        d = min(dx,dy)
 
         for c in self.coordRobot:
             #si un coin touche le mur
@@ -194,6 +195,18 @@ class Robot:
             return 0.0
 
         return round(d, 1)
+        """
+        pas = 0.1
+        dist = 0
+        rayon = [self.x + (self.longueur/2)*cos(radians(self.direction)), self.y - (self.longueur/2)*sin(radians(self.direction))]
+
+        while (rayon[0] > 0 and rayon[1] > 0 and rayon[0] < simu_longueur and rayon[1] < simu_largeur):
+            rayon[0] += pas * cos(radians(self.direction))
+            rayon[1] -= pas * sin(radians(self.direction))
+            dist += 1
+        return pas * dist
+        
+
     
     def set_vitesse_roue(self,port,vitesse):
         if (port == 1):
