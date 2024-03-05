@@ -12,7 +12,7 @@ class adaptateur(Robot2IN013Fake):
         """
         dps = 0 #Mettre le calcule pour mettre en Centimère par seconde
         self.set_motor_dps(port, dps)"""
-        pass
+        print("La vitesse des roue a été set a ",vitesse)
 
     def detect_distance(self,_simu_longueur, _simu_largeur):
         #return self.get_distance()
