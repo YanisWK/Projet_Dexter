@@ -1,3 +1,5 @@
+from math import pi
+
 class Robot2IN013Fake:
     """ 
     Classe d'encapsulation du robot et des senseurs.
@@ -10,8 +12,8 @@ class Robot2IN013Fake:
 
     WHEEL_BASE_WIDTH         = 117  # distance (mm) de la roue gauche a la roue droite.
     WHEEL_DIAMETER           = 66.5 #  diametre de la roue (mm)
-    WHEEL_BASE_CIRCUMFERENCE = WHEEL_BASE_WIDTH * math.pi # perimetre du cercle de rotation (mm)
-    WHEEL_CIRCUMFERENCE      = WHEEL_DIAMETER   * math.pi # perimetre de la roue (mm)
+    WHEEL_BASE_CIRCUMFERENCE = WHEEL_BASE_WIDTH * pi # perimetre du cercle de rotation (mm)
+    WHEEL_CIRCUMFERENCE      = WHEEL_DIAMETER   * pi # perimetre de la roue (mm)
     
     def __init__(self,fps=25):
         """ 
