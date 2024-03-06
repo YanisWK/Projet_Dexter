@@ -5,20 +5,25 @@ from time import time
 
 """Documentation : 
 
-    Classe du robot pour la simulation.
+    Description generale : Fichier contenant la classe Robot, les fonctions de mises à jour de coordonnées et de déplacement
+    Listes des methodes :
+    - __init__ => crée une instance Robot
+                  la classe utilise des listes velociteD et velociteR, pour stocker les déplacements et les 
+                  rotations à chaque rafraîchissement
+    - avancer => fait avancer le robot sur une distance donnée
+    - tourner => fait tourner le robot dans un angle donné
+    - coeff_directeur => retourne le couple (a,b) de la droite directionelle ax+by
+                    Ces coefficients sont les composantes du vecteur unitaire dirigeant le robot  
+                    - a est la composante horizontale (abscisse)
+                    - b est la composante verticale (ordonnée)
+                    Ils décrivent la direction associée à l'angle dans le cercle trigonométrique.
+    - deplacementRobot => effectue les déplacements du robot avec les fonctions avancer et tourner
 
-    Attributs :
-    - id : identifiant du robot
-    - longueur, largeur : dimensions du robot
-    - x, y : coordonnées du robot dans l'environnement
-    - direction : angle d'orientation du robot en degrés
-    - rayon_des_roues : rayon des roues du robot
-    - vitesse_lineaire_roue_gauche, vitesse_lineaire_roue_droite : vitesses linéaires des roues gauche et droite
-    - vitesse_de_rotation_roue_gauche, vitesse_de_rotation_roue_droite : vitesses de rotation des roues gauche et droite
-    - pret : indique l'activation de la simulation et du mouvement du robot
-    - dernier_rafraichissement : temps du dernier rafraîchissement
-    - temps_ajustement : temps d'ajustement pour le rafraîchissement
-    
+    - rafraichir => met à jour les déplacements et positions des coins du robot sur un temps de rafraichissement donné
+
+    - pos_coins_Robot => calcule la position des 4 coins à l'aide de la direction et de la taille du robot
+
+    - detect_distance => retourne la distance séparant la bordure dans la direction du robot
 """
 
 
@@ -45,13 +50,13 @@ class Robot:
         self.vitesse_lineaire_roue_gauche = 0
         self.vitesse_lineaire_roue_droite = 0
 
+        self.vitesse_de_rotation_roue_gauche = 0
+        self.vitesse_de_rotation_roue_droite = 0
+
         self.pret = False  #La simulation est activée et le robot est en mouvement
 
         self.dernier_rafraichissement = dernier_rafraichissement
         self.temps_ajustement = 0
-
-        self.position_moteurs = [0,0]
-
 
     @property
     def coordRobot(self):
@@ -72,7 +77,6 @@ class Robot:
         c3 = ( (x - demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir - 90)), (y + demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir - 90)) )
         c4 = ( (x - demi_longueur*cos(radians(dir))) + demi_largeur*cos(radians(dir + 90)), (y + demi_longueur*sin(radians(dir))) - demi_largeur*sin(radians(dir + 90)) )
         return [c1, c2, c3, c4]
-
 
     def __repr__(self):
         return "Le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "° \n" \
@@ -97,7 +101,7 @@ class Robot:
     def tourner(self, angle):
         """
         Effectue une rotation en ajustant la direction pour rester dans [0, 360]
-        Si l'angle n'est pas compris dans [0,360], c'est l'angle modulo 360 qui est ajouté 
+        si l'angle n'est pas compris dans [0,360], c'est l'angle modulo 360 qui est ajouté 
         à la direction actuelle
 
         Paramètre :
@@ -135,25 +139,36 @@ class Robot:
         
         """       
 
-        #Calcul de la distance que parcourt le robot à chaque rafraîchissement distance_par_rafraichissement = vitesse/temps
-        
-        vitesse_rotation_roue_gauche = self.vitesse_lineaire_roue_gauche / self.rayon_des_roues
-        vitesse_rotation_roue_droite = self.vitesse_lineaire_roue_droite / self.rayon_des_roues
+        """Calcul de la vitesse de déplacement de chaque roue avec la formule w = v/r 
+        où w est la vitesse de rotation, v est la vitesse linéaire et r est le rayon des roues.
+        """
+        self.vitesse_de_rotation_roue_gauche = self.vitesse_lineaire_roue_gauche / self.rayon_des_roues 
+        self.vitesse_de_rotation_roue_droite = self.vitesse_lineaire_roue_droite / self.rayon_des_roues
 
 
+        """Calcul de la vitesse de déplacement du robot avec la formule v = (wg + wd) / 2
+            où wg et wd sont respectivement les vitesses de rotation des roues gauche et droite.
+        """
         vitesse_deplacement = (self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2
+        
+        #Calcul de la distance que le robot doit parcourir à chaque rafraîchissement
         deplacement_par_rafraichissement = vitesse_deplacement * ((1/fps) + self.temps_ajustement)
-        print("robot deplacer avancer: ", deplacement_par_rafraichissement)
+        #Mise à jour des coordonnées du robot
         self.avancer(deplacement_par_rafraichissement)
 
+
+
+        """Calcul de la vitesse de rotation du robot avec la formule vitesse_rotation = ( r * (wd - wg) ) / L
+            où r est le rayon des roues, wd et wg sont respectivement les vitesses de rotation des roues droite et gauche
+            et L est la largeur du robot. 
+            On utilise la Largeur du robot pour calculer la vitesse de rotation car c'est la distance entre les deux roues.
+        """
+        vitesse_rotation = ( self.rayon_des_roues * (self.vitesse_de_rotation_roue_droite - self.vitesse_de_rotation_roue_gauche)) / self.largeur
+        
         #Calcul de la rotation que le robot doit faire à chaque rafraîchissement
-
-        vitesse_rotation = ( self.rayon_des_roues * (vitesse_rotation_roue_droite - vitesse_rotation_roue_gauche)) / self.largeur
         rotation_par_rafraichissement = vitesse_rotation * ((1/fps) + self.temps_ajustement)
-
-        self.position_moteurs[0] += vitesse_rotation_roue_gauche * ((1/fps) + self.temps_ajustement)
-        self.position_moteurs[1] += vitesse_rotation_roue_droite * ((1/fps) + self.temps_ajustement)
-
+        
+        #Mise à jour de la direction du robot
         self.tourner(degrees(rotation_par_rafraichissement))
         
 
@@ -169,7 +184,6 @@ class Robot:
         if self.pret:
             self.deplacementRobot(fps)
         
-
     def detect_distance(self, simu_longueur, simu_largeur):
         """
         Retourne une distance dans la direction dans laquelle le robot est orienté
@@ -178,40 +192,22 @@ class Robot:
         - simu_longueur, simu_largeur : dimensions de l'environnement d'une simulation
 
         Retourne :
-        - la distance entre le robot et le mur dans la direction du robot
+        - la distance séparant le mur le + proche dans la direction robot et le point d'intersection avec le mur
 
         """
 
-        pas = 0.1
-        dist = 0
-        rayon = [self.x + (self.longueur/2)*cos(radians(self.direction)), self.y - (self.longueur/2)*sin(radians(self.direction))]
-
-        while (rayon[0] > 0 and rayon[1] > 0 and rayon[0] < simu_longueur and rayon[1] < simu_largeur):
-            rayon[0] += pas * cos(radians(self.direction))
-            rayon[1] -= pas * sin(radians(self.direction))
-            dist += 1
-        return pas * dist
+        dx = min(self.x, simu_longueur - self.x)
+        dy = min(self.y, simu_largeur - self.y)
         
-    
-    def set_vitesse_roue(self,port,vitesse):
-        """
-        Ajuste la vitesse linéaire d'une ou des deux roues du robot en fonction du port.
+        d =min(dx,dy)-(self.longueur/2)
 
-        Paramètres :
-        - port : numéro du port de la roue 
-                -> 1 pour roue gauche
-                -> 2 pour roue droite
-                -> 3 pour les deux roues
-        - vitesse : nouvelle vitesse linéaire de la roue (en cm/s)
-        """
-        if (port == 1):
-            self.vitesse_lineaire_roue_gauche = vitesse
-        elif (port == 2):
-            self.vitesse_lineaire_roue_droite = vitesse
-        elif (port == 3):
-            self.vitesse_lineaire_roue_droite = vitesse
-            self.vitesse_lineaire_roue_gauche = vitesse
-    
+        for c in self.coordRobot:
+            if c[0]<0 or c[0]> simu_longueur:
+                return 0.0
+            if c[1]<0 or c[1]> simu_largeur:
+                return 0.0
+        
+        if d<0:
+            return 0.0
 
-    def get_position_moteurs(self):
-        return (self.position_moteurs[0], self.position_moteurs[1])
+        return round(d, 1)
