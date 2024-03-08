@@ -44,17 +44,28 @@ while (boucle):
 
 window, couleur, canvas, frame, text_distance = interface.creer_graphique(robot,simu)
 
-controller_choisi.start()
+plusieurs_strats = [controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi]
+
+i = 0
+plusieurs_strats[0].start()
 
 robot.dernier_rafraichissement = time()
 tab = [(robot.x,robot.y)]
 tailleMax = 500
 #Boucle principale de la simu
-while simu.awake and not controller_choisi.stop():
+while simu.awake:
+    if plusieurs_strats[i].stop():
+        i += 1
+        print("STOP NEXT")
+        if i < len(plusieurs_strats):
+            plusieurs_strats[i].start()
+        else:
+            break
+
     #Mise a jour tous les 1/temps
     sleep(1/simu.fps)
 
-    controller_choisi.etape()
+    plusieurs_strats[i].etape()
     
     #On efface tout et on redessine le robot
     simu.rafraichir()
