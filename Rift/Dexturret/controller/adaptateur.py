@@ -22,7 +22,7 @@ class adaptateurIRL(turret.Robot2IN013Fake):
         return self.get_motor_position()
     
     
-class adaptateurSimu(robot):
+class adaptateurSimu(turret.Robot):
 
     def __init__(self,id, longueur, largeur, rayon_des_roues, x, y, dernier_rafraichissement):
         super().__init__(id, longueur, largeur, rayon_des_roues, x, y, dernier_rafraichissement)
