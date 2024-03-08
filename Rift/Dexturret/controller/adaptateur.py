@@ -49,11 +49,3 @@ class adaptateurSimu(robot):
     def get_position_moteurs(self):
         """Retourne la position des moteurs au dernier rafraîchissement"""
         return (self.position_moteurs[0], self.position_moteurs[1])
-    
-    def detect_distance():
-        pass
-
-
-
-    
-        
