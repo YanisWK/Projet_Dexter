@@ -37,6 +37,7 @@ class AvancerRobot():
     def start(self):
         """Démarre l'avancement"""
         self.parcouru = 0
+        self.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):
         """Effectue une étape de l'avancement en déplaçant le robot en fonction de la vitesse de déplacement
@@ -45,9 +46,11 @@ class AvancerRobot():
 
         nouvelle_position_moteurs = self.robot.get_position_moteurs()
 
-        dist_RG = radians(abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * self.robot.rayon_des_roues)
-        dist_RD = radians(abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * self.robot.rayon_des_roues)
+        dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * self.robot.rayon_des_roues
+        dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * self.robot.rayon_des_roues
         self.parcouru += (dist_RG + dist_RD) / 2
+
+        self.derniere_position_moteurs = self.robot.get_position_moteurs()
 
         if self.stop() :
             self.robot.set_vitesse_roue(3,0)
@@ -55,7 +58,7 @@ class AvancerRobot():
         
     def stop(self):
         """Vérifie si l'avancement doit s'arrêter"""
-        return self.parcouru >= self.distance
+        return self.parcouru >= self.distance or self.parcouru >= self.distance - 2
     
 
 class TournerRobot():
@@ -103,7 +106,7 @@ class TournerRobot():
         """Vérifie si la rotation doit s'arrêter"""
         print(self.angle_parcouru)
         print(self.robot.direction)
-        return self.angle <= self.angle_parcouru #or self.angle - self.angle_parcouru <= 1
+        return self.angle <= self.angle_parcouru or self.angle_parcouru >= self.angle - 1
     
 
 class AvancerViteRobot():
