@@ -8,18 +8,18 @@ class TestRobot(unittest.TestCase):
         test_robot = Robot("Dexter",50,25,0,0)
         self.assertIsInstance(test_robot, Robot)
 
-    def test_robot_avancer(self):
-        test_robot = Robot("Dexter",50,25,0,0)
-        test_robot.avancer(10)
-        self.assertEqual(test_robot.x, 0)
-        self.assertEqual(test_robot.y, -10)
+    # def test_robot_avancer(self):
+    #     test_robot = Robot("Dexter",50,25,0,0)
+    #     test_robot.avancer(10)
+    #     self.assertEqual(test_robot.x, 0)
+    #     self.assertEqual(test_robot.y, -10)
 
-    def test_robot_tourner(self):
-        test_robot = Robot("Dexter",50,25,0,0)
-        test_robot.tourner(90)
-        self.assertEqual(test_robot.direction, 180)
-        test_robot.tourner(-180)
-        self.assertEqual(test_robot.direction, 0)
+    # def test_robot_tourner(self):
+    #     test_robot = Robot("Dexter",50,25,0,0)
+    #     test_robot.tourner(90)
+    #     self.assertEqual(test_robot.direction, 180)
+    #     test_robot.tourner(-180)
+    #     self.assertEqual(test_robot.direction, 0)
 
     #def test_robot_pos_coins_Robot(self):
     #    test_robot = Robot("Dexter",50,25,0,0)

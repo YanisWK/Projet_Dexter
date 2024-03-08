@@ -15,9 +15,8 @@ class TestSimulation(unittest.TestCase):
         self.assertTrue(test_simu.awake)
 
     def test_simulation_check_collision_arrete_simu(self):
-        robot = Robot("Dexter", 50, 25, 0, 0)
+        robot = Robot("Dexter", 50, 25, 1100, 0)
         test_simu = Simulation(1, robot, 1000, 700, 60)
-        robot.x = 1100
         test_simu.check_collision()
         self.assertFalse(test_simu.awake)
 
