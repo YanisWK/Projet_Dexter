@@ -1,6 +1,6 @@
-import turret.robot
-import controller.adaptateur 
-from math import sqrt, degrees
+import turret
+import controller
+from math import sqrt, degrees, radians
 
 """
 Documentation:
@@ -32,6 +32,7 @@ class AvancerRobot():
         self.distance = distance
         self.vitesse = vitesse
         self.fps = fps
+        self.derniere_position_moteurs = robot.get_position_moteurs()
 
     def start(self):
         """Démarre l'avancement"""
@@ -42,10 +43,11 @@ class AvancerRobot():
         et du nombre de rafraichissement, tant que la distance n'a pas été entièrement parcourue."""
         self.robot.set_vitesse_roue(3,self.vitesse)
 
-        vitesse_deplacement = (self.vitesse + self.vitesse) / 2
-        deplacement_par_rafraichissement = vitesse_deplacement / self.fps
+        nouvelle_position_moteurs = self.robot.get_position_moteurs()
 
-        self.parcouru += deplacement_par_rafraichissement
+        dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * self.robot.rayon_des_roues
+        dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * self.robot.rayon_des_roues
+        self.parcouru += (dist_RG + dist_RD) / 2
 
         print("Parcours: ", deplacement_par_rafraichissement)
 
@@ -72,6 +74,7 @@ class TournerRobot():
         self.robot = robot
         self.angle = angle
         self.fps = fps
+        self.derniere_position_moteurs = robot.get_position_moteurs()
 
     def start(self):
         """Démarre la rotation"""
@@ -85,14 +88,14 @@ class TournerRobot():
         self.robot.set_vitesse_roue(1,vit)
         self.robot.set_vitesse_roue(2,-vit)
 
-        vit_rot_RG = vit / self.robot.rayon_des_roues
-        vit_rot_RD = -vit / self.robot.rayon_des_roues
+        nouvelle_position_moteurs = self.robot.get_position_moteurs()
 
-        vitesse_rotation = ( self.robot.rayon_des_roues * (vit_rot_RD - vit_rot_RG)) / self.robot.largeur
-        rotation_par_rafraichissement = vitesse_rotation / self.fps
+        angle_RG = nouvelle_position_moteurs[0] - self.derniere_position_moteurs[0]
+        angle_RD = nouvelle_position_moteurs[1] - self.derniere_position_moteurs[1]
 
-        self.angle_parcouru += abs(degrees(rotation_par_rafraichissement))
-        print("rot/raf ", degrees(rotation_par_rafraichissement))
+        self.angle_parcouru += degrees(abs((self.robot.rayon_des_roues * (angle_RD - angle_RG)) / self.robot.largeur))
+
+        self.derniere_position_moteurs = nouvelle_position_moteurs
 
         if self.stop():
             self.robot.set_vitesse_roue(3,0)
