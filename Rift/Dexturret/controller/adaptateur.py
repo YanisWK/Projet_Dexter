@@ -11,14 +11,21 @@ class adaptateurIRL(Robot2IN013Fake):
         pass
     
     def set_vitesse_roue(self,port, vitesse):
-        """
+        
         dps = 0 #Mettre le calcule pour mettre en Centimère par seconde
-        self.set_motor_dps(port, dps)"""
+        self.set_motor_dps(port, dps)
         print("La vitesse des roue a été set a ",vitesse)
 
+
     def detect_distance(self,_simu_longueur, _simu_largeur):
-        #return self.get_distance()
+        dist=self.get_distance()/10
+        if (dist==819):
+            return 800
+        return dist
+
+    def get_position_moteurs(self):
         pass
+
 
 
 
@@ -49,6 +56,9 @@ class adaptateurSimu(robot):
     def get_position_moteurs(self):
         """Retourne la position des moteurs au dernier rafraîchissement"""
         return (self.position_moteurs[0], self.position_moteurs[1])
+    
+    def detect_distance():
+        pass
 
 
 
