@@ -49,7 +49,7 @@ class AvancerRobot():
         dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * self.robot.rayon_des_roues
         self.parcouru += (dist_RG + dist_RD) / 2
 
-        print("Parcours: ", deplacement_par_rafraichissement)
+        
 
         if self.stop() :
             self.robot.set_vitesse_roue(3,0)
