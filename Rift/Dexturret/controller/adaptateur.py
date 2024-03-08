@@ -5,7 +5,7 @@ from turret.robot2I013Fake import Robot2IN013Fake
 class adaptateurIRL(Robot2IN013Fake):
 
     def __init__(self):
-        Robot2IN013Fake.__init__()
+        super.__init__()
 
     def stop(robot,vitesse):
         pass
@@ -20,11 +20,35 @@ class adaptateurIRL(Robot2IN013Fake):
         #return self.get_distance()
         pass
 
+
+
 class adaptateurSimu(robot):
 
-    def __init__(self):
-        robot.__init__()
-        
+    def __init__(self,id, longueur, largeur, rayon_des_roues, x, y, dernier_rafraichissement):
+        super().__init__(id, longueur, largeur, rayon_des_roues, x, y, dernier_rafraichissement)
+
+    def set_vitesse_roue(self,port,vitesse):
+        """
+        Ajuste la vitesse linéaire d'une ou des deux roues du robot en fonction du port.
+
+        Paramètres :
+        - port : numéro du port de la roue 
+                -> 1 pour roue gauche
+                -> 2 pour roue droite
+                -> 3 pour les deux roues
+        - vitesse : nouvelle vitesse linéaire de la roue (en cm/s)
+        """
+        if (port == 1):
+            self.vitesse_lineaire_roue_gauche = vitesse
+        elif (port == 2):
+            self.vitesse_lineaire_roue_droite = vitesse
+        elif (port == 3):
+            self.vitesse_lineaire_roue_droite = vitesse
+            self.vitesse_lineaire_roue_gauche = vitesse
+
+    def get_position_moteurs(self):
+        """Retourne la position des moteurs au dernier rafraîchissement"""
+        return (self.position_moteurs[0], self.position_moteurs[1])
 
 
 

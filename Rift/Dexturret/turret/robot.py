@@ -193,25 +193,6 @@ class Robot:
         return pas * dist
         
     
-    def set_vitesse_roue(self,port,vitesse):
-        """
-        Ajuste la vitesse linéaire d'une ou des deux roues du robot en fonction du port.
-
-        Paramètres :
-        - port : numéro du port de la roue 
-                -> 1 pour roue gauche
-                -> 2 pour roue droite
-                -> 3 pour les deux roues
-        - vitesse : nouvelle vitesse linéaire de la roue (en cm/s)
-        """
-        if (port == 1):
-            self.vitesse_lineaire_roue_gauche = vitesse
-        elif (port == 2):
-            self.vitesse_lineaire_roue_droite = vitesse
-        elif (port == 3):
-            self.vitesse_lineaire_roue_droite = vitesse
-            self.vitesse_lineaire_roue_gauche = vitesse
-    
 
     def get_position_moteurs(self):
         """Retourne la position des moteurs au dernier rafraîchissement"""
