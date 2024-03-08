@@ -1,8 +1,7 @@
-from turret import robot
-from turret.robot2I013Fake import Robot2IN013Fake
+import turret
 
 
-class adaptateurIRL(Robot2IN013Fake):
+class adaptateurIRL(turret.Robot2IN013Fake):
 
     def __init__(self):
         super.__init__()
@@ -51,6 +50,8 @@ class adaptateurSimu(robot):
         """Retourne la position des moteurs au dernier rafraîchissement"""
         return (self.position_moteurs[0], self.position_moteurs[1])
     
+    def detect_distance():
+        pass
 
 
 

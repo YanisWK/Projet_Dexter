@@ -11,11 +11,11 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 #Initialisation des paramètres du robot et de la simulation
 larg = 700
 long = 1000
-robot = turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
-robot.direction = 135
-robot.pret = True
+robotAdapt = controller.adaptateurSimu(1, 50, 25, 0.05, long/2, larg/2, time())
+robotAdapt.direction = 135
+robotAdapt.pret = True
 fps = 60
-simu = turret.Simulation(1, robot, larg, long, fps)
+simu = turret.Simulation(1, robotAdapt, larg, long, fps)
 
 boucle = True
 
@@ -37,20 +37,20 @@ while (boucle):
                 if not (isinstance(distance, int)):
                     print("Entrée invalide, veuillez recommencer depuis le début (l'entrée doit être un entier)")
                 else:
-                    controller_choisi = controller.TracerCarre(robot, distance, vitesse, fps)
+                    controller_choisi = controller.TracerCarre(robotAdapt, distance, vitesse, fps)
             else:
-                controller_choisi = controller.AvancerViteMur(robot, simu, vitesse, fps)
+                controller_choisi = controller.AvancerViteMur(robotAdapt, simu, vitesse, fps)
             boucle = False
 
-window, couleur, canvas, frame, text_distance = interface.creer_graphique(robot,simu)
+window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
 
 plusieurs_strats = [controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi]
 
 i = 0
 plusieurs_strats[0].start()
 
-robot.dernier_rafraichissement = time()
-tab = [(robot.x,robot.y)]
+robotAdapt.dernier_rafraichissement = time()
+tab = [(robotAdapt.x,robotAdapt.y)]
 tailleMax = 500
 #Boucle principale de la simu
 while simu.awake:
@@ -73,17 +73,17 @@ while simu.awake:
 
     #Affichage de la ligne rouge pour la direction du robot
     canvas.pack()
-    if (robot.x,robot.y) != tab[-1]:
+    if (robotAdapt.x,robotAdapt.y) != tab[-1]:
         if len(tab) > tailleMax:
             tab.pop(0)
-        tab.append((robot.x,robot.y))
+        tab.append((robotAdapt.x,robotAdapt.y))
     for elem in range(1,len(tab)):
         x,y = tab[elem-1]
         x1,y1 = tab[elem]
         canvas.create_line(x, y, x1, y1, fill="black")
         canvas.pack()
     canvas.update()
-    interface.affichage_distance(text_distance,robot,simu.longueur,simu.largeur)
+    interface.affichage_distance(text_distance,robotAdapt,simu.longueur,simu.largeur)
 
 #Affichage d'une fenêtre pop-up en cas de collision
 if not simu.awake:
