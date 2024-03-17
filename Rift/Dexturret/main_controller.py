@@ -17,8 +17,20 @@ robotAdapt.pret = True
 fps = 60
 simu = turret.Simulation(1, robotAdapt, larg, long, fps)
 
-boucle = True
 
+stratAvancer = controller.AvancerRobot(robotAdapt, 100, 200, fps)
+stratTournerDroite = controller.TournerRobot(robotAdapt, -90, fps)
+stratTournerGauche = controller.TournerRobot(robotAdapt, 90, fps)
+
+strats = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
+          stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
+            stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
+                stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche]
+
+
+boucle = True
+boucle = False #a supprimer
+'''
 while (boucle):
     print("Choix du controller:\n(1) Tracer un carré\n(2) Foncer vers un mur")
     choix = int(input())
@@ -41,31 +53,22 @@ while (boucle):
             else:
                 controller_choisi = controller.AvancerViteMur(robotAdapt, simu, vitesse, fps)
             boucle = False
+'''
 
 window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
 
-plusieurs_strats = [controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi, controller_choisi]
-
-i = 0
-plusieurs_strats[0].start()
+controller_choisi = controller.Instructions(strats)
 
 robotAdapt.dernier_rafraichissement = time()
 tab = [(robotAdapt.x,robotAdapt.y)]
 tailleMax = 500
 #Boucle principale de la simu
-while simu.awake:
-    if plusieurs_strats[i].stop():
-        i += 1
-        print("STOP NEXT")
-        if i < len(plusieurs_strats):
-            plusieurs_strats[i].start()
-        else:
-            break
+while simu.awake and not controller_choisi.stop():
 
     #Mise a jour tous les 1/temps
     sleep(1/simu.fps)
 
-    plusieurs_strats[i].etape()
+    controller_choisi.etape()
     
     #On efface tout et on redessine le robot
     simu.rafraichir()

@@ -80,14 +80,18 @@ class TournerRobot():
     def start(self):
         """Démarre la rotation"""
         self.angle_parcouru = 0
-        self.robot_direction = self.robot.direction
+        self.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):
         """Effectue une étape de la rotation en déplaçant le robot en fonction de la vitesse de rotation
         et du nombre de rafraichissement, tant que l'angle n'est pas atteint."""
         vit = 10
-        self.robot.set_vitesse_roue(1,vit)
-        self.robot.set_vitesse_roue(2,-vit)
+        if (self.angle > 0):
+            self.robot.set_vitesse_roue(1 , -vit)
+            self.robot.set_vitesse_roue(2 , vit)
+        else:
+            self.robot.set_vitesse_roue(1 , vit)
+            self.robot.set_vitesse_roue(2 , -vit)
 
         nouvelle_position_moteurs = self.robot.get_position_moteurs()
 
@@ -99,14 +103,13 @@ class TournerRobot():
         self.derniere_position_moteurs = nouvelle_position_moteurs
 
         if self.stop():
-            self.robot.set_vitesse_roue(3,0)
             return
 
     def stop(self):
         """Vérifie si la rotation doit s'arrêter"""
         print(self.angle_parcouru)
         print(self.robot.direction)
-        return self.angle <= self.angle_parcouru or self.angle_parcouru >= self.angle - 1
+        return abs(self.angle) <= self.angle_parcouru or self.angle_parcouru >= abs(self.angle) - 1
     
 
 class AvancerViteRobot():
@@ -195,6 +198,37 @@ class AvancerViteMur():
         StratAvancerVite = AvancerViteRobot(self.robot, self.simu, self.vitesse, fps)
         self.strats = [StratAvancerVite]
         self.current = -1
+
+    def start(self):
+        """Démarre l'avancement du robot"""
+        self.current = -1
+
+    def etape(self):
+        """Effectue l'avancement en appelant la méthode etape de la stratégie AvancerVite et
+        met les vitesses des roues à 0, sinon"""
+        if self.stop():
+            return
+        if self.current < 0 or self.strats[self.current].stop():
+            self.current += 1
+            self.strats[self.current].start()
+        self.strats[self.current].etape()
+
+    def stop(self):
+        """Arrête le robot en appelant la méthode stop() de la dernière stratégie"""
+        return self.current == len(self.strats)-1 and self.strats[self.current].stop()
+    
+
+class Instructions():
+    def __init__(self, strats):
+        """
+        Paramètres:
+        - robot : robot à faire avancer
+        - simu : simulation dans laquelle se déplace le robot
+        - vitesse : vitesse du robot
+        - fps : frame par seconde
+        """
+        self.current = -1
+        self.strats = strats
 
     def start(self):
         """Démarre l'avancement du robot"""
