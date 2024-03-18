@@ -11,14 +11,15 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 #Initialisation des paramètres du robot et de la simulation
 larg = 700
 long = 1000
-robotAdapt = controller.adaptateurSimu(1, 50, 25, 0.05, long/2, larg/2, time())
+#robotAdapt = controller.adaptateurSimu(1, 50, 25, 0.05, long/2, larg/2, time())
+robotAdapt = controller.adaptateurIRL()
 robotAdapt.direction = 135
 robotAdapt.pret = True
 fps = 60
 simu = turret.Simulation(1, robotAdapt, larg, long, fps)
 
 
-stratAvancer = controller.AvancerRobot(robotAdapt, 100, 200, fps)
+stratAvancer = controller.AvancerRobot(robotAdapt, 100, 100, fps)
 stratTournerDroite = controller.TournerRobot(robotAdapt, -90, fps)
 stratTournerGauche = controller.TournerRobot(robotAdapt, 90, fps)
 
@@ -55,7 +56,7 @@ while (boucle):
             boucle = False
 '''
 
-window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
+#window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
 
 controller_choisi = controller.Instructions(strats)
 
@@ -71,11 +72,14 @@ while simu.awake and not controller_choisi.stop():
     controller_choisi.etape()
     
     #On efface tout et on redessine le robot
-    simu.rafraichir()
-    interface.rafraichir_graphique(simu, canvas)
+
+    #simu.rafraichir()
+    robotAdapt.rafraichir()
+
+    #interface.rafraichir_graphique(simu, canvas)
 
     #Affichage de la ligne rouge pour la direction du robot
-    canvas.pack()
+    #canvas.pack()
     if (robotAdapt.x,robotAdapt.y) != tab[-1]:
         if len(tab) > tailleMax:
             tab.pop(0)
@@ -83,17 +87,19 @@ while simu.awake and not controller_choisi.stop():
     for elem in range(1,len(tab)):
         x,y = tab[elem-1]
         x1,y1 = tab[elem]
-        canvas.create_line(x, y, x1, y1, fill="black")
-        canvas.pack()
-    canvas.update()
-    interface.affichage_distance(text_distance,robotAdapt,simu.longueur,simu.largeur)
+        #canvas.create_line(x, y, x1, y1, fill="black")
+        #canvas.pack()
+    #canvas.update()
+    #interface.affichage_distance(text_distance,robotAdapt,simu.longueur,simu.largeur)
 
 #Affichage d'une fenêtre pop-up en cas de collision
+"""
 if not simu.awake:
     interface.popup_collision(window)
     logging.info(f'Le Robot est entré en collision avec un obstacle')
+"""
 
 #Lancement de la boucle principale
 print("ok")
-if not boucle:
-    window.mainloop()
+#if not boucle:
+    #window.mainloop()

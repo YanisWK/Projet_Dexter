@@ -14,15 +14,19 @@ class Robot2IN013Fake:
     WHEEL_DIAMETER           = 66.5 #  diametre de la roue (mm)
     WHEEL_BASE_CIRCUMFERENCE = WHEEL_BASE_WIDTH * pi # perimetre du cercle de rotation (mm)
     WHEEL_CIRCUMFERENCE      = WHEEL_DIAMETER   * pi # perimetre de la roue (mm)
+
+    rayon_des_roues = WHEEL_DIAMETER/2
+
     
-    def __init__(self,fps=25):
+    
+    def __init__(self):
         """ 
             Initialise le robot
             :resolution: resolution de la camera
             :servoPort: port du servo (SERVO1 ou SERVO2)
             :motionPort: port pour l'accelerometre (AD1 ou AD2)
         """
-        self.fps=fps
+        self.fps = 60
 
 
     def stop(self):
@@ -42,14 +46,15 @@ class Robot2IN013Fake:
         :port: une constante moteur,  MOTOR_LEFT ou MOTOR_RIGHT (ou les deux MOTOR_LEFT+MOTOR_RIGHT).
         :dps: la vitesse cible en nombre de degres par seconde
         """
-        pass
+        print("Set de la vitesse de la roue ", port, "a une vitesse de ", dps)
 
     def get_motor_position(self):
         """
         Lit les etats des moteurs en degre.
         :return: couple du  degre de rotation des moteurs
         """
-        pass
+        print("Obtenir la positions des moteurs")
+        return(0, 0)
    
     def offset_motor_encoder(self, port, offset):
         """
