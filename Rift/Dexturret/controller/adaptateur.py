@@ -1,18 +1,37 @@
 import turret
+from math import pi
 
 
 class adaptateurIRL(turret.Robot2IN013Fake):
+    """
+    Classe simulant le robot IRL en convertissant les commandes en commandes compréhensibles pour le robot IRL.
+
+    Paramètre :
+    - turret.Robot2IN013Fake : robot IRL de la classe Robot2IN013Fake
+
+    """
 
     def __init__(self):
+        """ Initialise """
         super.__init__()
 
     def set_vitesse_roue(self,port, vitesse):
-        dps = 0 #Mettre le calcule pour mettre en Centimère par seconde
+        """
+        
+        Paramètres :
+        - port :
+        - vitesse : 
+        """
+        dps = vitesse * pi * turret.Robot2IN013Fake.WHEEL_DIAMETER/360
         self.set_motor_dps(port, dps)
-        #print("La vitesse des roue a été set a ",vitesse)
-
 
     def detect_distance(self,_simu_longueur, _simu_largeur):
+        """
+        
+        Paramètres :
+        -_simu_longueur : longueur de l'environnement du robot
+        - _simu_largeur : largeur de l'environnement du robot
+        """
         dist=self.get_distance()/10
         if (dist==819):
             return 800
