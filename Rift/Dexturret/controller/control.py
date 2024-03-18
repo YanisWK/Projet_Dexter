@@ -1,5 +1,5 @@
-import turret
-import controller
+import Dexturret.turret
+import Dexturret.controller
 from math import sqrt, degrees, radians
 
 """
