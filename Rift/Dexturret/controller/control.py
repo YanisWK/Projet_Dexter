@@ -48,9 +48,14 @@ class AvancerRobot():
 
         dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * self.robot.rayon_des_roues
         dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * self.robot.rayon_des_roues
+        print("Ancienne pos moteurs: ", self.derniere_position_moteurs)
+        print("Nouvelle pos moteurs: ", nouvelle_position_moteurs)
+        print("RG: ", dist_RG, ", RD: ", dist_RD)
         self.parcouru += (dist_RG + dist_RD) / 2
 
         self.derniere_position_moteurs = self.robot.get_position_moteurs()
+
+        print("Distance parcourue: ", self.parcouru)
 
         if self.stop() :
             self.robot.set_vitesse_roue(3,0)

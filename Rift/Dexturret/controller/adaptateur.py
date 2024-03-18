@@ -48,7 +48,12 @@ class adaptateurIRL(turret.Robot2IN013Fake):
         """
         return self.get_motor_position()
     
-    
+    def rafraichir(self):
+        print("Le fake se rafraichit")
+        self.position_moteurs[0] += self.vit_roue_gauche
+        self.position_moteurs[1] += self.vit_roue_droite
+
+
 class adaptateurSimu(turret.Robot):
 
     def __init__(self,id, longueur, largeur, rayon_des_roues, x, y, dernier_rafraichissement):
@@ -76,6 +81,3 @@ class adaptateurSimu(turret.Robot):
     def get_position_moteurs(self):
         """Retourne la position des moteurs au dernier rafraîchissement"""
         return (self.position_moteurs[0], self.position_moteurs[1])
-    
-    def rafraichir(self, fps):
-        pass

@@ -16,8 +16,10 @@ class Robot2IN013Fake:
     WHEEL_CIRCUMFERENCE      = WHEEL_DIAMETER   * pi # perimetre de la roue (mm)
 
     rayon_des_roues = WHEEL_DIAMETER/2
+    position_moteurs = [0, 0]
+    vit_roue_gauche = 0
+    vit_roue_droite = 0
 
-    
     
     def __init__(self):
         """ 
@@ -47,14 +49,21 @@ class Robot2IN013Fake:
         :dps: la vitesse cible en nombre de degres par seconde
         """
         print("Set de la vitesse de la roue ", port, "a une vitesse de ", dps)
+        if (port == 1):
+            self.vit_roue_gauche = dps
+        if (port == 2):
+            self.vit_roue_droite = dps
+        else:
+            self.vit_roue_gauche = dps
+            self.vit_roue_droite = dps
 
     def get_motor_position(self):
         """
         Lit les etats des moteurs en degre.
         :return: couple du  degre de rotation des moteurs
         """
-        print("Obtenir la positions des moteurs")
-        return(0, 0)
+        print("Obtenir la positions des moteurs:", "(", self.position_moteurs[0], " , ", self.position_moteurs[1], ")")
+        return self.position_moteurs
    
     def offset_motor_encoder(self, port, offset):
         """
