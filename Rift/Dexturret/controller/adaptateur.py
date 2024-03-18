@@ -13,7 +13,7 @@ class adaptateurIRL(turret.Robot2IN013Fake):
 
     def __init__(self):
         """ Initialise le robot de la classe Robot2IN013Fake"""
-        super.__init__()
+        super().__init__()
 
     def set_vitesse_roue(self,port, vitesse):
         """
