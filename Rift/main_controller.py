@@ -1,9 +1,9 @@
 from tkinter import IntVar,Button,Label
-import interface
-import turret
+import Dexturret.interface as interface
+import Dexturret.turret as turret
 from time import sleep, time
 import logging
-import controller
+import Dexturret.controller as controller
 
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")

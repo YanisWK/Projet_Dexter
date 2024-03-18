@@ -1,9 +1,9 @@
-import turret
+import Dexturret.turret as turret
 from time import time, sleep
-import interface
+import Dexturret.interface
 import logging
-import controller.adaptateur
-from .control import TracerCarre, AvancerViteMur
+import Dexturret.controller.adaptateur as controller
+from Dexturret.controller import TracerCarre, AvancerViteMur
 
 def affichage(robot):
     """
