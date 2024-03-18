@@ -1,5 +1,4 @@
-import turret
-from math import pi
+import Dexturret.turret as turret
 
 
 class adaptateurIRL(turret.Robot2IN013Fake):
