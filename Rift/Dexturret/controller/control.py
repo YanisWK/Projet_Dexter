@@ -48,8 +48,8 @@ class AvancerRobot():
         self.robot.set_vitesse_roue(3,self.vitesse)
         nouvelle_position_moteurs = self.robot.get_position_moteurs()
 
-        dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * self.robot.rayon_des_roues
-        dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * self.robot.rayon_des_roues
+        dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * (self.robot.rayon_des_roues/100)
+        dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * (self.robot.rayon_des_roues/100)
         self.parcouru += (dist_RG + dist_RD) / 2
 
         self.derniere_position_moteurs = nouvelle_position_moteurs
@@ -57,7 +57,6 @@ class AvancerRobot():
         print("Distance parcourue: ", self.parcouru)
 
         if self.stop() :
-            self.robot.set_vitesse_roue(3,0)
             return
         
     def stop(self):
@@ -104,9 +103,12 @@ class TournerRobot():
         angle_RG = nouvelle_position_moteurs[0] - self.derniere_position_moteurs[0]
         angle_RD = nouvelle_position_moteurs[1] - self.derniere_position_moteurs[1]
 
-        self.angle_parcouru += degrees(abs((self.robot.rayon_des_roues * (angle_RD - angle_RG)) / self.robot.largeur))
+        self.angle_parcouru += degrees(abs(((self.robot.rayon_des_roues/100) * (angle_RD - angle_RG)) / self.robot.largeur))
 
         self.derniere_position_moteurs = nouvelle_position_moteurs
+
+        print("Angle parcouru: ", self.angle_parcouru)
+        print("Rayon des roues: ", self.robot.rayon_des_roues)
 
         if self.stop():
             return
@@ -139,8 +141,6 @@ class AvancerViteRobot():
         arrête le robot en réglant la vitesse de ses roues à zéro, sinon
         """
         if self.stop():
-            self.robot.vitesse_lineaire_roue_gauche = 0
-            self.robot.vitesse_lineaire_roue_droite = 0
             return
 
     def stop(self):
