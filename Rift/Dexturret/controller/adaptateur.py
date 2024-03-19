@@ -49,9 +49,19 @@ class adaptateurIRL(turret.Robot2IN013Fake):
         return self.get_motor_position()
     
     def set_position_moteurs(self, port, offset):
+        """
+        Définit la position des moteurs avec un décalage spécifié.
+
+        Paramètres :
+        - port : numéro du port du moteur
+        - offset : offset de décalage en degrés
+        """
         return self.offset_motor_encoder(port, offset)
     
     def rafraichir(self):
+        """
+        Met à jour la position des moteurs en fonction de leur vitesse actuelle.
+        """
         self.position_moteurs[0] += self.vit_roue_gauche
         self.position_moteurs[1] += self.vit_roue_droite
 
@@ -59,6 +69,16 @@ class adaptateurIRL(turret.Robot2IN013Fake):
 class adaptateurSimu(turret.Robot):
 
     def __init__(self,id, longueur, largeur, rayon_des_roues, x, y, dernier_rafraichissement):
+        """
+        Initialise un adaptateur de simulation pour le robot.
+
+        Paramètres :
+        - id : identifiant du robot
+        - longueur, largeur : dimensions du robot
+        - rayon_des_roues : rayon des roues du robot
+        - x,y : position du robot
+        - dernier_rafraichissement : timestamp du dernier rafraîchissement des données du robot
+        """
         super().__init__(id, longueur, largeur, rayon_des_roues, x, y, dernier_rafraichissement)
 
     def set_vitesse_roue(self,port,vitesse):
@@ -82,6 +102,13 @@ class adaptateurSimu(turret.Robot):
         return (self.position_moteurs[0], self.position_moteurs[1])
     
     def set_position_moteurs(self, port, offset):
+        """
+        Définit la position des moteurs avec un décalage spécifié.
+
+        Paramètres :
+        - port : numéro du port du moteur
+        - offset : offset de décalage en degrés
+        """
         if (port == 1 or port == 3):
             self.position_moteurs[0] = offset
         if (port == 2 or port == 3):
