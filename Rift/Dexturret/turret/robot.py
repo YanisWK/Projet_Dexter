@@ -28,8 +28,9 @@ class Robot:
         Paramètres :
         - id : identifiant du robot
         - longueur, largeur : dimensions du robot
-        - x,y : coordonnées du robot dans l'environnement
-
+        - rayon_des_roues : rayon des roues du robot
+        - x,y : position du robot
+        - dernier_rafraichissement : timestamp du dernier rafraîchissement des données du robot
         """
         self.id = id 
 
@@ -57,9 +58,6 @@ class Robot:
     def coordRobot(self):
         """
         Met à jour les coordonnées des coins du robot
-
-        Paramètre :
-        - name : coordonnées des coins du robot
         """
         demi_longueur = self.longueur / 2
         demi_largeur = self.largeur / 2
@@ -75,16 +73,17 @@ class Robot:
 
 
     def __repr__(self):
+        """Décrit le robot"""
         return "Le robot d'identifiant " + str(self.id) + " qui se trouve en (" + str(self.x) + "," + str(self.y) + ")" + " et est tourné de " + str(self.direction) + "° \n" \
                 + "La vitesse de sa roue gauche est de " + str(self.vitesse_lineaire_roue_gauche) + " et celle de sa roue droite est de " + str(self.vitesse_lineaire_roue_droite)
 
 
     def avancer(self, distance):
         """
-        Déplace le robot en ligne droite en mettant à jour les coordonnées de robot 
+        Fait avancer le robot d'une certaine distance en mettant à jour les coordonnées du robot 
 
         Paramètre :
-        - distance : distance à parcourir
+        - distance : distance à parcourir (en cm)
         
         """
         logging.info(f'Le Robot a avancé de {distance} cm')
@@ -96,12 +95,12 @@ class Robot:
 
     def tourner(self, angle):
         """
-        Effectue une rotation en ajustant la direction pour rester dans [0, 360]
+        Fait tourner le robot d'un certain angle en ajustant la direction pour rester dans [0, 360]
         Si l'angle n'est pas compris dans [0,360], c'est l'angle modulo 360 qui est ajouté 
         à la direction actuelle
 
         Paramètre :
-        - angle : angle de rotation
+        - angle : angle de rotation (en degrés)
 
         """
         self.direction += angle
@@ -116,9 +115,11 @@ class Robot:
 
     def coeff_directeur(self, angle):
         """
-        Retourne (a,b) tel que ax+by représente la droite de la direction dans laquelle le robot est orienté
-        Cette droite permet au robot de se déplacer dans la direction voulue en variant x et y
+        Retourne le coefficient directeur de la droite représentant la trajectoire du robot
 
+        Paramètre:
+        - angle : angle de direction du robot
+        
         """
         a = cos(radians(angle))
         b = sin(radians(angle))
@@ -127,7 +128,7 @@ class Robot:
     
     def deplacementRobot(self, fps):
         """
-        Calcule la distance de déplacement en ligne droite et la rotation du robot à chaque rafraîchissement, 
+        Calcule la distance parcourue en ligne droite et la rotation du robot à chaque rafraîchissement, 
         puis met à jour la position et la direction du robot en appelant avancer et tourner
         
         Paramètre :
@@ -160,6 +161,7 @@ class Robot:
     def rafraichir(self,fps):
         """
         Met à jour les positions des coins du robot et les déplacements du robot
+        à chaque rafraichissement.
 
         Paramètre :
         - fps : frame par seconde
@@ -172,13 +174,10 @@ class Robot:
 
     def detect_distance(self, simu_longueur, simu_largeur):
         """
-        Retourne une distance dans la direction dans laquelle le robot est orienté
+        Retourne la distance détectée par le capteur (en cm)
 
         Paramètre :
-        - simu_longueur, simu_largeur : dimensions de l'environnement d'une simulation
-
-        Retourne :
-        - la distance entre le robot et le mur dans la direction du robot
+        - simu_longueur, simu_largeur : dimensions de l'environnement de simulation
 
         """
 

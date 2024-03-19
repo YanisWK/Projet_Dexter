@@ -18,7 +18,7 @@ fps = 60
 
 #Initialisation du robot qu'on va utiliser dans le suite du programme
 try:
-    choix = int(input("Quel robot vous voulez désigner ? (Tapez 1 pour le robotSimu et 2 pour le robotIRL) : "))
+    choix = int(input("Quel robot voulez-vous désigner ? (Tapez 1 pour le robotSimu ou 2 pour le robotIRL) : "))
     if choix == 1:
         robotAdapt = robotSimu
         robotAdapt.direction = 135
@@ -30,10 +30,10 @@ try:
         robotAdapt = robotIRL
         refresh = robotAdapt
     else:
-        print("Arrête du programme\n")
+        print("Arrêt du programme\n")
         exit()
 except ValueError:
-    print("Arrête du programme \n")
+    print("Arrêt du programme \n")
     exit()
 
 simu = turret.Simulation(1, robotAdapt, larg, long, fps)
