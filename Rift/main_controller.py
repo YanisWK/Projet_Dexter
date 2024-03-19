@@ -28,6 +28,8 @@ strats = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, st
             stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
                 stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche]
 
+carre = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite]
+
 
 boucle = True
 boucle = False #a supprimer
@@ -58,7 +60,7 @@ while (boucle):
 
 #window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
 
-controller_choisi = controller.Instructions(strats)
+controller_choisi = controller.Instructions(carre)
 
 robotAdapt.dernier_rafraichissement = time()
 tab = [(robotAdapt.x,robotAdapt.y)]
