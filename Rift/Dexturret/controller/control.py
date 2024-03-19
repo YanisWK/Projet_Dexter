@@ -36,24 +36,22 @@ class AvancerRobot():
 
     def start(self):
         """Démarre l'avancement"""
+        print("DEBUT AVANCER")
         self.parcouru = 0
         self.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):
         """Effectue une étape de l'avancement en déplaçant le robot en fonction de la vitesse de déplacement
         et du nombre de rafraichissement, tant que la distance n'a pas été entièrement parcourue."""
-        self.robot.set_vitesse_roue(3,self.vitesse)
 
+        self.robot.set_vitesse_roue(3,self.vitesse)
         nouvelle_position_moteurs = self.robot.get_position_moteurs()
 
         dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * self.robot.rayon_des_roues
         dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * self.robot.rayon_des_roues
-        print("Ancienne pos moteurs: ", self.derniere_position_moteurs)
-        print("Nouvelle pos moteurs: ", nouvelle_position_moteurs)
-        print("RG: ", dist_RG, ", RD: ", dist_RD)
         self.parcouru += (dist_RG + dist_RD) / 2
 
-        self.derniere_position_moteurs = self.robot.get_position_moteurs()
+        self.derniere_position_moteurs = nouvelle_position_moteurs
 
         print("Distance parcourue: ", self.parcouru)
 
@@ -63,7 +61,7 @@ class AvancerRobot():
         
     def stop(self):
         """Vérifie si l'avancement doit s'arrêter"""
-        return self.parcouru >= self.distance or self.parcouru >= self.distance - 2
+        return self.parcouru >= abs(self.distance) or self.parcouru >= abs(self.distance) - 2
     
 
 class TournerRobot():
@@ -84,6 +82,7 @@ class TournerRobot():
 
     def start(self):
         """Démarre la rotation"""
+        print("DEBUT TOURNER")
         self.angle_parcouru = 0
         self.derniere_position_moteurs = self.robot.get_position_moteurs()
 
@@ -112,8 +111,6 @@ class TournerRobot():
 
     def stop(self):
         """Vérifie si la rotation doit s'arrêter"""
-        print(self.angle_parcouru)
-        print(self.robot.direction)
         return abs(self.angle) <= self.angle_parcouru or self.angle_parcouru >= abs(self.angle) - 1
     
 

@@ -1,5 +1,5 @@
 import Dexturret.turret as turret
-from math import pi 
+from math import pi, degrees
 
 
 class adaptateurIRL(turret.Robot2IN013Fake):
@@ -15,7 +15,7 @@ class adaptateurIRL(turret.Robot2IN013Fake):
         """ Initialise le robot de la classe Robot2IN013Fake"""
         super().__init__()
 
-    def set_vitesse_roue(self,port, vitesse):
+    def set_vitesse_roue(self, port, vitesse):
         """
         Ajuste la vitesse linéaire d'une ou des deux roues du robot en fonction du port.
 
@@ -26,7 +26,7 @@ class adaptateurIRL(turret.Robot2IN013Fake):
                 -> 3 pour les deux roues
         - vitesse : nouvelle vitesse linéaire de la roue (en cm/s)
         """
-        dps = vitesse * pi * turret.Robot2IN013Fake.WHEEL_DIAMETER/360
+        dps = vitesse * 2 * pi / (self.rayon_des_roues * 10)
         self.set_motor_dps(port, dps)
 
     def detect_distance(self,_simu_longueur, _simu_largeur):
@@ -49,7 +49,6 @@ class adaptateurIRL(turret.Robot2IN013Fake):
         return self.get_motor_position()
     
     def rafraichir(self):
-        print("Le fake se rafraichit")
         self.position_moteurs[0] += self.vit_roue_gauche
         self.position_moteurs[1] += self.vit_roue_droite
 
