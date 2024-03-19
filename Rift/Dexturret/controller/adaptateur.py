@@ -48,6 +48,9 @@ class adaptateurIRL(turret.Robot2IN013Fake):
         """
         return self.get_motor_position()
     
+    def set_position_moteurs(self, port, offset):
+        return self.offset_motor_encoder(port, offset)
+    
     def rafraichir(self):
         self.position_moteurs[0] += self.vit_roue_gauche
         self.position_moteurs[1] += self.vit_roue_droite
@@ -69,14 +72,17 @@ class adaptateurSimu(turret.Robot):
                 -> 3 pour les deux roues
         - vitesse : nouvelle vitesse linéaire de la roue (en cm/s)
         """
-        if (port == 1):
+        if (port == 1 or port == 3):
             self.vitesse_lineaire_roue_gauche = vitesse
-        elif (port == 2):
+        if (port == 2 or port == 3):
             self.vitesse_lineaire_roue_droite = vitesse
-        elif (port == 3):
-            self.vitesse_lineaire_roue_droite = vitesse
-            self.vitesse_lineaire_roue_gauche = vitesse
 
     def get_position_moteurs(self):
         """Retourne la position des moteurs au dernier rafraîchissement"""
         return (self.position_moteurs[0], self.position_moteurs[1])
+    
+    def set_position_moteurs(self, port, offset):
+        if (port == 1 or port == 3):
+            self.position_moteurs[0] = offset
+        if (port == 2 or port == 3):
+            self.position_moteurs[1] = offset

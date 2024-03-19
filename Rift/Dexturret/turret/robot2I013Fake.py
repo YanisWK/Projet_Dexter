@@ -76,7 +76,10 @@ class Robot2IN013Fake:
 
         Zero the encoder by offsetting it by the current position
         """
-        pass
+        if (port == 1 or port == 3):
+            self.position_moteurs[0] = offset
+        if (port == 2 or port == 3):
+            self.position_moteurs[1] = offset
 
     def get_distance(self):
         """

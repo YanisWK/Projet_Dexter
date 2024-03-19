@@ -38,6 +38,7 @@ class AvancerRobot():
         """Démarre l'avancement"""
         print("DEBUT AVANCER")
         self.parcouru = 0
+        self.robot.set_position_moteurs(3, 0)
         self.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):
@@ -84,6 +85,7 @@ class TournerRobot():
         """Démarre la rotation"""
         print("DEBUT TOURNER")
         self.angle_parcouru = 0
+        self.robot.set_position_moteurs(3, 0)
         self.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):
@@ -162,7 +164,6 @@ class TracerCarre():
         self.vitesse = vitesse
         stratAvancer = AvancerRobot(self.robot, self.tailleCote, self.vitesse, fps)
         stratTourner = TournerRobot(self.robot, 90, fps)
-         #Besoin de savoir a chaque fois qu'on tourne de combien de degrès il faut tourner.
 
         self.strats = [stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner]
         self.current = -1
