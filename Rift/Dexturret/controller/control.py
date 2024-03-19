@@ -1,6 +1,4 @@
-import Dexturret.turret
-import Dexturret.controller
-from math import sqrt, degrees, radians
+from math import degrees
 
 """
 Documentation:
@@ -146,80 +144,7 @@ class AvancerViteRobot():
     def stop(self):
         """Arrête le robot en fonction de la distance qui le sépare des bordures de la simulation"""
         return self.robot.detect_distance(self.simu.longueur, self.simu.largeur) <= self.robot.largeur
-
-
-
-class TracerCarre():
-    """Classe qui permet au robot de tracer un carré"""
-    def __init__(self, robot, tailleCote, vitesse, fps):
-        """
-        Paramètres:
-        - robot : robot à faire avancer
-        - tailleCote : taille du coté du carré
-        - vitesse : vitesse du robot
-        - fps : frame par seconde
-        """
-        self.robot = robot
-        self.tailleCote = tailleCote
-        self.vitesse = vitesse
-        stratAvancer = AvancerRobot(self.robot, self.tailleCote, self.vitesse, fps)
-        stratTourner = TournerRobot(self.robot, 90, fps)
-
-        self.strats = [stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner,stratAvancer,stratTourner]
-        self.current = -1
-
-    def start(self):
-        """Démarre le traçage du carré"""
-        self.current = -1
-
-    def etape(self):
-        """Effectue le traçage du carré en appelant les classes AvancerRobot et TournerRobot alternativement"""
-        if self.stop():
-            return
-        if self.current < 0 or self.strats[self.current].stop():
-            self.current += 1
-            self.strats[self.current].start()
-        self.strats[self.current].etape()
-
-    def stop(self):
-        """Arrête le traçage du carré en appelant la méthode stop() de la dernière stratégie"""
-        return self.current == len(self.strats)-1 and self.strats[self.current].stop()
-
-class AvancerViteMur():
-    """Fait avancer le robot rapidement en fonction des limites de la simulation"""
-    def __init__(self, robot, simu, vitesse, fps):
-        """
-        Paramètres:
-        - robot : robot à faire avancer
-        - simu : simulation dans laquelle se déplace le robot
-        - vitesse : vitesse du robot
-        - fps : frame par seconde
-        """
-        self.robot = robot
-        self.simu = simu
-        self.vitesse = vitesse
-        StratAvancerVite = AvancerViteRobot(self.robot, self.simu, self.vitesse, fps)
-        self.strats = [StratAvancerVite]
-        self.current = -1
-
-    def start(self):
-        """Démarre l'avancement du robot"""
-        self.current = -1
-
-    def etape(self):
-        """Effectue l'avancement en appelant la méthode etape de la stratégie AvancerVite et
-        met les vitesses des roues à 0, sinon"""
-        if self.stop():
-            return
-        if self.current < 0 or self.strats[self.current].stop():
-            self.current += 1
-            self.strats[self.current].start()
-        self.strats[self.current].etape()
-
-    def stop(self):
-        """Arrête le robot en appelant la méthode stop() de la dernière stratégie"""
-        return self.current == len(self.strats)-1 and self.strats[self.current].stop()
-    
+        
 
 class Instructions():
     def __init__(self, strats):
