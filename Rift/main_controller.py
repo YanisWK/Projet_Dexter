@@ -4,7 +4,7 @@ import Dexturret.turret as turret
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
-from Dexturret import carre,strats
+from Dexturret import carre,strat
 
 
 #Configuration des logs 
