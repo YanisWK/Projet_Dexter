@@ -1,3 +1,4 @@
+
 from math import pi, degrees
 
 
@@ -35,7 +36,7 @@ class adaptateurIRL():
         - _simu_longueur : longueur de l'environnement du robot
         - _simu_largeur : largeur de l'environnement du robot
         """
-        dist=self.get_distance()/10
+        dist=self.robot.get_distance()/10
         if (dist==819):
             return 800
         return dist
@@ -44,7 +45,7 @@ class adaptateurIRL():
         """
         Retourne la position des moteurs du robot au dernier rafraichissement.
         """
-        return self.get_motor_position()
+        return self.robot.get_motor_position()
     
     def set_position_moteurs(self, port, offset):
         """
@@ -54,12 +55,12 @@ class adaptateurIRL():
         - port : numéro du port du moteur
         - offset : offset de décalage en degrés
         """
-        return self.offset_motor_encoder(port, offset)
+        return self.robot.offset_motor_encoder(port, offset)
     
     def rafraichir(self):
         """
         Met à jour la position des moteurs en fonction de leur vitesse actuelle.
         """
-        self.position_moteurs[0] += self.vit_roue_gauche
-        self.position_moteurs[1] += self.vit_roue_droite
+        self.robot.position_moteurs[0] += self.robot.vit_roue_gauche
+        self.robot.position_moteurs[1] += self.robot.vit_roue_droite
 

@@ -27,13 +27,13 @@ class adaptateurSimu():
         - vitesse : nouvelle vitesse linéaire de la roue (en cm/s)
         """
         if (port == 1 or port == 3):
-            self.vitesse_lineaire_roue_gauche = vitesse
+            self.robot.vitesse_lineaire_roue_gauche = vitesse
         if (port == 2 or port == 3):
-            self.vitesse_lineaire_roue_droite = vitesse
+            self.robot.vitesse_lineaire_roue_droite = vitesse
 
     def get_position_moteurs(self):
         """Retourne la position des moteurs au dernier rafraîchissement"""
-        return (self.position_moteurs[0], self.position_moteurs[1])
+        return (self.robot.sposition_moteurs[0], self.robot.position_moteurs[1])
     
     def set_position_moteurs(self, port, offset):
         """
@@ -44,6 +44,6 @@ class adaptateurSimu():
         - offset : offset de décalage en degrés
         """
         if (port == 1 or port == 3):
-            self.position_moteurs[0] = offset
+            self.robot.position_moteurs[0] = offset
         if (port == 2 or port == 3):
-            self.position_moteurs[1] = offset
+            self.robot.position_moteurs[1] = offset
