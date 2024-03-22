@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 #Initialisation des paramètres des robot et des variables pour la simulation
 larg = 700
 long = 1000
-robotSimu = controller.adaptateurSimu(1, 50, 25, 5, long/2, larg/2, time())
+robotSimu = controller.adaptateurSimu()
 robotIRL = controller.adaptateurIRL()
 fps = 60
 
