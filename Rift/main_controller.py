@@ -4,19 +4,10 @@ import Dexturret.turret as turret
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
-from Dexturret import carre,strats
-
+from Dexturret import carre,strats,robotSimu,robotIRL,long,larg,fps
 
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
-
-#Initialisation des paramètres des robot et des variables pour la simulation
-larg = 700
-long = 1000
-robotSimu = controller.adaptateurSimu(1, 50, 25, 5, long/2, larg/2, time())
-robotIRL = controller.adaptateurIRL()
-fps = 60
-
 
 #Initialisation du robot qu'on va utiliser dans le suite du programme
 try:
