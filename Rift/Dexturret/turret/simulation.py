@@ -43,7 +43,7 @@ class Simulation:
         
         """
         if (self.awake):
-            self.robot.rafraichir(self.fps)
+            self.robot.rafraichir()
             self.robot.detect_distance(self.longueur,self.largeur)
             self.check_collision()
 

@@ -40,6 +40,21 @@ except ValueError:
 
 simu = turret.Simulation(1, robotAdapt, larg, long, fps)
 #Initialisation des stratégies séquentielle 
+<<<<<<< HEAD
+=======
+stratAvancer = controller.AvancerRobot(robotAdapt, 100, 100, fps)
+stratTournerDroite = controller.TournerRobot(robotAdapt, -90, fps)
+stratTournerGauche = controller.TournerRobot(robotAdapt, 90, fps)
+
+strats = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
+          stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
+            stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
+                stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche]
+
+carre = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite]
+stratCarre = controller.Instructions(carre)
+carres = [stratCarre, stratCarre, stratCarre]
+>>>>>>> 034773effdd53b01a4897e78597f9dd77014d078
 
 controller_choisi = controller.Instructions(carre)
 
@@ -81,10 +96,12 @@ if (robotAdapt == robotIRL):
     print("Fin du programme robot IRL")
     exit()
 
-interface.popup_collision(window)
-logging.info(f'Le Robot est entré en collision avec un obstacle')
+if not simu.awake:
+    interface.popup_collision(window)
+    logging.info(f'Le Robot est entré en collision avec un obstacle')
 
 print("Fin du programme robotSimu")
 
 
 
+window.mainloop()
