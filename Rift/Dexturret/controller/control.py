@@ -9,8 +9,7 @@ Classes:
 - AvancerRobot
 - TournerRobot
 - AvancerViteRobot
-- TracerCarre
-- AvancerViteMur
+- Instructions
 
 """
 
