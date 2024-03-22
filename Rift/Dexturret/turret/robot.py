@@ -126,7 +126,7 @@ class Robot:
         return (a,b)
             
     
-    def deplacementRobot(self, fps):
+    def deplacementRobot(self):
         """
         Calcule la distance parcourue en ligne droite et la rotation du robot à chaque rafraîchissement, 
         puis met à jour la position et la direction du robot en appelant avancer et tourner
@@ -143,22 +143,22 @@ class Robot:
 
 
         vitesse_deplacement = (self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2
-        deplacement_par_rafraichissement = vitesse_deplacement * ((1/fps) + self.temps_ajustement)
+        deplacement_par_rafraichissement = vitesse_deplacement * (self.temps_ajustement)
         print("robot deplacer avancer: ", deplacement_par_rafraichissement)
         self.avancer(deplacement_par_rafraichissement)
 
         #Calcul de la rotation que le robot doit faire à chaque rafraîchissement
 
         vitesse_rotation = ( (self.rayon_des_roues/100) * (vitesse_rotation_roue_droite - vitesse_rotation_roue_gauche)) / self.largeur
-        rotation_par_rafraichissement = vitesse_rotation * ((1/fps) + self.temps_ajustement)
+        rotation_par_rafraichissement = vitesse_rotation * (self.temps_ajustement)
 
-        self.position_moteurs[0] += vitesse_rotation_roue_gauche * ((1/fps) + self.temps_ajustement)
-        self.position_moteurs[1] += vitesse_rotation_roue_droite * ((1/fps) + self.temps_ajustement)
+        self.position_moteurs[0] += vitesse_rotation_roue_gauche * (self.temps_ajustement)
+        self.position_moteurs[1] += vitesse_rotation_roue_droite * (self.temps_ajustement)
 
         self.tourner(degrees(rotation_par_rafraichissement))
         
 
-    def rafraichir(self,fps):
+    def rafraichir(self):
         """
         Met à jour les positions des coins du robot et les déplacements du robot
         à chaque rafraichissement.
@@ -166,10 +166,10 @@ class Robot:
         Paramètre :
         - fps : frame par seconde
         """
-        self.temps_ajustement = max(round((time() - self.dernier_rafraichissement) - 1/fps, 3), 0)
+        self.temps_ajustement = round((time() - self.dernier_rafraichissement), 3)
         self.dernier_rafraichissement = time()
         if self.pret:
-            self.deplacementRobot(fps)
+            self.deplacementRobot()
         
 
     def detect_distance(self, simu_longueur, simu_largeur):
