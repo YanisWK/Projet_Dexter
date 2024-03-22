@@ -9,17 +9,12 @@ from Dexturret import carre,strats,robotSimu,robotIRL,long,larg,fps
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
 
-<<<<<<< HEAD
-=======
 #Initialisation des paramètres des robot et des variables pour la simulation
 larg = 700
 long = 1000
-robotSimu = controller.adaptateurSimu()
-robotIRL = controller.adaptateurIRL()
 fps = 60
 
 
->>>>>>> b9196a3ae72778d0b279d37f2ad2d7a323a14cc5
 #Initialisation du robot qu'on va utiliser dans le suite du programme
 try:
     choix = int(input("Quel robot voulez-vous désigner ? (Tapez 1 pour le robotSimu ou 2 pour le robotIRL) : "))
@@ -29,10 +24,10 @@ try:
         robotAdapt.pret = True
         simu = turret.Simulation(1, robotAdapt, larg, long, fps)
         window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
-        refresh = simu
+        refresh = 1
     elif choix == 2:
         robotAdapt = robotIRL
-        refresh = robotAdapt
+        refresh = 2
     else:
         print("Arrêt du programme\n")
         exit()
@@ -46,10 +41,8 @@ simu = turret.Simulation(1, robotAdapt, larg, long, fps)
 controller_choisi = controller.Instructions(carre)
 
 
-if (robotAdapt == robotSimu):
+if refresh == 1:
     robotAdapt.dernier_rafraichissement = time()
-    tab = [(robotAdapt.x,robotAdapt.y)]
-    tailleMax = 500
 
 
 #Boucle principale de la simu
@@ -59,24 +52,24 @@ while simu.awake and not controller_choisi.stop():
     sleep(1/fps)
 
     controller_choisi.etape()
-    
-    refresh.rafraichir()
-    if (robotAdapt == robotSimu):
+    if refresh == 1 :
+        simu.rafraichir()
         interface.rafraichir_graphique(simu, canvas)
-
         #Affichage de la ligne rouge pour la direction du robot
         canvas.pack()
-        if (robotAdapt.x,robotAdapt.y) != tab[-1]:
-            if len(tab) > tailleMax:
-                tab.pop(0)
-            tab.append((robotAdapt.x,robotAdapt.y))
-        for elem in range(1,len(tab)):
-            x,y = tab[elem-1]
-            x1,y1 = tab[elem]
+        if (robotAdapt.x,robotAdapt.y) != robotAdapt.trace[-1]:
+            if len(robotAdapt.trace) > 500:
+                robotAdapt.trace.pop(0)
+            robotAdapt.trace.append((robotAdapt.x,robotAdapt.y))
+        for elem in range(1,len(robotAdapt.trace)):
+            x,y = robotAdapt.trace[elem-1]
+            x1,y1 = robotAdapt.trace[elem]
             canvas.create_line(x, y, x1, y1, fill="black")
             canvas.pack()
         canvas.update()
         interface.affichage_distance(text_distance,robotAdapt,simu.longueur,simu.largeur)
+    if refresh == 2:
+        robotAdapt.rafraichir()
 
 #Affichage d'une fenêtre pop-up en cas de collision
 if (robotAdapt == robotIRL):
@@ -88,7 +81,5 @@ if not simu.awake:
     logging.info(f'Le Robot est entré en collision avec un obstacle')
 
 print("Fin du programme robotSimu")
-
-
 
 window.mainloop()

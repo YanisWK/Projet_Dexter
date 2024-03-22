@@ -52,6 +52,8 @@ class Robot:
         self.temps_ajustement = 0
 
         self.position_moteurs = [0,0]
+        
+        self.trace = []
 
 
     @property
