@@ -10,6 +10,7 @@ Classes:
 - TournerRobot
 - AvancerViteRobot
 - Instructions
+- Strat_if
 
 """
 
@@ -147,18 +148,18 @@ class AvancerViteRobot():
 class Instructions():
     def __init__(self, strats):
         """
-        Paramètres:
-
+        Paramètre:
+        - strats : liste d'instructions à effectuer
         """
         self.current = -1
         self.strats = strats
 
     def start(self):
-        """"""
+        """Démarre l'exécution de lla liste de stratégies"""
         self.current = -1
 
     def etape(self):
-        """"""
+        """Exécute chaque instruction de la liste avec ses fonctions start et etape tout en testant sa fonction stop"""
         if self.stop():
             return
         if self.current < 0 or self.strats[self.current].stop():
@@ -167,7 +168,7 @@ class Instructions():
         self.strats[self.current].etape()
 
     def stop(self):
-        """"""
+        """Stoppe le robot si la dernière instruction est terminée"""
         return self.current == len(self.strats)-1 and self.strats[self.current].stop()
     
 
@@ -175,8 +176,8 @@ class Strat_if():
     def __init__(self, condition,strats):
         """
         Paramètres:
-        - condition : 
-        - strats : La strategie sequentielle a effectuer si la condition est rempli
+        - condition : condition à checker avant de faire une instruction
+        - strats : stratégie séquentielle à effectuer si la condition est remplie
         """
         self.condition = condition
         self.strats = strats
