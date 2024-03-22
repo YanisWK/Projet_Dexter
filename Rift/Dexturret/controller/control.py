@@ -149,21 +149,17 @@ class Instructions():
     def __init__(self, strats):
         """
         Paramètres:
-        - robot : robot à faire avancer
-        - simu : simulation dans laquelle se déplace le robot
-        - vitesse : vitesse du robot
-        - fps : frame par seconde
+
         """
         self.current = -1
         self.strats = strats
 
     def start(self):
-        """Démarre l'avancement du robot"""
+        """"""
         self.current = -1
 
     def etape(self):
-        """Effectue l'avancement en appelant la méthode etape de la stratégie AvancerVite et
-        met les vitesses des roues à 0, sinon"""
+        """"""
         if self.stop():
             return
         if self.current < 0 or self.strats[self.current].stop():
@@ -172,5 +168,34 @@ class Instructions():
         self.strats[self.current].etape()
 
     def stop(self):
-        """Arrête le robot en appelant la méthode stop() de la dernière stratégie"""
+        """"""
         return self.current == len(self.strats)-1 and self.strats[self.current].stop()
+    
+
+class Strat_if():
+    def __init__(self, condition,strats):
+        """
+        Paramètres:
+        - condition : 
+        - strats : La strategie sequentielle a effectuer si la condition est rempli
+        """
+        self.condition = condition
+        self.strats = strats
+        self.current = -1
+    
+    def start(self):
+        """"""
+        self.current = -1
+
+    def etape(self):
+        """"""
+        if self.stop():
+            return
+        if self.current < 0 or self.strats[self.current].stop():
+            self.current += 1
+            self.strats[self.current].start()
+        self.strats[self.current].etape()
+
+    def stop(self):
+        """"""
+        return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condition)
