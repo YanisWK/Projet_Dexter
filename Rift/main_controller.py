@@ -4,6 +4,8 @@ import Dexturret.turret as turret
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
+from Dexturret import carre,strats
+
 
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
@@ -38,18 +40,6 @@ except ValueError:
 
 simu = turret.Simulation(1, robotAdapt, larg, long, fps)
 #Initialisation des stratégies séquentielle 
-stratAvancer = controller.AvancerRobot(robotAdapt, 100, 100, fps)
-stratTournerDroite = controller.TournerRobot(robotAdapt, -90, fps)
-stratTournerGauche = controller.TournerRobot(robotAdapt, 90, fps)
-
-strats = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
-          stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
-            stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
-                stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche]
-
-carre = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite]
-stratCarre = controller.Instructions(carre)
-carres = [stratCarre, stratCarre, stratCarre]
 
 controller_choisi = controller.Instructions(carre)
 
