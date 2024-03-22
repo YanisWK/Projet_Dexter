@@ -33,7 +33,7 @@ class adaptateurSimu():
 
     def get_position_moteurs(self):
         """Retourne la position des moteurs au dernier rafraîchissement"""
-        return (self.robot.sposition_moteurs[0], self.robot.position_moteurs[1])
+        return (self.robot.position_moteurs[0], self.robot.position_moteurs[1])
     
     def set_position_moteurs(self, port, offset):
         """
