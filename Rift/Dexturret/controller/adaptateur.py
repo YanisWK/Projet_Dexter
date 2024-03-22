@@ -2,7 +2,7 @@ import Dexturret.turret as turret
 from math import pi, degrees
 
 
-class adaptateurIRL(turret.Robot2IN013Fake):
+class adaptateurIRL():
     """
     Classe simulant le robot IRL en convertissant les commandes en commandes compréhensibles pour le robot IRL.
 
@@ -66,7 +66,7 @@ class adaptateurIRL(turret.Robot2IN013Fake):
         self.position_moteurs[1] += self.vit_roue_droite
 
 
-class adaptateurSimu(turret.Robot):
+class adaptateurSimu():
 
     def __init__(self,id, longueur, largeur, rayon_des_roues, x, y, dernier_rafraichissement):
         """
