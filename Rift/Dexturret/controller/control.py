@@ -106,14 +106,13 @@ class TournerRobot():
         self.derniere_position_moteurs = nouvelle_position_moteurs
 
         print("Angle parcouru: ", self.angle_parcouru)
-        print("Rayon des roues: ", self.robot.rayon_des_roues)
 
         if self.stop():
             return
 
     def stop(self):
         """Vérifie si la rotation doit s'arrêter"""
-        return abs(self.angle) <= self.angle_parcouru or self.angle_parcouru >= abs(self.angle) - 1
+        return abs(self.angle) <= self.angle_parcouru or self.angle_parcouru >= abs(self.angle) - 1.5
     
 
 class AvancerViteRobot():

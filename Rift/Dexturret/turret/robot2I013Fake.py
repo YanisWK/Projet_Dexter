@@ -15,7 +15,7 @@ class Robot2IN013Fake:
     WHEEL_BASE_CIRCUMFERENCE = WHEEL_BASE_WIDTH * pi # perimetre du cercle de rotation (mm)
     WHEEL_CIRCUMFERENCE      = WHEEL_DIAMETER   * pi # perimetre de la roue (mm)
 
-    rayon_des_roues = 5
+    rayon_des_roues = WHEEL_DIAMETER/22
     largeur = WHEEL_BASE_WIDTH/10
     position_moteurs = [0, 0]
     vit_roue_gauche = 0
@@ -63,7 +63,7 @@ class Robot2IN013Fake:
         Lit les etats des moteurs en degre.
         :return: couple du  degre de rotation des moteurs
         """
-        print("Obtenir la positions des moteurs:", "(", self.position_moteurs[0], " , ", self.position_moteurs[1], ")")
+        print("Obtenir la positions des moteurs")
         return (self.position_moteurs[0], self.position_moteurs[1])
    
     def offset_motor_encoder(self, port, offset):

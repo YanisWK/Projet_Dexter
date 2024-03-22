@@ -48,6 +48,8 @@ strats = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, st
                 stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche]
 
 carre = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite]
+stratCarre = controller.Instructions(carre)
+carres = [stratCarre, stratCarre, stratCarre]
 
 controller_choisi = controller.Instructions(carre)
 
@@ -89,10 +91,12 @@ if (robotAdapt == robotIRL):
     print("Fin du programme robot IRL")
     exit()
 
-interface.popup_collision(window)
-logging.info(f'Le Robot est entré en collision avec un obstacle')
+if not simu.awake:
+    interface.popup_collision(window)
+    logging.info(f'Le Robot est entré en collision avec un obstacle')
 
 print("Fin du programme robotSimu")
 
 
 
+window.mainloop()
