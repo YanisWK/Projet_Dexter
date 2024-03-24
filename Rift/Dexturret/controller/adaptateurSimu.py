@@ -47,3 +47,30 @@ class adaptateurSimu():
             self.robot.position_moteurs[0] = offset
         if (port == 2 or port == 3):
             self.robot.position_moteurs[1] = offset
+
+    def detect_distance(self, simu_longueur, simu_largeur):
+        return self.robot.detect_distance(simu_longueur, simu_largeur)
+
+    @property
+    def rayon_des_roues(self):
+        return self.robot.rayon_des_roues
+    
+    @property
+    def x(self):
+        return self.robot.x
+    
+    @property
+    def y(self):
+        return self.robot.y
+    
+    @property
+    def longueur(self):
+        return self.robot.longueur
+    
+    @property
+    def largeur(self):
+        return self.robot.largeur
+    
+    @property
+    def trace(self):
+        return self.robot.trace

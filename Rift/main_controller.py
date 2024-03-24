@@ -4,25 +4,16 @@ import Dexturret.turret as turret
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
-from Dexturret import carre,strats,robotSimu,robotIRL,long,larg,fps
+from Dexturret import stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps
 
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
-
-#Initialisation des paramètres des robot et des variables pour la simulation
-larg = 700
-long = 1000
-fps = 60
-
 
 #Initialisation du robot qu'on va utiliser dans le suite du programme
 try:
     choix = int(input("Quel robot voulez-vous désigner ? (Tapez 1 pour le robotSimu ou 2 pour le robotIRL) : "))
     if choix == 1:
         robotAdapt = robotSimu
-        robotAdapt.direction = 135
-        robotAdapt.pret = True
-        simu = turret.Simulation(1, robotAdapt, larg, long, fps)
         window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
         refresh = 1
     elif choix == 2:
@@ -35,16 +26,9 @@ except ValueError:
     print("Arrêt du programme \n")
     exit()
 
-simu = turret.Simulation(1, robotAdapt, larg, long, fps)
-#Initialisation des stratégies séquentielle 
+controller_choisi = stratCarres
 
-controller_choisi = controller.Instructions(carre)
-
-
-if refresh == 1:
-    robotAdapt.dernier_rafraichissement = time()
-
-
+robotSim.dernier_rafraichissement = time()
 #Boucle principale de la simu
 while simu.awake and not controller_choisi.stop():
 
@@ -57,7 +41,7 @@ while simu.awake and not controller_choisi.stop():
         interface.rafraichir_graphique(simu, canvas)
         #Affichage de la ligne rouge pour la direction du robot
         canvas.pack()
-        if (robotAdapt.x,robotAdapt.y) != robotAdapt.trace[-1]:
+        if (len(robotAdapt.trace) == 0) or (robotAdapt.x,robotAdapt.y) != robotAdapt.trace[-1]:
             if len(robotAdapt.trace) > 500:
                 robotAdapt.trace.pop(0)
             robotAdapt.trace.append((robotAdapt.x,robotAdapt.y))
