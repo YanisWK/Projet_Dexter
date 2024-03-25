@@ -106,7 +106,7 @@ def affiche_robot(simu, canvas):
 def affiche_obstacle(canvas, obstacles):
     for obstacle in obstacles:
         canvas.create_rectangle(obstacle.x - obstacle.taille, obstacle.y - obstacle.taille,
-                                obstacle.x + obstacle.taille, obstacle.y + obstacle.taille, fill="black")
+                                obstacle.x + obstacle.taille, obstacle.y + obstacle.taille, fill="orange")
 
 def creer_obstacle(obstacles, x, y, taille):
     obstacle = obstacle(x, y, taille)
