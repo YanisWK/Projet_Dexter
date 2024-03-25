@@ -54,7 +54,6 @@ class Robot:
         self.position_moteurs = [0,0]
         
         self.trace = [] #tracé qui apparait derrière le robot
-        self.dessine = False
 
 
     @property
@@ -194,5 +193,4 @@ class Robot:
             dist += 1
         return pas * dist
         
-    
 
