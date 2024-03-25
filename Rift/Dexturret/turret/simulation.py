@@ -68,8 +68,7 @@ class Simulation:
     
     def check_collision(self):    
         """
-        Checke si le robot se cogne contre une bordure et stoppe la simulation
-        ou se cogne contre la balle.
+        Checke si le robot se cogne contre une bordure et stoppe la simulation.
         """
         Coord = self.robot.coordRobot
         for i in range(4):
@@ -77,3 +76,9 @@ class Simulation:
                 self.awake = False
             elif (Coord[i][1] > self.largeur) or (Coord[i][1] < 0):
                 self.awake = False
+
+    def check_collision_ballon(self, ballon):
+
+        if self.x == ballon.x and self.y == ballon.y:
+            return True
+        return False
