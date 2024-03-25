@@ -53,7 +53,7 @@ class Robot:
 
         self.position_moteurs = [0,0]
         
-        self.trace = []
+        self.trace = [] #tracé qui apparait derrière le robot
 
 
     @property
@@ -92,7 +92,7 @@ class Robot:
 
         #mise à jour des coordonnées grâce aux fonctions cosinus/sinus
         self.x += distance * cos(radians(self.direction))
-        self.y -= distance * sin(radians(self.direction))
+        self.y -= distance * sin(radians(self.direction)) #si on monte on a -sin
 
 
     def tourner(self, angle):
@@ -138,8 +138,8 @@ class Robot:
         
         """       
 
-        #Calcul de la distance que parcourt le robot à chaque rafraîchissement distance_par_rafraichissement = vitesse/temps
-        
+        #calcul de la vitesse de rotation de chaque roue
+
         vitesse_rotation_roue_gauche = self.vitesse_lineaire_roue_gauche / (self.rayon_des_roues/100)
         vitesse_rotation_roue_droite = self.vitesse_lineaire_roue_droite / (self.rayon_des_roues/100)
 
