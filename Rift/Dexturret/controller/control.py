@@ -88,6 +88,9 @@ class TournerRobot():
     def etape(self):
         """Effectue une étape de la rotation en déplaçant le robot en fonction de la vitesse de rotation
         et du nombre de rafraichissement, tant que l'angle n'est pas atteint."""
+        if self.stop():
+            return
+
         vit = 10
         if (self.angle > 0):
             self.robot.set_vitesse_roue(1 , -vit)
@@ -107,12 +110,9 @@ class TournerRobot():
 
         print("Angle parcouru: ", self.angle_parcouru)
 
-        if self.stop():
-            return
-
     def stop(self):
         """Vérifie si la rotation doit s'arrêter"""
-        return abs(self.angle) <= self.angle_parcouru or self.angle_parcouru >= abs(self.angle) - 1.5
+        return abs(self.angle) <= self.angle_parcouru or self.angle_parcouru >= abs(self.angle) - 2
     
 
 class AvancerViteRobot():
