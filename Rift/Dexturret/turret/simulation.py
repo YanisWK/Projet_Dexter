@@ -46,7 +46,6 @@ class Simulation:
             self.robot.rafraichir()
             self.robot.detect_distance(self.longueur,self.largeur)
             self.check_collision()
-            self.check_collision_ballon(self.ballon)
             self.collision_ballon(self.ballon)
 
         
