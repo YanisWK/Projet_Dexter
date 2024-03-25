@@ -1,20 +1,24 @@
 from tkinter import IntVar,Button,Label
 import Dexturret.interface as interface
 import Dexturret.turret as turret
-#from controller
 from time import sleep, time
 import logging
 
 #Configuration des logs 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
+#logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
 
 #Initialisation des paramètres du robot et de la simulation
 larg = 700
 long = 1000
 robot = turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
-simu = turret.Simulation(1, robot, larg, long, 60)
+obs1=turret.Obstacle(225,225,25)
+obs2=turret.Obstacle(745,445,25)
+obstacles=[obs1,obs2]
+simu = turret.Simulation(1, robot, larg, long, 60, obstacles)
 
-window, couleur, canvas, frame, text_distance = interface.creer_graphique(robot,simu)
+
+
+window, couleur, canvas, frame, obstacles, text_distance = interface.creer_graphique(robot,simu,obstacles)
 #Création des variables de vitesse des roues gauche et droite et configuration de leur scale de vitesse
 vitesse_roue_gauche = IntVar()
 scale_roue_gauche = interface.creer_scale(frame, "Vitesse roue gauche", vitesse_roue_gauche, -100, 100)
@@ -28,7 +32,7 @@ scale_roue_droite = interface.creer_scale(frame, "Vitesse roue droite", vitesse_
 scale_roue_droite.pack(ipady=20)
 
 
-window.bind('<KeyPress>',lambda event: interface.onKeyPress(robot, couleur,event))
+window.bind('<KeyPress>',lambda event: interface.onKeyPress(robot, couleur,event,obstacles))
 tab = [(robot.x,robot.y)]
 tailleMax = 500
 
@@ -40,7 +44,7 @@ while simu.awake:
     robot.vitesse_lineaire_roue_gauche = vitesse_roue_gauche.get()
     #On efface tout et on redessine le robot
     simu.rafraichir()
-    interface.rafraichir_graphique(simu, canvas)
+    interface.rafraichir_graphique(simu, canvas,obstacles)
 
     #Affichage de la ligne rouge pour la direction du robot
     canvas.pack()

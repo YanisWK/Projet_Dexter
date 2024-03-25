@@ -1,6 +1,6 @@
 from time import sleep
 from tkinter import Canvas, Toplevel, Button, Label, Tk, Frame, StringVar, IntVar, Scale, RIGHT, LEFT, HORIZONTAL, BOTH, BOTTOM, CENTER
-import Dexturret.turret 
+import Dexturret.turret, Dexturret.turret.obstacle
 from math import cos,radians,sin
 
 """Documentation : 
@@ -103,6 +103,15 @@ def affiche_robot(simu, canvas):
     
     canvas.pack()
 
+def affiche_obstacle(canvas, obstacles):
+    for obstacle in obstacles:
+        canvas.create_rectangle(obstacle.x - obstacle.taille, obstacle.y - obstacle.taille,
+                                obstacle.x + obstacle.taille, obstacle.y + obstacle.taille, fill="black")
+
+def creer_obstacle(obstacles, x, y, taille):
+    obstacle = obstacle(x, y, taille)
+    obstacles.append(obstacle)
+    
 def creer_couleur(frame):
     """
     Crée et configure une couleur.
@@ -157,7 +166,7 @@ def popup_collision(window):
     win.geometry("+{}+{}".format(x, y))
 
 
-def rafraichir_graphique(simu, canvas):
+def rafraichir_graphique(simu, canvas,obstacles):
     """
     Rafraîchit le graphique en effaçant le canvas et en réaffichant le robot avec les nouvelles positions, 
     et met à jour le canvas avec les changements effectués
@@ -169,30 +178,25 @@ def rafraichir_graphique(simu, canvas):
     """
     canvas.delete("all")
     affiche_robot(simu, canvas)
-    
+    affiche_obstacle(canvas,obstacles)
     canvas.pack()
     canvas.update()
 
-
-def creer_graphique(robot,simu):
+def creer_graphique(robot,simu,obstacles):
     #Création de la fenêtre principale, de la frame et du canvas pour la simulation
     window = creer_fenetre(simu.longueur, simu.largeur)
-
     frame = creer_frame(window)
-
     canvas = creer_canvas(window, simu.longueur, simu.largeur)
-
     text_distance = Label(frame, text="Distance : 0.0", font=("Helvetica", 16))
     text_distance.pack(ipady=10)
-    #Création d'une couleur 
     couleur = creer_couleur(frame)
-    return window, couleur, canvas, frame, text_distance
+    return window, couleur, canvas, frame, obstacles,text_distance
 
 
 def affichage_distance(text_distance,robot,long,larg):
     text_distance.config(text = f"Distance : {round(robot.detect_distance(long,larg),1)}")
 
-def onKeyPress(robot,couleur,event):
+def onKeyPress(robot,couleur,event,obstacles):
     """
     Gère l'événement lorsqu'une touche du clavier est pressée.
 
@@ -203,3 +207,5 @@ def onKeyPress(robot,couleur,event):
     if event.keysym == "space":
         robot.pret = not robot.pret
         change_color(robot.pret, couleur)
+    elif event.keysym == "o":  # Touche 'o' pour ajouter un obstacle
+        creer_obstacle(robot.canvas, obstacles, robot.x, robot.y, 20)  # Taille de l'obstacle à ajuster

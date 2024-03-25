@@ -17,7 +17,7 @@ et d'effectuer les calculs nécessaires pour simuler un déplacement fluide et r
 """
 
 class Simulation:
-    def __init__(self, id, robot, largeur, longueur, fps):
+    def __init__(self, id, robot, largeur, longueur, fps, obstacles):
         """
         Initialise une simulation avec un identifiant, un robot, un environnement et un temps de rafraîchissement
 
@@ -35,7 +35,7 @@ class Simulation:
         self.largeur = largeur              #La largueur de l'environnement
         self.fps = fps                      #Temps de rafraichissement
         self.awake=True
-        
+        self.obstacles = obstacles
     
     def rafraichir(self):
         """
@@ -46,7 +46,7 @@ class Simulation:
             self.robot.rafraichir()
             self.robot.detect_distance(self.longueur,self.largeur)
             self.check_collision()
-
+            self.collision()
         
     """
             for coin in self.coordRobot:
@@ -77,3 +77,9 @@ class Simulation:
             elif (Coord[i][1] > self.largeur) or (Coord[i][1] < 0):
                 self.awake = False
 
+    def collision(self):
+        for obstacle in self.obstacles:
+            for coin in self.robot.coordRobot:
+                if (coin[0] > obstacle.x - obstacle.taille and coin[0]< obstacle.x + obstacle.taille) and (
+                        coin[1] > obstacle.y - obstacle.taille and coin[1] < obstacle.y + obstacle.taille):
+                    self.awake = False
