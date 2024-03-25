@@ -21,3 +21,9 @@ class Ballon:
     def __repr__(self):
         return f"Ballon(x={self.x}, y={self.y}, vitesse={self.vitesse})"
     
+    def collision(self, robot):
+        coordRobot = robot.coordRobot
+        coordBallon = (self.x, self.y)
+        if coordRobot[0][0] <= coordBallon[0] <= coordRobot[2][0] and coordRobot[0][1] <= coordBallon[1] <= coordRobot[2][1]:
+            return True
+        return False
