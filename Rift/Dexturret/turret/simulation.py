@@ -46,6 +46,8 @@ class Simulation:
             self.robot.rafraichir()
             self.robot.detect_distance(self.longueur,self.largeur)
             self.check_collision()
+            self.check_collision_ballon(self.ballon)
+            self.collision_ballon(self.ballon)
 
         
     """
@@ -82,3 +84,12 @@ class Simulation:
         if self.x == ballon.x and self.y == ballon.y:
             return True
         return False
+    
+    def collision_ballon(self, ballon):
+        if self.check_collision_ballon(self.ballon):
+            print("Collision détectée!")
+            
+            if ballon.vitesse == 0:
+                ballon.vitesse = (self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2
+            else:
+                ballon.vitesse = ((self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2) + ballon.vitesse
