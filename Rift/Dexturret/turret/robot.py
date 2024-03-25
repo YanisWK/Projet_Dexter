@@ -192,6 +192,6 @@ class Robot:
             rayon[1] -= pas * sin(radians(self.direction))
             dist += 1
         return pas * dist
-        
+    
     
 

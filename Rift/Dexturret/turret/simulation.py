@@ -79,17 +79,14 @@ class Simulation:
             elif (Coord[i][1] > self.largeur) or (Coord[i][1] < 0):
                 self.awake = False
 
-    def check_collision_ballon(self,robot,ballon):
+    def check_collision_ballon(self):
 
-        if robot.x == ballon.x and robot.y == ballon.y:
+        if self.robot.x == self.ballon.x and self.robot.y == self.ballon.y:
             return True
         return False
     
-    def collision_ballon(self,robot,ballon):
+    def collision_ballon(self):
         if self.check_collision_ballon(self.ballon):
             print("Collision détectée!")
             
-            if ballon.vitesse == 0:
-                ballon.vitesse = (self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2
-            else:
-                ballon.vitesse = ((self.vitesse_lineaire_roue_gauche + self.vitesse_lineaire_roue_droite) / 2) + ballon.vitesse
+            self.ballon.vitesse = ((self.robot.vitesse_lineaire_roue_gauche + self.robot.vitesse_lineaire_roue_droite) / 2) + self.ballon.vitesse
