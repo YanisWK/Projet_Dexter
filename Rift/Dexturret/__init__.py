@@ -1,6 +1,7 @@
 from Dexturret.interface import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color
 from Dexturret.turret import Robot, Robot2IN013Fake, Simulation
 from Dexturret.controller import AvancerRobot, TournerRobot, adaptateurSimu, adaptateurIRL, Instructions, Strat_if
+from Dexturret.turret.ballon import Ballon 
 
 from time import time
 
@@ -13,7 +14,9 @@ robotSim = Robot(1, 50, 25, 5, long/2, larg/2, time())
 robotSimu = adaptateurSimu(robotSim)
 robotSim.direction = 135
 robotSim.pret = True
-simu = Simulation(1, robotSim, larg, long, fps)
+ballon = Ballon(20, 20, 0, time())
+
+simu = Simulation(1, robotSim, ballon, larg, long, fps)
 
 robotFake = Robot2IN013Fake()
 robotIRL = adaptateurIRL(robotFake)

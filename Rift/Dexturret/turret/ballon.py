@@ -6,16 +6,17 @@ import Dexturret.interface as interface
 
 # 2.1
 class Ballon:
-    def __init__(self, x=0, y=0, vitesse=0):
+    def __init__(self, x, y, vitesse, dernier_rafraichissement):
         self.x = x
         self.y = y
         self.vitesse = vitesse
+        self.dernier_rafraichissement = 0
 
-    def bouger(self):
+    def bouger_ballon(self):
         self.x += self.vitesse
         self.y += self.vitesse
 
-    def afficher_position(self):
+    def afficher_position_ballon(self):
         return f"Position du ballon: ({self.x}, {self.y})"
     
     def __repr__(self):
