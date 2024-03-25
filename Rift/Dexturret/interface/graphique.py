@@ -182,7 +182,7 @@ def rafraichir_graphique(simu, canvas,obstacles):
     canvas.pack()
     canvas.update()
 
-def creer_graphique(robot,simu):
+def creer_graphique(robot,simu,obstacles):
     #Création de la fenêtre principale, de la frame et du canvas pour la simulation
     window = creer_fenetre(simu.longueur, simu.largeur)
     frame = creer_frame(window)
@@ -192,13 +192,13 @@ def creer_graphique(robot,simu):
     couleur = creer_couleur(frame)
     bouton_dessin = Button(frame, text="Activer le dessin", command=lambda: activer_dessin(robot, bouton_dessin))
     bouton_dessin.pack()
-    return window, couleur, canvas, frame, text_distance
+    return window, couleur, canvas, frame, obstacles, text_distance
 
 
 def affichage_distance(text_distance,robot,long,larg):
     text_distance.config(text = f"Distance : {round(robot.detect_distance(long,larg),1)}")
 
-def onKeyPress(robot,couleur,event,obstacles):
+def onKeyPress(robot,couleur,event):
     """
     Gère l'événement lorsqu'une touche du clavier est pressée.
 
@@ -209,7 +209,7 @@ def onKeyPress(robot,couleur,event,obstacles):
     if event.keysym == "space":
         robot.pret = not robot.pret
         change_color(robot.pret, couleur)
-
+    
 def activer_dessin(robot,bouton):
     if robot.dessine:
         robot.dessine = False

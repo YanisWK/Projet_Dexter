@@ -14,10 +14,10 @@ robotSimu = adaptateurSimu(robotSim)
 robotSim.direction = 135
 robotSim.pret = True
 obs1=Obstacle(225,225,45)
-obs2=Obstacle(745,445,45)
-obs3=Obstacle(425,725,45)
+obs2=Obstacle(245,545,45)
+obs3=Obstacle(745,525,45)
 obs4=Obstacle(745,245,45)
-obs5=Obstacle(725,725,45)
+obs5=Obstacle(525,425,45)
 obstacles=[obs1,obs2,obs3,obs4,obs5]
 simu = Simulation(1, robotSim, larg, long, fps, obstacles)
 
@@ -41,6 +41,7 @@ croix = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, str
                 stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche]
 stratCroix = Instructions(croix)
 
-stratavancetantque = Strat_if(condition=lambda: not simu.collision(),strats=[stratAvancer])
-stratrepete = [stratavancetantque, stratTournerGauche]*5
+stratrepete = [[stratAvancer, stratTournerGauche],[stratAvancer, stratTournerGauche],
+               [stratAvancer, stratTournerGauche],[stratAvancer, stratTournerGauche],
+               [stratAvancer, stratTournerGauche]]
 stratObs = Instructions(stratrepete)
