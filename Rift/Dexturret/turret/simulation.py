@@ -17,7 +17,7 @@ et d'effectuer les calculs nécessaires pour simuler un déplacement fluide et r
 """
 
 class Simulation:
-    def __init__(self, id, robot, largeur, longueur, fps):
+    def __init__(self, id, robot, ballon, largeur, longueur, fps):
         """
         Initialise une simulation avec un identifiant, un robot, un environnement et un temps de rafraîchissement
 
@@ -35,9 +35,9 @@ class Simulation:
         self.largeur = largeur              #La largueur de l'environnement
         self.fps = fps                      #Temps de rafraichissement
         self.awake=True
-        
+        self.ballon = ballon
     
-    def rafraichir(self):
+    def rafraichir(self, robot):
         """
         Met à jour la fonction rafraichir du robot si la simu est active et si le robot est prêt
         
@@ -79,13 +79,13 @@ class Simulation:
             elif (Coord[i][1] > self.largeur) or (Coord[i][1] < 0):
                 self.awake = False
 
-    def check_collision_ballon(self, ballon):
+    def check_collision_ballon(self,robot,ballon):
 
-        if self.x == ballon.x and self.y == ballon.y:
+        if robot.x == ballon.x and robot.y == ballon.y:
             return True
         return False
     
-    def collision_ballon(self, ballon):
+    def collision_ballon(self,robot,ballon):
         if self.check_collision_ballon(self.ballon):
             print("Collision détectée!")
             
