@@ -15,8 +15,6 @@ class Robot2IN013Fake:
     WHEEL_BASE_CIRCUMFERENCE = WHEEL_BASE_WIDTH * pi # perimetre du cercle de rotation (mm)
     WHEEL_CIRCUMFERENCE      = WHEEL_DIAMETER   * pi # perimetre de la roue (mm)
 
-    rayon_des_roues = WHEEL_DIAMETER/22
-    largeur = WHEEL_BASE_WIDTH/10
     position_moteurs = [0, 0]
     vit_roue_gauche = 0
     vit_roue_droite = 0

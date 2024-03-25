@@ -4,7 +4,7 @@ import Dexturret.turret as turret
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
-from Dexturret import stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps
+from Dexturret import stratAvancer, stratTournerDroite, stratTournerGauche, stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps
 
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
@@ -16,12 +16,18 @@ try:
         robotAdapt = robotSimu
         window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
         refresh = 1
+
     elif choix == 2:
         robotAdapt = robotIRL
         refresh = 2
+        stratAvancer.robot = robotIRL
+        stratTournerDroite.robot = robotIRL
+        stratTournerGauche.robot = robotIRL
+
     else:
         print("Arrêt du programme\n")
         exit()
+
 except ValueError:
     print("Arrêt du programme \n")
     exit()
