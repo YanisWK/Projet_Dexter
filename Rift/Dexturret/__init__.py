@@ -13,7 +13,6 @@ robotSim = Robot(1, 50, 25, 5, long/2, larg/2, time())
 robotSimu = adaptateurSimu(robotSim)
 robotSim.direction = 135
 robotSim.pret = True
-simu = Simulation(1, robotSim, larg, long, fps)
 
 robotFake = Robot2IN013Fake()
 robotIRL = adaptateurIRL(robotFake)

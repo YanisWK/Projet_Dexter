@@ -169,6 +169,7 @@ def rafraichir_graphique(simu, canvas):
     """
     canvas.delete("all")
     affiche_robot(simu, canvas)
+    affiche_ballon(simu, canvas)
     
     canvas.pack()
     canvas.update()
@@ -203,3 +204,7 @@ def onKeyPress(robot,couleur,event):
     if event.keysym == "space":
         robot.pret = not robot.pret
         change_color(robot.pret, couleur)
+
+def affiche_ballon(simu, canvas):
+    canvas.create_polygon(simu.ballon.coordCoins)
+    canvas.pack()

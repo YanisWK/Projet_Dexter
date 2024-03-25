@@ -17,7 +17,7 @@ et d'effectuer les calculs nécessaires pour simuler un déplacement fluide et r
 """
 
 class Simulation:
-    def __init__(self, id, robot, largeur, longueur, fps):
+    def __init__(self, id, robot, largeur, longueur, fps, ballon):
         """
         Initialise une simulation avec un identifiant, un robot, un environnement et un temps de rafraîchissement
 
@@ -36,6 +36,8 @@ class Simulation:
         self.fps = fps                      #Temps de rafraichissement
         self.awake=True
         
+        self.ballon = ballon
+        
     
     def rafraichir(self):
         """
@@ -46,6 +48,9 @@ class Simulation:
             self.robot.rafraichir()
             self.robot.detect_distance(self.longueur,self.largeur)
             self.check_collision()
+
+            self.check_touche_balle()
+            self.ballon.rafraichir()
 
         
     """
@@ -77,3 +82,8 @@ class Simulation:
             elif (Coord[i][1] > self.largeur) or (Coord[i][1] < 0):
                 self.awake = False
 
+    def check_touche_balle(self):
+        for coin in self.robot.coordRobot:
+            cote = self.ballon.taille / 2
+            if (coin[0] <= self.ballon.x + cote and coin[0] >= self.ballon.x - cote) and (coin[1] <= self.ballon.y + cote and coin[1] >= self.ballon.y - cote):
+                self.ballon.toucher(self.robot.vitesse_lineaire_roue_gauche, self.robot.vitesse_lineaire_roue_droite, self.robot.direction)

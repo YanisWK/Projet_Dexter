@@ -8,11 +8,15 @@ import logging
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
 
+
+balle = turret.Ballon(100, 100, 10, time())
+
+
 #Initialisation des paramètres du robot et de la simulation
 larg = 700
 long = 1000
 robot = turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
-simu = turret.Simulation(1, robot, larg, long, 60)
+simu = turret.Simulation(1, robot, larg, long, 60, balle)
 
 window, couleur, canvas, frame, text_distance = interface.creer_graphique(robot,simu)
 #Création des variables de vitesse des roues gauche et droite et configuration de leur scale de vitesse
