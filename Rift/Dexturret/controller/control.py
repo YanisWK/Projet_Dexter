@@ -199,3 +199,38 @@ class Strat_if():
     def stop(self):
         """"""
         return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condition)
+    
+class DirigerVersBallon:
+    def __init__(self, robot, ballon, vitesse):
+        """
+        Paramètres:
+        - robot : robot à diriger vers le ballon
+        - ballon : ballon vers lequel diriger le robot
+        - vitesse : vitesse du robot
+        """
+        self.robot = robot
+        self.ballon = ballon
+        self.vitesse = vitesse
+
+    def calculer_direction(self):
+        dx = self.ballon.x - self.robot.x
+        dy = self.ballon.y - self.robot.y
+        return dx, dy
+
+    def bouger_vers_ballon(self):
+        dx, dy = self.calculer_direction()
+
+        self.robot.x += dx * self.vitesse
+        self.robot.y += dy * self.vitesse
+
+    def start(self):
+        """Démarre le déplacement du robot vers le ballon"""
+        self.current = -1
+    
+    def etape(self):
+        """Fait avancer le robot vers le ballon"""
+        self.bouger_vers_ballon()
+
+    def stop(self):
+        """Arrête le robot si le ballon est atteint"""
+        return self.robot.x == self.ballon.x and self.robot.y == self.ballon.y
