@@ -199,3 +199,25 @@ class Strat_if():
     def stop(self):
         """"""
         return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condition)
+    
+class tout_droit_obstacle():
+    def __init__(self,robot,simu,vitesse):
+        self.robot = robot
+        self.simu = simu
+        self.vitesse = vitesse
+
+    def start(self):
+        self.robot.set_vitesse_roue(3,self.vitesse)
+
+    def etape(self):
+
+        if self.stop():
+            Strat_tourner = TournerRobot(self.robot,90,60)
+            Strat_tourner.start()
+            if not(Strat_tourner.stop()):
+                Strat_tourner.etape()
+            return
+
+    def stop(self):
+        return self.robot.detect_distance(self.simu.longueur, self.simu.largeur) <= self.robot.largeur
+        

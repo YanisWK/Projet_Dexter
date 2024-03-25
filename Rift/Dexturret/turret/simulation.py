@@ -35,7 +35,7 @@ class Simulation:
         self.largeur = largeur              #La largueur de l'environnement
         self.fps = fps                      #Temps de rafraichissement
         self.awake=True
-        
+        self.obstacle =[] 
     
     def rafraichir(self):
         """

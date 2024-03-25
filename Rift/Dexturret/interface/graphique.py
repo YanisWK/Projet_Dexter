@@ -169,7 +169,11 @@ def rafraichir_graphique(simu, canvas):
     """
     canvas.delete("all")
     affiche_robot(simu, canvas)
-    
+    creer_obstacle(canvas,150,150)
+    creer_obstacle(canvas,250,500)
+    creer_obstacle(canvas,400,500)
+    creer_obstacle(canvas,900,200)
+    creer_obstacle(canvas,900,500)
     canvas.pack()
     canvas.update()
 
@@ -203,3 +207,6 @@ def onKeyPress(robot,couleur,event):
     if event.keysym == "space":
         robot.pret = not robot.pret
         change_color(robot.pret, couleur)
+
+def creer_obstacle(canvas,coordx,coordy):
+    canvas.create_polygon([(coordx,coordy),(coordx+100,coordy),(coordx+100,coordy+100),(coordx,coordy+100)])

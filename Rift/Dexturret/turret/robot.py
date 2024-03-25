@@ -193,5 +193,16 @@ class Robot:
             dist += 1
         return pas * dist
         
+
+    def dessine(self,b,canvas):
+        if b:
+            if (len(self.trace) == 0) or (self.x,self.y) != self.trace[-1]:
+                self.trace.append((self.x,self.y))
+            for elem in range(1,len(self.trace)):
+                x,y = self.trace[elem-1]
+                x1,y1 = self.trace[elem]
+                canvas.create_line(x, y, x1, y1, fill="black")
+                canvas.pack()
+            canvas.update()
     
 

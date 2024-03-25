@@ -1,6 +1,6 @@
 from Dexturret.interface import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color
 from Dexturret.turret import Robot, Robot2IN013Fake, Simulation
-from Dexturret.controller import AvancerRobot, TournerRobot, adaptateurSimu, adaptateurIRL, Instructions, Strat_if
+from Dexturret.controller import AvancerRobot, TournerRobot, adaptateurSimu, adaptateurIRL, Instructions, Strat_if, tout_droit_obstacle
 
 from time import time
 
@@ -26,6 +26,9 @@ carre = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite,\
           stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite]
 stratCarre = Instructions(carre)
 
+strat_tout_droit = tout_droit_obstacle(robotSimu,simu,100)
+cinqfois = [strat_tout_droit,strat_tout_droit,strat_tout_droit,strat_tout_droit,strat_tout_droit]
+stratcinqfois = Instructions(cinqfois)
 carres = [stratCarre, stratCarre, stratCarre]
 stratCarres = Instructions(carres)
 
