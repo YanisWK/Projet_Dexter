@@ -4,7 +4,7 @@ import Dexturret.turret as turret
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
-from Dexturret import stratAvancer, stratTournerDroite, stratTournerGauche, stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps
+from Dexturret import stratAvancer, Strat_if, stratObs, stratTournerDroite, stratTournerGauche, stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps
 
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
@@ -32,8 +32,9 @@ except ValueError:
     print("Arrêt du programme \n")
     exit()
 
-controller_choisi = stratCarres
-
+controller_choisi = stratObs
+tab = [(simu.robot.x,simu.robot.y)]
+tailleMax=500
 robotSim.dernier_rafraichissement = time()
 #Boucle principale de la simu
 while simu.awake and not controller_choisi.stop():
@@ -44,17 +45,18 @@ while simu.awake and not controller_choisi.stop():
     controller_choisi.etape()
     if refresh == 1 :
         simu.rafraichir()
-        interface.rafraichir_graphique(simu, canvas)
+        interface.rafraichir_graphique(simu, canvas, simu.obstacles)
         #Affichage de la ligne rouge pour la direction du robot
         canvas.pack()
-        if (len(robotAdapt.trace) == 0) or (robotAdapt.x,robotAdapt.y) != robotAdapt.trace[-1]:
-            if len(robotAdapt.trace) > 500:
-                robotAdapt.trace.pop(0)
-            robotAdapt.trace.append((robotAdapt.x,robotAdapt.y))
-        for elem in range(1,len(robotAdapt.trace)):
-            x,y = robotAdapt.trace[elem-1]
-            x1,y1 = robotAdapt.trace[elem]
-            canvas.create_line(x, y, x1, y1, fill="black")
+        if (simu.robot.x,simu.robot.y) != tab[-1]:
+            if len(tab) > tailleMax:
+                tab.pop(0)
+            tab.append((simu.robot.x,simu.robot.y))
+        if simu.robot.dessine:
+            for elem in range(1,len(tab)):
+                x,y = tab[elem-1]
+                x1,y1 = tab[elem]
+                canvas.create_line(x, y, x1, y1, fill="black")
             canvas.pack()
         canvas.update()
         interface.affichage_distance(text_distance,robotAdapt,simu.longueur,simu.largeur)

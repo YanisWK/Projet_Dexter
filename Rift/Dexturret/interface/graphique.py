@@ -106,7 +106,7 @@ def affiche_robot(simu, canvas):
 def affiche_obstacle(canvas, obstacles):
     for obstacle in obstacles:
         canvas.create_rectangle(obstacle.x - obstacle.taille, obstacle.y - obstacle.taille,
-                                obstacle.x + obstacle.taille, obstacle.y + obstacle.taille, fill="black")
+                                obstacle.x + obstacle.taille, obstacle.y + obstacle.taille, fill="#FFA500")
 
 def creer_obstacle(obstacles, x, y, taille):
     obstacle = obstacle(x, y, taille)
@@ -182,7 +182,7 @@ def rafraichir_graphique(simu, canvas,obstacles):
     canvas.pack()
     canvas.update()
 
-def creer_graphique(robot,simu,obstacles):
+def creer_graphique(robot,simu):
     #Création de la fenêtre principale, de la frame et du canvas pour la simulation
     window = creer_fenetre(simu.longueur, simu.largeur)
     frame = creer_frame(window)
@@ -190,7 +190,9 @@ def creer_graphique(robot,simu,obstacles):
     text_distance = Label(frame, text="Distance : 0.0", font=("Helvetica", 16))
     text_distance.pack(ipady=10)
     couleur = creer_couleur(frame)
-    return window, couleur, canvas, frame, obstacles,text_distance
+    bouton_dessin = Button(frame, text="Activer le dessin", command=lambda: activer_dessin(robot, bouton_dessin))
+    bouton_dessin.pack()
+    return window, couleur, canvas, frame, text_distance
 
 
 def affichage_distance(text_distance,robot,long,larg):
@@ -207,5 +209,11 @@ def onKeyPress(robot,couleur,event,obstacles):
     if event.keysym == "space":
         robot.pret = not robot.pret
         change_color(robot.pret, couleur)
-    elif event.keysym == "o":  # Touche 'o' pour ajouter un obstacle
-        creer_obstacle(robot.canvas, obstacles, robot.x, robot.y, 20)  # Taille de l'obstacle à ajuster
+
+def activer_dessin(robot,bouton):
+    if robot.dessine:
+        robot.dessine = False
+        bouton.config(text="Activer le dessin")
+    else:
+        robot.dessine = True
+        bouton.config(text="Désactiver le dessin")

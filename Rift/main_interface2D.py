@@ -11,9 +11,12 @@ import logging
 larg = 700
 long = 1000
 robot = turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
-obs1=turret.Obstacle(225,225,25)
-obs2=turret.Obstacle(745,445,25)
-obstacles=[obs1,obs2]
+obs1=turret.Obstacle(225,225,45)
+obs2=turret.Obstacle(245,545,45)
+obs3=turret.Obstacle(745,525,45)
+obs4=turret.Obstacle(745,245,45)
+obs5=turret.Obstacle(525,425,45)
+obstacles=[obs1,obs2,obs3,obs4,obs5]
 simu = turret.Simulation(1, robot, larg, long, 60, obstacles)
 
 
@@ -52,11 +55,12 @@ while simu.awake:
         if len(tab) > tailleMax:
             tab.pop(0)
         tab.append((robot.x,robot.y))
-    for elem in range(1,len(tab)):
-        x,y = tab[elem-1]
-        x1,y1 = tab[elem]
-        canvas.create_line(x, y, x1, y1, fill="black")
-        canvas.pack()
+    if simu.robot.dessine:
+        for elem in range(1,len(tab)):
+            x,y = tab[elem-1]
+            x1,y1 = tab[elem]
+            canvas.create_line(x, y, x1, y1, fill="black")
+    canvas.pack()
     canvas.update()
     interface.affichage_distance(text_distance,robot,simu.longueur,simu.largeur)
 

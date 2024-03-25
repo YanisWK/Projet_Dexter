@@ -142,7 +142,7 @@ class AvancerViteRobot():
 
     def stop(self):
         """Arrête le robot en fonction de la distance qui le sépare des bordures de la simulation"""
-        return self.robot.detect_distance(self.simu.longueur, self.simu.largeur) <= self.robot.largeur
+        return self.robot.detect_distance(self.simu.longueur, self.simu.largeur) <= self.robot.largeur or not self.simu.collision
         
 
 class Instructions():
