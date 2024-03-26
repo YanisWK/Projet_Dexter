@@ -54,27 +54,23 @@ class AvancerRobot():
         self.distance = distance
         self.vitesse = vitesse
         self.fps = fps
-        self.derniere_position_moteurs = robot.get_position_moteurs()
+        self.robot.derniere_position_moteurs = robot.get_position_moteurs()
 
     def start(self):
         """Démarre l'avancement"""
         print("DEBUT AVANCER")
         self.parcouru = 0
         self.robot.set_position_moteurs(3, 0)
-        self.derniere_position_moteurs = self.robot.get_position_moteurs()
+        self.robot.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):
         """Effectue une étape de l'avancement en déplaçant le robot en fonction de la vitesse de déplacement
         et du nombre de rafraichissement, tant que la distance n'a pas été entièrement parcourue."""
 
         self.robot.set_vitesse_roue(3,self.vitesse)
-        nouvelle_position_moteurs = self.robot.get_position_moteurs()
 
-        dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * (self.robot.rayon_des_roues/100)
-        dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * (self.robot.rayon_des_roues/100)
-        self.parcouru += (dist_RG + dist_RD) / 2
+        self.parcouru += self.robot.calcule_avancer_tourner()[0]
 
-        self.derniere_position_moteurs = nouvelle_position_moteurs
 
         print("Distance parcourue: ", self.parcouru)
 
@@ -101,14 +97,14 @@ class TournerRobot():
         self.robot = robot
         self.angle = angle
         self.fps = fps
-        self.derniere_position_moteurs = robot.get_position_moteurs()
+        self.robot.derniere_position_moteurs = robot.get_position_moteurs()
 
     def start(self):
         """Démarre la rotation"""
         print("DEBUT TOURNER")
         self.angle_parcouru = 0
         self.robot.set_position_moteurs(3, 0)
-        self.derniere_position_moteurs = self.robot.get_position_moteurs()
+        self.robot.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):
         """Effectue une étape de la rotation en déplaçant le robot en fonction de la vitesse de rotation
@@ -124,14 +120,8 @@ class TournerRobot():
             self.robot.set_vitesse_roue(1 , vit)
             self.robot.set_vitesse_roue(2 , -vit)
 
-        nouvelle_position_moteurs = self.robot.get_position_moteurs()
-
-        angle_RG = nouvelle_position_moteurs[0] - self.derniere_position_moteurs[0]
-        angle_RD = nouvelle_position_moteurs[1] - self.derniere_position_moteurs[1]
-
-        self.angle_parcouru += degrees(abs(((self.robot.rayon_des_roues/100) * (angle_RD - angle_RG)) / self.robot.largeur))
-
-        self.derniere_position_moteurs = nouvelle_position_moteurs
+        
+        self.angle_parcouru += self.robot.calcule_avancer_tourner()[1]
 
         print("Angle parcouru: ", self.angle_parcouru)
 
