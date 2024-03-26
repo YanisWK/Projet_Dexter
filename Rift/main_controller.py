@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 
 robotAdapt,refresh = choix_robot()
 if refresh == 1:
-    window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
+    window, couleur, canvas, frame, text_distance = interface.creer_graphique(simu)
 elif refresh == None:
     print("Arrête du programme")
     exit()
