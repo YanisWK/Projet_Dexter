@@ -14,6 +14,23 @@ Classes:
 
 """
 
+class CompareDistance():
+    def __init__(self,robot,distance,longueurSimu,largeurSimu):
+        self.robot=robot
+        self.distance=distance
+        self.longueurSimu=longueurSimu
+        self.largeurSimu=largeurSimu
+    def start(self):
+        capteur=self.robot.detect_distance(self.longueurSimu,self.largeurSimu)
+        if(self.distance<0):
+            return abs(self.distance)>capteur
+        else:
+            return self.distance<capteur
+    
+
+
+        
+
 class AvancerRobot():
     """
     Classe qui gére l'avancement du robot
@@ -173,7 +190,7 @@ class Instructions():
     
 
 class Strat_if():
-    def __init__(self, condition,strats):
+    def __init__(self, condition, strats):
         """
         Paramètres:
         - condition : condition à checker avant de faire une instruction
@@ -182,9 +199,11 @@ class Strat_if():
         self.condition = condition
         self.strats = strats
         self.current = -1
+        self.bool = False
     
     def start(self):
         """"""
+        self.bool = self.condition.start()
         self.current = -1
 
     def etape(self):
@@ -198,4 +217,4 @@ class Strat_if():
 
     def stop(self):
         """"""
-        return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condition)
+        return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.bool)
