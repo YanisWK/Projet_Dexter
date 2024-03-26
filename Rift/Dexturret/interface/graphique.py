@@ -215,7 +215,7 @@ def onKeyPress(robot,couleur,event):
         robot.pret = not robot.pret
         change_color(robot.pret, couleur)
 
-def dessiner(robot,canvas):
+def dessiner(robot,simu,canvas,text_distance):
     """
     Affichage du tracé qui suit le robot.
 
@@ -224,6 +224,9 @@ def dessiner(robot,canvas):
     - canvas : canvas sur lequel le tracé du robot se fait
 
     """
+    rafraichir_graphique(simu, canvas)
+    #Affichage de la ligne rouge pour la direction du robot
+    canvas.pack()
     if (len(robot.trace) == 0) or (robot.x,robot.y) != robot.trace[-1]:
         if len(robot.trace) > 500:
             robot.trace.pop(0)
@@ -233,3 +236,5 @@ def dessiner(robot,canvas):
         x1,y1 = robot.trace[elem]
         canvas.create_line(x, y, x1, y1, fill="black")
         canvas.pack()
+    canvas.update()
+    affichage_distance(text_distance,robot,simu.longueur,simu.largeur)

@@ -4,7 +4,7 @@ import Dexturret.turret as turret
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
-from Dexturret import stratAvancer, stratTournerDroite, stratTournerGauche, stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps
+from Dexturret import stratAvancer, stratTournerDroite, stratTournerGauche, stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps, choix_robot
 
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
@@ -44,12 +44,7 @@ while simu.awake and not controller_choisi.stop():
     controller_choisi.etape()
     if refresh == 1 :
         simu.rafraichir()
-        interface.rafraichir_graphique(simu, canvas)
-        #Affichage de la ligne rouge pour la direction du robot
-        canvas.pack()
-        interface.dessiner(robotAdapt,canvas)
-        canvas.update()
-        interface.affichage_distance(text_distance,robotAdapt,simu.longueur,simu.largeur)
+        interface.dessiner(robotAdapt,simu,canvas,text_distance)
     if refresh == 2:
         robotAdapt.rafraichir()
 
