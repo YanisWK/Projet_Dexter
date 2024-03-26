@@ -190,7 +190,7 @@ class Instructions():
     
 
 class Strat_if():
-    def __init__(self, condition,strats):
+    def __init__(self, condition, strats):
         """
         Paramètres:
         - condition : condition à checker avant de faire une instruction
@@ -199,9 +199,11 @@ class Strat_if():
         self.condition = condition
         self.strats = strats
         self.current = -1
+        self.bool = False
     
     def start(self):
         """"""
+        self.bool = self.condition.start()
         self.current = -1
 
     def etape(self):
@@ -215,4 +217,4 @@ class Strat_if():
 
     def stop(self):
         """"""
-        return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condition)
+        return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.bool)
