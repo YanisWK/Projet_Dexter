@@ -1,6 +1,6 @@
 from Dexturret.interface import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color, creer_graphique, affichage_distance, onKeyPress, dessiner
 from Dexturret.turret import Robot, Robot2IN013Fake, Simulation
-from Dexturret.controller import AvancerRobot, TournerRobot, adaptateurSimu, adaptateurIRL, Instructions, Strat_if
+from Dexturret.controller import AvancerRobot, TournerRobot, adaptateurSimu, adaptateurIRL, Instructions, Strat_if, CompareDistance
 
 from time import time
 
@@ -34,6 +34,10 @@ croix = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, str
             stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
                 stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche]
 stratCroix = Instructions(croix)
+
+dist_sup_50 = CompareDistance(robotSimu, 50, simu.longueur, simu.largeur)
+cote_condition = Strat_if(dist_sup_50, [stratAvancer, stratTournerDroite])
+carre_condition = Instructions([cote_condition, cote_condition, cote_condition, cote_condition])
 
 def choix_robot():
   try:

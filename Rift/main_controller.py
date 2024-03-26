@@ -4,7 +4,7 @@ import Dexturret.turret as turret
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
-from Dexturret import stratAvancer, stratTournerDroite, stratTournerGauche, stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps, choix_robot
+from Dexturret import stratAvancer, stratTournerDroite, stratTournerGauche, stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps, choix_robot, cote_condition, carre_condition
 
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
@@ -16,7 +16,7 @@ elif refresh == None:
     print("Arrête du programme")
     exit()
 
-controller_choisi = stratCarres
+controller_choisi = carre_condition
 
 robotSim.dernier_rafraichissement = time()
 #Boucle principale de la simu
