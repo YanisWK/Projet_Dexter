@@ -29,12 +29,7 @@ while simu.awake and not controller_choisi.stop():
     controller_choisi.etape()
     if refresh == 1 :
         simu.rafraichir()
-        interface.rafraichir_graphique(simu, canvas)
-        #Affichage de la ligne rouge pour la direction du robot
-        canvas.pack()
-        interface.dessiner(robotAdapt,canvas)
-        canvas.update()
-        interface.affichage_distance(text_distance,robotAdapt,simu.longueur,simu.largeur)
+        interface.dessiner(robotAdapt,simu,canvas,text_distance)
     if refresh == 2:
         robotAdapt.rafraichir()
 
