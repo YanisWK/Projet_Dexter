@@ -1,5 +1,6 @@
 from Dexturret.interface import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color, creer_graphique, affichage_distance, onKeyPress, dessiner
-from Dexturret.turret import Robot, Robot2IN013Fake, Simulation
+from Dexturret.simu import Robot, Simulation
+from Dexturret.irl import Robot2IN013Fake
 from Dexturret.controller import AvancerRobot, TournerRobot, adaptateurSimu, adaptateurIRL, Instructions, Strat_if, CompareDistance
 
 from time import time
