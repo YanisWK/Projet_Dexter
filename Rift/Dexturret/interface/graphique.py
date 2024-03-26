@@ -203,3 +203,14 @@ def onKeyPress(robot,couleur,event):
     if event.keysym == "space":
         robot.pret = not robot.pret
         change_color(robot.pret, couleur)
+
+def dessiner(robot,canvas):
+    if (len(robot.trace) == 0) or (robot.x,robot.y) != robot.trace[-1]:
+        if len(robot.trace) > 500:
+            robot.trace.pop(0)
+        robot.trace.append((robot.x,robot.y))
+    for elem in range(1,len(robot.trace)):
+        x,y = robot.trace[elem-1]
+        x1,y1 = robot.trace[elem]
+        canvas.create_line(x, y, x1, y1, fill="black")
+        canvas.pack()
