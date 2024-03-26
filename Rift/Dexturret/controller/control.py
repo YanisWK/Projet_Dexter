@@ -14,6 +14,23 @@ Classes:
 
 """
 
+class CompareDistance():
+    def __init__(self,robot,distance,longueurSimu,largeurSimu):
+        self.robot=robot
+        self.distance=distance
+        self.longueurSimu=longueurSimu
+        self.largeurSimu=largeurSimu
+    def start(self):
+        capteur=self.robot.detect_distance(self.longueurSimu,self.largeurSimu)
+        if(self.distance<0):
+            return abs(self.distance)>capteur
+        else:
+            return self.distance<capteur
+    
+
+
+        
+
 class AvancerRobot():
     """
     Classe qui gére l'avancement du robot
