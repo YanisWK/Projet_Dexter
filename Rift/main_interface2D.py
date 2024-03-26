@@ -44,15 +44,7 @@ while simu.awake:
 
     #Affichage de la ligne rouge pour la direction du robot
     canvas.pack()
-    if (robot.x,robot.y) != tab[-1]:
-        if len(tab) > tailleMax:
-            tab.pop(0)
-        tab.append((robot.x,robot.y))
-    for elem in range(1,len(tab)):
-        x,y = tab[elem-1]
-        x1,y1 = tab[elem]
-        canvas.create_line(x, y, x1, y1, fill="black")
-        canvas.pack()
+    interface.dessiner(robot,canvas)
     canvas.update()
     interface.affichage_distance(text_distance,robot,simu.longueur,simu.largeur)
 
