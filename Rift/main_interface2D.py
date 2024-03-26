@@ -44,7 +44,7 @@ while simu.awake:
 
     #Affichage de la ligne rouge pour la direction du robot
     canvas.pack()
-    interface.dessiner(robot,canvas)
+    interface.dessiner(robot,simu,canvas,text_distance)
     canvas.update()
     interface.affichage_distance(text_distance,robot,simu.longueur,simu.largeur)
 
