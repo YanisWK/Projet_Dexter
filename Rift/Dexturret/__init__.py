@@ -1,4 +1,4 @@
-from Dexturret.interface import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color
+from Dexturret.interface import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color, creer_graphique, affichage_distance, onKeyPress, dessiner
 from Dexturret.turret import Robot, Robot2IN013Fake, Simulation
 from Dexturret.controller import AvancerRobot, TournerRobot, adaptateurSimu, adaptateurIRL, Instructions, Strat_if
 
@@ -34,3 +34,22 @@ croix = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, str
             stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
                 stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche]
 stratCroix = Instructions(croix)
+
+def choix_robot():
+  try:
+      choix = int(input("Quel robot voulez-vous désigner ? (Tapez 1 pour le robotSimu ou 2 pour le robotIRL) : "))
+      if choix == 1:
+        robotAdapt = robotSimu
+        return robotAdapt,1
+      elif choix == 2:
+        robotAdapt = robotIRL
+        stratAvancer.robot = robotIRL
+        stratTournerDroite.robot = robotIRL
+        stratTournerGauche.robot = robotIRL
+        return robotAdapt,2
+  
+      else:
+          return None,None
+
+  except ValueError:
+      return None,None
