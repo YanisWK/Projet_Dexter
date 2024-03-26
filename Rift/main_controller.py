@@ -4,32 +4,17 @@ import Dexturret.turret as turret
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
-from Dexturret import stratAvancer, stratTournerDroite, stratTournerGauche, stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps
+from Dexturret import stratAvancer, stratTournerDroite, stratTournerGauche, stratCarre, stratCarres, stratCroix, robotSim, robotSimu, robotIRL, simu, long, larg, fps, choix_robot
 
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
 
 #Initialisation du robot qu'on va utiliser dans le suite du programme
-try:
-    choix = int(input("Quel robot voulez-vous désigner ? (Tapez 1 pour le robotSimu ou 2 pour le robotIRL) : "))
-    if choix == 1:
-        robotAdapt = robotSimu
-        window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
-        refresh = 1
-
-    elif choix == 2:
-        robotAdapt = robotIRL
-        refresh = 2
-        stratAvancer.robot = robotIRL
-        stratTournerDroite.robot = robotIRL
-        stratTournerGauche.robot = robotIRL
-
-    else:
-        print("Arrêt du programme\n")
-        exit()
-
-except ValueError:
-    print("Arrêt du programme \n")
+robotAdapt,refresh = choix_robot()
+if refresh == 1:
+    window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
+elif refresh == None:
+    print("Arrête du programme")
     exit()
 
 controller_choisi = stratCarres
