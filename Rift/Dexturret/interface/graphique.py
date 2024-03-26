@@ -4,12 +4,13 @@ import Dexturret.turret
 from math import cos,radians,sin
 
 """Documentation : 
-    - configure de l'interface graphique
-    - affiche l'environnement à l'aide d'un canvas (fond gris)
-    - affiche les échelles de la distance, la vitesse et l'angle pour l'utilisateur
-    - affiche le robot sous forme de rectangle
-    - configure la touche activant/désactivant la simulation
-    - affiche une ligne rouge pointant vers le point centre du robot
+    - creer_fenetre, creer_frame, creer_canvas, creer_scale, configure l'interface graphique
+    - creer_graphique, rafraichir_graphique : affiche l'environnement à l'aide d'un canvas (fond gris)
+    - affichage_distance : affiche les échelles de la distance et la vitesse des roues pour l'utilisateur
+    - affiche_robot : affiche le robot sous forme de rectangle et affiche une ligne rouge pointant vers le point centre du robot
+    - OnKeyPress : configure la touche activant/désactivant la simulation
+    - dessiner : affiche le tracé du robot 
+    - popup_collision : affiche un pop-up lorsque le robot rencontre une collision
 
 """
 
@@ -174,7 +175,14 @@ def rafraichir_graphique(simu, canvas):
     canvas.update()
 
 
-def creer_graphique(robot,simu):
+def creer_graphique(simu):
+    """
+    Assemble les éléments de la fenetre (frame, canvas, affichage de la distance)
+
+    Paramètre :
+    - simu : simulation dans lequel le robot se déplace 
+
+    """
     #Création de la fenêtre principale, de la frame et du canvas pour la simulation
     window = creer_fenetre(simu.longueur, simu.largeur)
 
@@ -190,6 +198,7 @@ def creer_graphique(robot,simu):
 
 
 def affichage_distance(text_distance,robot,long,larg):
+    """affiche la distance séparant le robot et la bordure vers lequel il se dirige"""
     text_distance.config(text = f"Distance : {round(robot.detect_distance(long,larg),1)}")
 
 def onKeyPress(robot,couleur,event):
@@ -197,6 +206,8 @@ def onKeyPress(robot,couleur,event):
     Gère l'événement lorsqu'une touche du clavier est pressée.
 
     Paramètre :
+    - robot : robot à manipuler
+    - couleur : couleur du bouton permettant l'activation ou la désactivation de la simu
     - event : évènement crée lorsqu'une touche du clavier est pressée
 
     """
@@ -205,6 +216,14 @@ def onKeyPress(robot,couleur,event):
         change_color(robot.pret, couleur)
 
 def dessiner(robot,canvas):
+    """
+    Affichage du tracé qui suit le robot.
+
+    Paramètre :
+    - robot : robot à manipuler
+    - canvas : canvas sur lequel le tracé du robot se fait
+
+    """
     if (len(robot.trace) == 0) or (robot.x,robot.y) != robot.trace[-1]:
         if len(robot.trace) > 500:
             robot.trace.pop(0)

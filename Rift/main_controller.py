@@ -14,7 +14,7 @@ try:
     choix = int(input("Quel robot voulez-vous désigner ? (Tapez 1 pour le robotSimu ou 2 pour le robotIRL) : "))
     if choix == 1:
         robotAdapt = robotSimu
-        window, couleur, canvas, frame, text_distance = interface.creer_graphique(robotAdapt,simu)
+        window, couleur, canvas, frame, text_distance = interface.creer_graphique(simu)
         refresh = 1
 
     elif choix == 2:

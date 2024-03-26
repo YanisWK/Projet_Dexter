@@ -14,7 +14,7 @@ long = 1000
 robot = turret.Robot(1, 50, 25, 0.05, long/2, larg/2, time())
 simu = turret.Simulation(1, robot, larg, long, 60)
 
-window, couleur, canvas, frame, text_distance = interface.creer_graphique(robot,simu)
+window, couleur, canvas, frame, text_distance = interface.creer_graphique(simu)
 #Création des variables de vitesse des roues gauche et droite et configuration de leur scale de vitesse
 vitesse_roue_gauche = IntVar()
 scale_roue_gauche = interface.creer_scale(frame, "Vitesse roue gauche", vitesse_roue_gauche, -100, 100)

@@ -7,18 +7,14 @@ from time import time
 
     Classe du robot pour la simulation.
 
-    Attributs :
-    - id : identifiant du robot
-    - longueur, largeur : dimensions du robot
-    - x, y : coordonnées du robot dans l'environnement
-    - direction : angle d'orientation du robot en degrés
-    - rayon_des_roues : rayon des roues du robot
-    - vitesse_lineaire_roue_gauche, vitesse_lineaire_roue_droite : vitesses linéaires des roues gauche et droite
-    - vitesse_de_rotation_roue_gauche, vitesse_de_rotation_roue_droite : vitesses de rotation des roues gauche et droite
-    - pret : indique l'activation de la simulation et du mouvement du robot
-    - dernier_rafraichissement : temps du dernier rafraîchissement
-    - temps_ajustement : temps d'ajustement pour le rafraîchissement
-    
+    - coordRobot
+    - __repr__
+    - avancer
+    - tourner
+    - coeff_directeur
+    - deplacementRobot
+    - rafraichir
+    - detect_distance
 """
 
 
@@ -192,6 +188,3 @@ class Robot:
             rayon[1] -= pas * sin(radians(self.direction))
             dist += 1
         return pas * dist
-        
-    
-

@@ -6,6 +6,7 @@ Ce module définit plusieurs classes contrôlant un robot simulé qui peut avanc
 Chaque classe propose des méthodes pour démarrer, effectuer une étape, et s'arrêter en fonction de l'état du robot.
 
 Classes:
+- CompareDistance
 - AvancerRobot
 - TournerRobot
 - AvancerViteRobot
@@ -16,19 +17,23 @@ Classes:
 
 class CompareDistance():
     def __init__(self,robot,distance,longueurSimu,largeurSimu):
+        """
+        Paramètres:
+        - robot : robot à faire avancer
+        - distance : distance à parcourir
+        - longueurSimu, largeurSimu : dimensions de la simulation
+        """
         self.robot=robot
         self.distance=distance
         self.longueurSimu=longueurSimu
         self.largeurSimu=largeurSimu
     def start(self):
+        """Démarre la comparaison de la distance entre le robot et distance"""
         capteur=self.robot.detect_distance(self.longueurSimu,self.largeurSimu)
         if(self.distance<0):
             return abs(self.distance)>capteur
         else:
             return self.distance<capteur
-    
-
-
         
 
 class AvancerRobot():
