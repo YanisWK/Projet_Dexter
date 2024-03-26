@@ -9,19 +9,23 @@ larg = 700
 long = 1000
 fps=60
 
+#Creation du robot simu, de son adaptateur et de la simulation
 robotSim = Robot(1, 50, 25, 5, long/2, larg/2, time())
 robotSimu = adaptateurSimu(robotSim)
 robotSim.direction = 135
 robotSim.pret = True
 simu = Simulation(1, robotSim, larg, long, fps)
 
+#Le robot fake et son adaptateur
 robotFake = Robot2IN013Fake()
 robotIRL = adaptateurIRL(robotFake)
 
+#Creation des strategies elementaires
 stratAvancer= AvancerRobot(robotSimu, 100, 100, fps)
 stratTournerDroite = TournerRobot(robotSimu, -90, fps)
 stratTournerGauche = TournerRobot(robotSimu, 90, fps)
 
+#Creation des strategies composees
 carre = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite,\
           stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite]
 stratCarre = Instructions(carre)
@@ -35,8 +39,9 @@ croix = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, str
                 stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche]
 stratCroix = Instructions(croix)
 
-dist_sup_50 = CompareDistance(robotSimu, 50, simu.longueur, simu.largeur)
-cote_condition = Strat_if(dist_sup_50, [stratAvancer, stratTournerDroite])
+#Creation des strategies conditionnelles
+dist_sup_100 = CompareDistance(robotSimu, 100, simu.longueur, simu.largeur)
+cote_condition = Strat_if(dist_sup_100, [stratAvancer, stratTournerDroite])
 carre_condition = Instructions([cote_condition, cote_condition, cote_condition, cote_condition])
 
 def choix_robot():
