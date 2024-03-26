@@ -47,15 +47,7 @@ while simu.awake and not controller_choisi.stop():
         interface.rafraichir_graphique(simu, canvas)
         #Affichage de la ligne rouge pour la direction du robot
         canvas.pack()
-        if (len(robotAdapt.trace) == 0) or (robotAdapt.x,robotAdapt.y) != robotAdapt.trace[-1]:
-            if len(robotAdapt.trace) > 500:
-                robotAdapt.trace.pop(0)
-            robotAdapt.trace.append((robotAdapt.x,robotAdapt.y))
-        for elem in range(1,len(robotAdapt.trace)):
-            x,y = robotAdapt.trace[elem-1]
-            x1,y1 = robotAdapt.trace[elem]
-            canvas.create_line(x, y, x1, y1, fill="black")
-            canvas.pack()
+        interface.dessiner(robotAdapt,canvas)
         canvas.update()
         interface.affichage_distance(text_distance,robotAdapt,simu.longueur,simu.largeur)
     if refresh == 2:
