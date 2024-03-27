@@ -16,29 +16,31 @@ Classes:
 """
 
 class CompareDistance():
-    def __init__(self,robot,distance,longueurSimu,largeurSimu):
+    def __init__(self, robot, distance, longueurSimu, largeurSimu):
         """
-        Paramètres:
-        - robot : robot à faire avancer
-        - distance : distance à parcourir
-        - longueurSimu, largeurSimu : dimensions de la simulation
+        -Est une condition
+        -Utilise le capteur de distance de robot
+        -Retourne si la distance que le robot capte est > a la distance en parametre si celle-ci est positive
+        -Et verifie si la distance est < a la distance en parametre si celle-ci est negative
         """
-        self.robot=robot
-        self.distance=distance
-        self.longueurSimu=longueurSimu
-        self.largeurSimu=largeurSimu
+        self.robot = robot
+        self.distance = distance
+        self.longueurSimu = longueurSimu
+        self.largeurSimu = largeurSimu
+
     def start(self):
         """Démarre la comparaison de la distance entre le robot et distance"""
-        capteur=self.robot.detect_distance(self.longueurSimu,self.largeurSimu)
-        if(self.distance<0):
-            return abs(self.distance)>capteur
+        capteur = self.robot.detect_distance(self.longueurSimu, self.largeurSimu)
+        if(self.distance < 0):
+            return abs(self.distance) > capteur
         else:
-            return self.distance<capteur
+            return self.distance < capteur
         
 
 class AvancerRobot():
     """
     Classe qui gére l'avancement du robot
+    Est une strategie de base
     """
     def __init__(self, robot, distance, vitesse, fps):
         """
@@ -52,27 +54,23 @@ class AvancerRobot():
         self.distance = distance
         self.vitesse = vitesse
         self.fps = fps
-        self.derniere_position_moteurs = robot.get_position_moteurs()
+        self.robot.derniere_position_moteurs = robot.get_position_moteurs()
 
     def start(self):
         """Démarre l'avancement"""
         print("DEBUT AVANCER")
         self.parcouru = 0
         self.robot.set_position_moteurs(3, 0)
-        self.derniere_position_moteurs = self.robot.get_position_moteurs()
+        self.robot.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):
         """Effectue une étape de l'avancement en déplaçant le robot en fonction de la vitesse de déplacement
         et du nombre de rafraichissement, tant que la distance n'a pas été entièrement parcourue."""
 
         self.robot.set_vitesse_roue(3,self.vitesse)
-        nouvelle_position_moteurs = self.robot.get_position_moteurs()
 
-        dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * (self.robot.rayon_des_roues/100)
-        dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * (self.robot.rayon_des_roues/100)
-        self.parcouru += (dist_RG + dist_RD) / 2
+        self.parcouru += self.robot.calcule_avancer_tourner()[0]
 
-        self.derniere_position_moteurs = nouvelle_position_moteurs
 
         print("Distance parcourue: ", self.parcouru)
 
@@ -87,6 +85,7 @@ class AvancerRobot():
 class TournerRobot():
     """    
     Classe qui gére la rotation du robot
+    Est une strategie de base
     """
     def __init__(self, robot, angle, fps):
         """
@@ -98,14 +97,14 @@ class TournerRobot():
         self.robot = robot
         self.angle = angle
         self.fps = fps
-        self.derniere_position_moteurs = robot.get_position_moteurs()
+        self.robot.derniere_position_moteurs = robot.get_position_moteurs()
 
     def start(self):
         """Démarre la rotation"""
         print("DEBUT TOURNER")
         self.angle_parcouru = 0
         self.robot.set_position_moteurs(3, 0)
-        self.derniere_position_moteurs = self.robot.get_position_moteurs()
+        self.robot.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):
         """Effectue une étape de la rotation en déplaçant le robot en fonction de la vitesse de rotation
@@ -121,53 +120,20 @@ class TournerRobot():
             self.robot.set_vitesse_roue(1 , vit)
             self.robot.set_vitesse_roue(2 , -vit)
 
-        nouvelle_position_moteurs = self.robot.get_position_moteurs()
-
-        angle_RG = nouvelle_position_moteurs[0] - self.derniere_position_moteurs[0]
-        angle_RD = nouvelle_position_moteurs[1] - self.derniere_position_moteurs[1]
-
-        self.angle_parcouru += degrees(abs(((self.robot.rayon_des_roues/100) * (angle_RD - angle_RG)) / self.robot.largeur))
-
-        self.derniere_position_moteurs = nouvelle_position_moteurs
+        
+        self.angle_parcouru += self.robot.calcule_avancer_tourner()[1]
 
         print("Angle parcouru: ", self.angle_parcouru)
 
     def stop(self):
         """Vérifie si la rotation doit s'arrêter"""
         return abs(self.angle) <= self.angle_parcouru or self.angle_parcouru >= abs(self.angle) - 2
-    
-
-class AvancerViteRobot():
-    """Gère le déplacement rapide linéaire du robot"""
-    def __init__(self, robot, simu, vitesse):
-        """
-        Paramètres:
-        - robot : robot à faire avancer
-        - simu : simulation dans laquelle se déplace le robot
-        - vitesse : vitesse du robot
-        """
-        self.robot = robot
-        self.simu = simu
-        self.vitesse = vitesse
-
-    def start(self):
-        """Démarre l'avancement en fonction de la vitesse spécifiée"""
-        self.robot.set_vitesse_roue(3,self.vitesse)
-
-    def etape(self):
-        """
-        Fait avancer le robot tant que le mur n'est pas atteint et
-        arrête le robot en réglant la vitesse de ses roues à zéro, sinon
-        """
-        if self.stop():
-            return
-
-    def stop(self):
-        """Arrête le robot en fonction de la distance qui le sépare des bordures de la simulation"""
-        return self.robot.detect_distance(self.simu.longueur, self.simu.largeur) <= self.robot.largeur
         
 
 class Instructions():
+    """
+    Est une strategie qui est compose d'autres strategies
+    """
     def __init__(self, strats):
         """
         Paramètre:
@@ -195,6 +161,9 @@ class Instructions():
     
 
 class Strat_if():
+    """
+    Est une strategie qui est compose d'autres strategies
+    """
     def __init__(self, condition, strats):
         """
         Paramètres:

@@ -16,6 +16,7 @@ class adaptateurIRL():
         self.robot = robot
         self.rayon_des_roues = self.robot.WHEEL_DIAMETER/22
         self.largeur = self.robot.WHEEL_BASE_WIDTH/10
+        self.derniere_position_moteurs = (0, 0)
 
     def set_vitesse_roue(self, port, vitesse):
         """
@@ -69,4 +70,21 @@ class adaptateurIRL():
         """
         self.robot.position_moteurs[0] += self.robot.vit_roue_gauche
         self.robot.position_moteurs[1] += self.robot.vit_roue_droite
+
+    def calcule_avancer_tourner(self):
+        nouvelle_position_moteurs = self.get_position_moteurs()
+
+        dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * (self.rayon_des_roues/100)
+        dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * (self.rayon_des_roues/100)
+
+        distance_parcourue = (dist_RG + dist_RD) / 2
+
+        angle_RG = nouvelle_position_moteurs[0] - self.derniere_position_moteurs[0]
+        angle_RD = nouvelle_position_moteurs[1] - self.derniere_position_moteurs[1]
+
+        angle_parcouru = degrees(abs(((self.rayon_des_roues/100) * (angle_RD - angle_RG)) / self.largeur))
+
+        self.derniere_position_moteurs = nouvelle_position_moteurs
+
+        return (distance_parcourue, angle_parcouru)
 

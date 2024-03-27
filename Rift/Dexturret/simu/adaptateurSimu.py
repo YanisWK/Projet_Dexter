@@ -14,6 +14,7 @@ class adaptateurSimu():
         - dernier_rafraichissement : timestamp du dernier rafraîchissement des données du robot
         """
         self.robot=robot
+        self.derniere_position_moteurs = (0, 0)
 
     def set_vitesse_roue(self,port,vitesse):
         """
@@ -50,6 +51,23 @@ class adaptateurSimu():
 
     def detect_distance(self, simu_longueur, simu_largeur):
         return self.robot.detect_distance(simu_longueur, simu_largeur)
+    
+    def calcule_avancer_tourner(self):
+        nouvelle_position_moteurs = self.get_position_moteurs()
+
+        dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * (self.rayon_des_roues/100)
+        dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * (self.rayon_des_roues/100)
+
+        distance_parcourue = (dist_RG + dist_RD) / 2
+
+        angle_RG = nouvelle_position_moteurs[0] - self.derniere_position_moteurs[0]
+        angle_RD = nouvelle_position_moteurs[1] - self.derniere_position_moteurs[1]
+
+        angle_parcouru = degrees(abs(((self.rayon_des_roues/100) * (angle_RD - angle_RG)) / self.largeur))
+
+        self.derniere_position_moteurs = nouvelle_position_moteurs
+
+        return (distance_parcourue, angle_parcouru)
 
     @property
     def rayon_des_roues(self):
