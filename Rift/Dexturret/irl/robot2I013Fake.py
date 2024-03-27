@@ -50,11 +50,15 @@ class Robot2IN013Fake:
         print("Set de la vitesse de la roue ", port, "a une vitesse de ", dps)
         if (port == 1):
             self.vit_roue_gauche = dps
+            self.position_moteurs[0] += self.vit_roue_gauche
         if (port == 2):
             self.vit_roue_droite = dps
+            self.position_moteurs[1] += self.vit_roue_droite
         else:
             self.vit_roue_gauche = dps
             self.vit_roue_droite = dps
+            self.position_moteurs[0] += self.vit_roue_gauche
+            self.position_moteurs[1] += self.vit_roue_droite
 
     def get_motor_position(self):
         """
@@ -116,4 +120,3 @@ class Robot2IN013Fake:
         """
         pass
 
-  
