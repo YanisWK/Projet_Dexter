@@ -14,7 +14,7 @@ class adaptateurIRL():
     def __init__(self,robot):
         """ Initialise le robot de la classe Robot2IN013Fake"""
         self.robot = robot
-        self.rayon_des_roues = self.robot.WHEEL_DIAMETER/22
+        self.rayon_des_roues = self.robot.WHEEL_DIAMETER/20
         self.largeur = self.robot.WHEEL_BASE_WIDTH/10
         self.derniere_position_moteurs = (0, 0)
 
@@ -63,12 +63,6 @@ class adaptateurIRL():
         - offset : offset de décalage en degrés
         """
         return self.robot.offset_motor_encoder(port, offset)
-    
-    def rafraichir(self):
-        """
-        Met à jour la position des moteurs en fonction de leur vitesse actuelle.
-        """
-        pass
 
     def calcule_avancer_tourner(self):
         nouvelle_position_moteurs = self.get_position_moteurs()
