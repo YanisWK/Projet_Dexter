@@ -33,8 +33,7 @@ class CompareDistance():
         capteur = self.robot.detect_distance(self.longueurSimu, self.largeurSimu)
         if(self.distance < 0):
             return abs(self.distance) > capteur
-        else:
-            return self.distance < capteur
+        return self.distance < capteur
         
 
 class AvancerRobot():
