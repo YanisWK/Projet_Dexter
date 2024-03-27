@@ -68,8 +68,7 @@ class adaptateurIRL():
         """
         Met à jour la position des moteurs en fonction de leur vitesse actuelle.
         """
-        self.robot.position_moteurs[0] += self.robot.vit_roue_gauche
-        self.robot.position_moteurs[1] += self.robot.vit_roue_droite
+        pass
 
     def calcule_avancer_tourner(self):
         nouvelle_position_moteurs = self.get_position_moteurs()
