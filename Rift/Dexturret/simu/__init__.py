@@ -1,1 +1,3 @@
-from simu import Robot, Simulation, AdaptateurSimu
+from .robot import Robot
+from .adaptateurSimu import adaptateurSimu
+from .simulation import Simulation
