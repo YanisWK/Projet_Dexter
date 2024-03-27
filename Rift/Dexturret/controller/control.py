@@ -111,7 +111,7 @@ class TournerRobot():
         if self.stop():
             return
 
-        vit = 10
+        vit = 200
         if (self.angle > 0):
             self.robot.set_vitesse_roue(1 , -vit)
             self.robot.set_vitesse_roue(2 , vit)

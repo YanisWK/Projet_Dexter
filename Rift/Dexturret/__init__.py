@@ -1,7 +1,9 @@
 from .interface import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color, creer_graphique, affichage_distance, onKeyPress, dessiner
 from .simu import Robot, adaptateurSimu, Simulation
-from .irl import Robot2IN013Fake, adaptateurIRL
+from .irl import adaptateurIRL
 from .controller import AvancerRobot, TournerRobot, Instructions, Strat_if, CompareDistance
+
+from robot2IN013 import Robot2IN013
 
 from time import time
 
@@ -18,18 +20,20 @@ robotSim.pret = True
 simu = Simulation(1, robotSim, larg, long, fps)
 
 #Le robot fake et son adaptateur
-robotFake = Robot2IN013Fake()
+robotFake = Robot2IN013()
 robotIRL = adaptateurIRL(robotFake)
 
 #Creation des strategies elementaires
-stratAvancer= AvancerRobot(robotSimu, 100, 100, fps)
+stratAvancer= AvancerRobot(robotSimu, 10, 200, fps)
 stratTournerDroite = TournerRobot(robotSimu, -90, fps)
 stratTournerGauche = TournerRobot(robotSimu, 90, fps)
 
 #Creation des strategies composees
 carre = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite,\
           stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite]
-stratCarre = Instructions(carre)
+carre2 = [stratAvancer, stratTournerGauche, stratAvancer, stratTournerGauche,\
+          stratAvancer, stratTournerGauche,stratAvancer, stratTournerGauche]
+stratCarre = Instructions(carre2)
 
 carres = [stratCarre, stratCarre, stratCarre]
 stratCarres = Instructions(carres)

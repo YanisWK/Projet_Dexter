@@ -15,7 +15,7 @@ elif refresh == None:
     print("Arrête du programme")
     exit()
 
-controller_choisi = carre_condition
+controller_choisi = stratCarre
 
 robotSim.dernier_rafraichissement = time()
 #Boucle principale de la simu
@@ -29,6 +29,7 @@ while simu.awake and not controller_choisi.stop():
         simu.rafraichir()
         interface.dessiner(robotAdapt,simu,canvas,text_distance)
         
+robotAdapt.set_vitesse_roue(3, 0)
 
 #Affichage d'une fenêtre pop-up en cas de collision
 if (robotAdapt == robotIRL):
