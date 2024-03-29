@@ -1,4 +1,4 @@
-from .interface import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color, creer_graphique, affichage_distance, onKeyPress, dessiner
+from .interface2D import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color, creer_graphique, affichage_distance, onKeyPress, dessiner
 from .simu import Robot, adaptateurSimu, Simulation
 from .irl import Robot2IN013Fake, adaptateurIRL
 from .controller import AvancerRobot, TournerRobot, Instructions, Strat_if, CompareDistance
@@ -11,7 +11,7 @@ long = 1000
 fps=60
 
 #Creation du robot simu, de son adaptateur et de la simulation
-robotSim = Robot(1, 50, 25, 5, long/2, larg/2, time())
+robotSim = Robot(1, 30, 15, 5, long/2, larg/2, time())
 robotSimu = adaptateurSimu(robotSim)
 robotSim.direction = 135
 robotSim.pret = True
@@ -22,14 +22,16 @@ robotFake = Robot2IN013Fake()
 robotIRL = adaptateurIRL(robotFake)
 
 #Creation des strategies elementaires
-stratAvancer= AvancerRobot(robotSimu, 100, 100, fps)
+stratAvancer= AvancerRobot(robotSimu, 50, 200, fps)
 stratTournerDroite = TournerRobot(robotSimu, -90, fps)
 stratTournerGauche = TournerRobot(robotSimu, 90, fps)
 
 #Creation des strategies composees
 carre = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite,\
           stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite]
-stratCarre = Instructions(carre)
+carre2 = [stratAvancer, stratTournerGauche, stratAvancer, stratTournerGauche,\
+          stratAvancer, stratTournerGauche,stratAvancer, stratTournerGauche]
+stratCarre = Instructions(carre2)
 
 carres = [stratCarre, stratCarre, stratCarre]
 stratCarres = Instructions(carres)
@@ -56,6 +58,7 @@ def choix_robot():
         stratAvancer.robot = robotIRL
         stratTournerDroite.robot = robotIRL
         stratTournerGauche.robot = robotIRL
+        dist_sup_100.robot = robotIRL
         return robotAdapt,2
   
       else:

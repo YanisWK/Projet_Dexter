@@ -1,1 +1,1 @@
-from .control import AvancerRobot, AvancerViteRobot, TournerRobot, Instructions, Strat_if, CompareDistance
+from .control import AvancerRobot, TournerRobot, Instructions, Strat_if, CompareDistance
