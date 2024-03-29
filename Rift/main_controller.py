@@ -1,5 +1,5 @@
 from tkinter import IntVar,Button,Label
-import Dexturret.interface as interface
+import Dexturret.interface2D as interface2D
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 
 robotAdapt,refresh = choix_robot()
 if refresh == 1:
-    window, couleur, canvas, frame, text_distance = interface.creer_graphique(simu)
+    window, couleur, canvas, frame, text_distance = interface2D.creer_graphique(simu)
 elif refresh == None:
     print("Arrête du programme")
     exit()
@@ -27,7 +27,7 @@ while simu.awake and not controller_choisi.stop():
     controller_choisi.etape()
     if refresh == 1 :
         simu.rafraichir()
-        interface.dessiner(robotAdapt,simu,canvas,text_distance)
+        interface2D.dessiner(robotAdapt,simu,canvas,text_distance)
         
 robotAdapt.set_vitesse_roue(3, 0)
 
@@ -37,7 +37,7 @@ if (robotAdapt == robotIRL):
     exit()
 
 if not simu.awake:
-    interface.popup_collision(window)
+    interface2D.popup_collision(window)
     logging.info(f'Le Robot est entré en collision avec un obstacle')
 
 print("Fin du programme robotSimu")
