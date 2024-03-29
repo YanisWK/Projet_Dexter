@@ -1,6 +1,5 @@
 from tkinter import IntVar,Button,Label
 import Dexturret.interface as interface
-import Dexturret.turret as turret
 from time import sleep, time
 import logging
 import Dexturret.controller as controller

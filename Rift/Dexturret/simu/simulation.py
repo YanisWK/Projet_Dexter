@@ -1,5 +1,3 @@
-import Dexturret.turret
-
 """Documentation : 
 
 Classe qui simule le déplacement d'un robot dans un environnement donné
