@@ -1,5 +1,5 @@
 from math import degrees
-
+import logging
 """
 Documentation:
 Ce module définit plusieurs classes contrôlant un robot simulé qui peut avancer, tourner, tracer un carré et avancer vite vers un mur.
@@ -71,7 +71,7 @@ class AvancerRobot():
         self.parcouru += self.robot.calcule_avancer_tourner()[0]
 
 
-        print("Distance parcourue: ", self.parcouru)
+        logging.info(f"Distance parcourue: {self.parcouru}")
 
         if self.stop() :
             return
@@ -122,7 +122,7 @@ class TournerRobot():
         
         self.angle_parcouru += self.robot.calcule_avancer_tourner()[1]
 
-        print("Angle parcouru: ", self.angle_parcouru)
+        logging.info(f"Angle parcouru: {self.angle_parcouru}")
 
     def stop(self):
         """Vérifie si la rotation doit s'arrêter"""

@@ -1,4 +1,4 @@
-
+import logging
 from math import pi, degrees
 
 
@@ -29,7 +29,7 @@ class adaptateurIRL():
                 -> 3 pour les deux roues
         - vitesse : nouvelle vitesse linéaire de la roue (en cm/s)
         """
-        print("Set vitesse de(s) roue(s) ", port, " a ", vitesse)
+        logging.info(f"Set vitesse de(s) roue(s)  {port} a {vitesse}")
         dps = vitesse * 2 * pi / (self.rayon_des_roues * 10)
         self.robot.set_motor_dps(port, dps)
 
@@ -51,7 +51,7 @@ class adaptateurIRL():
         """
         Retourne la position des moteurs du robot au dernier rafraichissement.
         """
-        print("Obtenir la position des moteurs")
+        logging.info("Obtenir la position des moteurs")
         return self.robot.get_motor_position()
     
     def set_position_moteurs(self, port, offset):

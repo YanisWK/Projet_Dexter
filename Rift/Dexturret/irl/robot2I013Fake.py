@@ -1,5 +1,5 @@
 from math import pi
-
+import logging
 class Robot2IN013Fake:
     """ 
     Classe d'encapsulation du robot et des senseurs.
@@ -47,7 +47,7 @@ class Robot2IN013Fake:
         :port: une constante moteur,  MOTOR_LEFT ou MOTOR_RIGHT (ou les deux MOTOR_LEFT+MOTOR_RIGHT).
         :dps: la vitesse cible en nombre de degres par seconde
         """
-        print("Set de la vitesse de la roue ", port, "a une vitesse de ", dps)
+        logging.info(f"Set de la vitesse de la roue  {port} a une vitesse de {dps}")
         if (port == 1):
             self.vit_roue_gauche = dps
             self.position_moteurs[0] += self.vit_roue_gauche
@@ -65,7 +65,7 @@ class Robot2IN013Fake:
         Lit les etats des moteurs en degre.
         :return: couple du  degre de rotation des moteurs
         """
-        print("Obtenir la positions des moteurs")
+        logging.info("Obtenir la positions des moteurs")
         return (self.position_moteurs[0], self.position_moteurs[1])
    
     def offset_motor_encoder(self, port, offset):
