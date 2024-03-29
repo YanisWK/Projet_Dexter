@@ -32,6 +32,11 @@ class MyApp(ShowBase):
 
         self.pandaActor.loop("walk") #répète l'animation on loop
 
+
+        # Initialiser la caméra avec un angle de 3/4 par rapport au panda.
+        self.camera.setPos(0, -20, 6)  # Déplacer la caméra derrière le panda
+        self.camera.lookAt(self.pandaActor)  # Orienter la caméra vers le panda
+
         #définition des intervalles de déplacement et de rotation du panda
         
         posInterval1 = self.pandaActor.posInterval(13,
@@ -66,6 +71,9 @@ class MyApp(ShowBase):
         angleRadians = angleDegrees * (pi / 180.0)
         self.camera.setPos(20 * sin(angleRadians), -20 * cos(angleRadians), 3)
         self.camera.setHpr(angleDegrees, 0, 0)
+        # Mettre à jour la position de la caméra pour suivre le panda.
+        self.camera.setPos(self.pandaActor, 5000, 5000, 5000)  #1e param= de près ou de loin, 2e param=depuis la gauche ou la droite, 3e param=vue d'en haut ou d'en bas
+        self.camera.lookAt(self.pandaActor)
         return Task.cont
 
 
