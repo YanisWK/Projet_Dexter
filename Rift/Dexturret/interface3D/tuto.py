@@ -14,7 +14,12 @@ class MyApp(ShowBase):
         self.disableMouse() #désactive les controles de la caméra
 
     
-        self.scene = self.loader.loadModel("models/environment") #charge l'environnement
+        self.scene = self.loader.loadModel("models/box") #charge l'environnement
+
+        self.obstacle = self.loader.loadModel("models/box") #crée l'obstacle
+        self.obstacle.reparentTo(self.render)
+        self.obstacle.setScale(1, 1, 1)  #ajuste la taille de l'obstacle
+        self.obstacle.setPos(0, 0, 0)  #positionne l'obstacle
 
         self.scene.reparentTo(self.render) #attache l'objet représentant la scène à l'arbre de la scène principale
 
