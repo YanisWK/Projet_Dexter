@@ -27,15 +27,17 @@ stratTournerDroite = TournerRobot(robotSimu, -90, fps)
 stratTournerGauche = TournerRobot(robotSimu, 90, fps)
 
 #Creation des strategies composees
-carre = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite,\
+carreD = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite,\
           stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite]
-carre2 = [stratAvancer, stratTournerGauche, stratAvancer, stratTournerGauche,\
+carreG = [stratAvancer, stratTournerGauche, stratAvancer, stratTournerGauche,\
           stratAvancer, stratTournerGauche,stratAvancer, stratTournerGauche]
-stratCarre = Instructions(carre2)
+stratCarreD = Instructions(carreD)
+stratCarreG = Instructions(carreG)
 
-carres = [stratCarre, stratCarre, stratCarre]
+carres = [stratCarreD, stratCarreD, stratCarreD]
 stratCarres = Instructions(carres)
 
+stratCarresFor = Strat_for(3, [stratCarreD, stratAvancer])
 
 #Creation des strategies conditionnelles
 dist_sup_100 = CompareDistance(robotSimu, 100, simu.longueur, simu.largeur)
