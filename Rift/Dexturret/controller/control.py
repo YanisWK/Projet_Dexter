@@ -194,7 +194,15 @@ class Strat_if():
         return (self.current >= len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condi)
     
 class Strat_while():
+    """
+    Est une stratégie conditionnelle qui effectue la liste de strategie tant que la condition est valide
+    """
     def __init__(self, condition, strats):
+        """
+        Paramètres:
+        - condition : condition a verifier a chaque tour de boucle
+        - strats : liste des strategies a effectuer
+        """
         self.condition = condition
         self.strats = strats
         self.current = -1
@@ -203,13 +211,9 @@ class Strat_while():
     def start(self):
         self.current = -1
         self.condi = self.condition.start()
-        print("START")
 
     def etape(self):
-        print("ETAPE")
-        print("DIST: ", self.condition.robot.detect_distance(self.condition.longueurSimu, self.condition.largeurSimu))
         if self.stop():
-            print("STOP")
             return
         
         if self.current < 0 or self.strats[self.current].stop():
@@ -226,7 +230,15 @@ class Strat_while():
         return not(self.condi)
     
 class Strat_for():
+    """
+    Strategie sequentielle qui effectue un nombre defini de fois une liste de strategie
+    """
     def __init__(self, max, strats):
+        """
+        Parametres:
+        - max: le nombre de tour de boucle
+        - strats: la liste des strategies a effectuer a chaque tour de boucle
+        """
         self.max = max
         self.strats = strats
         self.current = -1
