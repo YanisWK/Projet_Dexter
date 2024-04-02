@@ -129,7 +129,7 @@ class TournerRobot():
         return abs(self.angle) <= self.angle_parcouru or self.angle_parcouru >= abs(self.angle) - 2
         
 
-class Instructions():
+class Sequence():
     """
     Est une strategie qui est compose d'autres strategies
     """
@@ -156,7 +156,7 @@ class Instructions():
 
     def stop(self):
         """Stoppe le robot si la dernière instruction est terminée"""
-        return self.current == len(self.strats)-1 and self.strats[self.current].stop()
+        return self.current >= len(self.strats)-1 and self.strats[self.current].stop()
     
 
 class Strat_if():
@@ -191,7 +191,7 @@ class Strat_if():
 
     def stop(self):
         """"""
-        return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condi)
+        return (self.current >= len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condi)
     
 class Strat_while():
     def __init__(self, condition, strats):
@@ -251,4 +251,4 @@ class Strat_for():
         self.strats[self.current].etape()
 
     def stop(self):
-        return self.boucle == self.max
+        return self.boucle >= self.max
