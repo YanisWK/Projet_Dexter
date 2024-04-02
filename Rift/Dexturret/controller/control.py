@@ -203,18 +203,27 @@ class Strat_while():
     def start(self):
         self.current = -1
         self.condi = self.condition.start()
+        print("START")
 
     def etape(self):
+        print("ETAPE")
+        print("DIST: ", self.condition.robot.detect_distance(self.condition.longueurSimu, self.condition.largeurSimu))
         if self.stop():
+            print("STOP")
             return
         
         if self.current < 0 or self.strats[self.current].stop():
             self.current += 1
+
+            if (self.current == len(self.strats)):
+                self.current = 0
+                self.condi = self.condition.start()
+
             self.strats[self.current].start()
         self.strats[self.current].etape()
 
     def stop(self):
-        return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condi)
+        return not(self.condi)
     
 class Strat_for():
     def __init__(self, max, strats):

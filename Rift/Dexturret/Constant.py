@@ -11,9 +11,9 @@ long = 1000
 fps=60
 
 #Creation du robot simu, de son adaptateur et de la simulation
-robotSim = Robot(1, 30, 15, 5, long/2, larg/2, time())
+robotSim = Robot(1, 50, 25, 5, long/2, larg/2, time())
 robotSimu = adaptateurSimu(robotSim)
-robotSim.direction = 135
+robotSim.direction = 100
 robotSim.pret = True
 simu = Simulation(1, robotSim, larg, long, fps)
 
@@ -44,6 +44,10 @@ dist_sup_100 = CompareDistance(robotSimu, 100, simu.longueur, simu.largeur)
 cote_condition = Strat_if(dist_sup_100, [stratAvancer, stratTournerDroite])
 carre_condition = Instructions([cote_condition, cote_condition, cote_condition, cote_condition])
 
+avancerPeu = AvancerRobot(robotSimu, 10, 200, 60)
+dist_sup_25 = CompareDistance(robotSimu, 25, simu.longueur, simu.largeur)
+avancerViteMur = Strat_while(dist_sup_25, [avancerPeu])
+
 def choix_robot():
   try:
       choix = int(input("Quel robot voulez-vous désigner ? (Tapez 1 pour le robotSimu ou 2 pour le robotIRL) : "))
@@ -56,6 +60,9 @@ def choix_robot():
         stratTournerDroite.robot = robotIRL
         stratTournerGauche.robot = robotIRL
         dist_sup_100.robot = robotIRL
+        dist_sup_25.robot = robotIRL
+        avancerPeu.robot = robotIRL
+        avancerViteMur.robot = robotIRL
         return robotAdapt,2
   
       else:
