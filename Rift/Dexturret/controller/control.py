@@ -221,11 +221,11 @@ class Strat_for():
         self.max = max
         self.strats = strats
         self.current = -1
-        self.boucle = -1
+        self.boucle = 0
 
     def start(self):
         self.current = -1
-        self.boucle = -1
+        self.boucle = 0
 
     def etape(self):    
         if self.current < 0 or self.strats[self.current].stop():
