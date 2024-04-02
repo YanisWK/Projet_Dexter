@@ -1,5 +1,7 @@
 from math import pi
 import logging
+from random import randint
+
 class Robot2IN013Fake:
     """ 
     Classe d'encapsulation du robot et des senseurs.
@@ -90,7 +92,7 @@ class Robot2IN013Fake:
             1. L'intervalle est de **5-8,000** millimeters.
             2. Lorsque la valeur est en dehors de l'intervalle, le retour est **8190**.
         """
-        pass
+        return randint(0, 100)
 
     def servo_rotate(self,position):
         """
