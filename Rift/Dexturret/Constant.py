@@ -1,7 +1,7 @@
 from .interface2D import creer_canvas, creer_couleur, creer_fenetre, creer_frame, creer_scale, affiche_robot, popup_collision, rafraichir_graphique, change_color, creer_graphique, affichage_distance, onKeyPress, dessiner
 from .simu import Robot, adaptateurSimu, Simulation
 from .irl import Robot2IN013Fake, adaptateurIRL
-from .controller import AvancerRobot, TournerRobot, Instructions, Strat_if, CompareDistance
+from .controller import AvancerRobot, TournerRobot, Instructions, Strat_if, Strat_while, Strat_for, CompareDistance
 
 from time import time
 
@@ -36,11 +36,6 @@ stratCarre = Instructions(carre2)
 carres = [stratCarre, stratCarre, stratCarre]
 stratCarres = Instructions(carres)
 
-croix = [stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
-          stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
-            stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche,\
-                stratAvancer, stratTournerDroite, stratAvancer, stratTournerDroite, stratAvancer, stratTournerGauche]
-stratCroix = Instructions(croix)
 
 #Creation des strategies conditionnelles
 dist_sup_100 = CompareDistance(robotSimu, 100, simu.longueur, simu.largeur)
