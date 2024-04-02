@@ -172,10 +172,12 @@ class Strat_if():
         self.condition = condition
         self.strats = strats
         self.current = -1
+        self.condi = False
     
     def start(self):
         """"""
         self.current = -1
+        self.condi = self.condition.start()
 
     def etape(self):
         """"""
@@ -189,16 +191,18 @@ class Strat_if():
 
     def stop(self):
         """"""
-        return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condition.start())
+        return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condi)
     
 class Strat_while():
     def __init__(self, condition, strats):
         self.condition = condition
         self.strats = strats
         self.current = -1
+        self.condi = False
 
     def start(self):
         self.current = -1
+        self.condi = self.condition.start()
 
     def etape(self):
         if self.stop():
@@ -210,4 +214,32 @@ class Strat_while():
         self.strats[self.current].etape()
 
     def stop(self):
-        return not(self.condition.start())
+        return (self.current == len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condi)
+    
+class Strat_for():
+    def __init__(self, max, strats):
+        self.max = max
+        self.strats = strats
+        self.current = -1
+        self.boucle = -1
+
+    def start(self):
+        self.current = -1
+        self.boucle = -1
+
+    def etape(self):    
+        if self.current < 0 or self.strats[self.current].stop():
+            self.current += 1
+
+            if (self.current == len(self.strats)):
+                self.current = 0
+                self.boucle += 1
+            self.strats[self.current].start()
+
+        if self.stop():
+            return
+        
+        self.strats[self.current].etape()
+
+    def stop(self):
+        return self.boucle == self.max
