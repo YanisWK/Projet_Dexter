@@ -59,7 +59,8 @@ class AvancerRobot():
         """Démarre l'avancement"""
         print("DEBUT AVANCER")
         self.parcouru = 0
-        self.robot.set_position_moteurs(3, 0)
+        self.robot.set_position_moteurs(1, self.robot.get_position_moteurs()[0])
+        self.robot.set_position_moteurs(2, self.robot.get_position_moteurs()[1])
         self.robot.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):

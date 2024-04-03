@@ -15,7 +15,7 @@ elif refresh == None:
     print("Arrête du programme")
     exit()
 
-controller_choisi = avancerViteMur
+controller_choisi = stratCarresFor
 controller_choisi.start()
 
 robotSim.dernier_rafraichissement = time()
