@@ -161,8 +161,8 @@ class Sequence():
 
 class Strat_if():
     """
-    Est une strategie qui est compose d'autres strategies
-    """
+    Est une stratégie conditionnelle qui effectue la liste de strategie si que la condition est valide
+    """ 
     def __init__(self, condition, strats):
         """
         Paramètres:
@@ -175,12 +175,12 @@ class Strat_if():
         self.condi = False
     
     def start(self):
-        """"""
+        """Démarre l'exécution"""
         self.current = -1
         self.condi = self.condition.start()
 
     def etape(self):
-        """"""
+        """Effectue une étape de la stratégie en vérifiant si la condition est remplie"""
         if self.stop():
             return
         
@@ -190,7 +190,7 @@ class Strat_if():
         self.strats[self.current].etape()
 
     def stop(self):
-        """"""
+        """Arrête la stratégie si la dernière instruction est terminée ou si la condition n'est pas remplie"""
         return (self.current >= len(self.strats)-1 and self.strats[self.current].stop()) or not(self.condi)
     
 class Strat_while():
@@ -209,10 +209,12 @@ class Strat_while():
         self.condi = False
 
     def start(self):
+        """Démarre l'exécution"""
         self.current = -1
         self.condi = self.condition.start()
 
-    def etape(self):
+    def etape(self):        
+        """Effectue une étape de la stratégie en vérifiant la condition à chaque tour de boucle"""
         if self.stop():
             return
         
@@ -227,11 +229,12 @@ class Strat_while():
         self.strats[self.current].etape()
 
     def stop(self):
+        """Arrête la stratégie si la condition n'est plus valide"""
         return not(self.condi)
     
 class Strat_for():
     """
-    Strategie sequentielle qui effectue un nombre defini de fois une liste de strategie
+    Est une strategie séquentielle qui effectue un nombre défini de fois une liste de strategies
     """
     def __init__(self, max, strats):
         """
@@ -245,10 +248,12 @@ class Strat_for():
         self.boucle = 0
 
     def start(self):
+        """Démarre l'exécution"""
         self.current = -1
         self.boucle = 0
 
     def etape(self):    
+        """Effectue une étape"""
         if self.current < 0 or self.strats[self.current].stop():
             self.current += 1
 
@@ -263,4 +268,5 @@ class Strat_for():
         self.strats[self.current].etape()
 
     def stop(self):
+        """Arrête la stratégie lorsque le nombre de tours de boucle atteint le max"""
         return self.boucle >= self.max
