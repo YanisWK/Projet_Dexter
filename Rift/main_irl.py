@@ -14,13 +14,16 @@ dist_sup_25.robot = robotAdapt
 
 controller_choisi = stratCarreD
 
+fichier = open("data.txt", "w")
+
 while simu.awake and not controller_choisi.stop():
 
     #Mise a jour tous les 1/temps
     sleep(1/fps)
     print("ENCODER: ", robotAdapt.get_position_moteurs())
-
+    fichier.write(Robot2IN013.get_image)
     controller_choisi.etape()
     robotAdapt.set_vitesse_roue(3, 0)
-        
+
+fichier.close()
 robotAdapt.set_vitesse_roue(3, 0)
