@@ -307,3 +307,8 @@ def getStrat_CarreCondition(Robot,distance,vitesse,fps,angle,long,larg):
     stratTournerDroite = TournerRobot(Robot, -angle, fps)
     cote_condition = Strat_if(dist_sup, [stratAvancer, stratTournerDroite])
     return Sequence([cote_condition, cote_condition, cote_condition, cote_condition])
+
+def getStrat_AvancerViteMur(Robot,distance,vitesse,fps,long,larg):
+    avancerPeu = AvancerRobot(Robot, distance, vitesse, fps)
+    dist_sup = CompareDistance(Robot, 100, long, larg)
+    return Strat_while(dist_sup, [avancerPeu])
