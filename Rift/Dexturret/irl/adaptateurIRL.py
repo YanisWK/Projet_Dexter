@@ -66,22 +66,21 @@ class adaptateurIRL():
         return self.robot.offset_motor_encoder(port, offset)
 
     def calcule_avancer_tourner(self):
-        nouvelle_position_moteurs = self.get_position_moteurs()
+        angle_RG = self.get_position_moteurs()[0]
+        angle_RD = self.get_position_moteurs()[1]
 
-        dist_RG = (abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) / 360) * (2*self.rayon_des_roues * pi)
-        dist_RD = (abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) / 360) * (2*self.rayon_des_roues * pi)
+        dist_RG = (abs(angle_RG) / 360) * (2 * self.rayon_des_roues * pi)
+        dist_RD = (abs(angle_RD) / 360) * (2 * self.rayon_des_roues * pi)
+        print("angle_RG ", angle_RG)
+        print("angle_RD ", angle_RD)
 
         distance_parcourue = (dist_RG + dist_RD) / 2
-
-        angle_RG = nouvelle_position_moteurs[0] - self.derniere_position_moteurs[0]
-        angle_RD = nouvelle_position_moteurs[1] - self.derniere_position_moteurs[1]
-
-        angle_parcouru = degrees(abs(((self.rayon_des_roues/100) * (angle_RD - angle_RG)) / self.largeur)) * 1.5
+        print("DIST PARCOURUE ", distance_parcourue)
 
         angle_parcouru = abs(self.rayon_des_roues * (angle_RD - angle_RG)) / self.largeur
-        print("PARCOURU ", angle_parcouru)
+        print("ANGLE PARCOURU ", angle_parcouru)
 
-        self.derniere_position_moteurs = nouvelle_position_moteurs
+        self.set_position_moteurs(1, self.get_position_moteurs()[0])
+        self.set_position_moteurs(2, self.get_position_moteurs()[1])
 
         return (distance_parcourue, angle_parcouru)
-
