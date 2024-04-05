@@ -285,3 +285,13 @@ def getStrat_seq_carreG(Robot,distance,vitesse,fps,angle):
     carreG = [strat_av, strat_tg, strat_av, strat_tg,\
              strat_av, strat_tg, strat_av, strat_tg]
     return Sequence(carreG)
+
+def getStrat_dessine_n_carre(nombre,Robot,distance,vitesse,fps,angle, direction):
+    if direction == 1:
+        stratCarre = getStrat_seq_carreG(Robot,distance,vitesse,fps,angle)
+    else:
+        stratCarre = getStrat_seq_carreD(Robot,distance,vitesse,fps,angle)
+    carres = []
+    for i in range(nombre):
+        carres.append(stratCarre)
+    return Sequence(carres)
