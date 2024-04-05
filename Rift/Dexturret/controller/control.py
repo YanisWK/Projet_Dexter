@@ -271,3 +271,10 @@ class Strat_for():
     def stop(self):
         """Arrête la stratégie lorsque le nombre de tours de boucle atteint le max"""
         return self.boucle >= self.max
+    
+def getStrat_seq_carreD(Robot,distance,vitesse,fps,angle):
+    strat_av = AvancerRobot(Robot, distance, vitesse, fps)
+    strat_td = TournerRobot(Robot, -angle, fps)
+    carreD = [strat_av, strat_td, strat_av, strat_td,\
+             strat_av, strat_td, strat_av, strat_td]
+    return Sequence(carreD)
