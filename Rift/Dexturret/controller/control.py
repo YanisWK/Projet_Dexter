@@ -295,3 +295,8 @@ def getStrat_dessine_n_carre(nombre,Robot,distance,vitesse,fps,angle, direction)
     for i in range(nombre):
         carres.append(stratCarre)
     return Sequence(carres)
+
+def getStrat_CarresFor(Robot,distance,vitesse,fps,angle):
+    strat_av =AvancerRobot(Robot, distance, vitesse, fps)
+    strat_CarreD = getStrat_seq_carreD(Robot,distance,vitesse,fps,angle)
+    return Strat_for(3, [strat_CarreD, strat_av])
