@@ -31,6 +31,7 @@ class adaptateurIRL():
         """
         logging.info(f"Set vitesse de(s) roue(s)  {port} a {vitesse}")
         dps = vitesse * 2 * pi / (self.rayon_des_roues * 10)
+        dps *= 10
         self.robot.set_motor_dps(port, dps)
 
     def detect_distance(self,_simu_longueur, _simu_largeur):
@@ -67,15 +68,18 @@ class adaptateurIRL():
     def calcule_avancer_tourner(self):
         nouvelle_position_moteurs = self.get_position_moteurs()
 
-        dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * (self.rayon_des_roues/100)
-        dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * (self.rayon_des_roues/100)
+        dist_RG = (abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) / 360) * (2*self.rayon_des_roues * pi)
+        dist_RD = (abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) / 360) * (2*self.rayon_des_roues * pi)
 
         distance_parcourue = (dist_RG + dist_RD) / 2
 
         angle_RG = nouvelle_position_moteurs[0] - self.derniere_position_moteurs[0]
         angle_RD = nouvelle_position_moteurs[1] - self.derniere_position_moteurs[1]
 
-        angle_parcouru = degrees(abs(((self.rayon_des_roues/100) * (angle_RD - angle_RG)) / self.largeur))
+        angle_parcouru = degrees(abs(((self.rayon_des_roues/100) * (angle_RD - angle_RG)) / self.largeur)) * 1.5
+
+        angle_parcouru = abs(self.rayon_des_roues * (angle_RD - angle_RG)) / self.largeur
+        print("PARCOURU ", angle_parcouru)
 
         self.derniere_position_moteurs = nouvelle_position_moteurs
 
