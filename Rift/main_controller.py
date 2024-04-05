@@ -3,7 +3,7 @@ import Dexturret.interface2D as interface2D
 from time import sleep, time
 import logging
 import Dexturret.controller as controller
-from Dexturret import stratAvancer, stratTournerDroite, stratTournerGauche, stratCarreD, stratCarreG, stratCarres, stratCarresFor, robotSim, robotSimu, robotFake, robotIRL, simu, long, larg, fps, choix_robot, cote_condition, carre_condition, dist_sup_25, avancerPeu, avancerViteMur
+from Dexturret import robotSim, robotAdaptSimu, robotFake, robotAdaptIRL, simu, LONGUEUR, LARGUEUR, FPS, choix_robot
 
 #Configuration des logs 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S", filemode="w",filename="test.log")
@@ -15,7 +15,8 @@ elif refresh == None:
     print("Arrête du programme")
     exit()
 
-controller_choisi = stratCarresFor
+controller_choisi = controller.getStrat_AvancerViteMur(robotAdapt,25,200,60,LONGUEUR,LARGUEUR)
+
 controller_choisi.start()
 
 robotSim.dernier_rafraichissement = time()
@@ -23,7 +24,7 @@ robotSim.dernier_rafraichissement = time()
 while simu.awake and not controller_choisi.stop():
 
     #Mise a jour tous les 1/temps
-    sleep(1/fps)
+    sleep(1/FPS)
 
     controller_choisi.etape()
     if refresh == 1 :
@@ -33,7 +34,7 @@ while simu.awake and not controller_choisi.stop():
 robotAdapt.set_vitesse_roue(3, 0)
 
 #Affichage d'une fenêtre pop-up en cas de collision
-if (robotAdapt == robotIRL):
+if (robotAdapt == robotAdaptIRL):
     print("Fin du programme robot IRL")
     exit()
 
