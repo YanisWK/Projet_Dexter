@@ -278,3 +278,10 @@ def getStrat_seq_carreD(Robot,distance,vitesse,fps,angle):
     carreD = [strat_av, strat_td, strat_av, strat_td,\
              strat_av, strat_td, strat_av, strat_td]
     return Sequence(carreD)
+
+def getStrat_seq_carreG(Robot,distance,vitesse,fps,angle):
+    strat_av = AvancerRobot(Robot, distance, vitesse, fps)
+    strat_tg = TournerRobot(Robot, angle, fps)
+    carreG = [strat_av, strat_tg, strat_av, strat_tg,\
+             strat_av, strat_tg, strat_av, strat_tg]
+    return Sequence(carreG)
