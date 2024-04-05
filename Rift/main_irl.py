@@ -7,12 +7,7 @@ from time import sleep
 robotIRL = Robot2IN013()
 robotAdapt = adaptateurIRL(robotIRL)
 
-stratAvancer.robot = robotAdapt
-stratTournerDroite.robot = robotAdapt
-stratTournerGauche.robot = robotAdapt
-dist_sup_25.robot = robotAdapt
-
-controller_choisi = stratCarreD
+controller_choisi = controller.getStrat_seq_carreD(robotAdapt,50,200,60,90)
 
 fichier = open("data.txt", "w")
 
