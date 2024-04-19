@@ -4,5 +4,5 @@ from .irl import Robot2IN013Fake, adaptateurIRL
 from .controller import AvancerRobot, TournerRobot, Sequence, Strat_if, Strat_while, Strat_for, CompareDistance
 
 from time import time
-from .Constant import stratAvancer, stratTournerDroite, stratTournerGauche, stratCarreD, stratCarreG, stratCarres, stratCarresFor, robotSim, robotSimu, robotFake, robotIRL, simu, long, larg, fps, choix_robot, cote_condition, carre_condition, dist_sup_25, avancerPeu, avancerViteMur
+from .Constant import robotSim, robotAdaptSimu, robotFake, robotAdaptIRL, simu, LONGUEUR, LARGUEUR, FPS, choix_robot
 

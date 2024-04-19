@@ -1,1 +1,1 @@
-from .control import AvancerRobot, TournerRobot, Sequence, Strat_if, Strat_while, Strat_for, CompareDistance
+from .control import AvancerRobot, TournerRobot, Sequence, Strat_if, Strat_while, Strat_for, CompareDistance, getStrat_seq_carreD, getStrat_seq_carreG, getStrat_dessine_n_carre, getStrat_CarresFor, getStrat_CarreCondition,getStrat_AvancerViteMur

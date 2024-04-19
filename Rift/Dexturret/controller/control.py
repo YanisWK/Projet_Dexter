@@ -61,13 +61,12 @@ class AvancerRobot():
         self.parcouru = 0
         self.robot.set_position_moteurs(1, self.robot.get_position_moteurs()[0])
         self.robot.set_position_moteurs(2, self.robot.get_position_moteurs()[1])
-        self.robot.derniere_position_moteurs = self.robot.get_position_moteurs()
 
     def etape(self):
         """Effectue une étape de l'avancement en déplaçant le robot en fonction de la vitesse de déplacement
         et du nombre de rafraichissement, tant que la distance n'a pas été entièrement parcourue."""
 
-        self.robot.set_vitesse_roue(3,self.vitesse)
+        self.robot.set_vitesse_roue(3, self.vitesse)
 
         self.parcouru += self.robot.calcule_avancer_tourner()[0]
 
@@ -79,7 +78,7 @@ class AvancerRobot():
         
     def stop(self):
         """Vérifie si l'avancement doit s'arrêter"""
-        return self.parcouru >= abs(self.distance) or self.parcouru >= abs(self.distance) - 2
+        return self.parcouru >= abs(self.distance) #or self.parcouru >= abs(self.distance) - 2
     
 
 class TournerRobot():
@@ -97,20 +96,17 @@ class TournerRobot():
         self.robot = robot
         self.angle = angle
         self.fps = fps
-        self.robot.derniere_position_moteurs = robot.get_position_moteurs()
 
     def start(self):
         """Démarre la rotation"""
         print("DEBUT TOURNER")
         self.angle_parcouru = 0
-        self.robot.set_position_moteurs(3, 0)
-        self.robot.derniere_position_moteurs = self.robot.get_position_moteurs()
+        self.robot.set_position_moteurs(1, self.robot.get_position_moteurs()[0])
+        self.robot.set_position_moteurs(2, self.robot.get_position_moteurs()[1])
 
     def etape(self):
         """Effectue une étape de la rotation en déplaçant le robot en fonction de la vitesse de rotation
         et du nombre de rafraichissement, tant que l'angle n'est pas atteint."""
-        if self.stop():
-            return
 
         vit = 20
         if (self.angle > 0):
@@ -119,15 +115,17 @@ class TournerRobot():
         else:
             self.robot.set_vitesse_roue(1 , vit)
             self.robot.set_vitesse_roue(2 , -vit)
-
         
         self.angle_parcouru += self.robot.calcule_avancer_tourner()[1]
 
         logging.info(f"Angle parcouru: {self.angle_parcouru}")
 
+        if self.stop():
+            return
+
     def stop(self):
         """Vérifie si la rotation doit s'arrêter"""
-        return abs(self.angle) <= self.angle_parcouru or self.angle_parcouru >= abs(self.angle) - 2
+        return abs(self.angle) <= self.angle_parcouru #or self.angle_parcouru >= abs(self.angle) - 2
         
 
 class Sequence():
@@ -271,3 +269,44 @@ class Strat_for():
     def stop(self):
         """Arrête la stratégie lorsque le nombre de tours de boucle atteint le max"""
         return self.boucle >= self.max
+    
+def getStrat_seq_carreD(Robot,distance,vitesse,fps,angle):
+    strat_av = AvancerRobot(Robot, distance, vitesse, fps)
+    strat_td = TournerRobot(Robot, -angle, fps)
+    carreD = [strat_av, strat_td, strat_av, strat_td,\
+             strat_av, strat_td, strat_av, strat_td]
+    return Sequence(carreD)
+
+def getStrat_seq_carreG(Robot,distance,vitesse,fps,angle):
+    strat_av = AvancerRobot(Robot, distance, vitesse, fps)
+    strat_tg = TournerRobot(Robot, angle, fps)
+    carreG = [strat_av, strat_tg, strat_av, strat_tg,\
+             strat_av, strat_tg, strat_av, strat_tg]
+    return Sequence(carreG)
+
+def getStrat_dessine_n_carre(nombre,Robot,distance,vitesse,fps,angle, direction):
+    if direction == 1:
+        stratCarre = getStrat_seq_carreG(Robot,distance,vitesse,fps,angle)
+    else:
+        stratCarre = getStrat_seq_carreD(Robot,distance,vitesse,fps,angle)
+    carres = []
+    for i in range(nombre):
+        carres.append(stratCarre)
+    return Sequence(carres)
+
+def getStrat_CarresFor(Robot,distance,vitesse,fps,angle):
+    strat_av =AvancerRobot(Robot, distance, vitesse, fps)
+    strat_CarreD = getStrat_seq_carreD(Robot,distance,vitesse,fps,angle)
+    return Strat_for(3, [strat_CarreD, strat_av])
+
+def getStrat_CarreCondition(Robot,distance,vitesse,fps,angle,long,larg):
+    dist_sup= CompareDistance(Robot, 100, long, larg)
+    stratAvancer =AvancerRobot(Robot, distance, vitesse, fps)
+    stratTournerDroite = TournerRobot(Robot, -angle, fps)
+    cote_condition = Strat_if(dist_sup, [stratAvancer, stratTournerDroite])
+    return Sequence([cote_condition, cote_condition, cote_condition, cote_condition])
+
+def getStrat_AvancerViteMur(Robot,distance,vitesse,fps,long,larg):
+    avancerPeu = AvancerRobot(Robot, distance, vitesse, fps)
+    dist_sup = CompareDistance(Robot, 100, long, larg)
+    return Strat_while(dist_sup, [avancerPeu])
