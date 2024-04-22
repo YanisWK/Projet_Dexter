@@ -61,20 +61,20 @@ class AvancerRobot():
         self.parcouru = 0
         self.robot.set_position_moteurs(1, self.robot.get_position_moteurs()[0])
         self.robot.set_position_moteurs(2, self.robot.get_position_moteurs()[1])
+        self.robot.set_vitesse_roue(3, self.vitesse)
 
     def etape(self):
         """Effectue une étape de l'avancement en déplaçant le robot en fonction de la vitesse de déplacement
         et du nombre de rafraichissement, tant que la distance n'a pas été entièrement parcourue."""
 
-        self.robot.set_vitesse_roue(3, self.vitesse)
-
-        self.parcouru += self.robot.calcule_avancer_tourner()[0]
-
+        if self.stop() :
+            self.robot.set_position_moteurs(1, self.robot.get_position_moteurs()[0])
+            self.robot.set_position_moteurs(2, self.robot.get_position_moteurs()[1])
+            return
+        
+        self.parcouru = self.robot.calcule_avancer_tourner()[0]
 
         logging.info(f"Distance parcourue: {self.parcouru}")
-
-        if self.stop() :
-            return
         
     def stop(self):
         """Vérifie si l'avancement doit s'arrêter"""
@@ -104,24 +104,26 @@ class TournerRobot():
         self.robot.set_position_moteurs(1, self.robot.get_position_moteurs()[0])
         self.robot.set_position_moteurs(2, self.robot.get_position_moteurs()[1])
 
-    def etape(self):
-        """Effectue une étape de la rotation en déplaçant le robot en fonction de la vitesse de rotation
-        et du nombre de rafraichissement, tant que l'angle n'est pas atteint."""
-
-        vit = 20
+        vit = 50
         if (self.angle > 0):
             self.robot.set_vitesse_roue(1 , -vit)
             self.robot.set_vitesse_roue(2 , vit)
         else:
             self.robot.set_vitesse_roue(1 , vit)
             self.robot.set_vitesse_roue(2 , -vit)
-        
-        self.angle_parcouru += self.robot.calcule_avancer_tourner()[1]
 
-        logging.info(f"Angle parcouru: {self.angle_parcouru}")
+    def etape(self):
+        """Effectue une étape de la rotation en déplaçant le robot en fonction de la vitesse de rotation
+        et du nombre de rafraichissement, tant que l'angle n'est pas atteint."""
 
         if self.stop():
+            self.robot.set_position_moteurs(1, self.robot.get_position_moteurs()[0])
+            self.robot.set_position_moteurs(2, self.robot.get_position_moteurs()[1])
             return
+        
+        self.angle_parcouru = self.robot.calcule_avancer_tourner()[1]
+
+        logging.info(f"Angle parcouru: {self.angle_parcouru}")
 
     def stop(self):
         """Vérifie si la rotation doit s'arrêter"""
