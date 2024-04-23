@@ -1,4 +1,4 @@
-from math import cos, sin, radians, degrees, sqrt, pi
+from math import cos, sin, radians, degrees, sqrt
 import logging
 from time import time
 
