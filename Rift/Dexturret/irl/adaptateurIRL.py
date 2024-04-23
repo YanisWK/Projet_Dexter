@@ -16,7 +16,6 @@ class adaptateurIRL():
         self.robot = robot
         self.rayon_des_roues = self.robot.WHEEL_DIAMETER/20
         self.largeur = self.robot.WHEEL_BASE_WIDTH/10
-        self.derniere_position_moteurs = (0, 0)
 
     def set_vitesse_roue(self, port, vitesse):
         """
@@ -44,8 +43,6 @@ class adaptateurIRL():
         """
         print("Utilisation du capteur de distance")
         dist=self.robot.get_distance()/10
-        if (dist==819):
-            return 800
         return dist
 
     def get_position_moteurs(self):
@@ -66,8 +63,7 @@ class adaptateurIRL():
         return self.robot.offset_motor_encoder(port, offset)
 
     def calcule_avancer_tourner(self):
-        angle_RG = self.get_position_moteurs()[0]
-        angle_RD = self.get_position_moteurs()[1]
+        angle_RG, angle_RD = self.get_position_moteurs()
 
         dist_RG = (abs(angle_RG) / 360) * (2 * self.rayon_des_roues * pi)
         dist_RD = (abs(angle_RD) / 360) * (2 * self.rayon_des_roues * pi)
@@ -79,8 +75,5 @@ class adaptateurIRL():
 
         angle_parcouru = abs(self.rayon_des_roues * (angle_RD - angle_RG)) / self.largeur
         print("ANGLE PARCOURU ", angle_parcouru)
-
-        self.set_position_moteurs(1, self.get_position_moteurs()[0])
-        self.set_position_moteurs(2, self.get_position_moteurs()[1])
 
         return (distance_parcourue, angle_parcouru)
