@@ -91,6 +91,9 @@ class VueRobot(ShowBase):
         # Créer le NodePath et ajouter le GeomNode
         rectangle3D_node = self.render.attachNewNode(node)
 
+        # Définir la propriété TwoSided à True pour rendre les faces double face
+        rectangle3D_node.setTwoSided(True)
+
         # Changer la couleur du rectangle 3D
         rectangle3D_node.setColor(0, 0, 1, 1)  # bleu (la couleur préférer de Yanis :D)
         
