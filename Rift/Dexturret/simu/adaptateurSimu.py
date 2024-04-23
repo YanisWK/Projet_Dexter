@@ -45,27 +45,29 @@ class adaptateurSimu():
         - offset : offset de décalage en degrés
         """
         if (port == 1 or port == 3):
-            self.robot.position_moteurs[0] = offset
+            self.robot.position_moteurs[0] -= offset
         if (port == 2 or port == 3):
-            self.robot.position_moteurs[1] = offset
+            self.robot.position_moteurs[1] -= offset
 
     def detect_distance(self, simu_longueur, simu_largeur):
         return self.robot.detect_distance(simu_longueur, simu_largeur)
     
     def calcule_avancer_tourner(self):
-        nouvelle_position_moteurs = self.get_position_moteurs()
+        angle_RG, angle_RD = self.get_position_moteurs()
 
-        dist_RG = abs(self.derniere_position_moteurs[0] - nouvelle_position_moteurs[0]) * (self.rayon_des_roues/100)
-        dist_RD = abs(self.derniere_position_moteurs[1] - nouvelle_position_moteurs[1]) * (self.rayon_des_roues/100)
+        dist_RG = (abs(angle_RG) / 360) * (2 * self.rayon_des_roues * pi)
+        dist_RD = (abs(angle_RD) / 360) * (2 * self.rayon_des_roues * pi)
+        print("angle_RG ", angle_RG)
+        print("angle_RD ", angle_RD)
 
         distance_parcourue = (dist_RG + dist_RD) / 2
+        print("DIST PARCOURUE ", distance_parcourue)
 
-        angle_RG = nouvelle_position_moteurs[0] - self.derniere_position_moteurs[0]
-        angle_RD = nouvelle_position_moteurs[1] - self.derniere_position_moteurs[1]
-
-        angle_parcouru = degrees(abs(((self.rayon_des_roues/100) * (angle_RD - angle_RG)) / self.largeur))
+        angle_parcouru = abs(self.rayon_des_roues * (angle_RD - angle_RG)) / self.largeur
+        print("ANGLE PARCOURU ", angle_parcouru)
 
         return (distance_parcourue, angle_parcouru)
+
 
     @property
     def rayon_des_roues(self):
