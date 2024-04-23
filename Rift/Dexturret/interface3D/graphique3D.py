@@ -11,6 +11,7 @@ class VueRobot(ShowBase):
         super().__init__()
 
         # Coordonnées des sommets du rectangle 3D
+        # (Vertices c'est sommet en anglais) 
         vertices = [
             (-1, -1, -1),  # sommet 0
             (1, -1, -1),   # sommet 1
@@ -91,7 +92,7 @@ class VueRobot(ShowBase):
         rectangle3D_node = self.render.attachNewNode(node)
 
         # Changer la couleur du rectangle 3D
-        rectangle3D_node.setColor(1, 0, 0, 1)  # rouge
+        rectangle3D_node.setColor(0, 0, 1, 1)  # bleu (la couleur préférer de Yanis :D)
         
         # Déplacer la caméra pour qu'elle pointe vers le rectangle 3D
         self.camera.lookAt(rectangle3D_node)
