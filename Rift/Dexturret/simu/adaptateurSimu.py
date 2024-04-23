@@ -65,8 +65,6 @@ class adaptateurSimu():
 
         angle_parcouru = degrees(abs(((self.rayon_des_roues/100) * (angle_RD - angle_RG)) / self.largeur))
 
-        self.derniere_position_moteurs = nouvelle_position_moteurs
-
         return (distance_parcourue, angle_parcouru)
 
     @property
