@@ -31,6 +31,7 @@ class CompareDistance():
     def start(self):
         """Démarre la comparaison de la distance entre le robot et distance"""
         capteur = self.robot.detect_distance(self.longueurSimu, self.largeurSimu)
+        print("Distance: ", capteur)
         if(self.distance < 0):
             return abs(self.distance) > capteur
         return self.distance < capteur
@@ -53,7 +54,6 @@ class AvancerRobot():
         self.distance = distance
         self.vitesse = vitesse
         self.fps = fps
-        self.robot.derniere_position_moteurs = robot.get_position_moteurs()
 
     def start(self):
         """Démarre l'avancement"""
@@ -213,10 +213,12 @@ class Strat_while():
         """Démarre l'exécution"""
         self.current = -1
         self.condi = self.condition.start()
+        print("DEBUT WHILE")
 
     def etape(self):        
         """Effectue une étape de la stratégie en vérifiant la condition à chaque tour de boucle"""
         if self.stop():
+            print("FIN WHILE")
             return
         
         if self.current < 0 or self.strats[self.current].stop():
@@ -309,6 +311,6 @@ def getStrat_CarreCondition(Robot,distance,vitesse,fps,angle,long,larg):
     return Sequence([cote_condition, cote_condition, cote_condition, cote_condition])
 
 def getStrat_AvancerViteMur(Robot,distance,vitesse,fps,long,larg):
-    avancerPeu = AvancerRobot(Robot, distance, vitesse, fps)
-    dist_sup = CompareDistance(Robot, 100, long, larg)
+    avancerPeu = AvancerRobot(Robot, 5, vitesse, fps)
+    dist_sup = CompareDistance(Robot, distance, long, larg)
     return Strat_while(dist_sup, [avancerPeu])

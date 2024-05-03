@@ -7,7 +7,7 @@ from time import time
 
 #Initialisation des paramètres des robot et des variables pour la simulation
 LARGUEUR= 700
-LONGUEUR= 1000
+LONGUEUR= 700
 FPS=60
 
 #Creation du robot simu, de son adaptateur et de la simulation

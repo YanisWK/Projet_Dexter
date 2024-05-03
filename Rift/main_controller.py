@@ -15,7 +15,7 @@ elif refresh == None:
     print("Arrête du programme")
     exit()
 
-controller_choisi = controller.getStrat_CarresFor(robotAdapt, 100, 100, 60, 90)
+controller_choisi = controller.getStrat_AvancerViteMur(robotAdapt, 100, 100, 60, LONGUEUR, LARGUEUR)
 
 controller_choisi.start()
 
@@ -24,7 +24,7 @@ robotSim.dernier_rafraichissement = time()
 while simu.awake and not controller_choisi.stop():
 
     #Mise a jour tous les 1/temps
-    sleep(1/FPS)
+    sleep(1/120)
 
     controller_choisi.etape()
     if refresh == 1 :

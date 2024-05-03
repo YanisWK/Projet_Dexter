@@ -14,7 +14,6 @@ class adaptateurSimu():
         - dernier_rafraichissement : timestamp du dernier rafraîchissement des données du robot
         """
         self.robot=robot
-        self.derniere_position_moteurs = (0, 0)
 
     def set_vitesse_roue(self,port,vitesse):
         """
