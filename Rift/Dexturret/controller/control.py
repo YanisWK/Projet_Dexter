@@ -12,6 +12,8 @@ Classes:
 - AvancerViteRobot
 - Instructions
 - Strat_if
+- Strat_for
+- Start_while
 
 """
 
@@ -143,7 +145,7 @@ class Sequence():
         self.strats = strats
 
     def start(self):
-        """Démarre l'exécution de lla liste de stratégies"""
+        """Démarre l'exécution de la liste de stratégies"""
         self.current = -1
 
     def etape(self):
@@ -275,6 +277,16 @@ class Strat_for():
         return self.boucle >= self.max
     
 def getStrat_seq_carreD(Robot,distance,vitesse,fps,angle):
+    """
+    Crée une séquence d'instructions pour faire avancer le robot en dessinant un carré vers la droite.
+    
+    Paramètres :
+    - Robot: instance du robot
+    - distance: distance à parcourir à chaque étape
+    - vitesse: vitesse du robot
+    - fps: frames par seconde
+    - angle: angle de rotation à chaque coin du carré
+   """
     strat_av = AvancerRobot(Robot, distance, vitesse, fps)
     strat_td = TournerRobot(Robot, -angle, fps)
     carreD = [strat_av, strat_td, strat_av, strat_td,\
@@ -282,6 +294,7 @@ def getStrat_seq_carreD(Robot,distance,vitesse,fps,angle):
     return Sequence(carreD)
 
 def getStrat_seq_carreG(Robot,distance,vitesse,fps,angle):
+    """Crée une séquence d'instructions pour faire avancer le robot en dessinant un carré vers la gauche."""
     strat_av = AvancerRobot(Robot, distance, vitesse, fps)
     strat_tg = TournerRobot(Robot, angle, fps)
     carreG = [strat_av, strat_tg, strat_av, strat_tg,\
@@ -289,6 +302,17 @@ def getStrat_seq_carreG(Robot,distance,vitesse,fps,angle):
     return Sequence(carreG)
 
 def getStrat_dessine_n_carre(nombre,Robot,distance,vitesse,fps,angle, direction):
+    """Crée une séquence d'instructions pour faire dessiner n carrés au robot.
+    
+    Paramètres :
+    - nombre: nombre de carrés à dessiner
+    - Robot: instance du robot
+    - distance: distance à parcourir à chaque étape
+    - vitesse: vitesse du robot
+    - fps: frames par seconde
+    - angle: angle de rotation  à chaque coin du carré
+    - direction: direction dans laquelle dessiner les carrés(1 pour gauche,sinon droite)
+    """
     if direction == 1:
         stratCarre = getStrat_seq_carreG(Robot,distance,vitesse,fps,angle)
     else:
@@ -299,11 +323,30 @@ def getStrat_dessine_n_carre(nombre,Robot,distance,vitesse,fps,angle, direction)
     return Sequence(carres)
 
 def getStrat_CarresFor(Robot,distance,vitesse,fps,angle):
+    """Crée une séquence d'instructions pour faire dessiner trois carrés au robot.
+    
+    Paramètres :
+    - Robot: instance du robot
+    - distance: distance à parcourir à chaque étape
+    - vitesse: vitesse du robot
+    - fps: frames par seconde
+    - angle: angle de rotationà chaque coin du carré
+    """
     strat_av =AvancerRobot(Robot, distance, vitesse, fps)
     strat_CarreD = getStrat_seq_carreD(Robot,distance,vitesse,fps,angle)
     return Strat_for(3, [strat_CarreD, strat_av])
 
 def getStrat_CarreCondition(Robot,distance,vitesse,fps,angle,long,larg):
+    """Crée une séquence d'instructions pour faire dessiner des carrés au robot en fonction d'une condition.
+    
+    Paramètres :
+    - Robot: instance du robot
+    - distance: distance à parcourir à chaque étape
+    - vitesse: vitesse du robot
+    - fps: frames par seconde
+    - angle: angle de rotation à chaque coin du carré
+    - long,larg: dimensions de la simulation
+    """
     dist_sup= CompareDistance(Robot, 100, long, larg)
     stratAvancer =AvancerRobot(Robot, distance, vitesse, fps)
     stratTournerDroite = TournerRobot(Robot, -angle, fps)
@@ -311,6 +354,15 @@ def getStrat_CarreCondition(Robot,distance,vitesse,fps,angle,long,larg):
     return Sequence([cote_condition, cote_condition, cote_condition, cote_condition])
 
 def getStrat_AvancerViteMur(Robot,distance,vitesse,fps,long,larg):
+    """Crée une séquence d'instructions pour faire avancer rapidement le robot vers un mur.
+    
+    Paramètres :
+    - Robot: instance du robot
+    - distance: distance à parcourir à chaque étape
+    - vitesse: vitesse du robot
+    - fps: frames par seconde
+    - long,larg: dimensions de la simulation
+    """
     avancerPeu = AvancerRobot(Robot, 5, vitesse, fps)
     dist_sup = CompareDistance(Robot, distance, long, larg)
     return Strat_while(dist_sup, [avancerPeu])
