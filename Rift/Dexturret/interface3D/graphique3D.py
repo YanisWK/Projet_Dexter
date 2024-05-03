@@ -1,9 +1,32 @@
 from direct.showbase.ShowBase import ShowBase
-from panda3d.core import Geom, GeomTriangles, GeomVertexWriter, GeomVertexFormat, GeomVertexData, GeomNode
+from direct.task import Task
+from direct.actor.Actor import Actor
+from direct.interval.IntervalGlobal import Sequence
+from panda3d.core import Geom,GeomTriangles,GeomVertexWriter,GeomVertexFormat,GeomVertexData,TransparencyAttrib,Point3,Vec4
+
+from panda3d.core import Geom, GeomTriangles, GeomVertexWriter, GeomVertexFormat, GeomVertexData, NodePath, GeomNode, GeomVertexReader
+
+from panda3d.bullet import BulletWorld
+from panda3d.core import Vec3
+from panda3d.bullet import BulletWorld
+from panda3d.bullet import BulletPlaneShape
+from panda3d.bullet import BulletRigidBodyNode
+from panda3d.bullet import BulletBoxShape
+from panda3d.bullet import ZUp
+from panda3d.bullet import BulletCylinderShape
 
 class VueRobot(ShowBase):
     def __init__(self):
         super().__init__()
+        world = BulletWorld()
+        world.setGravity(Vec3(0, 0, -9.81))
+
+        shape = BulletPlaneShape(Vec3(0, 0, 1), 1)
+        node = BulletRigidBodyNode('Ground')
+        node.addShape(shape)
+        np = render.attachNewNode(node)
+        np.setPos(0, 0, -5)
+        world.attachRigidBody(node)
 
         # Coordonnées des sommets du premier rectangle 3D
         vertices1 = [
@@ -103,11 +126,19 @@ class VueRobot(ShowBase):
         # Créer le GeomNode pour le premier rectangle
         node1 = GeomNode('rectangle1')
         node1.addGeom(geom1)
+        
+        shape = BulletBoxShape(Vec3(0.5, 0.5, 0.5))
+        node2 = BulletRigidBodyNode('Box')
+        node2.setMass(1.0)
+        node2.addShape(shape)
+        np = render.attachNewNode(node2)
+        np.setPos(0, 0, -5)
+        world.attachRigidBody(node2)
+        
+        
 
-        # Créer le NodePath pour le premier rectangle et l'attacher à la scène
-        rectangle1_node = self.render.attachNewNode(node1)
-        rectangle1_node.setTwoSided(True)
-        rectangle1_node.setColor(0, 0, 1, 1)
+        # Créer le NodePath et ajouter le GeomNode
+        rectangle3D_node = self.render.attachNewNode(node)
 
         # Créer le GeomVertexData pour le deuxième rectangle
         vdata2 = GeomVertexData('vertices2', format, Geom.UHStatic)
@@ -143,6 +174,13 @@ class VueRobot(ShowBase):
         
         # Déplacer la caméra pour qu'elle pointe vers le rectangle 3D
         self.camera.lookAt(rectangle1_node)
+        # Update
+        def update(task):
+            dt = globalClock.getDt()
+            world.doPhysics(dt)
+            return task.cont
+
+        taskMgr.add(update, 'update')
 
         
             
