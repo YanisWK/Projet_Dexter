@@ -2,18 +2,8 @@ from direct.showbase.ShowBase import ShowBase
 from direct.task import Task
 from direct.actor.Actor import Actor
 from direct.interval.IntervalGlobal import Sequence
-from panda3d.core import Geom,GeomTriangles,GeomVertexWriter,GeomVertexFormat,GeomVertexData,TransparencyAttrib,Point3,Vec4
-
-from panda3d.core import Geom, GeomTriangles, GeomVertexWriter, GeomVertexFormat, GeomVertexData, NodePath, GeomNode, GeomVertexReader
-
-from panda3d.bullet import BulletWorld
-from panda3d.core import Vec3
-from panda3d.bullet import BulletWorld
-from panda3d.bullet import BulletPlaneShape
-from panda3d.bullet import BulletRigidBodyNode
-from panda3d.bullet import BulletBoxShape
-from panda3d.bullet import ZUp
-from panda3d.bullet import BulletCylinderShape
+from panda3d.core import Geom,GeomTriangles,GeomVertexWriter,GeomVertexFormat,GeomVertexData,TransparencyAttrib,Point3,Vec4, Vec3, NodePath, GeomNode, GeomVertexReader
+from panda3d.bullet import BulletWorld, BulletPlaneShape, BulletRigidBodyNode, BulletBoxShape, ZUp, BulletCylinderShape
 
 class VueRobot(ShowBase):
     def __init__(self):
