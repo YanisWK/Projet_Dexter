@@ -13,7 +13,6 @@ from panda3d.bullet import BulletPlaneShape
 from panda3d.bullet import BulletRigidBodyNode
 from panda3d.bullet import BulletBoxShape
 from panda3d.bullet import ZUp
-from panda3d.bullet import BulletCylinderShape
 
 class VueRobot(ShowBase):
     def __init__(self):
@@ -21,15 +20,9 @@ class VueRobot(ShowBase):
         world = BulletWorld()
         world.setGravity(Vec3(0, 0, -9.81))
 
-        shape = BulletPlaneShape(Vec3(0, 0, 1), 1)
-        node = BulletRigidBodyNode('Ground')
-        node.addShape(shape)
-        np = render.attachNewNode(node)
-        np.setPos(0, 0, -5)
-        world.attachRigidBody(node)
 
         # Coordonnées des sommets du premier rectangle 3D
-        vertices1 = [
+        verticesRect = [
             (-1, -1, -1),  # sommet 0
             (1, -1, -1),   # sommet 1
             (1, 1, -1),    # sommet 2
@@ -41,15 +34,15 @@ class VueRobot(ShowBase):
         ]
 
         # Coordonnées des sommets du deuxième rectangle 3D
-        vertices2 = [
-            (-10, -10, -1),  # sommet 0
-            (10, -10, -1),   # sommet 1
-            (10, 10, -1),    # sommet 2
-            (-10, 10, -1),   # sommet 3
+        verticesPlat = [
+            (-100, -100, -1),  # sommet 0
+            (100, -100, -1),   # sommet 1
+            (100, 100, -1),    # sommet 2
+            (-100, 100, -1),   # sommet 3
         ]
 
         # Normales des sommets des rectangles 3D
-        normals = [
+        normalsRobot = [
             (-1, -1, -1),  # normal du sommet 0
             (1, -1, -1),   # normal du sommet 1
             (1, 1, -1),    # normal du sommet 2
@@ -60,7 +53,7 @@ class VueRobot(ShowBase):
             (-1, 1, 1),    # normal du sommet 7
         ]
 
-        normals2 = [
+        normalsPlat = [
             (-10, -10, -1),  # normal du sommet 0
             (10, -10, -1),   # normal du sommet 1
             (10, 10, -1),    # normal du sommet 2
@@ -80,7 +73,7 @@ class VueRobot(ShowBase):
         ]
 
         # Indices des triangles du premier rectangle 3D
-        indices1 = [
+        indicesRobot = [
             (0, 1, 2), (0, 2, 3),  # face avant
             (4, 5, 6), (4, 6, 7),  # face arrière
             (0, 1, 5), (0, 5, 4),  # face bas
@@ -90,7 +83,7 @@ class VueRobot(ShowBase):
         ]
 
         # Indices des triangles du deuxième rectangle 3D
-        indices2 = [
+        indicesPlat = [
             (0, 1, 2), (0, 2, 3),  # face avant
         ]
 
@@ -98,82 +91,101 @@ class VueRobot(ShowBase):
         format = GeomVertexFormat.getV3n3c4()  # 3D vertices, normals, and colors
 
         # Créer le GeomVertexData pour le premier rectangle
-        vdata1 = GeomVertexData('vertices1', format, Geom.UHStatic)
+        vdataRobot = GeomVertexData('verticesRect', format, Geom.UHStatic)
 
         # Créer les writers pour le premier rectangle
-        vertex1 = GeomVertexWriter(vdata1, 'vertex')
-        normal1 = GeomVertexWriter(vdata1, 'normal')
-        color1 = GeomVertexWriter(vdata1, 'color')
+        vertexRobot = GeomVertexWriter(vdataRobot, 'vertex')
+        normalRobot = GeomVertexWriter(vdataRobot, 'normal')
+        colorRobot = GeomVertexWriter(vdataRobot, 'color')
 
         # Ajouter les vertices, normales et couleurs du premier rectangle
         for i in range(8):
-            vertex1.addData3f(vertices1[i])
-            normal1.addData3f(normals[i])
-            color1.addData4f(colors[i])
+            vertexRobot.addData3f(verticesRect[i])
+            normalRobot.addData3f(normalsRobot[i])
+            colorRobot.addData4f(colors[i])
 
         # Créer le GeomTriangles pour le premier rectangle
-        triangles1 = GeomTriangles(Geom.UHStatic)
+        trianglesRobot = GeomTriangles(Geom.UHStatic)
 
         # Ajouter les triangles du premier rectangle
         for i in range(12):
-            triangles1.addVertices(*indices1[i])
-            triangles1.closePrimitive()
+            trianglesRobot.addVertices(*indicesRobot[i])
+            trianglesRobot.closePrimitive()
 
         # Créer le Geom pour le premier rectangle
-        geom1 = Geom(vdata1)
-        geom1.addPrimitive(triangles1)
+        geomRobot = Geom(vdataRobot)
+        geomRobot.addPrimitive(trianglesRobot)
 
         # Créer le GeomNode pour le premier rectangle
-        node1 = GeomNode('rectangle1')
-        node1.addGeom(geom1)
+        nodeRobot = GeomNode('Robot')
+        nodeRobot.addGeom(geomRobot)
         
-        shape = BulletBoxShape(Vec3(0.5, 0.5, 0.5))
-        node2 = BulletRigidBodyNode('Box')
-        node2.setMass(1.0)
-        node2.addShape(shape)
-        np = render.attachNewNode(node2)
-        np.setPos(0, 0, -5)
-        world.attachRigidBody(node2)
+        robotShape = BulletBoxShape(Vec3(0.5, 0.5, 0.5))
+        nodeRobot_phys = BulletRigidBodyNode('Robot_Physics')
+        nodeRobot_phys.setMass(1.0)
+        nodeRobot_phys.addShape(robotShape)
+        Robot_phys_pos = render.attachNewNode(nodeRobot_phys)
+        Robot_phys_pos.setPos(0, 0,0)
+        world.attachRigidBody(nodeRobot_phys)
         
         
+        
+        # Créer le NodePath et ajouter le GeomNode et le relie a sa physique
+        Robot_pos = self.render.attachNewNode(nodeRobot)
+        Robot_pos.setPos(0,0,0)
+        Robot_pos.setTwoSided(True)
+        Robot_pos.setColor(0,0,1,1)
+        Robot_pos.reparentTo(Robot_phys_pos)
 
-        # Créer le NodePath et ajouter le GeomNode
-        rectangle3D_node = self.render.attachNewNode(node)
+
+        
 
         # Créer le GeomVertexData pour le deuxième rectangle
-        vdata2 = GeomVertexData('vertices2', format, Geom.UHStatic)
+        vdataPlat = GeomVertexData('verticesPlat', format, Geom.UHStatic)
 
         # Créer les writers pour le deuxième rectangle
-        vertex2 = GeomVertexWriter(vdata2, 'vertex')
-        normal2 = GeomVertexWriter(vdata2, 'normal')
-        color2 = GeomVertexWriter(vdata2, 'color')
+        vertexPlat = GeomVertexWriter(vdataPlat, 'vertex')
+        normalPlat = GeomVertexWriter(vdataPlat, 'normal')
+        colorPlat = GeomVertexWriter(vdataPlat, 'color')
 
         # Ajouter les vertices, normales et couleurs du deuxième rectangle
         for i in range(4):
-            vertex2.addData3f(vertices2[i])
-            normal2.addData3f(normals2[i])
-            color2.addData4f(colors[i])
+            vertexPlat.addData3f(verticesPlat[i])
+            normalPlat.addData3f(normalsPlat[i])
+            colorPlat.addData4f(colors[i])
 
-        triangles2 = GeomTriangles(Geom.UHStatic)
-        # Ajouter les triangles du premier rectangle
+        trianglesPlat = GeomTriangles(Geom.UHStatic)
+
+
         for i in range(2):
-            triangles2.addVertices(*indices2[i])
-            triangles2.closePrimitive()
-         # Créer le Geom pour le premier rectangle
-        geom2 = Geom(vdata2)
-        geom2.addPrimitive(triangles2)
+            trianglesPlat.addVertices(*indicesPlat[i])
+            trianglesPlat.closePrimitive()
 
-        # Créer le GeomNode pour le premier rectangle
-        node2 = GeomNode('rectangle2')
-        node2.addGeom(geom2)
+        geomPlat = Geom(vdataPlat)
+        geomPlat.addPrimitive(trianglesPlat)
+
+        nodePlat = GeomNode('Platefrome')
+        nodePlat.addGeom(geomPlat)
 
         # Créer le NodePath pour le premier rectangle et l'attacher à la scène
-        rectangle2_node = self.render.attachNewNode(node2)
-        rectangle2_node.setTwoSided(True)
-        rectangle2_node.setColor(1, 0, 1, 1)
+        platPos = self.render.attachNewNode(nodePlat)
+        platPos.setPos(0,0,-40)
+        platPos.setTwoSided(True)
+        platPos.setColor(1, 0, 1, 1)
         
+        
+        platShape = BulletPlaneShape(Vec3(0, 0, 1), 1)
+        nodePlat_phys = BulletRigidBodyNode('Ground')
+        nodePlat_phys.addShape(platShape)
+        plat_phys_pos = render.attachNewNode(nodePlat_phys)
+        plat_phys_pos.setPos(0, 0, -40)
+        world.attachRigidBody(nodePlat_phys)
+
+
+
+        platPos.reparentTo(plat_phys_pos)
         # Déplacer la caméra pour qu'elle pointe vers le rectangle 3D
-        self.camera.lookAt(rectangle1_node)
+        self.camera.lookAt(Robot_pos)
         # Update
         def update(task):
             dt = globalClock.getDt()
