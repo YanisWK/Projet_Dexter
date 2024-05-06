@@ -14,12 +14,14 @@ from panda3d.bullet import BulletRigidBodyNode
 from panda3d.bullet import BulletBoxShape
 from panda3d.bullet import ZUp
 
+
+from math import pi, sin, cos
+
 class VueRobot(ShowBase):
     def __init__(self):
         super().__init__()
         world = BulletWorld()
         world.setGravity(Vec3(0, 0, -9.81))
-
 
         # Coordonnées des sommets du premier rectangle 3D
         verticesRect = [
@@ -124,15 +126,15 @@ class VueRobot(ShowBase):
         nodeRobot_phys = BulletRigidBodyNode('Robot_Physics')
         nodeRobot_phys.setMass(1.0)
         nodeRobot_phys.addShape(robotShape)
-        Robot_phys_pos = render.attachNewNode(nodeRobot_phys)
-        Robot_phys_pos.setPos(0, 0,0)
+        Robot_phys_pos = self.render.attachNewNode(nodeRobot_phys)
+        Robot_phys_pos.setPos(2,2,2)
         world.attachRigidBody(nodeRobot_phys)
         
         
         
         # Créer le NodePath et ajouter le GeomNode et le relie a sa physique
         Robot_pos = self.render.attachNewNode(nodeRobot)
-        Robot_pos.setPos(0,0,0)
+        Robot_pos.setPos(2,2,2)
         Robot_pos.setTwoSided(True)
         Robot_pos.setColor(0,0,1,1)
         Robot_pos.reparentTo(Robot_phys_pos)
@@ -169,7 +171,7 @@ class VueRobot(ShowBase):
 
         # Créer le NodePath pour le premier rectangle et l'attacher à la scène
         platPos = self.render.attachNewNode(nodePlat)
-        platPos.setPos(0,0,-40)
+        platPos.setPos(0,0,0)
         platPos.setTwoSided(True)
         platPos.setColor(1, 0, 1, 1)
         
@@ -177,22 +179,29 @@ class VueRobot(ShowBase):
         platShape = BulletPlaneShape(Vec3(0, 0, 1), 1)
         nodePlat_phys = BulletRigidBodyNode('Ground')
         nodePlat_phys.addShape(platShape)
-        plat_phys_pos = render.attachNewNode(nodePlat_phys)
-        plat_phys_pos.setPos(0, 0, -40)
+        plat_phys_pos = self.render.attachNewNode(nodePlat_phys)
+        plat_phys_pos.setPos(0, 3, 0)
         world.attachRigidBody(nodePlat_phys)
 
 
 
         platPos.reparentTo(plat_phys_pos)
         # Déplacer la caméra pour qu'elle pointe vers le rectangle 3D
-        self.camera.lookAt(Robot_pos)
+        
+        base.disableMouse()
+        base.camera.setPos(0,30,10)
+        base.camera.setHpr(60)
+        base.camera.lookAt(Robot_pos)
+        #base.camLens.setFov(40)
+
         # Update
         def update(task):
             dt = globalClock.getDt()
             world.doPhysics(dt)
             return task.cont
 
-        taskMgr.add(update, 'update')
+        self.taskMgr.add(update, 'update')
+        
 
         
             
