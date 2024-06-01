@@ -67,6 +67,9 @@ class Simulation:
     def check_collision(self):    
         """
         Checke si le robot se cogne contre une bordure et stoppe la simulation
+
+        Variables locales :
+        - Coord : coordonnées des coins du robot        
         """
         Coord = self.robot.coordRobot
         for i in range(4):
