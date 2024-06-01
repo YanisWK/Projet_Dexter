@@ -8,6 +8,7 @@ Les objectifs du projet sont :
   3. Suivre une balise colorée
 
 Pré-requis
+
 Initiation à Github et à Python
 Dites ce qu'il faut faire...
 
@@ -18,6 +19,7 @@ Le choix du robot vous sera demandé comme suit :
 
 Versions
 Listez les versions ici exemple : Dernière version stable : 1.0 
+
 Liste des versions : 1.0
 
 Auteurs
