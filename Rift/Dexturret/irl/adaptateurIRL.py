@@ -27,6 +27,9 @@ class adaptateurIRL():
                 -> 2 pour roue droite
                 -> 3 pour les deux roues
         - vitesse : nouvelle vitesse linéaire de la roue (en cm/s)
+
+        Variable locale :
+        - dps : vitesse de rotation des roues en degrés par seconde
         """
         logging.info(f"Set vitesse de(s) roue(s)  {port} a {vitesse}")
         dps = vitesse * 2 * pi / (self.rayon_des_roues * 10)
@@ -40,6 +43,12 @@ class adaptateurIRL():
         Paramètres :
         - _simu_longueur : longueur de l'environnement du robot
         - _simu_largeur : largeur de l'environnement du robot
+
+        Variable locale :
+        - dist : distance entre le robot et un obstacle
+
+        Retourne :
+        - dist : distance entre le robot et un obstacle
         """
         print("Utilisation du capteur de distance")
         dist=self.robot.get_distance()/10
@@ -47,7 +56,8 @@ class adaptateurIRL():
 
     def get_position_moteurs(self):
         """
-        Retourne la position des moteurs du robot au dernier rafraichissement.
+        Retourne: 
+        - la position des moteurs du robot au dernier rafraichissement
         """
         logging.info("Obtenir la position des moteurs")
         return self.robot.get_motor_position()
@@ -59,10 +69,26 @@ class adaptateurIRL():
         Paramètres :
         - port : numéro du port du moteur
         - offset : offset de décalage en degrés
+
+        Retourne :
+        - self.robot.offset_motor_encoder(port, offset) : décalage de la position du moteur
         """
         return self.robot.offset_motor_encoder(port, offset)
 
     def calcule_avancer_tourner(self):
+        """
+        Calcule la distance et l'angle parcourus par le robot à chaque rafraîchissement
+        
+        Variable locale :
+        - angle_RG, angle_RD : position des moteurs au dernier rafraîchissement (en degrés)
+        - dist_RG, dist_RD : distance parcourue par chaque roue (en cm)
+        - distance_parcourue : distance parcourue par le robot (en cm)
+        - angle_parcouru : angle parcouru par le robot (en degrés)
+        
+        Retourne :
+        - distance_parcourue : distance parcourue par le robot (en cm)
+        - angle_parcouru : angle parcouru par le robot (en degrés)
+        """
         angle_RG, angle_RD = self.get_position_moteurs()
 
         dist_RG = (abs(angle_RG) / 360) * (2 * self.rayon_des_roues * pi)
