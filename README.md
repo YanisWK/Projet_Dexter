@@ -10,15 +10,15 @@ Les objectifs du projet sont :
 Pré-requis
 
 Initiation à Github et à Python
-Dites ce qu'il faut faire...
 
-Executez la commande' python3 main_controller.py' pour commencer.
+Executez uen des commandes suivantes : 'python3 main_controller.py', 'python3 main_interface2D.py'.
 
 Le choix du robot vous sera demandé comme suit :
 "Quel robot voulez-vous désigner ? (Tapez 1 pour le robotSimu ou 2 pour le robotIRL) : "
 
 Versions
-Listez les versions ici exemple : Dernière version stable : 1.0 
+
+Dernière version stable : 1.0 
 
 Liste des versions : 1.0
 
