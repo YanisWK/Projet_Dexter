@@ -23,6 +23,6 @@ Liste des versions : 1.0
 Auteurs
 - Yanis SAADI DIT SAADA
 - Lucke MAO
-- Loïc H
-- Victor
+- Loïc HUANG 
+- Victor ROQUE GOMES
 - Ines HARRAOUI
