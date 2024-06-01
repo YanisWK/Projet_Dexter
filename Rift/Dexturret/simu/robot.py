@@ -21,12 +21,18 @@ from time import time
 class Robot:
     def __init__(self, id, longueur, largeur, rayon_des_roues, x, y, dernier_rafraichissement):
         """
+        Constructeur de la classe Robot
         Paramètres :
         - id : identifiant du robot
         - longueur, largeur : dimensions du robot
         - rayon_des_roues : rayon des roues du robot
         - x,y : position du robot
         - dernier_rafraichissement : timestamp du dernier rafraîchissement des données du robot
+        - vitesses_lineaires_roues : vitesses de rotation des roues gauche et droite
+        - pret : booléen qui indique si la simulation est activée et le robot est en mouvement
+        - position_moteurs : position des moteurs
+        - trace : liste des positions du robot
+
         """
         self.id = id 
 
@@ -56,6 +62,19 @@ class Robot:
     def coordRobot(self):
         """
         Met à jour les coordonnées des coins du robot
+
+        Paramètre :
+        - longueur, largeur : dimensions du robot
+        - direction : direction du robot
+        - x,y : position du robot
+
+        Variable locale :
+        - demi_longueur, demi_largeur : demi-longueur et demi-largeur du robot
+        - c1, c2, c3, c4 : coordonnées des coins du robot
+
+        Retourne :
+        - liste des coordonnées des coins du robot
+
         """
         demi_longueur = self.longueur / 2
         demi_largeur = self.largeur / 2
@@ -82,6 +101,9 @@ class Robot:
 
         Paramètre :
         - distance : distance à parcourir (en cm)
+
+        Retourne :
+        - les nouvelles coordonnées du robot après avancement de la distance donnée en paramètre
         
         """
         logging.info(f'Le Robot a avancé de {distance} cm')
@@ -100,6 +122,9 @@ class Robot:
         Paramètre :
         - angle : angle de rotation (en degrés)
 
+        Retourne :
+        - la nouvelle direction du robot après rotation de l'angle donné en paramètre
+
         """
         self.direction += angle
 
@@ -117,6 +142,12 @@ class Robot:
 
         Paramètre:
         - angle : angle de direction du robot
+
+        Variable locale :
+        - a,b : coordonnées du coefficient directeur
+
+        Retourne :
+        - le coefficient directeur de la droite représentant la trajectoire du robot
         
         """
         a = cos(radians(angle))
@@ -131,7 +162,21 @@ class Robot:
         
         Paramètre :
         - fps : nombre de rafraichissement par seconde
+        - temps_ajustement : temps écoulé entre deux rafraichissements
+        - vitesse_rotation_roue_gauche, vitesse_rotation_roue_droite : vitesse de rotation des roues gauche et droite
+        - rayon_des_roues : rayon des roues du robot
+        - position_moteurs : position des moteurs
+        - dernier_rafraichissement : timestamp du dernier rafraîchissement des données du robot
         
+        Variable locale :
+        - vitesse_deplacement : vitesse de déplacement du robot (moyenne des vitesses des roues)
+        - deplacement_par_rafraichissement : distance parcourue par le robot à chaque rafraîchissement (en cm)
+        - vitesse_rotation : vitesse de rotation du robot (en degrés)
+        - rotation_par_rafraichissement : rotation du robot à chaque rafraîchissement (en degrés)
+
+        Retourne :
+        - les nouvelles coordonnées du robot après déplacement et rotation
+
         """       
 
         #Calcul de la distance que parcourt le robot à chaque rafraîchissement distance_par_rafraichissement = vitesse/temps
@@ -162,6 +207,13 @@ class Robot:
 
         Paramètre :
         - fps : frame par seconde
+
+        Variable locale :
+        - temps_ajustement : temps écoulé entre deux rafraichissements (en secondes)
+        - dernier_rafraichissement : timestamp du dernier rafraîchissement des données du robot (en secondes)
+
+        Retourne :
+        - les nouvelles coordonnées du robot après déplacement et rotation
         """
         self.temps_ajustement = round((time() - self.dernier_rafraichissement), 3)
         self.dernier_rafraichissement = time()
@@ -175,6 +227,14 @@ class Robot:
 
         Paramètre :
         - simu_longueur, simu_largeur : dimensions de l'environnement de simulation
+
+        Variable locale :
+        - pas : pas de déplacement du rayon
+        - dist : distance parcourue par le rayon
+        - rayon : coordonnées du rayon
+
+        Retourne :
+        - la distance détectée par le capteur (en cm)
 
         """
 
