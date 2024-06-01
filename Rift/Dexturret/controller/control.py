@@ -106,7 +106,7 @@ class TournerRobot():
         self.robot.set_position_moteurs(1, self.robot.get_position_moteurs()[0])
         self.robot.set_position_moteurs(2, self.robot.get_position_moteurs()[1])
 
-        vit = 10
+        vit = 50
         if (self.angle > 0):
             self.robot.set_vitesse_roue(1 , -vit)
             self.robot.set_vitesse_roue(2 , vit)
@@ -363,6 +363,6 @@ def getStrat_AvancerViteMur(Robot,distance,vitesse,fps,long,larg):
     - fps: frames par seconde
     - long,larg: dimensions de la simulation
     """
-    avancerPeu = AvancerRobot(Robot, 5, vitesse, fps)
+    avancerPeu = AvancerRobot(Robot, 1, vitesse, fps)
     dist_sup = CompareDistance(Robot, distance, long, larg)
     return Strat_while(dist_sup, [avancerPeu])
