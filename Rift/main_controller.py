@@ -15,7 +15,7 @@ elif refresh == None:
     print("Arrête du programme")
     exit()
 
-controller_choisi = controller.getStrat_AvancerViteMur(robotAdapt, 100, 100, 60, LONGUEUR, LARGUEUR)
+controller_choisi = controller.getStrat_dessine_n_carre(5,robotAdapt, 100, 100, 60,90,1001)
 
 controller_choisi.start()
 
