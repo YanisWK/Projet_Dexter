@@ -5,10 +5,18 @@ from time import sleep
 
 robotIRL = Robot2IN013()
 robotAdapt = adaptateurIRL(robotIRL)
+controller_choisi = None
 
-controller_choisi = controller.getStrat_AvancerViteMur(robotAdapt, 3, 50, 60, 0, 0) # => saccadé
-# controller_choisi = controller.Sequence([controller.AvancerRobot(robotAdapt, 5, 100, 60)])
-# controller_choisi = controller.getStrat_seq_carreD(robotAdapt, 20, 100, 60, 90)
+print("Choisissez le controller: Avancer le robot (1), Tracer carré (2), Avancer vite mur (3)")
+choix = input()
+
+if choix == 1:
+    controller_choisi = controller.Sequence([controller.AvancerRobot(robotAdapt, 5, 100, 60)])
+elif choix == 2:
+    controller_choisi = controller.getStrat_seq_carreD(robotAdapt, 20, 100, 60, 90)
+else:
+    controller_choisi = controller.getStrat_AvancerViteMur(robotAdapt, 3, 50, 60, 0, 0) # => saccadé
+    
 controller_choisi.start()
 
 fichier = open("data.txt", "w")
@@ -21,14 +29,6 @@ while not controller_choisi.stop():
     print("ENCODER: ", robotAdapt.get_position_moteurs())
     #fichier.write(Robot2IN013.get_image)
     controller_choisi.etape()
-
-# robotAdapt.set_vitesse_roue(3, 100) # => pas saccadé
-# sleep(0.5)
-# print("Changement vitesse")
-# robotAdapt.set_position_moteurs(1, robotAdapt.get_position_moteurs()[0])
-# robotAdapt.set_position_moteurs(2, robotAdapt.get_position_moteurs()[1])
-# robotAdapt.set_vitesse_roue(3, 50)
-# sleep(1)
 
 print("FIN")
 fichier.close()
