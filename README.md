@@ -7,11 +7,10 @@ Les objectifs du projet sont :
   2. S’approcher le plus vite possible et le plus près d’un mur sans le toucher
   3. Suivre une balise colorée
 
-Pré-requis
-
+Pré-requis : 
 Initiation à Github et à Python
 
-Executez uen des commandes suivantes : 'python3 main_controller.py', 'python3 main_interface2D.py'.
+Executez une des commandes suivantes : 'python3 main_controller.py', 'python3 main_interface2D.py'.
 
 Le choix du robot vous sera demandé comme suit :
 "Quel robot voulez-vous désigner ? (Tapez 1 pour le robotSimu ou 2 pour le robotIRL) : "
