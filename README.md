@@ -27,3 +27,6 @@ Auteurs
 - Loïc HUANG 
 - Victor ROQUE GOMES
 - Ines HARRAOUI
+
+Lien du rapport :
+https://docs.google.com/document/d/1fCYAZer-qHP3jRllnPrmnmbvQoCRHaCE_UuWvo2TixA/edit?usp=sharing
