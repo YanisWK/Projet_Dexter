@@ -30,3 +30,9 @@ Auteurs
 
 Lien du rapport :
 https://docs.google.com/document/d/1fCYAZer-qHP3jRllnPrmnmbvQoCRHaCE_UuWvo2TixA/edit?usp=sharing
+
+Lien de la présentation :
+https://docs.google.com/presentation/d/1G5KHQRtxMIgbsX4OlwgYeZTfsbBRTnlqBSdtFvAyzhU/edit?usp=sharing
+
+Lien du compte-rendu :
+https://docs.google.com/document/d/1_oKAAJLp05Tep2ow7cTfBcSDCl4fMJ3ZHu8e2uo1WiU/edit?usp=sharing
