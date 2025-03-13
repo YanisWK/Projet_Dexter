@@ -188,10 +188,8 @@ class VueRobot(ShowBase):
         platPos.reparentTo(plat_phys_pos)
         # Déplacer la caméra pour qu'elle pointe vers le rectangle 3D
         
-        base.disableMouse()
-        base.camera.setPos(0,30,10)
-        base.camera.setHpr(60)
-        base.camera.lookAt(Robot_pos)
+        #base.disableMouse()
+
         #base.camLens.setFov(40)
 
         # Update
