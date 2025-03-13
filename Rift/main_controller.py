@@ -15,7 +15,7 @@ elif refresh == None:
     print("Arrête du programme")
     exit()
 
-controller_choisi = controller.getStrat_dessine_n_carre(5,robotAdapt, 100, 100, 60,90,1001)
+controller_choisi = controller.getStrat_dessine_n_carre(1,robotAdapt, 100, 100, 60,90,1001)
 
 controller_choisi.start()
 

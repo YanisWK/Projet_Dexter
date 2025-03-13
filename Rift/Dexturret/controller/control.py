@@ -106,7 +106,7 @@ class TournerRobot():
         self.robot.set_position_moteurs(1, self.robot.get_position_moteurs()[0])
         self.robot.set_position_moteurs(2, self.robot.get_position_moteurs()[1])
 
-        vit = 50
+        vit = 10
         if (self.angle > 0):
             self.robot.set_vitesse_roue(1 , -vit)
             self.robot.set_vitesse_roue(2 , vit)
